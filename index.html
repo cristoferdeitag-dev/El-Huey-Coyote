@@ -3,14 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Huey Coyote</title>
+    <title>El Huey Coyote | Changarro Web</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        h1 { color: #d35400; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f4f1ea; /* Color de pared vieja */
+            overflow-x: hidden;
+        }
+
+        /* La Cortina de Acero */
+        #cortina {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(180deg, #1d6e3f 0%, #15512d 50%, #114224 100%); /* Verde metálico */
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(0,0,0,0.3) 40px,
+                    rgba(0,0,0,0.3) 45px
+                ); /* Textura de lámina acanalada */
+            z-width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.7);
+        }
+
+        /* El Rótulo en la cortina */
+        .rotulo {
+            color: #f1c40f; /* Amarillo cadmio */
+            font-size: 5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-shadow: 4px 4px 0px #c0392b, 8px 8px 0px #000; /* Estilo rótulo sonidero */
+            text-align: center;
+            line-height: 1.1;
+            padding: 0 20px;
+        }
+
+        .sub-rotulo {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-top: 20px;
+            font-weight: bold;
+            background-color: #000;
+            padding: 5px 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Instrucción para abrir */
+        .abrir-btn {
+            margin-top: 50px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #c0392b; /* Rojo vibrante */
+            border: 3px solid #000;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.2s ease;
+        }
+
+        .abrir-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #000;
+        }
+
+        .abrir-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        /* El Changarro (Contenido detrás de la cortina) */
+        #changarro {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 3rem;
+            color: #c0392b;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border: 2px dashed #000;
+        }
+
+        /* Clase para levantar la cortina */
+        .cortina-arriba {
+            transform: translateY(-100%);
+        }
     </style>
 </head>
 <body>
-    <h1>Bienvenido a Huey Coyote</h1>
-    <p>Sitio web en construcción. Sistema automatizado bajo la supervisión de HAZ.</p>
+
+    <!-- La Cortina -->
+    <div id="cortina">
+        <div class="rotulo">El Huey Coyote</div>
+        <div class="sub-rotulo">Música, Sudor y Cumbia</div>
+        <button class="abrir-btn" onclick="abrirCortina()">[ Levantar Cortina ]</button>
+    </div>
+
+    <!-- El Changarro -->
+    <div id="changarro">
+        <h2>Pásele, ya abrimos</h2>
+        <p>Aquí va a ir todo el changarro digital. Shows, merch, fotos y el portafolio.<br><br><b>(Sitio en construcción por la Arquitectura de HAZ)</b></p>
+        <button class="abrir-btn" onclick="bajarCortina()" style="background-color: #2c3e50;">[ Cerrar Changarro ]</button>
+    </div>
+
+    <script>
+        function abrirCortina() {
+            document.getElementById('cortina').classList.add('cortina-arriba');
+        }
+        function bajarCortina() {
+            document.getElementById('cortina').classList.remove('cortina-arriba');
+        }
+    </script>
 </body>
 </html>
