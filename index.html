@@ -5,85 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Huey Coyote | Changarro Web</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Courier New', Courier, monospace;
-            background-color: #f4f1ea; /* Color de pared vieja */
+            background-color: #f4f1ea;
             overflow-x: hidden;
         }
 
-        /* La Cortina de Acero */
+        /* ===== LA CORTINA DE ACERO ===== */
         #cortina {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(180deg, #1d6e3f 0%, #15512d 50%, #114224 100%); /* Verde metálico */
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(0,0,0,0.3) 40px,
-                    rgba(0,0,0,0.3) 45px
-                ); /* Textura de lámina acanalada */
-            z-width: 100%;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
-            transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1);
-            box-shadow: 0px 10px 30px rgba(0,0,0,0.7);
+            transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1);
+            cursor: pointer;
         }
 
-        /* El Rótulo en la cortina */
+        /* Textura de lamina acanalada */
+        #cortina::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(180deg, #1d6e3f 0%, #15512d 50%, #0d3a1c 100%);
+            z-index: -2;
+        }
+
+        #cortina::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 18px,
+                rgba(0,0,0,0.25) 18px,
+                rgba(0,0,0,0.25) 20px
+            );
+            z-index: -1;
+        }
+
         .rotulo {
-            color: #f1c40f; /* Amarillo cadmio */
-            font-size: 5rem;
+            color: #f1c40f;
+            font-size: clamp(2.5rem, 8vw, 6rem);
             font-weight: 900;
             text-transform: uppercase;
-            text-shadow: 4px 4px 0px #c0392b, 8px 8px 0px #000; /* Estilo rótulo sonidero */
+            text-shadow: 3px 3px 0px #c0392b, 6px 6px 0px rgba(0,0,0,0.8);
             text-align: center;
             line-height: 1.1;
             padding: 0 20px;
+            z-index: 1;
         }
 
         .sub-rotulo {
             color: #fff;
-            font-size: 1.5rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.5rem);
             margin-top: 20px;
             font-weight: bold;
-            background-color: #000;
-            padding: 5px 15px;
+            background-color: rgba(0,0,0,0.85);
+            padding: 8px 20px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            z-index: 1;
         }
 
-        /* Instrucción para abrir */
         .abrir-btn {
             margin-top: 50px;
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            padding: 15px 35px;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
             font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
             color: #fff;
-            background-color: #c0392b; /* Rojo vibrante */
+            background-color: #c0392b;
             border: 3px solid #000;
             cursor: pointer;
             text-transform: uppercase;
             box-shadow: 4px 4px 0px #000;
             transition: all 0.2s ease;
+            z-index: 1;
         }
 
         .abrir-btn:hover {
             transform: translate(-2px, -2px);
             box-shadow: 6px 6px 0px #000;
+            background-color: #e74c3c;
         }
 
         .abrir-btn:active {
@@ -91,55 +105,78 @@
             box-shadow: 2px 2px 0px #000;
         }
 
-        /* El Changarro (Contenido detrás de la cortina) */
+        /* Animacion: cortina sube */
+        .cortina-arriba {
+            transform: translateY(-100%);
+        }
+
+        /* ===== EL CHANGARRO ===== */
         #changarro {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 50px;
+            padding: 50px 20px;
             text-align: center;
+            background-color: #f4f1ea;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 100% 25px;
         }
 
-        h2 {
-            font-size: 3rem;
+        #changarro h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
             color: #c0392b;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-transform: uppercase;
-            text-shadow: 2px 2px 0px #000;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
         }
 
-        p {
-            font-size: 1.2rem;
+        #changarro p {
+            font-size: 1.1rem;
             max-width: 600px;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 30px;
             background-color: #fff;
-            padding: 20px;
-            border: 2px dashed #000;
+            padding: 25px;
+            border: 2px dashed #333;
         }
 
-        /* Clase para levantar la cortina */
-        .cortina-arriba {
-            transform: translateY(-100%);
+        .cerrar-btn {
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            color: #fff;
+            background-color: #2c3e50;
+            border: 3px solid #000;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.2s ease;
+        }
+
+        .cerrar-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #000;
         }
     </style>
 </head>
 <body>
 
-    <!-- La Cortina -->
+    <!-- La Cortina de Acero -->
     <div id="cortina">
-        <div class="rotulo">El Huey Coyote</div>
-        <div class="sub-rotulo">Música, Sudor y Cumbia</div>
-        <button class="abrir-btn" onclick="abrirCortina()">[ Levantar Cortina ]</button>
+        <div class="rotulo">El Huey<br>Coyote</div>
+        <div class="sub-rotulo">Musica, Sudor y Cumbia</div>
+        <button class="abrir-btn" onclick="abrirCortina()">&#9654; Levantar Cortina</button>
     </div>
 
     <!-- El Changarro -->
     <div id="changarro">
-        <h2>Pásele, ya abrimos</h2>
-        <p>Aquí va a ir todo el changarro digital. Shows, merch, fotos y el portafolio.<br><br><b>(Sitio en construcción por la Arquitectura de HAZ)</b></p>
-        <button class="abrir-btn" onclick="bajarCortina()" style="background-color: #2c3e50;">[ Cerrar Changarro ]</button>
+        <h2>Pasele, ya abrimos</h2>
+        <p>Aqui va a ir todo el changarro digital. Shows, merch, fotos y el portafolio completo.<br><br><b>Sitio en construccion - Arquitectura HAZ</b></p>
+        <button class="cerrar-btn" onclick="bajarCortina()">&#9660; Cerrar Changarro</button>
     </div>
 
     <script>
