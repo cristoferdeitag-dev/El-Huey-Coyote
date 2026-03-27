@@ -4,81 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Huey Coyote | Música, Sudor y Cumbia</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Permanent+Marker&family=Oswald:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --verde: #1d6e3f;
-            --verde-oscuro: #0d3a1c;
             --rojo: #c0392b;
             --rojo-vivo: #e74c3c;
             --amarillo: #f1c40f;
-            --naranja: #e67e22;
+            --naranja: #ff931e;
+            --verde: #1d6e3f;
             --negro: #1a1a1a;
             --blanco: #f4f1ea;
-            --gris-metal: #8a8a8a;
         }
 
         html { scroll-behavior: smooth; }
+        body { font-family: 'Oswald', sans-serif; background: var(--negro); color: var(--blanco); overflow-x: hidden; }
 
-        body {
-            font-family: 'Oswald', sans-serif;
-            background-color: var(--negro);
-            color: var(--blanco);
-            overflow-x: hidden;
-        }
-
-        /* ===========================
-           PANTALLA DE INICIO (CORTINA)
-        =========================== */
+        /* ========================
+           PANTALLA INICIO (CORTINA)
+        ======================== */
         #pantalla-inicio {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            inset: 0;
             z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1);
-            cursor: pointer;
             overflow: hidden;
+            cursor: pointer;
+            transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1);
         }
 
-        /* Fondo persiana verde */
-        #pantalla-inicio::before {
-            content: '';
+        #pantalla-inicio .fondo-cortina {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, #2a8a50 0%, #1d6e3f 40%, #15512d 70%, #0d3a1c 100%);
-            z-index: -2;
+            background-image: url('assets/img/inicio-cortina.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
         }
 
-        /* Ranuras de lámina acanalada */
-        #pantalla-inicio::after {
-            content: '';
+        #pantalla-inicio .overlay-cortina {
             position: absolute;
             inset: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 16px,
-                rgba(0,0,0,0.3) 16px,
-                rgba(0,0,0,0.3) 18px,
-                transparent 18px,
-                transparent 22px,
-                rgba(255,255,255,0.04) 22px,
-                rgba(255,255,255,0.04) 24px
-            );
-            z-index: -1;
+            background: rgba(0,0,0,0.35);
+            z-index: 1;
         }
 
         .logo-cortina {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            z-index: 1;
             padding: 0 20px;
         }
 
@@ -87,18 +65,9 @@
             font-size: clamp(4rem, 12vw, 9rem);
             line-height: 0.9;
             text-transform: uppercase;
-            /* Efecto lettering pintado */
             color: var(--rojo-vivo);
             -webkit-text-stroke: 3px #fff;
-            text-shadow:
-                4px 4px 0 var(--negro),
-                8px 8px 0 var(--amarillo),
-                12px 12px 0 rgba(0,0,0,0.4);
-            letter-spacing: -2px;
-        }
-
-        .logo-cortina h1 span {
-            display: block;
+            text-shadow: 4px 4px 0 var(--negro), 8px 8px 0 var(--amarillo), 12px 12px 0 rgba(0,0,0,0.4);
         }
 
         .logo-cortina .subtitulo {
@@ -106,732 +75,43 @@
             color: #fff;
             font-size: clamp(0.9rem, 2.5vw, 1.4rem);
             margin-top: 15px;
-            background-color: rgba(0,0,0,0.75);
+            background: rgba(0,0,0,0.75);
             padding: 8px 24px;
             text-transform: uppercase;
             letter-spacing: 4px;
-            border: 1px solid rgba(255,255,255,0.2);
+            display: inline-block;
         }
 
         .btn-abrir {
+            position: relative;
+            z-index: 2;
             margin-top: 50px;
             padding: 18px 50px;
             font-family: 'Bebas Neue', cursive;
             font-size: clamp(1.2rem, 3vw, 1.8rem);
             letter-spacing: 4px;
             color: #fff;
-            background-color: var(--rojo);
+            background: var(--rojo);
             border: 4px solid var(--negro);
             cursor: pointer;
-            text-transform: uppercase;
             box-shadow: 6px 6px 0 var(--negro);
             transition: all 0.15s ease;
-            z-index: 1;
         }
 
-        .btn-abrir:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 9px 9px 0 var(--negro);
-            background-color: var(--rojo-vivo);
-        }
-
-        .btn-abrir:active {
-            transform: translate(3px, 3px);
-            box-shadow: 3px 3px 0 var(--negro);
-        }
-
-        .cortina-sube {
-            transform: translateY(-100%);
-        }
-
-        /* ===========================
-           PÁGINA PRINCIPAL (CHANGARRO)
-        =========================== */
-        #changarro-principal {
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Fondo textura */
-        .fondo-metal {
-            background-color: #2a2a2a;
-            background-image:
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(255,255,255,0.02) 40px,
-                    rgba(255,255,255,0.02) 41px
-                ),
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(255,255,255,0.02) 40px,
-                    rgba(255,255,255,0.02) 41px
-                );
-        }
-
-        /* ===========================
-           HERO SECTION
-        =========================== */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(
-                to bottom,
-                #1a1a1a 0%,
-                #2d1a0e 50%,
-                #1a1a1a 100%
-            );
-        }
-
-        .hero-contenido {
-            text-align: center;
-            z-index: 2;
-            padding: 40px 20px;
-        }
-
-        .hero-logo {
-            font-family: 'Permanent Marker', cursive;
-            font-size: clamp(3rem, 10vw, 8rem);
-            line-height: 0.9;
-            color: var(--rojo-vivo);
-            -webkit-text-stroke: 2px #fff;
-            text-shadow:
-                3px 3px 0 var(--negro),
-                6px 6px 0 var(--amarillo);
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .hero-tagline {
-            font-family: 'Special Elite', cursive;
-            font-size: clamp(1rem, 2.5vw, 1.5rem);
-            color: #ccc;
-            background: rgba(0,0,0,0.6);
-            padding: 10px 30px;
-            border-left: 4px solid var(--rojo);
-            border-right: 4px solid var(--rojo);
-            display: inline-block;
-            margin-bottom: 40px;
-            letter-spacing: 3px;
-        }
-
-        /* Decoración lateral */
-        .hero-decoracion {
-            position: absolute;
-            top: 0; bottom: 0;
-            width: 8px;
-            background: repeating-linear-gradient(
-                to bottom,
-                var(--rojo) 0px, var(--rojo) 20px,
-                var(--amarillo) 20px, var(--amarillo) 40px,
-                var(--verde) 40px, var(--verde) 60px
-            );
-        }
-        .hero-decoracion.izq { left: 0; }
-        .hero-decoracion.der { right: 0; }
-
-        /* ===========================
-           NAVEGACIÓN / CARTELES
-        =========================== */
-        #nav-carteles {
-            background: #1a1a1a;
-            padding: 60px 20px;
-        }
-
-        .nav-titulo {
-            text-align: center;
-            font-family: 'Bebas Neue', cursive;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: var(--gris-metal);
-            letter-spacing: 6px;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-        }
-
-        .carteles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .cartel {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px 20px;
-            cursor: pointer;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-            border: 4px solid var(--negro);
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            min-height: 160px;
-        }
-
-        .cartel:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 8px 8px 0 rgba(0,0,0,0.8);
-        }
-
-        .cartel:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0 rgba(0,0,0,0.8);
-        }
-
-        .cartel.rojo { background-color: var(--rojo); box-shadow: 5px 5px 0 var(--negro); }
-        .cartel.verde { background-color: var(--verde); box-shadow: 5px 5px 0 var(--negro); }
-        .cartel.naranja { background-color: var(--naranja); box-shadow: 5px 5px 0 var(--negro); }
-        .cartel.amarillo { background-color: #c49a00; box-shadow: 5px 5px 0 var(--negro); }
-        .cartel.azul { background-color: #1a5276; box-shadow: 5px 5px 0 var(--negro); }
-
-        .cartel-emoji {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
-        }
-
-        .cartel-titulo {
-            font-family: 'Bebas Neue', cursive;
-            font-size: clamp(1.3rem, 3vw, 2rem);
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-align: center;
-            -webkit-text-stroke: 1px rgba(0,0,0,0.3);
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.4);
-        }
-
-        .cartel-sub {
-            font-family: 'Special Elite', cursive;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.8);
-            margin-top: 6px;
-            text-align: center;
-            letter-spacing: 1px;
-        }
-
-        /* ===========================
-           SECCIONES
-        =========================== */
-        .seccion {
-            min-height: 100vh;
-            padding: 80px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .seccion-header {
-            text-align: center;
-            margin-bottom: 50px;
-            width: 100%;
-        }
-
-        .seccion-titulo {
-            font-family: 'Permanent Marker', cursive;
-            font-size: clamp(2.5rem, 7vw, 5rem);
-            text-transform: uppercase;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        .seccion-linea {
-            height: 6px;
-            width: 120px;
-            margin: 15px auto;
-        }
-
-        .seccion-subtitulo {
-            font-family: 'Special Elite', cursive;
-            font-size: clamp(0.9rem, 2vw, 1.2rem);
-            letter-spacing: 3px;
-            opacity: 0.7;
-            text-transform: uppercase;
-        }
-
-        /* ===========================
-           PRÓXIMOS SHOWS
-        =========================== */
-        #shows {
-            background: linear-gradient(135deg, #1a0a0a 0%, #2d0a0a 50%, #1a0a0a 100%);
-        }
-
-        #shows .seccion-titulo { color: var(--naranja); text-shadow: 3px 3px 0 var(--negro); }
-        #shows .seccion-linea { background: var(--naranja); }
-        #shows .seccion-subtitulo { color: #ccc; }
-
-        .shows-container {
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .show-card {
-            background: rgba(255,255,255,0.05);
-            border: 3px solid var(--naranja);
-            border-left: 8px solid var(--naranja);
-            padding: 25px 30px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            transition: all 0.2s ease;
-        }
-
-        .show-card:hover {
-            background: rgba(230, 126, 34, 0.1);
-            transform: translateX(5px);
-        }
-
-        .show-fecha {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2.5rem;
-            color: var(--naranja);
-            line-height: 1;
-            text-align: center;
-            min-width: 80px;
-        }
-
-        .show-fecha span {
-            display: block;
-            font-size: 1rem;
-            color: rgba(255,255,255,0.5);
-            letter-spacing: 2px;
-        }
-
-        .show-info {
-            flex: 1;
-        }
-
-        .show-nombre {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.8rem;
-            color: #fff;
-            letter-spacing: 2px;
-        }
-
-        .show-lugar {
-            font-family: 'Special Elite', cursive;
-            color: rgba(255,255,255,0.6);
-            font-size: 0.95rem;
-            margin-top: 4px;
-        }
-
-        .show-ciudad {
-            font-family: 'Oswald', sans-serif;
-            color: var(--naranja);
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 2px;
-        }
-
-        .btn-show {
-            padding: 12px 25px;
-            background: var(--rojo);
-            color: #fff;
-            border: 3px solid var(--negro);
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            cursor: pointer;
-            box-shadow: 3px 3px 0 var(--negro);
-            transition: all 0.15s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-show:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0 var(--negro);
-        }
-
-        .shows-vacio {
-            text-align: center;
-            padding: 60px;
-            border: 3px dashed rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.4);
-            font-family: 'Special Elite', cursive;
-            font-size: 1.2rem;
-        }
-
-        /* ===========================
-           COLABS
-        =========================== */
-        #colabs {
-            background: linear-gradient(135deg, #0a1a0a 0%, #0a2d15 50%, #0a1a0a 100%);
-        }
-
-        #colabs .seccion-titulo { color: var(--verde); text-shadow: 3px 3px 0 var(--negro); }
-        #colabs .seccion-linea { background: var(--verde); }
-
-        .colabs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            max-width: 900px;
-            width: 100%;
-        }
-
-        .colab-card {
-            background: rgba(255,255,255,0.04);
-            border: 3px solid var(--verde);
-            padding: 30px 20px;
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        .colab-card:hover {
-            background: rgba(29, 110, 63, 0.15);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 0 rgba(0,0,0,0.5);
-        }
-
-        .colab-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--verde-oscuro);
-            margin: 0 auto 15px;
-            border: 3px solid var(--verde);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-        }
-
-        .colab-nombre {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.5rem;
-            color: #fff;
-            letter-spacing: 2px;
-        }
-
-        .colab-desc {
-            font-family: 'Special Elite', cursive;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.85rem;
-            margin-top: 8px;
-        }
-
-        .colabs-vacio {
-            text-align: center;
-            padding: 60px;
-            border: 3px dashed rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.4);
-            font-family: 'Special Elite', cursive;
-            font-size: 1.2rem;
-            max-width: 500px;
-        }
-
-        /* ===========================
-           MERCH
-        =========================== */
-        #merch {
-            background: linear-gradient(135deg, #1a0a1a 0%, #2d152d 50%, #1a0a1a 100%);
-        }
-
-        #merch .seccion-titulo { color: var(--amarillo); text-shadow: 3px 3px 0 var(--negro); }
-        #merch .seccion-linea { background: var(--amarillo); }
-
-        .merch-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px;
-            max-width: 1000px;
-            width: 100%;
-        }
-
-        .merch-card {
-            background: rgba(255,255,255,0.04);
-            border: 3px solid rgba(241, 196, 15, 0.4);
-            overflow: hidden;
-            transition: all 0.2s ease;
-        }
-
-        .merch-card:hover {
-            border-color: var(--amarillo);
-            transform: translateY(-5px);
-        }
-
-        .merch-img {
-            width: 100%;
-            height: 220px;
-            background: rgba(255,255,255,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-        }
-
-        .merch-info {
-            padding: 20px;
-        }
-
-        .merch-nombre {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.4rem;
-            color: var(--amarillo);
-            letter-spacing: 2px;
-        }
-
-        .merch-precio {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 1.6rem;
-            color: #fff;
-            margin-top: 5px;
-        }
-
-        .btn-merch {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: var(--amarillo);
-            color: var(--negro);
-            border: none;
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: all 0.15s;
-        }
-
-        .btn-merch:hover { background: #f39c12; }
-
-        .merch-vacio {
-            text-align: center;
-            padding: 60px;
-            border: 3px dashed rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.4);
-            font-family: 'Special Elite', cursive;
-            font-size: 1.2rem;
-            max-width: 500px;
-        }
-
-        /* ===========================
-           ABOUT ME
-        =========================== */
-        #about {
-            background: linear-gradient(135deg, #0a0a1a 0%, #10102d 50%, #0a0a1a 100%);
-        }
-
-        #about .seccion-titulo { color: #7986cb; text-shadow: 3px 3px 0 var(--negro); }
-        #about .seccion-linea { background: #7986cb; }
-
-        .about-contenido {
-            max-width: 800px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        @media (max-width: 600px) {
-            .about-contenido {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-        }
-
-        .about-foto {
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, #1a1a3a, #2a2a5a);
-            border: 4px solid #7986cb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            box-shadow: 8px 8px 0 rgba(0,0,0,0.5);
-        }
-
-        .about-texto h3 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: #7986cb;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-        }
-
-        .about-texto p {
-            font-family: 'Special Elite', cursive;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.9;
-            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-            margin-bottom: 15px;
-        }
-
-        /* ===========================
-           CONTACTO
-        =========================== */
-        #contacto {
-            background: linear-gradient(135deg, #1a1000 0%, #2d1e00 50%, #1a1000 100%);
-        }
-
-        #contacto .seccion-titulo { color: var(--rojo-vivo); text-shadow: 3px 3px 0 var(--negro); }
-        #contacto .seccion-linea { background: var(--rojo-vivo); }
-
-        .contacto-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 800px;
-            width: 100%;
-            margin-bottom: 50px;
-        }
-
-        .red-social {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px 20px;
-            border: 3px solid rgba(255,255,255,0.15);
-            text-decoration: none;
-            color: #fff;
-            transition: all 0.2s ease;
-            gap: 12px;
-        }
-
-        .red-social:hover {
-            border-color: var(--rojo-vivo);
-            background: rgba(231, 76, 60, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .red-icono {
-            font-size: 2.5rem;
-        }
-
-        .red-nombre {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.4rem;
-            letter-spacing: 3px;
-        }
-
-        .red-handle {
-            font-family: 'Special Elite', cursive;
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.5);
-        }
-
-        .contacto-form {
-            max-width: 500px;
-            width: 100%;
-        }
-
-        .contacto-form h3 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.8rem;
-            color: var(--rojo-vivo);
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .form-grupo {
-            margin-bottom: 15px;
-        }
-
-        .form-grupo input,
-        .form-grupo textarea {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border: 2px solid rgba(255,255,255,0.2);
-            color: #fff;
-            font-family: 'Special Elite', cursive;
-            font-size: 1rem;
-            transition: border-color 0.2s;
-            outline: none;
-        }
-
-        .form-grupo input:focus,
-        .form-grupo textarea:focus {
-            border-color: var(--rojo-vivo);
-        }
-
-        .form-grupo input::placeholder,
-        .form-grupo textarea::placeholder {
-            color: rgba(255,255,255,0.3);
-        }
-
-        .form-grupo textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .btn-enviar {
-            width: 100%;
-            padding: 18px;
-            background: var(--rojo);
-            color: #fff;
-            border: 4px solid var(--negro);
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.5rem;
-            letter-spacing: 4px;
-            cursor: pointer;
-            box-shadow: 5px 5px 0 var(--negro);
-            transition: all 0.15s;
-            text-transform: uppercase;
-        }
-
-        .btn-enviar:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 8px 8px 0 var(--negro);
-            background: var(--rojo-vivo);
-        }
-
-        /* ===========================
-           FOOTER
-        =========================== */
-        footer {
-            background: var(--negro);
-            border-top: 4px solid var(--rojo);
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 2rem;
-            color: var(--rojo);
-            text-shadow: 2px 2px 0 var(--amarillo);
-            margin-bottom: 10px;
-        }
-
-        .footer-texto {
-            font-family: 'Special Elite', cursive;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-        }
+        .btn-abrir:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--negro); background: var(--rojo-vivo); }
+        .btn-abrir:active { transform: translate(3px,3px); box-shadow: 3px 3px 0 var(--negro); }
+        .cortina-sube { transform: translateY(-100%); }
 
-        /* ===========================
-           NAVBAR FLOTANTE
-        =========================== */
+        /* ========================
+           NAVBAR
+        ======================== */
         #navbar {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            background: rgba(26,26,26,0.95);
+            background: rgba(26,26,26,0.96);
             border-bottom: 3px solid var(--rojo);
-            padding: 12px 30px;
+            padding: 10px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -839,10 +119,7 @@
             transition: transform 0.3s ease;
             backdrop-filter: blur(10px);
         }
-
-        #navbar.visible {
-            transform: translateY(0);
-        }
+        #navbar.visible { transform: translateY(0); }
 
         .nav-logo {
             font-family: 'Permanent Marker', cursive;
@@ -852,61 +129,370 @@
             text-decoration: none;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
-
+        .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
         .nav-link {
-            padding: 6px 14px;
+            padding: 6px 12px;
             font-family: 'Bebas Neue', cursive;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             letter-spacing: 2px;
             color: rgba(255,255,255,0.7);
             text-decoration: none;
             border: 2px solid transparent;
             transition: all 0.15s;
-            text-transform: uppercase;
+        }
+        .nav-link:hover { color: #fff; border-color: var(--rojo); }
+
+        /* ========================
+           HERO - CHANGARRO PRINCIPAL
+        ======================== */
+        #hero {
+            position: relative;
+            width: 100%;
+            /* Proporción 16:9 aprox del diseño */
+            padding-top: 56.25%;
+            overflow: hidden;
         }
 
-        .nav-link:hover {
+        .hero-fondo {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/img/changarro-principal.jpg');
+            background-size: cover;
+            background-position: center top;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Overlay sutil */
+        .hero-fondo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0.3) 100%);
+        }
+
+        /* Contenedor de botones sobre la imagen */
+        .hero-botones {
+            position: absolute;
+            inset: 0;
+        }
+
+        /* Botones carteles - posicionados como en Figma */
+        .cartel-btn {
+            position: absolute;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.15s ease, filter 0.15s ease;
+        }
+        .cartel-btn:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* PRÓXIMOS SHOWS - arriba izquierda */
+        .btn-shows {
+            left: 2%;
+            top: 10%;
+            width: 18%;
+        }
+
+        /* COLABS - abajo del shows */
+        .btn-colabs {
+            left: 2%;
+            top: 43%;
+            width: 12%;
+        }
+
+        /* PIDE PARA LLEVAR - arriba centro */
+        .btn-merch {
+            left: 35%;
+            top: 5%;
+            width: 20%;
+        }
+
+        /* YA ME CONOCES - arriba derecha */
+        .btn-about {
+            right: 2%;
+            top: 5%;
+            width: 22%;
+        }
+
+        /* ÉCHAME UN GRITO - debajo de ya me conoces */
+        .btn-contacto {
+            right: 2%;
+            top: 22%;
+            width: 22%;
+        }
+
+        .cartel-btn img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Redes sociales en la barra del mostrador */
+        .redes-bar {
+            position: absolute;
+            bottom: 18%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: clamp(8px, 2vw, 20px);
+            align-items: center;
+            background: rgba(0,0,0,0.6);
+            padding: clamp(6px, 1.5vw, 12px) clamp(10px, 2vw, 24px);
+            border-top: 3px solid var(--verde);
+            border-bottom: 3px solid var(--verde);
+            backdrop-filter: blur(4px);
+        }
+
+        .red-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             color: #fff;
-            border-color: var(--rojo);
+            text-decoration: none;
+            font-family: 'Bebas Neue', cursive;
+            font-size: clamp(0.7rem, 1.5vw, 1rem);
+            letter-spacing: 2px;
+            padding: clamp(4px, 1vw, 8px) clamp(6px, 1.5vw, 14px);
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.2s;
+        }
+        .red-btn:hover { background: rgba(255,255,255,0.15); border-color: #fff; transform: translateY(-3px); }
+
+        .red-btn svg { width: clamp(16px, 2.5vw, 24px); height: clamp(16px, 2.5vw, 24px); fill: currentColor; }
+
+        /* ========================
+           SECCIONES INTERIORES
+        ======================== */
+        .seccion {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* ===========================
+        .seccion-fondo {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .seccion-fondo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.65);
+        }
+
+        .seccion-contenido {
+            position: relative;
+            z-index: 2;
+            padding: 100px 40px 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .seccion-titulo {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .seccion-linea {
+            height: 5px;
+            width: 100px;
+            margin-bottom: 40px;
+        }
+
+        /* ========================
+           SHOWS
+        ======================== */
+        #shows { background: #0d0000; }
+        #shows .seccion-fondo { background-image: url('assets/img/shows.jpg'); }
+        #shows .seccion-titulo { color: var(--naranja); text-shadow: 3px 3px 0 #000; }
+        #shows .seccion-linea { background: var(--naranja); }
+
+        .show-card {
+            background: rgba(255,255,255,0.06);
+            border-left: 6px solid var(--naranja);
+            padding: 20px 25px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            transition: background 0.2s;
+        }
+        .show-card:hover { background: rgba(255,147,30,0.12); }
+
+        .show-fecha { font-family: 'Bebas Neue', cursive; font-size: 2.5rem; color: var(--naranja); min-width: 70px; text-align: center; line-height: 1; }
+        .show-fecha span { display: block; font-size: 0.9rem; color: rgba(255,255,255,0.5); letter-spacing: 2px; }
+        .show-nombre { font-family: 'Bebas Neue', cursive; font-size: 1.6rem; letter-spacing: 2px; }
+        .show-lugar { font-family: 'Special Elite', cursive; color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 3px; }
+        .show-info { flex: 1; }
+
+        .btn-tickets {
+            padding: 10px 22px;
+            background: var(--rojo);
+            color: #fff;
+            border: 3px solid #000;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 3px 3px 0 #000;
+            text-decoration: none;
+            transition: all 0.15s;
+            display: inline-block;
+        }
+        .btn-tickets:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #000; }
+
+        .vacio {
+            text-align: center;
+            padding: 50px;
+            border: 3px dashed rgba(255,255,255,0.2);
+            font-family: 'Special Elite', cursive;
+            color: rgba(255,255,255,0.4);
+            font-size: 1.1rem;
+        }
+
+        /* ========================
+           COLABS
+        ======================== */
+        #colabs { background: #000d05; }
+        #colabs .seccion-fondo { background-image: url('assets/img/colabs.jpg'); }
+        #colabs .seccion-titulo { color: #4ade80; text-shadow: 3px 3px 0 #000; }
+        #colabs .seccion-linea { background: #4ade80; }
+
+        .colabs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+
+        .colab-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(74,222,128,0.4);
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .colab-card:hover { border-color: #4ade80; transform: translateY(-4px); }
+        .colab-nombre { font-family: 'Bebas Neue', cursive; font-size: 1.4rem; letter-spacing: 2px; color: #4ade80; margin-top: 10px; }
+        .colab-desc { font-family: 'Special Elite', cursive; color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 6px; }
+
+        /* ========================
+           MERCH
+        ======================== */
+        #merch { background: #0d0005; }
+        #merch .seccion-fondo { background-image: url('assets/img/merch.jpg'); }
+        #merch .seccion-titulo { color: var(--amarillo); text-shadow: 3px 3px 0 #000; }
+        #merch .seccion-linea { background: var(--amarillo); }
+
+        .merch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .merch-card { background: rgba(255,255,255,0.05); border: 2px solid rgba(241,196,15,0.3); overflow: hidden; transition: all 0.2s; }
+        .merch-card:hover { border-color: var(--amarillo); transform: translateY(-4px); }
+        .merch-img { width: 100%; height: 200px; object-fit: cover; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .merch-info { padding: 18px; }
+        .merch-nombre { font-family: 'Bebas Neue', cursive; font-size: 1.3rem; color: var(--amarillo); letter-spacing: 2px; }
+        .merch-precio { font-family: 'Permanent Marker', cursive; font-size: 1.5rem; margin-top: 5px; }
+        .btn-comprar { display: block; width: 100%; padding: 10px; background: var(--amarillo); color: #000; border: none; font-family: 'Bebas Neue', cursive; font-size: 1.1rem; letter-spacing: 3px; cursor: pointer; margin-top: 12px; transition: background 0.15s; }
+        .btn-comprar:hover { background: #f39c12; }
+
+        /* ========================
+           ABOUT ME
+        ======================== */
+        #about { background: #00000d; }
+        #about .seccion-fondo { background-image: url('assets/img/about.jpg'); }
+        #about .seccion-titulo { color: #818cf8; text-shadow: 3px 3px 0 #000; }
+        #about .seccion-linea { background: #818cf8; }
+
+        .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: start; }
+        @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
+
+        .about-foto { width: 100%; aspect-ratio: 1; background: rgba(255,255,255,0.05); border: 4px solid #818cf8; display: flex; align-items: center; justify-content: center; font-size: 5rem; box-shadow: 8px 8px 0 rgba(0,0,0,0.5); overflow: hidden; }
+        .about-foto img { width: 100%; height: 100%; object-fit: cover; }
+        .about-texto h3 { font-family: 'Bebas Neue', cursive; font-size: 2rem; color: #818cf8; letter-spacing: 3px; margin-bottom: 15px; }
+        .about-texto p { font-family: 'Special Elite', cursive; color: rgba(255,255,255,0.75); line-height: 1.9; font-size: 1rem; margin-bottom: 12px; }
+
+        /* ========================
+           CONTACTO
+        ======================== */
+        #contacto { background: #0d0500; }
+        #contacto .seccion-fondo { background-image: url('assets/img/contacto.jpg'); }
+        #contacto .seccion-titulo { color: var(--rojo-vivo); text-shadow: 3px 3px 0 #000; }
+        #contacto .seccion-linea { background: var(--rojo-vivo); }
+
+        .redes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-bottom: 50px; }
+
+        .red-card {
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            padding: 25px 15px;
+            border: 2px solid rgba(255,255,255,0.15);
+            text-decoration: none; color: #fff;
+            transition: all 0.2s;
+        }
+        .red-card:hover { border-color: var(--rojo-vivo); background: rgba(231,76,60,0.1); transform: translateY(-4px); }
+        .red-card svg { width: 36px; height: 36px; fill: currentColor; }
+        .red-card-nombre { font-family: 'Bebas Neue', cursive; font-size: 1.2rem; letter-spacing: 3px; }
+        .red-card-handle { font-family: 'Special Elite', cursive; font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+        .form-contacto { max-width: 500px; }
+        .form-contacto h3 { font-family: 'Bebas Neue', cursive; font-size: 1.8rem; color: var(--rojo-vivo); letter-spacing: 3px; margin-bottom: 20px; }
+        .form-grupo { margin-bottom: 12px; }
+        .form-grupo input, .form-grupo textarea {
+            width: 100%; padding: 14px; background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.2); color: #fff;
+            font-family: 'Special Elite', cursive; font-size: 1rem; outline: none; transition: border-color 0.2s;
+        }
+        .form-grupo input:focus, .form-grupo textarea:focus { border-color: var(--rojo-vivo); }
+        .form-grupo input::placeholder, .form-grupo textarea::placeholder { color: rgba(255,255,255,0.3); }
+        .form-grupo textarea { height: 110px; resize: vertical; }
+        .btn-enviar {
+            width: 100%; padding: 16px; background: var(--rojo); color: #fff;
+            border: 4px solid #000; font-family: 'Bebas Neue', cursive;
+            font-size: 1.4rem; letter-spacing: 4px; cursor: pointer;
+            box-shadow: 5px 5px 0 #000; transition: all 0.15s;
+        }
+        .btn-enviar:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 #000; }
+
+        /* ========================
+           FOOTER
+        ======================== */
+        footer {
+            background: #000;
+            border-top: 4px solid var(--rojo);
+            padding: 25px 20px;
+            text-align: center;
+        }
+        .footer-logo { font-family: 'Permanent Marker', cursive; font-size: 2rem; color: var(--rojo); text-shadow: 2px 2px 0 var(--amarillo); margin-bottom: 8px; }
+        .footer-txt { font-family: 'Special Elite', cursive; color: rgba(255,255,255,0.35); font-size: 0.85rem; letter-spacing: 2px; }
+
+        /* ========================
+           SCROLL REVEAL
+        ======================== */
+        .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* ========================
            RESPONSIVE
-        =========================== */
+        ======================== */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .carteles-grid { grid-template-columns: repeat(2, 1fr); }
-            .about-contenido { gap: 30px; }
-            .show-card { flex-direction: column; }
-        }
-
-        @media (max-width: 480px) {
-            .carteles-grid { grid-template-columns: 1fr; }
-        }
-
-        /* ===========================
-           SCROLL REVEAL ANIMATION
-        =========================== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
+            .redes-bar { flex-wrap: wrap; justify-content: center; bottom: 12%; }
+            .red-btn span { display: none; }
+            .btn-shows { left: 1%; top: 8%; width: 28%; }
+            .btn-colabs { left: 1%; top: 45%; width: 20%; }
+            .btn-merch { left: 30%; top: 3%; width: 30%; }
+            .btn-about { right: 1%; top: 3%; width: 32%; }
+            .btn-contacto { right: 1%; top: 22%; width: 32%; }
+            .seccion-contenido { padding: 80px 20px 40px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR FLOTANTE -->
+    <!-- NAVBAR -->
     <nav id="navbar">
         <a href="#hero" class="nav-logo">HueyCoyote</a>
         <div class="nav-links">
@@ -918,186 +504,169 @@
         </div>
     </nav>
 
-    <!-- PANTALLA DE INICIO -->
+    <!-- PANTALLA INICIO -->
     <div id="pantalla-inicio">
+        <div class="fondo-cortina"></div>
+        <div class="overlay-cortina"></div>
         <div class="logo-cortina">
-            <h1>
-                <span>Huey</span>
-                <span>Coyote</span>
-            </h1>
+            <h1>Huey<br>Coyote</h1>
             <p class="subtitulo">Música · Sudor · Cumbia</p>
         </div>
         <button class="btn-abrir" onclick="abrirCortina()">▶ Abre el Changarro</button>
     </div>
 
-    <!-- PÁGINA PRINCIPAL -->
-    <div id="changarro-principal" class="fondo-metal">
+    <!-- HERO - CHANGARRO PRINCIPAL -->
+    <section id="hero">
+        <div class="hero-fondo"></div>
+        <div class="hero-botones">
 
-        <!-- HERO -->
-        <section id="hero">
-            <div class="hero-decoracion izq"></div>
-            <div class="hero-decoracion der"></div>
-            <div class="hero-contenido">
-                <h1 class="hero-logo">Huey<br>Coyote</h1>
-                <p class="hero-tagline">Música · Sudor · Cumbia</p>
-            </div>
-        </section>
+            <!-- Cartel: Próximos Shows -->
+            <a href="#shows" class="cartel-btn btn-shows">
+                <img src="assets/img/shows-cartel.png" alt="Próximos Shows"
+                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'background:#e67e22;padding:8px 12px;font-family:Bebas Neue,cursive;font-size:clamp(1rem,3vw,1.8rem);color:#fff;border:3px solid #000;box-shadow:4px 4px 0 #000;letter-spacing:2px;text-align:center\'>⭐ PRÓXIMOS<br>SHOWS ⭐<br><small style=\'font-size:0.6em\'>COLABS</small></div>'">
+            </a>
 
-        <!-- CARTELES DE NAVEGACIÓN -->
-        <section id="nav-carteles">
-            <p class="nav-titulo">¿Qué andas buscando?</p>
-            <div class="carteles-grid">
-                <a href="#shows" class="cartel naranja">
-                    <div class="cartel-emoji">🎸</div>
-                    <div class="cartel-titulo">Próximos Shows</div>
-                    <div class="cartel-sub">Fechas y boletos</div>
-                </a>
-                <a href="#colabs" class="cartel verde">
-                    <div class="cartel-emoji">🤝</div>
-                    <div class="cartel-titulo">Colabs</div>
-                    <div class="cartel-sub">Proyectos y amigos</div>
-                </a>
-                <a href="#merch" class="cartel amarillo">
-                    <div class="cartel-emoji">👕</div>
-                    <div class="cartel-titulo">Pide para Llevar</div>
-                    <div class="cartel-sub">Merch del changarro</div>
-                </a>
-                <a href="#about" class="cartel azul">
-                    <div class="cartel-emoji">🤠</div>
-                    <div class="cartel-titulo">Ya me Conoces</div>
-                    <div class="cartel-sub">Un poco de historia</div>
-                </a>
-                <a href="#contacto" class="cartel rojo">
-                    <div class="cartel-emoji">📣</div>
-                    <div class="cartel-titulo">Échame un Grito</div>
-                    <div class="cartel-sub">Contacto y redes</div>
-                </a>
-            </div>
-        </section>
-
-        <!-- PRÓXIMOS SHOWS -->
-        <section id="shows" class="seccion">
-            <div class="seccion-header reveal">
-                <h2 class="seccion-titulo">Próximos<br>Shows</h2>
-                <div class="seccion-linea"></div>
-                <p class="seccion-subtitulo">Nos vemos en la pista</p>
-            </div>
-            <div class="shows-container">
-                <!-- Próximamente llena con datos reales -->
-                <div class="shows-vacio reveal">
-                    🎸 Los shows se están cocinando...<br><br>
-                    Checa pronto para las fechas.
+            <!-- Cartel: Pide para Llevar -->
+            <a href="#merch" class="cartel-btn btn-merch">
+                <div style="background:var(--rojo);padding:8px 16px;font-family:'Bebas Neue',cursive;font-size:clamp(0.9rem,2.5vw,1.5rem);color:#fff;border:3px solid #000;box-shadow:4px 4px 0 #000;letter-spacing:2px;text-align:center;white-space:nowrap">
+                    PIDE PARA LLEVAR
                 </div>
-            </div>
-        </section>
+            </a>
 
-        <!-- COLABS -->
-        <section id="colabs" class="seccion">
-            <div class="seccion-header reveal">
-                <h2 class="seccion-titulo">Colabs</h2>
-                <div class="seccion-linea"></div>
-                <p class="seccion-subtitulo">Gente chida con quien hemos tocado</p>
-            </div>
-            <div class="colabs-vacio reveal">
-                🤝 Las colabs están en proceso...<br><br>
-                Pronto aquí los cuates.
-            </div>
-        </section>
+            <!-- Cartel: Ya me Conoces -->
+            <a href="#about" class="cartel-btn btn-about">
+                <div style="background:var(--verde);padding:10px 14px;font-family:'Bebas Neue',cursive;color:#fff;border:3px solid #000;box-shadow:4px 4px 0 #000;text-align:center">
+                    <div style="font-size:clamp(0.8rem,2vw,1.2rem);letter-spacing:2px;color:var(--naranja)">¿YA ME CONOCES?</div>
+                    <div style="font-size:clamp(0.9rem,2.5vw,1.5rem);letter-spacing:3px">ÉCHAME UN GRITO</div>
+                </div>
+            </a>
 
-        <!-- MERCH -->
-        <section id="merch" class="seccion">
-            <div class="seccion-header reveal">
-                <h2 class="seccion-titulo">Pide para<br>Llevar</h2>
-                <div class="seccion-linea"></div>
-                <p class="seccion-subtitulo">Merch del Changarro</p>
+            <!-- Redes sociales en la barra del mostrador -->
+            <div class="redes-bar">
+                <a href="#" class="red-btn" title="Instagram">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="red-btn" title="TikTok">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    <span>TikTok</span>
+                </a>
+                <a href="#" class="red-btn" title="YouTube">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+                    <span>YouTube</span>
+                </a>
+                <a href="#" class="red-btn" title="Spotify">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                    <span>Spotify</span>
+                </a>
+                <a href="#" class="red-btn" title="Apple Music">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.994 6.124a9.23 9.23 0 0 0-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 0 0-1.877-.726 10.496 10.496 0 0 0-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208A7.37 7.37 0 0 0 .05 5.08c-.02.399-.04.798-.04 1.197v11.446c0 .51.01 1.02.06 1.53.07.68.23 1.33.53 1.95.46.96 1.18 1.67 2.14 2.12.46.22.95.36 1.46.44.57.09 1.14.12 1.72.12h11.44c.51 0 1.02-.01 1.53-.06.68-.07 1.33-.23 1.95-.53.96-.46 1.67-1.18 2.12-2.14.22-.46.36-.95.44-1.46.09-.57.12-1.14.12-1.72V7.816c-.003-.564-.016-1.128-.063-1.692zm-9.374 11.443c-.23.04-.46.05-.7.05-.72 0-1.42-.18-2.05-.53a4.13 4.13 0 0 1-1.52-1.52 4.07 4.07 0 0 1-.53-2.05c0-.72.18-1.42.53-2.05a4.13 4.13 0 0 1 1.52-1.52c.63-.35 1.33-.53 2.05-.53.24 0 .47.01.7.05V7.1l5.46-1.47v8.04a4.13 4.13 0 0 1-.53 2.05 4.13 4.13 0 0 1-1.52 1.52c-.63.35-1.33.53-2.05.53-.24 0-.47-.01-.7-.05a4.07 4.07 0 0 1-2.35-1.37z"/></svg>
+                    <span>Apple Music</span>
+                </a>
             </div>
-            <div class="merch-vacio reveal">
-                👕 El merch está en el horno...<br><br>
-                Regresa pronto para llevarte algo chido.
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ABOUT ME -->
-        <section id="about" class="seccion">
-            <div class="seccion-header reveal">
-                <h2 class="seccion-titulo">Ya me<br>Conoces</h2>
-                <div class="seccion-linea"></div>
-                <p class="seccion-subtitulo">Un poco de historia</p>
+    <!-- PRÓXIMOS SHOWS -->
+    <section id="shows" class="seccion">
+        <div class="seccion-fondo"></div>
+        <div class="seccion-contenido">
+            <h2 class="seccion-titulo reveal">Próximos<br>Shows</h2>
+            <div class="seccion-linea reveal"></div>
+            <div class="shows-container reveal">
+                <div class="vacio">🎸 Los shows se están cocinando...<br><br>Checa pronto para las fechas.</div>
             </div>
-            <div class="about-contenido reveal">
+        </div>
+    </section>
+
+    <!-- COLABS -->
+    <section id="colabs" class="seccion">
+        <div class="seccion-fondo"></div>
+        <div class="seccion-contenido">
+            <h2 class="seccion-titulo reveal">Colabs</h2>
+            <div class="seccion-linea reveal"></div>
+            <div class="reveal">
+                <div class="vacio">🤝 Las colabs están en proceso...<br><br>Pronto aquí los cuates.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MERCH -->
+    <section id="merch" class="seccion">
+        <div class="seccion-fondo"></div>
+        <div class="seccion-contenido">
+            <h2 class="seccion-titulo reveal">Pide para<br>Llevar</h2>
+            <div class="seccion-linea reveal"></div>
+            <div class="reveal">
+                <div class="vacio">👕 El merch está en el horno...<br><br>Regresa pronto para llevarte algo chido.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT ME -->
+    <section id="about" class="seccion">
+        <div class="seccion-fondo"></div>
+        <div class="seccion-contenido">
+            <h2 class="seccion-titulo reveal">Ya me<br>Conoces</h2>
+            <div class="seccion-linea reveal"></div>
+            <div class="about-grid reveal">
                 <div class="about-foto">🤠</div>
                 <div class="about-texto">
                     <h3>El Huey Coyote</h3>
-                    <p>
-                        Este es el changarro digital. Un espacio pa' la música, el sudor y la cumbia.
-                        Sin pretextos, sin corbata.
-                    </p>
-                    <p>
-                        Aquí va la historia, el camino recorrido, los shows, los sueños y todo lo que viene.
-                        Bienvenido al changarro.
-                    </p>
+                    <p>Este es el changarro digital. Un espacio pa' la música, el sudor y la cumbia. Sin pretextos, sin corbata.</p>
+                    <p>Aquí va la historia, el camino recorrido, los shows, los sueños y todo lo que viene. Bienvenido al changarro.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- CONTACTO -->
-        <section id="contacto" class="seccion">
-            <div class="seccion-header reveal">
-                <h2 class="seccion-titulo">Échame<br>un Grito</h2>
-                <div class="seccion-linea"></div>
-                <p class="seccion-subtitulo">Redes y contacto</p>
+    <!-- CONTACTO -->
+    <section id="contacto" class="seccion">
+        <div class="seccion-fondo"></div>
+        <div class="seccion-contenido">
+            <h2 class="seccion-titulo reveal">Échame<br>un Grito</h2>
+            <div class="seccion-linea reveal"></div>
+            <div class="redes-grid reveal">
+                <a href="#" class="red-card">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <div class="red-card-nombre">Instagram</div>
+                    <div class="red-card-handle">@hueycoyote</div>
+                </a>
+                <a href="#" class="red-card">
+                    <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    <div class="red-card-nombre">TikTok</div>
+                    <div class="red-card-handle">@hueycoyote</div>
+                </a>
+                <a href="#" class="red-card">
+                    <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+                    <div class="red-card-nombre">YouTube</div>
+                    <div class="red-card-handle">Huey Coyote</div>
+                </a>
+                <a href="#" class="red-card">
+                    <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                    <div class="red-card-nombre">Spotify</div>
+                    <div class="red-card-handle">Huey Coyote</div>
+                </a>
             </div>
-
-            <div class="contacto-grid reveal">
-                <a href="#" class="red-social">
-                    <div class="red-icono">📸</div>
-                    <div class="red-nombre">Instagram</div>
-                    <div class="red-handle">@hueycoyote</div>
-                </a>
-                <a href="#" class="red-social">
-                    <div class="red-icono">🎵</div>
-                    <div class="red-nombre">TikTok</div>
-                    <div class="red-handle">@hueycoyote</div>
-                </a>
-                <a href="#" class="red-social">
-                    <div class="red-icono">▶️</div>
-                    <div class="red-nombre">YouTube</div>
-                    <div class="red-handle">Huey Coyote</div>
-                </a>
-                <a href="#" class="red-social">
-                    <div class="red-icono">🎧</div>
-                    <div class="red-nombre">Spotify</div>
-                    <div class="red-handle">Huey Coyote</div>
-                </a>
-            </div>
-
-            <div class="contacto-form reveal">
-                <h3>Manda un mensaje</h3>
+            <div class="form-contacto reveal">
+                <h3>Manda un Mensaje</h3>
                 <form onsubmit="enviarForm(event)">
-                    <div class="form-grupo">
-                        <input type="text" placeholder="Tu nombre" required>
-                    </div>
-                    <div class="form-grupo">
-                        <input type="email" placeholder="Tu correo" required>
-                    </div>
-                    <div class="form-grupo">
-                        <textarea placeholder="¿Qué onda? ¿En qué te ayudo?"></textarea>
-                    </div>
+                    <div class="form-grupo"><input type="text" placeholder="Tu nombre" required></div>
+                    <div class="form-grupo"><input type="email" placeholder="Tu correo" required></div>
+                    <div class="form-grupo"><textarea placeholder="¿Qué onda?"></textarea></div>
                     <button type="submit" class="btn-enviar">Mandar Mensaje</button>
                 </form>
             </div>
-        </section>
-
-    </div>
+        </div>
+    </section>
 
     <!-- FOOTER -->
     <footer>
         <div class="footer-logo">HueyCoyote</div>
-        <p class="footer-texto">Música · Sudor · Cumbia · Guadalajara, México</p>
+        <p class="footer-txt">Música · Sudor · Cumbia · Guadalajara, México</p>
     </footer>
 
     <script>
-        // Abrir cortina
         function abrirCortina() {
             document.getElementById('pantalla-inicio').classList.add('cortina-sube');
             setTimeout(() => {
@@ -1106,35 +675,23 @@
             }, 1900);
         }
 
-        // Navbar al hacer scroll
         window.addEventListener('scroll', () => {
-            const pantalla = document.getElementById('pantalla-inicio');
-            if (!pantalla || pantalla.style.display === 'none' || pantalla.classList.contains('cortina-sube')) {
-                const navbar = document.getElementById('navbar');
-                if (window.scrollY > 50) {
-                    navbar.classList.add('visible');
-                }
+            const p = document.getElementById('pantalla-inicio');
+            if (!p || p.style.display === 'none' || p.classList.contains('cortina-sube')) {
+                if (window.scrollY > 50) document.getElementById('navbar').classList.add('visible');
             }
         });
 
-        // Scroll reveal
-        const observador = new IntersectionObserver((entradas) => {
-            entradas.forEach(entrada => {
-                if (entrada.isIntersecting) {
-                    entrada.target.classList.add('visible');
-                }
-            });
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-        document.querySelectorAll('.reveal').forEach(el => observador.observe(el));
-
-        // Form submit
         function enviarForm(e) {
             e.preventDefault();
             alert('¡Mensaje recibido! Te contesto pronto. 🐺');
             e.target.reset();
         }
     </script>
-
 </body>
 </html>
