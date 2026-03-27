@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -28,3 +29,4 @@ jobs:
             **/.git*/**
             **/node_modules/**
             README.md
+            test.txt
