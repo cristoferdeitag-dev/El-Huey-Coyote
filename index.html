@@ -13,7 +13,8 @@
             --rojo-vivo: #e74c3c;
             --amarillo: #f1c40f;
             --naranja: #ff931e;
-            --verde: #1d6e3f;
+            --verde: #4eb32e;
+            --verde-oscuro: #1d6e3f;
             --negro: #1a1a1a;
             --blanco: #f4f1ea;
             --azul-logo: #1ab1e5;
@@ -24,7 +25,7 @@
         body { font-family: 'Oswald', sans-serif; background: var(--negro); color: var(--blanco); overflow-x: hidden; }
 
         /* ========================
-           PANTALLA INICIO (CORTINA)
+           PANTALLA INICIO (CORTINA VERDE)
         ======================== */
         #pantalla-inicio {
             position: fixed;
@@ -51,7 +52,7 @@
         #pantalla-inicio .overlay-cortina {
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.15);
+            background: rgba(0,0,0,0.1);
             z-index: 1;
         }
 
@@ -63,7 +64,7 @@
         }
 
         .logo-cortina img {
-            width: clamp(300px, 50vw, 700px);
+            width: clamp(300px, 55vw, 750px);
             height: auto;
             filter: drop-shadow(4px 4px 0 var(--azul-oscuro)) drop-shadow(0 0 20px rgba(26,177,229,0.3));
         }
@@ -71,14 +72,14 @@
         .btn-abrir {
             position: relative;
             z-index: 2;
-            margin-top: 60px;
+            margin-top: 50px;
             padding: 0;
             background: none;
             border: none;
             cursor: pointer;
             font-family: 'Bebas Neue', cursive;
-            font-size: clamp(1.4rem, 3vw, 2rem);
-            letter-spacing: 6px;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            letter-spacing: 8px;
             color: var(--azul-logo);
             text-shadow: 2px 2px 0 var(--azul-oscuro);
             transition: all 0.2s ease;
@@ -93,44 +94,174 @@
         .cortina-sube { transform: translateY(-100%); }
 
         /* ========================
-           NAVBAR
+           HERO - CHANGARRO PRINCIPAL
         ======================== */
-        #navbar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
-            background: rgba(26,26,26,0.96);
-            border-bottom: 3px solid var(--rojo);
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-            backdrop-filter: blur(10px);
+        #hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
         }
-        #navbar.visible { transform: translateY(0); }
 
-        .nav-logo {
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/img/changarro-principal.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.3) 100%);
+            z-index: 1;
+        }
+
+        .hero-nav-buttons {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+        }
+
+        /* Botones sobre el changarro - posicionados como en Figma */
+        .hero-btn {
+            position: absolute;
+            text-decoration: none;
             font-family: 'Permanent Marker', cursive;
-            font-size: 1.5rem;
-            color: var(--azul-logo);
-            text-shadow: 1px 1px 0 var(--azul-oscuro);
-            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .hero-btn:hover {
+            transform: scale(1.08);
+            filter: brightness(1.2);
         }
 
-        .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
-        .nav-link {
-            padding: 6px 12px;
-            font-family: 'Bebas Neue', cursive;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            border: 2px solid transparent;
-            transition: all 0.15s;
+        /* Grupo izquierdo - Marco estilo letrero de taquería */
+        .hero-btn-grupo-izq {
+            position: absolute;
+            left: 4%;
+            top: 25%;
+            z-index: 3;
         }
-        .nav-link:hover { color: #fff; border-color: var(--azul-logo); }
+
+        .hero-btn-shows {
+            display: block;
+            background: linear-gradient(135deg, var(--amarillo) 0%, var(--naranja) 100%);
+            border: 4px solid var(--rojo);
+            padding: 18px 28px;
+            font-size: clamp(1rem, 2.5vw, 1.8rem);
+            color: var(--rojo);
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+            text-decoration: none;
+            font-family: 'Permanent Marker', cursive;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.25s ease;
+            line-height: 1.1;
+        }
+        .hero-btn-shows:hover {
+            transform: scale(1.05) rotate(-1deg);
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.5);
+        }
+
+        .hero-btn-colabs {
+            display: block;
+            margin-top: 12px;
+            background: var(--verde);
+            border: 3px solid #2d7a1e;
+            padding: 12px 28px;
+            font-size: clamp(0.9rem, 2vw, 1.4rem);
+            color: #fff;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+            text-decoration: none;
+            font-family: 'Permanent Marker', cursive;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.25s ease;
+            text-align: center;
+        }
+        .hero-btn-colabs:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.5);
+        }
+
+        /* Botón merch - arriba centro */
+        .hero-btn-merch {
+            position: absolute;
+            left: 25%;
+            top: 15%;
+            background: var(--rojo-vivo);
+            border: 3px solid #fff;
+            padding: 12px 24px;
+            font-size: clamp(0.8rem, 1.8vw, 1.3rem);
+            color: #fff;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+            text-decoration: none;
+            font-family: 'Permanent Marker', cursive;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.25s ease;
+            z-index: 3;
+        }
+        .hero-btn-merch:hover {
+            transform: scale(1.08);
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.5);
+        }
+
+        /* Grupo derecho - Ya me conoces + Échame un grito */
+        .hero-btn-grupo-der {
+            position: absolute;
+            right: 4%;
+            top: 15%;
+            z-index: 3;
+            text-align: right;
+        }
+
+        .hero-btn-about {
+            display: block;
+            background: rgba(0,0,0,0.7);
+            border: 3px solid var(--amarillo);
+            padding: 10px 22px;
+            font-size: clamp(0.8rem, 1.8vw, 1.3rem);
+            color: var(--amarillo);
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+            text-decoration: none;
+            font-family: 'Permanent Marker', cursive;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.25s ease;
+        }
+        .hero-btn-about:hover {
+            background: rgba(0,0,0,0.85);
+            transform: scale(1.05);
+        }
+
+        .hero-btn-contacto {
+            display: block;
+            margin-top: 10px;
+            background: rgba(0,0,0,0.7);
+            border: 3px solid var(--azul-logo);
+            padding: 10px 22px;
+            font-size: clamp(0.7rem, 1.5vw, 1.1rem);
+            color: var(--azul-logo);
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+            text-decoration: none;
+            font-family: 'Permanent Marker', cursive;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.25s ease;
+        }
+        .hero-btn-contacto:hover {
+            background: rgba(0,0,0,0.85);
+            transform: scale(1.05);
+        }
 
         /* ========================
            SECCIONES - FULL BLEED
@@ -168,7 +299,7 @@
         }
 
         /* ========================
-           SHOWS - Taqueria Menu Style
+           SHOWS - Menú de Taquería
         ======================== */
         #shows {
             background: #0d0500;
@@ -177,7 +308,7 @@
             background-image: url('assets/img/shows.jpg');
         }
         #shows .seccion-full-overlay {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0.4) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.08) 30%, rgba(0,0,0,0.08) 70%, rgba(0,0,0,0.35) 100%);
         }
 
         .shows-header {
@@ -256,19 +387,8 @@
             color: var(--rojo);
         }
 
-        .shows-vacio {
-            text-align: center;
-            padding: 40px;
-            background: rgba(255,255,255,0.85);
-            font-family: 'Special Elite', cursive;
-            color: #333;
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
         /* ========================
-           COLABS - Soda Crates Style
+           COLABS - Rejas de Refrescos
         ======================== */
         #colabs {
             background: #000d05;
@@ -277,7 +397,7 @@
             background-image: url('assets/img/colabs.jpg');
         }
         #colabs .seccion-full-overlay {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.4) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.35) 100%);
         }
 
         .colabs-header {
@@ -288,62 +408,100 @@
         .colabs-header h2 {
             font-family: 'Permanent Marker', cursive;
             font-size: clamp(2.5rem, 6vw, 4.5rem);
-            color: #4ade80;
+            color: var(--verde);
             text-transform: uppercase;
             text-shadow: 3px 3px 0 #000, 6px 6px 0 rgba(0,0,0,0.3);
         }
 
         .colabs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 16px;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .colab-crate {
-            background: rgba(255,255,255,0.08);
-            border: 3px solid rgba(74,222,128,0.4);
-            padding: 30px 20px;
+            aspect-ratio: 1.2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 15px;
             text-align: center;
-            transition: all 0.2s;
-            backdrop-filter: blur(4px);
+            transition: all 0.25s ease;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Colores de reja por marca */
+        .colab-crate--verde {
+            background: #3a8c3f;
+            border: 4px solid #2d6e32;
+            box-shadow: inset 0 -4px 0 #2d6e32, 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        .colab-crate--amarillo {
+            background: #f5c518;
+            border: 4px solid #d4a80e;
+            box-shadow: inset 0 -4px 0 #d4a80e, 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        .colab-crate--verde-oscuro {
+            background: #1a4d2e;
+            border: 4px solid #0f3320;
+            box-shadow: inset 0 -4px 0 #0f3320, 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        .colab-crate--rosa {
+            background: #d94b8a;
+            border: 4px solid #b83a72;
+            box-shadow: inset 0 -4px 0 #b83a72, 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        .colab-crate--gris {
+            background: #b0b0b0;
+            border: 4px solid #8a8a8a;
+            box-shadow: inset 0 -4px 0 #8a8a8a, 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        .colab-crate--gris-oscuro {
+            background: #6b6b6b;
+            border: 4px solid #505050;
+            box-shadow: inset 0 -4px 0 #505050, 3px 3px 0 rgba(0,0,0,0.3);
+        }
+
         .colab-crate:hover {
-            border-color: #4ade80;
             transform: translateY(-6px);
-            background: rgba(74,222,128,0.1);
+            box-shadow: inset 0 -4px 0 currentColor, 6px 8px 0 rgba(0,0,0,0.4);
         }
 
         .colab-crate .nombre {
             font-family: 'Bebas Neue', cursive;
-            font-size: 1.5rem;
-            letter-spacing: 3px;
-            color: #4ade80;
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+            line-height: 1.1;
+        }
+        .colab-crate--amarillo .nombre {
+            color: #1a1a1a;
+            text-shadow: none;
+        }
+        .colab-crate--gris .nombre {
+            color: #1a1a1a;
+            text-shadow: none;
         }
 
         .colab-crate .desc {
             font-family: 'Special Elite', cursive;
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.5);
-            margin-top: 8px;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 6px;
         }
-
-        .colabs-vacio {
-            text-align: center;
-            padding: 40px;
-            background: rgba(0,0,0,0.5);
-            border: 3px dashed rgba(74,222,128,0.3);
-            font-family: 'Special Elite', cursive;
-            color: rgba(255,255,255,0.6);
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-            backdrop-filter: blur(4px);
+        .colab-crate--amarillo .desc,
+        .colab-crate--gris .desc {
+            color: rgba(0,0,0,0.5);
         }
 
         /* ========================
-           MERCH - Market Board Style
+           MERCH - Tabla de Precios de Mercado
         ======================== */
         #merch {
             background: #0d0005;
@@ -352,7 +510,7 @@
             background-image: url('assets/img/merch.jpg');
         }
         #merch .seccion-full-overlay {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.15) 70%, rgba(0,0,0,0.5) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.08) 30%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0.4) 100%);
         }
 
         .merch-header {
@@ -363,7 +521,7 @@
         .merch-header h2 {
             font-family: 'Permanent Marker', cursive;
             font-size: clamp(2.5rem, 6vw, 4.5rem);
-            color: var(--amarillo);
+            color: var(--rojo-vivo);
             text-transform: uppercase;
             text-shadow: 3px 3px 0 #000, 6px 6px 0 rgba(0,0,0,0.3);
         }
@@ -371,64 +529,65 @@
         .merch-header .sub {
             font-family: 'Bebas Neue', cursive;
             font-size: clamp(1rem, 2.5vw, 1.6rem);
-            color: var(--rojo-vivo);
+            color: var(--amarillo);
             letter-spacing: 4px;
             margin-top: 8px;
         }
 
-        .merch-lista {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 12px;
+        .merch-tabla {
             max-width: 900px;
             margin: 0 auto;
+            background: rgba(255,255,255,0.92);
+            padding: 30px;
+            border: 4px solid #333;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
         }
 
-        .merch-item {
+        .merch-tabla-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        .merch-col {
+            padding: 0 15px;
+        }
+        .merch-col:not(:last-child) {
+            border-right: 2px solid rgba(0,0,0,0.1);
+        }
+
+        .merch-fila {
             display: flex;
             align-items: baseline;
-            gap: 8px;
-            padding: 12px 18px;
-            background: rgba(255,255,255,0.88);
-            transition: all 0.2s;
+            gap: 4px;
+            padding: 8px 0;
+            border-bottom: 1px dotted rgba(0,0,0,0.15);
         }
-        .merch-item:hover {
-            background: rgba(255,255,255,0.95);
-            transform: translateX(4px);
+        .merch-fila:last-child {
+            border-bottom: none;
         }
 
-        .merch-item .producto {
+        .merch-fila .producto {
             font-family: 'Oswald', sans-serif;
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 1.2vw, 1.05rem);
             color: #1a1a1a;
             text-transform: uppercase;
             font-weight: 700;
             letter-spacing: 1px;
         }
 
-        .merch-item .dots {
+        .merch-fila .dots {
             flex: 1;
-            border-bottom: 2px dotted rgba(0,0,0,0.3);
-            min-width: 20px;
-            margin-bottom: 4px;
+            border-bottom: 2px dotted rgba(0,0,0,0.25);
+            min-width: 10px;
+            margin-bottom: 3px;
         }
 
-        .merch-item .precio {
+        .merch-fila .precio {
             font-family: 'Permanent Marker', cursive;
-            font-size: 1.2rem;
+            font-size: clamp(0.9rem, 1.3vw, 1.15rem);
             color: var(--rojo);
             white-space: nowrap;
-        }
-
-        .merch-vacio {
-            text-align: center;
-            padding: 40px;
-            background: rgba(255,255,255,0.85);
-            font-family: 'Special Elite', cursive;
-            color: #333;
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
         }
 
         /* ========================
@@ -447,7 +606,7 @@
         .about-header h2 {
             font-family: 'Permanent Marker', cursive;
             font-size: clamp(3rem, 8vw, 5rem);
-            color: #818cf8;
+            color: var(--amarillo);
             text-transform: uppercase;
             text-shadow: 3px 3px 0 #000;
             line-height: 0.9;
@@ -457,7 +616,7 @@
         .about-linea {
             height: 5px;
             width: 100px;
-            background: #818cf8;
+            background: var(--amarillo);
             margin-bottom: 40px;
         }
 
@@ -472,7 +631,7 @@
             width: 100%;
             aspect-ratio: 1;
             background: rgba(255,255,255,0.05);
-            border: 4px solid #818cf8;
+            border: 4px solid var(--amarillo);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -485,7 +644,7 @@
         .about-texto h3 {
             font-family: 'Bebas Neue', cursive;
             font-size: 2rem;
-            color: #818cf8;
+            color: var(--amarillo);
             letter-spacing: 3px;
             margin-bottom: 15px;
         }
@@ -612,40 +771,83 @@
         .reveal.visible { opacity: 1; transform: none; }
 
         /* ========================
-           NAV SCROLLSPY
-        ======================== */
-        .nav-link.active {
-            color: #fff;
-            border-color: var(--azul-logo);
-        }
-
-        /* ========================
            RESPONSIVE
         ======================== */
+        @media (max-width: 1024px) {
+            .hero-btn-grupo-izq { left: 3%; top: 20%; }
+            .hero-btn-merch { left: 30%; top: 10%; }
+            .hero-btn-grupo-der { right: 3%; top: 10%; }
+        }
+
         @media (max-width: 768px) {
-            .nav-links { display: none; }
             .seccion-full-contenido { padding: 80px 20px 40px; }
             .about-grid { grid-template-columns: 1fr; }
             .shows-menu { grid-template-columns: 1fr; }
-            .merch-lista { grid-template-columns: 1fr; }
+
+            /* Hero mobile: botones en overlay inferior */
+            .hero-nav-buttons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+                padding-bottom: 40px;
+                gap: 0;
+            }
+            .hero-btn-grupo-izq,
+            .hero-btn-grupo-der {
+                position: static;
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+            .hero-btn-merch {
+                position: static;
+                margin-bottom: 10px;
+            }
+            .hero-btn-shows,
+            .hero-btn-colabs,
+            .hero-btn-about,
+            .hero-btn-contacto,
+            .hero-btn-merch {
+                font-size: 0.9rem;
+                padding: 10px 18px;
+            }
+            .hero-btn-colabs { margin-top: 0; }
+            .hero-btn-contacto { margin-top: 0; }
+
+            /* Colabs grid mobile */
+            .colabs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* Merch tabla mobile */
+            .merch-tabla-grid {
+                grid-template-columns: 1fr;
+            }
+            .merch-col {
+                border-right: none !important;
+                border-bottom: 2px solid rgba(0,0,0,0.1);
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+            }
+            .merch-col:last-child {
+                border-bottom: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .colabs-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav id="navbar">
-        <a href="#shows" class="nav-logo">HueyCoyote</a>
-        <div class="nav-links">
-            <a href="#shows" class="nav-link">Shows</a>
-            <a href="#colabs" class="nav-link">Colabs</a>
-            <a href="#merch" class="nav-link">Merch</a>
-            <a href="#about" class="nav-link">Ya me conoces</a>
-            <a href="#contacto" class="nav-link">Échame un grito</a>
-        </div>
-    </nav>
-
-    <!-- PANTALLA INICIO - Cortina metálica verde -->
+    <!-- PANTALLA INICIO - Cortina verde metálica -->
     <div id="pantalla-inicio">
         <div class="fondo-cortina"></div>
         <div class="overlay-cortina"></div>
@@ -655,7 +857,29 @@
         <button class="btn-abrir" onclick="abrirCortina()">ABRE EL CHANGARRO</button>
     </div>
 
-    <!-- PRÓXIMOS SHOWS - Estilo menú de taquería -->
+    <!-- HERO - Changarro Principal con navegación -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-nav-buttons">
+            <!-- Grupo izquierdo: Shows + Colabs -->
+            <div class="hero-btn-grupo-izq">
+                <a href="#shows" class="hero-btn-shows">Próximos<br>Shows</a>
+                <a href="#colabs" class="hero-btn-colabs">Colabs</a>
+            </div>
+
+            <!-- Centro: Merch -->
+            <a href="#merch" class="hero-btn-merch">Pide para Llevar</a>
+
+            <!-- Grupo derecho: About + Contacto -->
+            <div class="hero-btn-grupo-der">
+                <a href="#about" class="hero-btn-about">¡Ya me Conoces!</a>
+                <a href="#contacto" class="hero-btn-contacto">Échame un Grito</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRÓXIMOS SHOWS - Menú de taquería -->
     <section id="shows" class="seccion-full">
         <div class="seccion-full-img"></div>
         <div class="seccion-full-overlay"></div>
@@ -705,7 +929,7 @@
         </div>
     </section>
 
-    <!-- COLABS - Estilo rejas de refrescos -->
+    <!-- COLABS - Rejas de refrescos -->
     <section id="colabs" class="seccion-full">
         <div class="seccion-full-img"></div>
         <div class="seccion-full-overlay"></div>
@@ -713,13 +937,36 @@
             <div class="colabs-header reveal">
                 <h2>Colabs</h2>
             </div>
-            <div class="colabs-vacio reveal">
-                Las colabs están en proceso...<br><br>Pronto aquí los cuates.
+            <div class="colabs-grid reveal">
+                <div class="colab-crate colab-crate--verde">
+                    <div class="nombre">Mercado Libre</div>
+                    <div class="desc">Colaboración</div>
+                </div>
+                <div class="colab-crate colab-crate--amarillo">
+                    <div class="nombre">OXXO</div>
+                    <div class="desc">Colaboración</div>
+                </div>
+                <div class="colab-crate colab-crate--verde-oscuro">
+                    <div class="nombre">Indio</div>
+                    <div class="desc">Colaboración</div>
+                </div>
+                <div class="colab-crate colab-crate--rosa">
+                    <div class="nombre">Liverpool</div>
+                    <div class="desc">Colaboración</div>
+                </div>
+                <div class="colab-crate colab-crate--gris">
+                    <div class="nombre">Pingüinos</div>
+                    <div class="desc">Colaboración</div>
+                </div>
+                <div class="colab-crate colab-crate--gris-oscuro">
+                    <div class="nombre">Bacardí</div>
+                    <div class="desc">Colaboración</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- MERCH - Estilo tabla de precios de mercado -->
+    <!-- MERCH - Tabla de precios de mercado -->
     <section id="merch" class="seccion-full">
         <div class="seccion-full-img"></div>
         <div class="seccion-full-overlay"></div>
@@ -728,57 +975,65 @@
                 <h2>Llévele, Llévele</h2>
                 <div class="sub">Pide para Llevar</div>
             </div>
-            <div class="merch-lista reveal">
-                <div class="merch-item">
-                    <span class="producto">Playeras</span>
-                    <span class="dots"></span>
-                    <span class="precio">$150</span>
-                </div>
-                <div class="merch-item">
-                    <span class="producto">Gorras</span>
-                    <span class="dots"></span>
-                    <span class="precio">$150</span>
-                </div>
-                <div class="merch-item">
-                    <span class="producto">Chalecos</span>
-                    <span class="dots"></span>
-                    <span class="precio">$300</span>
-                </div>
-                <div class="merch-item">
-                    <span class="producto">Chaquetas</span>
-                    <span class="dots"></span>
-                    <span class="precio">$400</span>
-                </div>
-                <div class="merch-item">
-                    <span class="producto">Cintos</span>
-                    <span class="dots"></span>
-                    <span class="precio">$350</span>
-                </div>
-                <div class="merch-item">
-                    <span class="producto">Casetas</span>
-                    <span class="dots"></span>
-                    <span class="precio">$120</span>
-                </div>
-                <div class="merch-item">
-                    <span class="producto">Paleacates</span>
-                    <span class="dots"></span>
-                    <span class="precio">$100</span>
-                </div>
-                <div class="merch-item">
-                    <span class="producto">Buzos</span>
-                    <span class="dots"></span>
-                    <span class="precio">$380</span>
-                </div>
-                <div class="merch-item">
-                    <span class="producto">Botas</span>
-                    <span class="dots"></span>
-                    <span class="precio">$700</span>
+            <div class="merch-tabla reveal">
+                <div class="merch-tabla-grid">
+                    <div class="merch-col">
+                        <div class="merch-fila">
+                            <span class="producto">Playeras</span>
+                            <span class="dots"></span>
+                            <span class="precio">$150</span>
+                        </div>
+                        <div class="merch-fila">
+                            <span class="producto">Gorras</span>
+                            <span class="dots"></span>
+                            <span class="precio">$150</span>
+                        </div>
+                        <div class="merch-fila">
+                            <span class="producto">Chalecos</span>
+                            <span class="dots"></span>
+                            <span class="precio">$300</span>
+                        </div>
+                    </div>
+                    <div class="merch-col">
+                        <div class="merch-fila">
+                            <span class="producto">Chaquetas</span>
+                            <span class="dots"></span>
+                            <span class="precio">$400</span>
+                        </div>
+                        <div class="merch-fila">
+                            <span class="producto">Cintos</span>
+                            <span class="dots"></span>
+                            <span class="precio">$350</span>
+                        </div>
+                        <div class="merch-fila">
+                            <span class="producto">Casetas</span>
+                            <span class="dots"></span>
+                            <span class="precio">$120</span>
+                        </div>
+                    </div>
+                    <div class="merch-col">
+                        <div class="merch-fila">
+                            <span class="producto">Paleacates</span>
+                            <span class="dots"></span>
+                            <span class="precio">$100</span>
+                        </div>
+                        <div class="merch-fila">
+                            <span class="producto">Buzos</span>
+                            <span class="dots"></span>
+                            <span class="precio">$380</span>
+                        </div>
+                        <div class="merch-fila">
+                            <span class="producto">Botas</span>
+                            <span class="dots"></span>
+                            <span class="precio">$700</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT ME -->
+    <!-- ABOUT ME - Ya me Conoces -->
     <section id="about" class="seccion-full">
         <div class="seccion-full-img"></div>
         <div class="seccion-full-overlay"></div>
@@ -788,7 +1043,9 @@
                 <div class="about-linea"></div>
             </div>
             <div class="about-grid reveal">
-                <div class="about-foto">🤠</div>
+                <div class="about-foto">
+                    <img src="assets/img/changarro-principal.jpg" alt="El Huey Coyote">
+                </div>
                 <div class="about-texto">
                     <h3>El Huey Coyote</h3>
                     <p>Este es el changarro digital. Un espacio pa' la música, el sudor y la cumbia. Sin pretextos, sin corbata.</p>
@@ -798,7 +1055,7 @@
         </div>
     </section>
 
-    <!-- CONTACTO -->
+    <!-- CONTACTO - Échame un Grito -->
     <section id="contacto" class="seccion-full">
         <div class="seccion-full-img"></div>
         <div class="seccion-full-overlay"></div>
@@ -852,25 +1109,29 @@
             document.getElementById('pantalla-inicio').classList.add('cortina-sube');
             setTimeout(() => {
                 document.getElementById('pantalla-inicio').style.display = 'none';
-                document.getElementById('navbar').classList.add('visible');
             }, 1900);
         }
 
-        window.addEventListener('scroll', () => {
-            const p = document.getElementById('pantalla-inicio');
-            if (!p || p.style.display === 'none' || p.classList.contains('cortina-sube')) {
-                if (window.scrollY > 50) document.getElementById('navbar').classList.add('visible');
-            }
-        });
-
+        // Scroll reveal
         const obs = new IntersectionObserver(entries => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
+        // Smooth scroll for hero buttons
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
         function enviarForm(e) {
             e.preventDefault();
-            alert('¡Mensaje recibido! Te contesto pronto. 🐺');
+            alert('¡Mensaje recibido! Te contesto pronto.');
             e.target.reset();
         }
     </script>
