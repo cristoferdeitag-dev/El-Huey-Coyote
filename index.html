@@ -16,6 +16,8 @@
             --verde: #1d6e3f;
             --negro: #1a1a1a;
             --blanco: #f4f1ea;
+            --azul-logo: #1ab1e5;
+            --azul-oscuro: #1b1464;
         }
 
         html { scroll-behavior: smooth; }
@@ -49,7 +51,7 @@
         #pantalla-inicio .overlay-cortina {
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.35);
+            background: rgba(0,0,0,0.15);
             z-index: 1;
         }
 
@@ -60,46 +62,34 @@
             padding: 0 20px;
         }
 
-        .logo-cortina h1 {
-            font-family: 'Permanent Marker', cursive;
-            font-size: clamp(4rem, 12vw, 9rem);
-            line-height: 0.9;
-            text-transform: uppercase;
-            color: var(--rojo-vivo);
-            -webkit-text-stroke: 3px #fff;
-            text-shadow: 4px 4px 0 var(--negro), 8px 8px 0 var(--amarillo), 12px 12px 0 rgba(0,0,0,0.4);
-        }
-
-        .logo-cortina .subtitulo {
-            font-family: 'Special Elite', cursive;
-            color: #fff;
-            font-size: clamp(0.9rem, 2.5vw, 1.4rem);
-            margin-top: 15px;
-            background: rgba(0,0,0,0.75);
-            padding: 8px 24px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            display: inline-block;
+        .logo-cortina img {
+            width: clamp(300px, 50vw, 700px);
+            height: auto;
+            filter: drop-shadow(4px 4px 0 var(--azul-oscuro)) drop-shadow(0 0 20px rgba(26,177,229,0.3));
         }
 
         .btn-abrir {
             position: relative;
             z-index: 2;
-            margin-top: 50px;
-            padding: 18px 50px;
-            font-family: 'Bebas Neue', cursive;
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            letter-spacing: 4px;
-            color: #fff;
-            background: var(--rojo);
-            border: 4px solid var(--negro);
+            margin-top: 60px;
+            padding: 0;
+            background: none;
+            border: none;
             cursor: pointer;
-            box-shadow: 6px 6px 0 var(--negro);
-            transition: all 0.15s ease;
+            font-family: 'Bebas Neue', cursive;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            letter-spacing: 6px;
+            color: var(--azul-logo);
+            text-shadow: 2px 2px 0 var(--azul-oscuro);
+            transition: all 0.2s ease;
         }
 
-        .btn-abrir:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--negro); background: var(--rojo-vivo); }
-        .btn-abrir:active { transform: translate(3px,3px); box-shadow: 3px 3px 0 var(--negro); }
+        .btn-abrir:hover {
+            color: #fff;
+            text-shadow: 2px 2px 0 var(--azul-logo), 0 0 20px rgba(26,177,229,0.5);
+            transform: scale(1.05);
+        }
+
         .cortina-sube { transform: translateY(-100%); }
 
         /* ========================
@@ -124,8 +114,8 @@
         .nav-logo {
             font-family: 'Permanent Marker', cursive;
             font-size: 1.5rem;
-            color: var(--rojo);
-            text-shadow: 1px 1px 0 var(--amarillo);
+            color: var(--azul-logo);
+            text-shadow: 1px 1px 0 var(--azul-oscuro);
             text-decoration: none;
         }
 
@@ -140,296 +130,419 @@
             border: 2px solid transparent;
             transition: all 0.15s;
         }
-        .nav-link:hover { color: #fff; border-color: var(--rojo); }
+        .nav-link:hover { color: #fff; border-color: var(--azul-logo); }
 
         /* ========================
-           HERO - CHANGARRO PRINCIPAL
+           SECCIONES - FULL BLEED
         ======================== */
-        #hero {
+        .seccion-full {
             position: relative;
             width: 100%;
-            /* Proporción 16:9 aprox del diseño */
-            padding-top: 56.25%;
-            overflow: hidden;
-        }
-
-        .hero-fondo {
-            position: absolute;
-            inset: 0;
-            background-image: url('assets/img/changarro-principal.jpg');
-            background-size: cover;
-            background-position: center top;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Overlay sutil */
-        .hero-fondo::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0.3) 100%);
-        }
-
-        /* Contenedor de botones sobre la imagen */
-        .hero-botones {
-            position: absolute;
-            inset: 0;
-        }
-
-        /* Botones carteles - posicionados como en Figma */
-        .cartel-btn {
-            position: absolute;
-            cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.15s ease, filter 0.15s ease;
-        }
-        .cartel-btn:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
-        }
-
-        /* PRÓXIMOS SHOWS - arriba izquierda */
-        .btn-shows {
-            left: 2%;
-            top: 10%;
-            width: 18%;
-        }
-
-        /* COLABS - abajo del shows */
-        .btn-colabs {
-            left: 2%;
-            top: 43%;
-            width: 12%;
-        }
-
-        /* PIDE PARA LLEVAR - arriba centro */
-        .btn-merch {
-            left: 35%;
-            top: 5%;
-            width: 20%;
-        }
-
-        /* YA ME CONOCES - arriba derecha */
-        .btn-about {
-            right: 2%;
-            top: 5%;
-            width: 22%;
-        }
-
-        /* ÉCHAME UN GRITO - debajo de ya me conoces */
-        .btn-contacto {
-            right: 2%;
-            top: 22%;
-            width: 22%;
-        }
-
-        .cartel-btn img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Redes sociales en la barra del mostrador */
-        .redes-bar {
-            position: absolute;
-            bottom: 18%;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: clamp(8px, 2vw, 20px);
-            align-items: center;
-            background: rgba(0,0,0,0.6);
-            padding: clamp(6px, 1.5vw, 12px) clamp(10px, 2vw, 24px);
-            border-top: 3px solid var(--verde);
-            border-bottom: 3px solid var(--verde);
-            backdrop-filter: blur(4px);
-        }
-
-        .red-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #fff;
-            text-decoration: none;
-            font-family: 'Bebas Neue', cursive;
-            font-size: clamp(0.7rem, 1.5vw, 1rem);
-            letter-spacing: 2px;
-            padding: clamp(4px, 1vw, 8px) clamp(6px, 1.5vw, 14px);
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: all 0.2s;
-        }
-        .red-btn:hover { background: rgba(255,255,255,0.15); border-color: #fff; transform: translateY(-3px); }
-
-        .red-btn svg { width: clamp(16px, 2.5vw, 24px); height: clamp(16px, 2.5vw, 24px); fill: currentColor; }
-
-        /* ========================
-           SECCIONES INTERIORES
-        ======================== */
-        .seccion {
             min-height: 100vh;
-            position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .seccion-fondo {
+        .seccion-full-img {
             position: absolute;
             inset: 0;
             background-size: cover;
             background-position: center;
+            z-index: 0;
         }
 
-        .seccion-fondo::after {
-            content: '';
+        .seccion-full-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.65);
+            z-index: 1;
         }
 
-        .seccion-contenido {
+        .seccion-full-contenido {
             position: relative;
             z-index: 2;
-            padding: 100px 40px 60px;
-            max-width: 1000px;
-            margin: 0 auto;
+            width: 100%;
+            max-width: 1200px;
+            padding: 80px 40px;
         }
 
-        .seccion-titulo {
-            font-family: 'Permanent Marker', cursive;
-            font-size: clamp(3rem, 8vw, 6rem);
-            text-transform: uppercase;
-            line-height: 0.9;
-            margin-bottom: 15px;
+        /* ========================
+           SHOWS - Taqueria Menu Style
+        ======================== */
+        #shows {
+            background: #0d0500;
+        }
+        #shows .seccion-full-img {
+            background-image: url('assets/img/shows.jpg');
+        }
+        #shows .seccion-full-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0.4) 100%);
         }
 
-        .seccion-linea {
-            height: 5px;
-            width: 100px;
+        .shows-header {
+            text-align: center;
             margin-bottom: 40px;
         }
 
-        /* ========================
-           SHOWS
-        ======================== */
-        #shows { background: #0d0000; }
-        #shows .seccion-fondo { background-image: url('assets/img/shows.jpg'); }
-        #shows .seccion-titulo { color: var(--naranja); text-shadow: 3px 3px 0 #000; }
-        #shows .seccion-linea { background: var(--naranja); }
-
-        .show-card {
-            background: rgba(255,255,255,0.06);
-            border-left: 6px solid var(--naranja);
-            padding: 20px 25px;
-            margin-bottom: 15px;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            flex-wrap: wrap;
-            transition: background 0.2s;
+        .shows-header h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--rojo-vivo);
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0 #000, 6px 6px 0 rgba(0,0,0,0.3);
+            line-height: 1;
         }
-        .show-card:hover { background: rgba(255,147,30,0.12); }
 
-        .show-fecha { font-family: 'Bebas Neue', cursive; font-size: 2.5rem; color: var(--naranja); min-width: 70px; text-align: center; line-height: 1; }
-        .show-fecha span { display: block; font-size: 0.9rem; color: rgba(255,255,255,0.5); letter-spacing: 2px; }
-        .show-nombre { font-family: 'Bebas Neue', cursive; font-size: 1.6rem; letter-spacing: 2px; }
-        .show-lugar { font-family: 'Special Elite', cursive; color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 3px; }
-        .show-info { flex: 1; }
-
-        .btn-tickets {
-            padding: 10px 22px;
-            background: var(--rojo);
-            color: #fff;
-            border: 3px solid #000;
+        .shows-header .sub {
             font-family: 'Bebas Neue', cursive;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            cursor: pointer;
-            box-shadow: 3px 3px 0 #000;
-            text-decoration: none;
-            transition: all 0.15s;
-            display: inline-block;
-        }
-        .btn-tickets:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #000; }
-
-        .vacio {
-            text-align: center;
-            padding: 50px;
-            border: 3px dashed rgba(255,255,255,0.2);
-            font-family: 'Special Elite', cursive;
-            color: rgba(255,255,255,0.4);
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.5vw, 1.6rem);
+            color: var(--amarillo);
+            letter-spacing: 4px;
+            margin-top: 8px;
         }
 
-        /* ========================
-           COLABS
-        ======================== */
-        #colabs { background: #000d05; }
-        #colabs .seccion-fondo { background-image: url('assets/img/colabs.jpg'); }
-        #colabs .seccion-titulo { color: #4ade80; text-shadow: 3px 3px 0 #000; }
-        #colabs .seccion-linea { background: #4ade80; }
+        .shows-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-        .colabs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-
-        .colab-card {
-            background: rgba(255,255,255,0.05);
-            border: 2px solid rgba(74,222,128,0.4);
-            padding: 25px 20px;
-            text-align: center;
+        .show-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(255,255,255,0.85);
+            border-bottom: 2px solid rgba(0,0,0,0.1);
             transition: all 0.2s;
         }
-        .colab-card:hover { border-color: #4ade80; transform: translateY(-4px); }
-        .colab-nombre { font-family: 'Bebas Neue', cursive; font-size: 1.4rem; letter-spacing: 2px; color: #4ade80; margin-top: 10px; }
-        .colab-desc { font-family: 'Special Elite', cursive; color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 6px; }
+        .show-item:hover {
+            background: rgba(255,255,255,0.95);
+            transform: translateX(4px);
+        }
+
+        .show-item .fecha {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.1rem;
+            color: var(--rojo);
+            letter-spacing: 1px;
+            white-space: nowrap;
+            min-width: 70px;
+        }
+
+        .show-item .lugar {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            flex: 1;
+        }
+
+        .show-item .dots {
+            flex: 1;
+            border-bottom: 2px dotted rgba(0,0,0,0.3);
+            min-width: 20px;
+            margin-bottom: 4px;
+        }
+
+        .show-item .precio {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.1rem;
+            color: var(--rojo);
+        }
+
+        .shows-vacio {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.85);
+            font-family: 'Special Elite', cursive;
+            color: #333;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
         /* ========================
-           MERCH
+           COLABS - Soda Crates Style
         ======================== */
-        #merch { background: #0d0005; }
-        #merch .seccion-fondo { background-image: url('assets/img/merch.jpg'); }
-        #merch .seccion-titulo { color: var(--amarillo); text-shadow: 3px 3px 0 #000; }
-        #merch .seccion-linea { background: var(--amarillo); }
+        #colabs {
+            background: #000d05;
+        }
+        #colabs .seccion-full-img {
+            background-image: url('assets/img/colabs.jpg');
+        }
+        #colabs .seccion-full-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.4) 100%);
+        }
 
-        .merch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-        .merch-card { background: rgba(255,255,255,0.05); border: 2px solid rgba(241,196,15,0.3); overflow: hidden; transition: all 0.2s; }
-        .merch-card:hover { border-color: var(--amarillo); transform: translateY(-4px); }
-        .merch-img { width: 100%; height: 200px; object-fit: cover; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
-        .merch-info { padding: 18px; }
-        .merch-nombre { font-family: 'Bebas Neue', cursive; font-size: 1.3rem; color: var(--amarillo); letter-spacing: 2px; }
-        .merch-precio { font-family: 'Permanent Marker', cursive; font-size: 1.5rem; margin-top: 5px; }
-        .btn-comprar { display: block; width: 100%; padding: 10px; background: var(--amarillo); color: #000; border: none; font-family: 'Bebas Neue', cursive; font-size: 1.1rem; letter-spacing: 3px; cursor: pointer; margin-top: 12px; transition: background 0.15s; }
-        .btn-comprar:hover { background: #f39c12; }
+        .colabs-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .colabs-header h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: #4ade80;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0 #000, 6px 6px 0 rgba(0,0,0,0.3);
+        }
+
+        .colabs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .colab-crate {
+            background: rgba(255,255,255,0.08);
+            border: 3px solid rgba(74,222,128,0.4);
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.2s;
+            backdrop-filter: blur(4px);
+        }
+        .colab-crate:hover {
+            border-color: #4ade80;
+            transform: translateY(-6px);
+            background: rgba(74,222,128,0.1);
+        }
+
+        .colab-crate .nombre {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            color: #4ade80;
+        }
+
+        .colab-crate .desc {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 8px;
+        }
+
+        .colabs-vacio {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0,0,0,0.5);
+            border: 3px dashed rgba(74,222,128,0.3);
+            font-family: 'Special Elite', cursive;
+            color: rgba(255,255,255,0.6);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ========================
+           MERCH - Market Board Style
+        ======================== */
+        #merch {
+            background: #0d0005;
+        }
+        #merch .seccion-full-img {
+            background-image: url('assets/img/merch.jpg');
+        }
+        #merch .seccion-full-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.15) 70%, rgba(0,0,0,0.5) 100%);
+        }
+
+        .merch-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .merch-header h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--amarillo);
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0 #000, 6px 6px 0 rgba(0,0,0,0.3);
+        }
+
+        .merch-header .sub {
+            font-family: 'Bebas Neue', cursive;
+            font-size: clamp(1rem, 2.5vw, 1.6rem);
+            color: var(--rojo-vivo);
+            letter-spacing: 4px;
+            margin-top: 8px;
+        }
+
+        .merch-lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .merch-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            padding: 12px 18px;
+            background: rgba(255,255,255,0.88);
+            transition: all 0.2s;
+        }
+        .merch-item:hover {
+            background: rgba(255,255,255,0.95);
+            transform: translateX(4px);
+        }
+
+        .merch-item .producto {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .merch-item .dots {
+            flex: 1;
+            border-bottom: 2px dotted rgba(0,0,0,0.3);
+            min-width: 20px;
+            margin-bottom: 4px;
+        }
+
+        .merch-item .precio {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.2rem;
+            color: var(--rojo);
+            white-space: nowrap;
+        }
+
+        .merch-vacio {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.85);
+            font-family: 'Special Elite', cursive;
+            color: #333;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
         /* ========================
            ABOUT ME
         ======================== */
-        #about { background: #00000d; }
-        #about .seccion-fondo { background-image: url('assets/img/about.jpg'); }
-        #about .seccion-titulo { color: #818cf8; text-shadow: 3px 3px 0 #000; }
-        #about .seccion-linea { background: #818cf8; }
+        #about {
+            background: #00000d;
+        }
+        #about .seccion-full-img {
+            background-image: url('assets/img/about.jpg');
+        }
+        #about .seccion-full-overlay {
+            background: rgba(0,0,0,0.65);
+        }
 
-        .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: start; }
-        @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
+        .about-header h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: #818cf8;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0 #000;
+            line-height: 0.9;
+            margin-bottom: 15px;
+        }
 
-        .about-foto { width: 100%; aspect-ratio: 1; background: rgba(255,255,255,0.05); border: 4px solid #818cf8; display: flex; align-items: center; justify-content: center; font-size: 5rem; box-shadow: 8px 8px 0 rgba(0,0,0,0.5); overflow: hidden; }
+        .about-linea {
+            height: 5px;
+            width: 100px;
+            background: #818cf8;
+            margin-bottom: 40px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .about-foto {
+            width: 100%;
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.05);
+            border: 4px solid #818cf8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
         .about-foto img { width: 100%; height: 100%; object-fit: cover; }
-        .about-texto h3 { font-family: 'Bebas Neue', cursive; font-size: 2rem; color: #818cf8; letter-spacing: 3px; margin-bottom: 15px; }
-        .about-texto p { font-family: 'Special Elite', cursive; color: rgba(255,255,255,0.75); line-height: 1.9; font-size: 1rem; margin-bottom: 12px; }
+
+        .about-texto h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2rem;
+            color: #818cf8;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+        .about-texto p {
+            font-family: 'Special Elite', cursive;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.9;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
 
         /* ========================
            CONTACTO
         ======================== */
-        #contacto { background: #0d0500; }
-        #contacto .seccion-fondo { background-image: url('assets/img/contacto.jpg'); }
-        #contacto .seccion-titulo { color: var(--rojo-vivo); text-shadow: 3px 3px 0 #000; }
-        #contacto .seccion-linea { background: var(--rojo-vivo); }
+        #contacto {
+            background: #0d0500;
+        }
+        #contacto .seccion-full-img {
+            background-image: url('assets/img/contacto.jpg');
+        }
+        #contacto .seccion-full-overlay {
+            background: rgba(0,0,0,0.65);
+        }
 
-        .redes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-bottom: 50px; }
+        .contacto-header h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: var(--rojo-vivo);
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0 #000;
+            line-height: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .contacto-linea {
+            height: 5px;
+            width: 100px;
+            background: var(--rojo-vivo);
+            margin-bottom: 40px;
+        }
+
+        .redes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-bottom: 50px;
+        }
 
         .red-card {
-            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
             padding: 25px 15px;
             border: 2px solid rgba(255,255,255,0.15);
-            text-decoration: none; color: #fff;
+            text-decoration: none;
+            color: #fff;
             transition: all 0.2s;
         }
         .red-card:hover { border-color: var(--rojo-vivo); background: rgba(231,76,60,0.1); transform: translateY(-4px); }
@@ -441,18 +554,31 @@
         .form-contacto h3 { font-family: 'Bebas Neue', cursive; font-size: 1.8rem; color: var(--rojo-vivo); letter-spacing: 3px; margin-bottom: 20px; }
         .form-grupo { margin-bottom: 12px; }
         .form-grupo input, .form-grupo textarea {
-            width: 100%; padding: 14px; background: rgba(255,255,255,0.05);
-            border: 2px solid rgba(255,255,255,0.2); color: #fff;
-            font-family: 'Special Elite', cursive; font-size: 1rem; outline: none; transition: border-color 0.2s;
+            width: 100%;
+            padding: 14px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: #fff;
+            font-family: 'Special Elite', cursive;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
         }
         .form-grupo input:focus, .form-grupo textarea:focus { border-color: var(--rojo-vivo); }
         .form-grupo input::placeholder, .form-grupo textarea::placeholder { color: rgba(255,255,255,0.3); }
         .form-grupo textarea { height: 110px; resize: vertical; }
         .btn-enviar {
-            width: 100%; padding: 16px; background: var(--rojo); color: #fff;
-            border: 4px solid #000; font-family: 'Bebas Neue', cursive;
-            font-size: 1.4rem; letter-spacing: 4px; cursor: pointer;
-            box-shadow: 5px 5px 0 #000; transition: all 0.15s;
+            width: 100%;
+            padding: 16px;
+            background: var(--rojo);
+            color: #fff;
+            border: 4px solid #000;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.4rem;
+            letter-spacing: 4px;
+            cursor: pointer;
+            box-shadow: 5px 5px 0 #000;
+            transition: all 0.15s;
         }
         .btn-enviar:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 #000; }
 
@@ -461,12 +587,23 @@
         ======================== */
         footer {
             background: #000;
-            border-top: 4px solid var(--rojo);
+            border-top: 4px solid var(--azul-logo);
             padding: 25px 20px;
             text-align: center;
         }
-        .footer-logo { font-family: 'Permanent Marker', cursive; font-size: 2rem; color: var(--rojo); text-shadow: 2px 2px 0 var(--amarillo); margin-bottom: 8px; }
-        .footer-txt { font-family: 'Special Elite', cursive; color: rgba(255,255,255,0.35); font-size: 0.85rem; letter-spacing: 2px; }
+        .footer-logo {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2rem;
+            color: var(--azul-logo);
+            text-shadow: 2px 2px 0 var(--azul-oscuro);
+            margin-bottom: 8px;
+        }
+        .footer-txt {
+            font-family: 'Special Elite', cursive;
+            color: rgba(255,255,255,0.35);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
 
         /* ========================
            SCROLL REVEAL
@@ -475,18 +612,22 @@
         .reveal.visible { opacity: 1; transform: none; }
 
         /* ========================
+           NAV SCROLLSPY
+        ======================== */
+        .nav-link.active {
+            color: #fff;
+            border-color: var(--azul-logo);
+        }
+
+        /* ========================
            RESPONSIVE
         ======================== */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .redes-bar { flex-wrap: wrap; justify-content: center; bottom: 12%; }
-            .red-btn span { display: none; }
-            .btn-shows { left: 1%; top: 8%; width: 28%; }
-            .btn-colabs { left: 1%; top: 45%; width: 20%; }
-            .btn-merch { left: 30%; top: 3%; width: 30%; }
-            .btn-about { right: 1%; top: 3%; width: 32%; }
-            .btn-contacto { right: 1%; top: 22%; width: 32%; }
-            .seccion-contenido { padding: 80px 20px 40px; }
+            .seccion-full-contenido { padding: 80px 20px 40px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .shows-menu { grid-template-columns: 1fr; }
+            .merch-lista { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -494,7 +635,7 @@
 
     <!-- NAVBAR -->
     <nav id="navbar">
-        <a href="#hero" class="nav-logo">HueyCoyote</a>
+        <a href="#shows" class="nav-logo">HueyCoyote</a>
         <div class="nav-links">
             <a href="#shows" class="nav-link">Shows</a>
             <a href="#colabs" class="nav-link">Colabs</a>
@@ -504,111 +645,148 @@
         </div>
     </nav>
 
-    <!-- PANTALLA INICIO -->
+    <!-- PANTALLA INICIO - Cortina metálica verde -->
     <div id="pantalla-inicio">
         <div class="fondo-cortina"></div>
         <div class="overlay-cortina"></div>
         <div class="logo-cortina">
-            <h1>Huey<br>Coyote</h1>
-            <p class="subtitulo">Música · Sudor · Cumbia</p>
+            <img src="assets/img/logo-hueycoyote.svg" alt="Huey Coyote">
         </div>
-        <button class="btn-abrir" onclick="abrirCortina()">▶ Abre el Changarro</button>
+        <button class="btn-abrir" onclick="abrirCortina()">ABRE EL CHANGARRO</button>
     </div>
 
-    <!-- HERO - CHANGARRO PRINCIPAL -->
-    <section id="hero">
-        <div class="hero-fondo"></div>
-        <div class="hero-botones">
-
-            <!-- Cartel: Próximos Shows -->
-            <a href="#shows" class="cartel-btn btn-shows">
-                <img src="assets/img/shows-cartel.png" alt="Próximos Shows"
-                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'background:#e67e22;padding:8px 12px;font-family:Bebas Neue,cursive;font-size:clamp(1rem,3vw,1.8rem);color:#fff;border:3px solid #000;box-shadow:4px 4px 0 #000;letter-spacing:2px;text-align:center\'>⭐ PRÓXIMOS<br>SHOWS ⭐<br><small style=\'font-size:0.6em\'>COLABS</small></div>'">
-            </a>
-
-            <!-- Cartel: Pide para Llevar -->
-            <a href="#merch" class="cartel-btn btn-merch">
-                <div style="background:var(--rojo);padding:8px 16px;font-family:'Bebas Neue',cursive;font-size:clamp(0.9rem,2.5vw,1.5rem);color:#fff;border:3px solid #000;box-shadow:4px 4px 0 #000;letter-spacing:2px;text-align:center;white-space:nowrap">
-                    PIDE PARA LLEVAR
+    <!-- PRÓXIMOS SHOWS - Estilo menú de taquería -->
+    <section id="shows" class="seccion-full">
+        <div class="seccion-full-img"></div>
+        <div class="seccion-full-overlay"></div>
+        <div class="seccion-full-contenido">
+            <div class="shows-header reveal">
+                <h2>Próximos Shows</h2>
+                <div class="sub">Presentaciones</div>
+            </div>
+            <div class="shows-menu reveal">
+                <div class="show-item">
+                    <span class="fecha">FEB 08</span>
+                    <span class="lugar">Puebla</span>
+                    <span class="dots"></span>
+                    <span class="precio">$</span>
                 </div>
-            </a>
-
-            <!-- Cartel: Ya me Conoces -->
-            <a href="#about" class="cartel-btn btn-about">
-                <div style="background:var(--verde);padding:10px 14px;font-family:'Bebas Neue',cursive;color:#fff;border:3px solid #000;box-shadow:4px 4px 0 #000;text-align:center">
-                    <div style="font-size:clamp(0.8rem,2vw,1.2rem);letter-spacing:2px;color:var(--naranja)">¿YA ME CONOCES?</div>
-                    <div style="font-size:clamp(0.9rem,2.5vw,1.5rem);letter-spacing:3px">ÉCHAME UN GRITO</div>
+                <div class="show-item">
+                    <span class="fecha">FEB 14</span>
+                    <span class="lugar">CDMX</span>
+                    <span class="dots"></span>
+                    <span class="precio">$</span>
                 </div>
-            </a>
-
-            <!-- Redes sociales en la barra del mostrador -->
-            <div class="redes-bar">
-                <a href="#" class="red-btn" title="Instagram">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    <span>Instagram</span>
-                </a>
-                <a href="#" class="red-btn" title="TikTok">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-                    <span>TikTok</span>
-                </a>
-                <a href="#" class="red-btn" title="YouTube">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-                    <span>YouTube</span>
-                </a>
-                <a href="#" class="red-btn" title="Spotify">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-                    <span>Spotify</span>
-                </a>
-                <a href="#" class="red-btn" title="Apple Music">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.994 6.124a9.23 9.23 0 0 0-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 0 0-1.877-.726 10.496 10.496 0 0 0-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208A7.37 7.37 0 0 0 .05 5.08c-.02.399-.04.798-.04 1.197v11.446c0 .51.01 1.02.06 1.53.07.68.23 1.33.53 1.95.46.96 1.18 1.67 2.14 2.12.46.22.95.36 1.46.44.57.09 1.14.12 1.72.12h11.44c.51 0 1.02-.01 1.53-.06.68-.07 1.33-.23 1.95-.53.96-.46 1.67-1.18 2.12-2.14.22-.46.36-.95.44-1.46.09-.57.12-1.14.12-1.72V7.816c-.003-.564-.016-1.128-.063-1.692zm-9.374 11.443c-.23.04-.46.05-.7.05-.72 0-1.42-.18-2.05-.53a4.13 4.13 0 0 1-1.52-1.52 4.07 4.07 0 0 1-.53-2.05c0-.72.18-1.42.53-2.05a4.13 4.13 0 0 1 1.52-1.52c.63-.35 1.33-.53 2.05-.53.24 0 .47.01.7.05V7.1l5.46-1.47v8.04a4.13 4.13 0 0 1-.53 2.05 4.13 4.13 0 0 1-1.52 1.52c-.63.35-1.33.53-2.05.53-.24 0-.47-.01-.7-.05a4.07 4.07 0 0 1-2.35-1.37z"/></svg>
-                    <span>Apple Music</span>
-                </a>
+                <div class="show-item">
+                    <span class="fecha">FEB 18</span>
+                    <span class="lugar">Guadalajara</span>
+                    <span class="dots"></span>
+                    <span class="precio">$</span>
+                </div>
+                <div class="show-item">
+                    <span class="fecha">MAR 02</span>
+                    <span class="lugar">Monterrey</span>
+                    <span class="dots"></span>
+                    <span class="precio">$</span>
+                </div>
+                <div class="show-item">
+                    <span class="fecha">MAR 08</span>
+                    <span class="lugar">León</span>
+                    <span class="dots"></span>
+                    <span class="precio">$</span>
+                </div>
+                <div class="show-item">
+                    <span class="fecha">MAR 22</span>
+                    <span class="lugar">Tijuana</span>
+                    <span class="dots"></span>
+                    <span class="precio">$</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- PRÓXIMOS SHOWS -->
-    <section id="shows" class="seccion">
-        <div class="seccion-fondo"></div>
-        <div class="seccion-contenido">
-            <h2 class="seccion-titulo reveal">Próximos<br>Shows</h2>
-            <div class="seccion-linea reveal"></div>
-            <div class="shows-container reveal">
-                <div class="vacio">🎸 Los shows se están cocinando...<br><br>Checa pronto para las fechas.</div>
+    <!-- COLABS - Estilo rejas de refrescos -->
+    <section id="colabs" class="seccion-full">
+        <div class="seccion-full-img"></div>
+        <div class="seccion-full-overlay"></div>
+        <div class="seccion-full-contenido">
+            <div class="colabs-header reveal">
+                <h2>Colabs</h2>
+            </div>
+            <div class="colabs-vacio reveal">
+                Las colabs están en proceso...<br><br>Pronto aquí los cuates.
             </div>
         </div>
     </section>
 
-    <!-- COLABS -->
-    <section id="colabs" class="seccion">
-        <div class="seccion-fondo"></div>
-        <div class="seccion-contenido">
-            <h2 class="seccion-titulo reveal">Colabs</h2>
-            <div class="seccion-linea reveal"></div>
-            <div class="reveal">
-                <div class="vacio">🤝 Las colabs están en proceso...<br><br>Pronto aquí los cuates.</div>
+    <!-- MERCH - Estilo tabla de precios de mercado -->
+    <section id="merch" class="seccion-full">
+        <div class="seccion-full-img"></div>
+        <div class="seccion-full-overlay"></div>
+        <div class="seccion-full-contenido">
+            <div class="merch-header reveal">
+                <h2>Llévele, Llévele</h2>
+                <div class="sub">Pide para Llevar</div>
             </div>
-        </div>
-    </section>
-
-    <!-- MERCH -->
-    <section id="merch" class="seccion">
-        <div class="seccion-fondo"></div>
-        <div class="seccion-contenido">
-            <h2 class="seccion-titulo reveal">Pide para<br>Llevar</h2>
-            <div class="seccion-linea reveal"></div>
-            <div class="reveal">
-                <div class="vacio">👕 El merch está en el horno...<br><br>Regresa pronto para llevarte algo chido.</div>
+            <div class="merch-lista reveal">
+                <div class="merch-item">
+                    <span class="producto">Playeras</span>
+                    <span class="dots"></span>
+                    <span class="precio">$150</span>
+                </div>
+                <div class="merch-item">
+                    <span class="producto">Gorras</span>
+                    <span class="dots"></span>
+                    <span class="precio">$150</span>
+                </div>
+                <div class="merch-item">
+                    <span class="producto">Chalecos</span>
+                    <span class="dots"></span>
+                    <span class="precio">$300</span>
+                </div>
+                <div class="merch-item">
+                    <span class="producto">Chaquetas</span>
+                    <span class="dots"></span>
+                    <span class="precio">$400</span>
+                </div>
+                <div class="merch-item">
+                    <span class="producto">Cintos</span>
+                    <span class="dots"></span>
+                    <span class="precio">$350</span>
+                </div>
+                <div class="merch-item">
+                    <span class="producto">Casetas</span>
+                    <span class="dots"></span>
+                    <span class="precio">$120</span>
+                </div>
+                <div class="merch-item">
+                    <span class="producto">Paleacates</span>
+                    <span class="dots"></span>
+                    <span class="precio">$100</span>
+                </div>
+                <div class="merch-item">
+                    <span class="producto">Buzos</span>
+                    <span class="dots"></span>
+                    <span class="precio">$380</span>
+                </div>
+                <div class="merch-item">
+                    <span class="producto">Botas</span>
+                    <span class="dots"></span>
+                    <span class="precio">$700</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ABOUT ME -->
-    <section id="about" class="seccion">
-        <div class="seccion-fondo"></div>
-        <div class="seccion-contenido">
-            <h2 class="seccion-titulo reveal">Ya me<br>Conoces</h2>
-            <div class="seccion-linea reveal"></div>
+    <section id="about" class="seccion-full">
+        <div class="seccion-full-img"></div>
+        <div class="seccion-full-overlay"></div>
+        <div class="seccion-full-contenido">
+            <div class="about-header reveal">
+                <h2>Ya me<br>Conoces</h2>
+                <div class="about-linea"></div>
+            </div>
             <div class="about-grid reveal">
                 <div class="about-foto">🤠</div>
                 <div class="about-texto">
@@ -621,11 +799,14 @@
     </section>
 
     <!-- CONTACTO -->
-    <section id="contacto" class="seccion">
-        <div class="seccion-fondo"></div>
-        <div class="seccion-contenido">
-            <h2 class="seccion-titulo reveal">Échame<br>un Grito</h2>
-            <div class="seccion-linea reveal"></div>
+    <section id="contacto" class="seccion-full">
+        <div class="seccion-full-img"></div>
+        <div class="seccion-full-overlay"></div>
+        <div class="seccion-full-contenido">
+            <div class="contacto-header reveal">
+                <h2>Échame<br>un Grito</h2>
+                <div class="contacto-linea"></div>
+            </div>
             <div class="redes-grid reveal">
                 <a href="#" class="red-card">
                     <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -695,4 +876,3 @@
     </script>
 </body>
 </html>
-<!-- deploy test Fri Mar 27 03:00:22 AM UTC 2026 -->
