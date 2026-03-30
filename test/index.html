@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Huey Coyote | Música, Sudor y Cumbia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Permanent+Marker&family=Oswald:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --rojo: #c0392b;
+            --rojo-vivo: #e74c3c;
+            --amarillo: #f1c40f;
+            --naranja: #ff931e;
+            --verde: #4eb32e;
+            --verde-oscuro: #1d6e3f;
+            --negro: #1a1a1a;
+            --blanco: #f4f1ea;
+            --azul-logo: #1ab1e5;
+            --azul-oscuro: #1b1464;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Oswald', sans-serif; background: var(--negro); color: var(--blanco); overflow-x: hidden; }
+
+        /* ========================
+           PANTALLA INICIO (CORTINA VERDE)
+        ======================== */
+        #pantalla-inicio {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        #pantalla-inicio .fondo-cortina {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/img/cortina-huey.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        #pantalla-inicio .overlay-cortina {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+
+        .btn-abrir {
+            position: absolute;
+            bottom: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            padding: 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Special Elite', cursive;
+            font-size: clamp(1rem, 2.2vw, 1.5rem);
+            letter-spacing: 6px;
+            color: var(--azul-logo);
+            text-shadow: 2px 2px 0 var(--azul-oscuro);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-abrir:hover {
+            color: #fff;
+            text-shadow: 2px 2px 0 var(--azul-logo), 0 0 20px rgba(26,177,229,0.5);
+            transform: translateX(-50%) scale(1.08);
+        }
+
+        .cortina-sube { transform: translateY(-100%); }
+
+        /* ========================
+           CONTENIDO PLACEHOLDER
+        ======================== */
+        #contenido {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        #contenido h1 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: var(--amarillo);
+            text-shadow: 3px 3px 0 var(--rojo);
+        }
+
+        #contenido p {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            color: var(--blanco);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PANTALLA INICIO - Cortina verde metálica -->
+    <div id="pantalla-inicio">
+        <div class="fondo-cortina"></div>
+        <div class="overlay-cortina"></div>
+        <button class="btn-abrir" onclick="abrirCortina()">Abre el Changarro</button>
+    </div>
+
+    <!-- CONTENIDO (placeholder mientras se maqueta el resto) -->
+    <section id="contenido">
+        <div>
+            <h1>🐺 El Huey Coyote</h1>
+            <p>Aquí va el rediseño — en construcción</p>
+        </div>
+    </section>
+
+    <script>
+        function abrirCortina() {
+            document.getElementById('pantalla-inicio').classList.add('cortina-sube');
+            setTimeout(() => {
+                document.getElementById('pantalla-inicio').style.display = 'none';
+            }, 1900);
+        }
+    </script>
+</body>
+</html>
