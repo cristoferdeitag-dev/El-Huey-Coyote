@@ -84,30 +84,132 @@
         .cortina-sube { transform: translateY(-100%); }
 
         /* ========================
-           CONTENIDO PLACEHOLDER
+           HERO - CHANGARRO PRINCIPAL
         ======================== */
-        #contenido {
+        #hero {
+            position: relative;
+            width: 100%;
             min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/img/changarro-hero.png');
+            background-size: cover;
+            background-position: center top;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
+            z-index: 1;
+        }
+
+        .hero-nav-buttons {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+        }
+
+        /* Botones de navegación posicionados sobre la foto */
+        .hero-btn {
+            position: absolute;
+            display: block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.08);
+            filter: brightness(1.2);
+        }
+
+        .hero-btn img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.6));
+        }
+
+        /* Posiciones de los botones sobre el changarro */
+        .hero-btn-shows {
+            left: 3%;
+            top: 22%;
+            width: clamp(120px, 18vw, 280px);
+        }
+
+        .hero-btn-colabs {
+            left: 6%;
+            top: 50%;
+            width: clamp(60px, 7vw, 110px);
+        }
+
+        .hero-btn-llevar {
+            left: 24%;
+            top: 8%;
+            width: clamp(120px, 17vw, 260px);
+        }
+
+        .hero-btn-conoces {
+            right: 5%;
+            top: 10%;
+            width: clamp(120px, 18vw, 280px);
+        }
+
+        .hero-btn-grito {
+            right: 7%;
+            top: 35%;
+            width: clamp(120px, 17vw, 260px);
+        }
+
+        /* ========================
+           SECCIONES PLACEHOLDER
+        ======================== */
+        .seccion-placeholder {
+            min-height: 50vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
+            border-top: 3px solid var(--amarillo);
         }
 
-        #contenido h1 {
+        .seccion-placeholder h2 {
             font-family: 'Permanent Marker', cursive;
-            font-size: clamp(2rem, 5vw, 4rem);
+            font-size: clamp(1.5rem, 4vw, 3rem);
             color: var(--amarillo);
             text-shadow: 3px 3px 0 var(--rojo);
         }
 
-        #contenido p {
+        .seccion-placeholder p {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            margin-top: 20px;
+            font-size: 1.1rem;
+            margin-top: 15px;
             color: var(--blanco);
-            opacity: 0.7;
+            opacity: 0.5;
+        }
+
+        /* ========================
+           RESPONSIVE
+        ======================== */
+        @media (max-width: 768px) {
+            .hero-btn-shows { left: 2%; top: 20%; width: 100px; }
+            .hero-btn-colabs { left: 4%; top: 48%; width: 55px; }
+            .hero-btn-llevar { left: 22%; top: 6%; width: 100px; }
+            .hero-btn-conoces { right: 3%; top: 8%; width: 100px; }
+            .hero-btn-grito { right: 4%; top: 32%; width: 100px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-btn-shows { left: 1%; top: 18%; width: 75px; }
+            .hero-btn-colabs { left: 3%; top: 45%; width: 40px; }
+            .hero-btn-llevar { left: 20%; top: 4%; width: 75px; }
+            .hero-btn-conoces { right: 2%; top: 6%; width: 75px; }
+            .hero-btn-grito { right: 3%; top: 28%; width: 75px; }
         }
     </style>
 </head>
@@ -122,12 +224,49 @@
         </button>
     </div>
 
-    <!-- CONTENIDO (placeholder mientras se maqueta el resto) -->
-    <section id="contenido">
-        <div>
-            <h1>🐺 El Huey Coyote</h1>
-            <p>Aquí va el rediseño — en construcción</p>
+    <!-- HERO - Changarro Principal con navegación -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-nav-buttons">
+            <!-- Izquierda: Shows + Colabs -->
+            <a href="#shows" class="hero-btn hero-btn-shows">
+                <img src="assets/img/btn-proximos-shows.svg" alt="Próximos Shows">
+            </a>
+            <a href="#colabs" class="hero-btn hero-btn-colabs">
+                <img src="assets/img/btn-colabs.svg" alt="Colabs">
+            </a>
+
+            <!-- Centro arriba: Pide para llevar -->
+            <a href="#merch" class="hero-btn hero-btn-llevar">
+                <img src="assets/img/btn-pide-para-llevar.svg" alt="Pide para Llevar">
+            </a>
+
+            <!-- Derecha: Ya me conoces + Échame un grito -->
+            <a href="#about" class="hero-btn hero-btn-conoces">
+                <!-- TODO: SVG de ¿Ya me conoces? -->
+            </a>
+            <a href="#contacto" class="hero-btn hero-btn-grito">
+                <img src="assets/img/btn-echame-un-grito.svg" alt="Échame un Grito">
+            </a>
         </div>
+    </section>
+
+    <!-- Secciones placeholder -->
+    <section id="shows" class="seccion-placeholder">
+        <div><h2>Próximos Shows</h2><p>En construcción...</p></div>
+    </section>
+    <section id="colabs" class="seccion-placeholder">
+        <div><h2>Colabs</h2><p>En construcción...</p></div>
+    </section>
+    <section id="merch" class="seccion-placeholder">
+        <div><h2>Pide para Llevar</h2><p>En construcción...</p></div>
+    </section>
+    <section id="about" class="seccion-placeholder">
+        <div><h2>¿Ya me Conoces?</h2><p>En construcción...</p></div>
+    </section>
+    <section id="contacto" class="seccion-placeholder">
+        <div><h2>Échame un Grito</h2><p>En construcción...</p></div>
     </section>
 
     <script>
