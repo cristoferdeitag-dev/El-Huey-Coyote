@@ -58,27 +58,27 @@
 
         .btn-abrir {
             position: absolute;
-            bottom: 12%;
+            bottom: 10%;
             left: 50%;
             transform: translateX(-50%);
             z-index: 2;
-            padding: 0;
+            padding: 10px 20px;
             background: none;
             border: none;
             cursor: pointer;
-            font-family: 'Special Elite', cursive;
-            font-size: clamp(1rem, 2.2vw, 1.5rem);
-            letter-spacing: 6px;
-            color: var(--azul-logo);
-            text-shadow: 2px 2px 0 var(--azul-oscuro);
             transition: all 0.3s ease;
-            text-transform: uppercase;
         }
 
-        .btn-abrir:hover {
-            color: #fff;
-            text-shadow: 2px 2px 0 var(--azul-logo), 0 0 20px rgba(26,177,229,0.5);
-            transform: translateX(-50%) scale(1.08);
+        .btn-abrir img {
+            width: clamp(250px, 35vw, 500px);
+            height: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+            transition: all 0.3s ease;
+        }
+
+        .btn-abrir:hover img {
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5)) brightness(1.2);
+            transform: scale(1.08);
         }
 
         .cortina-sube { transform: translateY(-100%); }
@@ -117,7 +117,9 @@
     <div id="pantalla-inicio">
         <div class="fondo-cortina"></div>
         <div class="overlay-cortina"></div>
-        <button class="btn-abrir" onclick="abrirCortina()">Abre el Changarro</button>
+        <button class="btn-abrir" onclick="abrirCortina()">
+            <img src="assets/img/btn-changarro.svg" alt="Abre el Changarro">
+        </button>
     </div>
 
     <!-- CONTENIDO (placeholder mientras se maqueta el resto) -->
