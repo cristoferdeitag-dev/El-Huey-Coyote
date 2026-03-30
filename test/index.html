@@ -89,81 +89,76 @@
         #hero {
             position: relative;
             width: 100%;
-            min-height: 100vh;
-            overflow: hidden;
         }
 
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background-image: url('assets/img/changarro-hero.png');
-            background-size: cover;
-            background-position: center top;
-            z-index: 0;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
-            z-index: 1;
-        }
-
-        .hero-nav-buttons {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-        }
-
-        /* Botones de navegación posicionados sobre la foto */
-        .hero-btn {
-            position: absolute;
-            display: block;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .hero-btn:hover {
-            transform: scale(1.08);
-            filter: brightness(1.2);
-        }
-
-        .hero-btn img {
+        #hero img.hero-img {
             width: 100%;
             height: auto;
-            filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.6));
+            display: block;
         }
 
-        /* Posiciones de los botones sobre el changarro */
-        .hero-btn-shows {
-            left: 5%;
-            top: 28%;
-            width: clamp(100px, 15vw, 230px);
+        /* Botones invisibles sobre la imagen */
+        .hero-hotspot {
+            position: absolute;
+            cursor: pointer;
+            z-index: 2;
+            /* border: 2px dashed rgba(255,255,0,0.4); /* descomentar para debug */
+            transition: background 0.3s ease;
         }
 
-        .hero-btn-colabs {
-            left: 8%;
-            top: 52%;
-            width: clamp(50px, 6vw, 95px);
+        .hero-hotspot:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
         }
 
-        .hero-btn-llevar {
-            left: 50%;
-            transform: translateX(-50%);
-            top: 12%;
-            width: clamp(110px, 15vw, 230px);
+        /* Posiciones en porcentaje sobre la imagen */
+        .hs-shows {
+            left: 2%;
+            top: 18%;
+            width: 17%;
+            height: 28%;
         }
 
-        .hero-btn-conoces {
-            right: 5%;
-            top: 15%;
-            width: clamp(110px, 17vw, 270px);
+        .hs-colabs {
+            left: 26%;
+            top: 27%;
+            width: 10%;
+            height: 10%;
         }
 
-        .hero-btn-grito {
-            right: 6%;
-            top: 40%;
-            width: clamp(110px, 15vw, 230px);
+        .hs-llevar {
+            left: 20%;
+            top: 5%;
+            width: 22%;
+            height: 14%;
+        }
+
+        .hs-conoces {
+            right: 2%;
+            top: 5%;
+            width: 22%;
+            height: 18%;
+        }
+
+        .hs-grito {
+            right: 4%;
+            top: 25%;
+            width: 20%;
+            height: 12%;
+        }
+
+        .hs-apple-music {
+            left: 15%;
+            top: 78%;
+            width: 12%;
+            height: 10%;
+        }
+
+        .hs-spotify {
+            left: 38%;
+            top: 78%;
+            width: 12%;
+            height: 10%;
         }
 
         /* ========================
@@ -193,25 +188,6 @@
             color: var(--blanco);
             opacity: 0.5;
         }
-
-        /* ========================
-           RESPONSIVE
-        ======================== */
-        @media (max-width: 768px) {
-            .hero-btn-shows { left: 3%; top: 25%; width: 90px; }
-            .hero-btn-colabs { left: 5%; top: 48%; width: 45px; }
-            .hero-btn-llevar { top: 8%; width: 90px; }
-            .hero-btn-conoces { right: 3%; top: 12%; width: 90px; }
-            .hero-btn-grito { right: 4%; top: 35%; width: 90px; }
-        }
-
-        @media (max-width: 480px) {
-            .hero-btn-shows { left: 2%; top: 22%; width: 70px; }
-            .hero-btn-colabs { left: 3%; top: 45%; width: 35px; }
-            .hero-btn-llevar { top: 5%; width: 70px; }
-            .hero-btn-conoces { right: 2%; top: 10%; width: 70px; }
-            .hero-btn-grito { right: 3%; top: 30%; width: 70px; }
-        }
     </style>
 </head>
 <body>
@@ -227,30 +203,16 @@
 
     <!-- HERO - Changarro Principal con navegación -->
     <section id="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-nav-buttons">
-            <!-- Izquierda: Shows + Colabs -->
-            <a href="#shows" class="hero-btn hero-btn-shows">
-                <img src="assets/img/btn-proximos-shows.svg" alt="Próximos Shows">
-            </a>
-            <a href="#colabs" class="hero-btn hero-btn-colabs">
-                <img src="assets/img/btn-colabs.svg" alt="Colabs">
-            </a>
+        <img src="assets/img/changarro-hero.png" alt="El Huey Coyote - Changarro" class="hero-img">
 
-            <!-- Centro arriba: Pide para llevar -->
-            <a href="#merch" class="hero-btn hero-btn-llevar">
-                <img src="assets/img/btn-pide-para-llevar.svg" alt="Pide para Llevar">
-            </a>
-
-            <!-- Derecha: Ya me conoces + Échame un grito -->
-            <a href="#about" class="hero-btn hero-btn-conoces">
-                <img src="assets/img/btn-ya-me-conoces.svg" alt="¿Ya me Conoces?">
-            </a>
-            <a href="#contacto" class="hero-btn hero-btn-grito">
-                <img src="assets/img/btn-echame-un-grito.svg" alt="Échame un Grito">
-            </a>
-        </div>
+        <!-- Botones invisibles posicionados sobre los letreros -->
+        <a href="#shows" class="hero-hotspot hs-shows" title="Próximos Shows"></a>
+        <a href="#colabs" class="hero-hotspot hs-colabs" title="Colabs"></a>
+        <a href="#merch" class="hero-hotspot hs-llevar" title="Pide para Llevar"></a>
+        <a href="#about" class="hero-hotspot hs-conoces" title="¿Ya me Conoces?"></a>
+        <a href="#contacto" class="hero-hotspot hs-grito" title="Échame un Grito"></a>
+        <a href="#" class="hero-hotspot hs-apple-music" title="Apple Music" target="_blank"></a>
+        <a href="#" class="hero-hotspot hs-spotify" title="Spotify" target="_blank"></a>
     </section>
 
     <!-- Secciones placeholder -->
