@@ -339,19 +339,19 @@
             .footer-social a { font-size: 0.75rem; padding: 6px 12px; }
         }
         /* ========================
-           SCROLL ANIMATIONS
+           SCROLL ANIMATIONS (initial state)
         ======================== */
-        .seccion-img {
+        .anim-ready .seccion-img {
             opacity: 0;
             transform: translateY(60px);
         }
 
-        .seccion-separador {
+        .anim-ready .seccion-separador {
             opacity: 0;
             transform: scale(0.9);
         }
 
-        .site-footer {
+        .anim-ready .site-footer {
             opacity: 0;
             transform: translateY(40px);
         }
@@ -478,6 +478,12 @@
         function initAnimations() {
             gsap.registerPlugin(ScrollTrigger);
 
+            // Add class to body so CSS initial states activate
+            document.body.classList.add('anim-ready');
+
+            // Force ScrollTrigger to recalculate on mobile
+            ScrollTrigger.refresh();
+
             // Hero image — subtle parallax
             gsap.to('#hero .hero-img', {
                 yPercent: 15,
@@ -534,6 +540,9 @@
                     }
                 });
             });
+
+            // Refresh after a moment for mobile
+            setTimeout(function() { ScrollTrigger.refresh(); }, 500);
 
             // Footer — fade in
             gsap.to('.site-footer', {
