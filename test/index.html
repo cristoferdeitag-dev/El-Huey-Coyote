@@ -81,6 +81,7 @@
             transform: scale(1.08);
         }
 
+        .cortina-media { transform: translateY(-50%); }
         .cortina-sube { transform: translateY(-100%); }
 
         /* ========================
@@ -147,17 +148,31 @@
             height: 12%;
         }
 
-        .hs-apple-music {
-            left: 15%;
-            top: 78%;
-            width: 12%;
+        .hs-apple-music-1 {
+            left: 5%;
+            top: 75%;
+            width: 10%;
             height: 10%;
         }
 
-        .hs-spotify {
-            left: 38%;
+        .hs-apple-music-2 {
+            left: 16%;
             top: 78%;
-            width: 12%;
+            width: 7%;
+            height: 8%;
+        }
+
+        .hs-apple-music-3 {
+            left: 26%;
+            top: 78%;
+            width: 7%;
+            height: 8%;
+        }
+
+        .hs-spotify {
+            left: 36%;
+            top: 78%;
+            width: 10%;
             height: 10%;
         }
 
@@ -211,7 +226,9 @@
         <a href="#merch" class="hero-hotspot hs-llevar" title="Pide para Llevar"></a>
         <a href="#about" class="hero-hotspot hs-conoces" title="¿Ya me Conoces?"></a>
         <a href="#contacto" class="hero-hotspot hs-grito" title="Échame un Grito"></a>
-        <a href="#" class="hero-hotspot hs-apple-music" title="Apple Music" target="_blank"></a>
+        <a href="#" class="hero-hotspot hs-apple-music-1" title="Apple Music" target="_blank"></a>
+        <a href="#" class="hero-hotspot hs-apple-music-2" title="Apple Music" target="_blank"></a>
+        <a href="#" class="hero-hotspot hs-apple-music-3" title="Apple Music" target="_blank"></a>
         <a href="#" class="hero-hotspot hs-spotify" title="Spotify" target="_blank"></a>
     </section>
 
@@ -233,10 +250,28 @@
     </section>
 
     <script>
+        var cortinaEstado = 0; // 0=cerrada, 1=media, 2=abierta
+
         function abrirCortina() {
-            document.getElementById('pantalla-inicio').classList.add('cortina-sube');
-            setTimeout(() => {
-                document.getElementById('pantalla-inicio').style.display = 'none';
+            var cortina = document.getElementById('pantalla-inicio');
+            if (cortinaEstado === 0) {
+                // Primera vez: sube a la mitad
+                cortina.classList.add('cortina-media');
+                cortinaEstado = 1;
+                // Después de un momento, permitir scroll para subir el resto
+                setTimeout(function() {
+                    window.addEventListener('scroll', subirCortinaCompleta, { once: true });
+                }, 2000);
+            }
+        }
+
+        function subirCortinaCompleta() {
+            var cortina = document.getElementById('pantalla-inicio');
+            cortina.classList.remove('cortina-media');
+            cortina.classList.add('cortina-sube');
+            cortinaEstado = 2;
+            setTimeout(function() {
+                cortina.style.display = 'none';
             }, 1900);
         }
     </script>
