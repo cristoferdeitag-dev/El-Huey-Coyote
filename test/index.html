@@ -81,7 +81,6 @@
             transform: scale(1.08);
         }
 
-        .cortina-media { transform: translateY(-50%); }
         .cortina-sube { transform: translateY(-100%); }
 
         /* ========================
@@ -250,26 +249,17 @@
     </section>
 
     <script>
-        var cortinaEstado = 0; // 0=cerrada, 1=media, 2=abierta
-
         function abrirCortina() {
             var cortina = document.getElementById('pantalla-inicio');
-            if (cortinaEstado === 0) {
-                // Primera vez: sube a la mitad
-                cortina.classList.add('cortina-media');
-                cortinaEstado = 1;
-                // Después de un momento, permitir scroll para subir el resto
-                setTimeout(function() {
-                    window.addEventListener('scroll', subirCortinaCompleta, { once: true });
-                }, 2000);
-            }
-        }
+            var hero = document.getElementById('hero');
 
-        function subirCortinaCompleta() {
-            var cortina = document.getElementById('pantalla-inicio');
-            cortina.classList.remove('cortina-media');
+            // Pre-scroll la página al 50% del hero ANTES de que la cortina suba
+            // Así cuando la cortina se va, el usuario ve la mitad inferior
+            var heroHeight = hero.offsetHeight;
+            window.scrollTo(0, heroHeight * 0.4);
+
+            // Sube la cortina completa
             cortina.classList.add('cortina-sube');
-            cortinaEstado = 2;
             setTimeout(function() {
                 cortina.style.display = 'none';
             }, 1900);
