@@ -176,6 +176,56 @@
         }
 
         /* ========================
+           SEPARADOR DE SECCIONES
+        ======================== */
+        .seccion-separador {
+            background: var(--rojo);
+            padding: 20px 0;
+            text-align: center;
+            border-top: 4px solid var(--amarillo);
+            border-bottom: 4px solid var(--amarillo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .seccion-separador::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0,0,0,0.05) 10px,
+                rgba(0,0,0,0.05) 20px
+            );
+        }
+
+        .seccion-separador h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--amarillo);
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========================
+           SECCIÓN SHOWS
+        ======================== */
+        #shows {
+            background: var(--blanco);
+            padding: 0;
+        }
+
+        #shows img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ========================
            SECCIONES PLACEHOLDER
         ======================== */
         .seccion-placeholder {
@@ -231,9 +281,14 @@
         <a href="#" class="hero-hotspot hs-spotify" title="Spotify" target="_blank"></a>
     </section>
 
-    <!-- Secciones placeholder -->
-    <section id="shows" class="seccion-placeholder">
-        <div><h2>Próximos Shows</h2><p>En construcción...</p></div>
+    <!-- SEPARADOR: Próximos Shows -->
+    <div class="seccion-separador">
+        <h2>🌮 Próximos Shows 🌮</h2>
+    </div>
+
+    <!-- SECCIÓN: Shows - Menú de taquería -->
+    <section id="shows">
+        <img src="assets/img/shows-menu.png" alt="Próximos Shows - El Huey Coyote">
     </section>
     <section id="colabs" class="seccion-placeholder">
         <div><h2>Colabs</h2><p>En construcción...</p></div>
