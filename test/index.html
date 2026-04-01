@@ -308,13 +308,15 @@
         ======================== */
         .spotify-player {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 10px;
+            right: 10px;
             z-index: 99;
-            background: var(--negro);
-            border-top: 2px solid var(--amarillo);
+            width: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             display: none;
+            transition: opacity 0.3s;
         }
 
         .spotify-player.visible { display: block; }
@@ -322,12 +324,12 @@
         .spotify-player iframe {
             display: block;
             width: 100%;
-            height: 80px;
+            height: 152px;
             border: none;
         }
 
         /* Adjust footer padding to not be hidden behind player */
-        .site-footer { padding-bottom: 100px; }
+        .site-footer { padding-bottom: 60px; }
 
         @media (max-width: 768px) {
             .site-nav .nav-links { gap: 2px; }
