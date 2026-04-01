@@ -102,7 +102,7 @@
             position: absolute;
             cursor: pointer;
             z-index: 2;
-            /* border: 2px dashed rgba(255,255,0,0.4); /* descomentar para debug */
+            border: 2px dashed rgba(255,0,0,0.7);
             transition: background 0.3s ease;
         }
 
@@ -306,13 +306,8 @@
     <script>
         function abrirCortina() {
             var cortina = document.getElementById('pantalla-inicio');
-            var hero = document.getElementById('hero');
-
-            // Pre-scroll la página al 50% del hero ANTES de que la cortina suba
-            // Así cuando la cortina se va, el usuario ve la mitad inferior
-            var heroHeight = hero.offsetHeight;
-            window.scrollTo(0, heroHeight * 0.4);
-
+            // Scroll al inicio para ver hero completo
+            window.scrollTo(0, 0);
             // Sube la cortina completa
             cortina.classList.add('cortina-sube');
             setTimeout(function() {
