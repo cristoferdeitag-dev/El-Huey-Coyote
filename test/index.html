@@ -303,6 +303,32 @@
             letter-spacing: 1px;
         }
 
+        /* ========================
+           SPOTIFY PLAYER
+        ======================== */
+        .spotify-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            background: var(--negro);
+            border-top: 2px solid var(--amarillo);
+            display: none;
+        }
+
+        .spotify-player.visible { display: block; }
+
+        .spotify-player iframe {
+            display: block;
+            width: 100%;
+            height: 80px;
+            border: none;
+        }
+
+        /* Adjust footer padding to not be hidden behind player */
+        .site-footer { padding-bottom: 100px; }
+
         @media (max-width: 768px) {
             .site-nav .nav-links { gap: 2px; }
             .site-nav .nav-links a { font-size: 0.7rem; padding: 4px 8px; }
@@ -392,6 +418,11 @@
         <img src="assets/img/contacto-echame.png" alt="Échame un Grito - Contacto">
     </section>
 
+    <!-- SPOTIFY MINI PLAYER -->
+    <div class="spotify-player" id="spotify-player">
+        <iframe src="https://open.spotify.com/embed/album/5wmzvhLzXU1Y2BSbE15B4p?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+
     <!-- FOOTER -->
     <footer class="site-footer">
         <div class="footer-inner">
@@ -417,6 +448,7 @@
             setTimeout(function() {
                 cortina.style.display = 'none';
                 document.getElementById('site-nav').classList.add('visible');
+                document.getElementById('spotify-player').classList.add('visible');
             }, 1900);
         }
     </script>
