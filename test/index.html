@@ -230,10 +230,84 @@
             color: var(--amarillo);
         }
 
+        /* ========================
+           FOOTER
+        ======================== */
+        .site-footer {
+            background: var(--negro);
+            border-top: 4px solid var(--amarillo);
+            padding: 50px 20px 30px;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--amarillo);
+            text-shadow: 3px 3px 0 var(--rojo);
+            margin-bottom: 6px;
+        }
+
+        .footer-tagline {
+            font-family: 'Special Elite', cursive;
+            font-size: 1rem;
+            color: var(--azul-logo);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .footer-social a {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--blanco);
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 2px solid var(--amarillo);
+            border-radius: 4px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-social a:hover {
+            background: var(--amarillo);
+            color: var(--negro);
+        }
+
+        .footer-line {
+            width: 60px;
+            height: 3px;
+            background: var(--rojo);
+            margin: 0 auto 16px;
+        }
+
+        .footer-copy {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(244,241,234,0.4);
+            letter-spacing: 1px;
+        }
+
         @media (max-width: 768px) {
             .site-nav .nav-links { gap: 2px; }
             .site-nav .nav-links a { font-size: 0.7rem; padding: 4px 8px; }
             .site-nav .nav-logo { font-size: 1.1rem; }
+            .footer-social a { font-size: 0.75rem; padding: 6px 12px; }
         }
     </style>
 </head>
@@ -242,7 +316,7 @@
     <!-- HEADER / NAV -->
     <nav class="site-nav" id="site-nav">
         <div class="site-nav-inner">
-            <span class="nav-logo">🐺 Huey Coyote</span>
+            <span class="nav-logo">Huey Coyote</span>
             <ul class="nav-links">
                 <li><a href="#hero">Inicio</a></li>
                 <li><a href="#shows">Shows</a></li>
@@ -300,7 +374,7 @@
 
     <!-- SEPARADOR: About -->
     <div class="seccion-separador">
-        <h2>🐺 ¿Ya me Conoces? 🐺</h2>
+        <h2>¿Ya me Conoces?</h2>
     </div>
 
     <!-- SECCIÓN: About -->
@@ -317,6 +391,23 @@
     <section id="contacto" class="seccion-img">
         <img src="assets/img/contacto-echame.png" alt="Échame un Grito - Contacto">
     </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-logo">El Huey Coyote</div>
+            <div class="footer-tagline">Música, Sudor y Cumbia</div>
+            <div class="footer-social">
+                <a href="#" title="Instagram" target="_blank">Instagram</a>
+                <a href="#" title="TikTok" target="_blank">TikTok</a>
+                <a href="#" title="YouTube" target="_blank">YouTube</a>
+                <a href="#" title="Spotify" target="_blank">Spotify</a>
+                <a href="#" title="Apple Music" target="_blank">Apple Music</a>
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-copy">&copy; 2026 El Huey Coyote. Todos los derechos reservados.</div>
+        </div>
+    </footer>
 
     <script>
         function abrirCortina() {
