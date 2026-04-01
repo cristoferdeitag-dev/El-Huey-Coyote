@@ -89,6 +89,7 @@
         #hero {
             position: relative;
             width: 100%;
+            overflow: hidden;
         }
 
         #hero img.hero-img {
@@ -337,7 +338,26 @@
             .site-nav .nav-logo { font-size: 1.1rem; }
             .footer-social a { font-size: 0.75rem; padding: 6px 12px; }
         }
+        /* ========================
+           SCROLL ANIMATIONS
+        ======================== */
+        .seccion-img {
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        .seccion-separador {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .site-footer {
+            opacity: 0;
+            transform: translateY(40px);
+        }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
@@ -451,7 +471,82 @@
                 cortina.style.display = 'none';
                 document.getElementById('site-nav').classList.add('visible');
                 document.getElementById('spotify-player').classList.add('visible');
+                initAnimations();
             }, 1900);
+        }
+
+        function initAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero image — subtle parallax
+            gsap.to('#hero .hero-img', {
+                yPercent: 15,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '#hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true
+                }
+            });
+
+            // Section images — fade in + slide up
+            gsap.utils.toArray('.seccion-img').forEach(function(section) {
+                gsap.to(section, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+
+                // Image inside — subtle zoom on enter
+                var img = section.querySelector('img');
+                if (img) {
+                    gsap.from(img, {
+                        scale: 1.08,
+                        duration: 1.5,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: section,
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+                }
+            });
+
+            // Separators — scale + fade
+            gsap.utils.toArray('.seccion-separador').forEach(function(sep) {
+                gsap.to(sep, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: 'back.out(1.7)',
+                    scrollTrigger: {
+                        trigger: sep,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            });
+
+            // Footer — fade in
+            gsap.to('.site-footer', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.site-footer',
+                    start: 'top 90%',
+                    toggleActions: 'play none none none'
+                }
+            });
         }
     </script>
 </body>
