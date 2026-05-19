@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>El Huey Coyote — Header preview</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+    <title>El Huey Coyote — Header preview v7</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -19,87 +18,35 @@
             width: 100vw;
             max-width: 540px;
             margin: 0 auto;
-            aspect-ratio: 1080 / 1920;
-            background-image: url('assets/header-fondo.png');
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
+        }
+
+        .header-wrap img.header-design {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Texto invisible para SEO/buscadores (Google) y lectores de pantalla */
+        .seo-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
             overflow: hidden;
-        }
-
-        /* "PIDE PARA LLEVAR" — letrero metálico de arriba */
-        .txt-pide {
-            position: absolute;
-            top: 5.6%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #ffffff;
-            font-family: 'Special Elite', 'Courier New', monospace;
-            font-size: 4.2vw;
-            letter-spacing: 0.18em;
-            font-weight: 700;
+            clip: rect(0, 0, 0, 0);
             white-space: nowrap;
-            text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+            border: 0;
         }
 
-        /* "PRÓXIMOS SHOWS" — letrero rojo con focos, lado izquierdo */
-        .txt-shows {
-            position: absolute;
-            top: 16.7%;
-            left: 12.5%;
-            width: 28%;
-            transform: rotate(-10.1deg);
-            text-align: center;
-            font-family: 'Bungee', 'Permanent Marker', cursive;
-            color: #fff5b8;
-            font-size: 4.6vw;
-            line-height: 0.95;
-            text-transform: uppercase;
-            text-shadow:
-                1px 1px 0 #7a1010,
-                2px 2px 0 #5a0c0c,
-                0 0 6px rgba(255,200,40,0.6);
-        }
-
-        /* "¿Ya me conoces? ÉCHAME UN GRITO" — letrero verde, lado derecho */
-        .txt-grito {
-            position: absolute;
-            top: 16.5%;
-            right: 7%;
-            width: 33%;
-            text-align: center;
-            font-family: 'Permanent Marker', 'Bungee', cursive;
-            line-height: 1.05;
-        }
-
-        .txt-grito .l1 {
-            display: block;
-            color: #ffffff;
-            font-size: 3vw;
-            font-style: italic;
-            margin-bottom: 0.3em;
-            text-shadow: 0 1px 0 #1d3b0e;
-        }
-
-        .txt-grito .l2 {
-            display: block;
-            color: #ffd84a;
-            font-size: 4.2vw;
-            font-weight: 900;
-            letter-spacing: 0.02em;
-            text-shadow:
-                1px 1px 0 #1f4a16,
-                2px 2px 0 #163610;
-        }
-
-        /* Pequeña etiqueta de debug para Anette (la podemos quitar) */
         .preview-tag {
             position: fixed;
             bottom: 8px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.75);
             color: #ffd84a;
-            font-family: 'Special Elite', monospace;
+            font-family: monospace;
             font-size: 11px;
             padding: 4px 10px;
             border-radius: 3px;
@@ -107,7 +54,6 @@
             pointer-events: none;
         }
 
-        /* Para pantallas grandes, encuadramos en 9:16 al centro */
         @media (min-width: 540px) {
             body {
                 display: flex;
@@ -117,27 +63,26 @@
             }
             .header-wrap {
                 max-height: calc(100vh - 40px);
-                aspect-ratio: 1080 / 1920;
+            }
+            .header-wrap img.header-design {
+                max-height: calc(100vh - 40px);
                 width: auto;
-                height: calc(100vh - 40px);
             }
         }
     </style>
 </head>
 <body>
-    <div class="header-wrap">
-        <div class="txt-pide">PIDE PARA LLEVAR</div>
+    <header class="header-wrap">
+        <!-- Imagen del diseño completo de Anette (idéntico al .ai) -->
+        <img class="header-design" src="assets/header-completo.png" alt="El Huey Coyote — Pide para llevar, próximos shows, échame un grito">
 
-        <div class="txt-shows">
-            PRÓXIMOS<br>SHOWS
-        </div>
+        <!-- Textos para SEO (invisibles visualmente pero leídos por Google y lectores de pantalla) -->
+        <h1 class="seo-only">El Huey Coyote</h1>
+        <p class="seo-only">Pide para llevar</p>
+        <h2 class="seo-only">Próximos shows</h2>
+        <p class="seo-only">¿Ya me conoces? Échame un grito</p>
+    </header>
 
-        <div class="txt-grito">
-            <span class="l1">¿Ya me conoces?</span>
-            <span class="l2">ÉCHAME UN GRITO</span>
-        </div>
-    </div>
-
-    <div class="preview-tag">Preview header v1 · El Huey Coyote</div>
+    <div class="preview-tag">v7 · imagen completa (idéntico al diseño)</div>
 </body>
 </html>
