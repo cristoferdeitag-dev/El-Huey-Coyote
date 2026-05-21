@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>El Huey Coyote</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@500;600;700;800&family=Quicksand:ital,wght@0,500;0,600;1,500;1,600&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        html, body {
+            background: #1a1a1a;
+            overflow-x: hidden;
+            font-family: 'Quicksand', system-ui, sans-serif;
+        }
+
+        .site-wrap {
+            position: relative;
+            width: 100vw;
+            max-width: 540px;
+            margin: 0 auto;
+            background: #1a1a1a;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            container-type: inline-size;
+        }
+
+        section > img.bg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* === PORTADA (cortina overlay) === */
+        .portada-overlay {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 540px;
+            height: 100vh;
+            z-index: 100;
+            overflow: hidden;
+            cursor: pointer;
+            background: #2dbf86;
+            transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+            will-change: transform;
+            border: 0;
+            padding: 0;
+        }
+        .portada-overlay img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+        .portada-overlay.subida {
+            transform: translateX(-50%) translateY(-100%);
+        }
+
+        /* === HEADLINER áreas clicables — el LETRERO mismo se alza + ilumina === */
+        .menu-link {
+            position: absolute;
+            display: block;
+            cursor: pointer;
+            border: 0;
+            background: transparent;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+        .menu-link img.letrero {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+        /* Efecto: el texto se alza un poquito (sin iluminación) */
+        .menu-link:hover {
+            transform: scale(1.08);
+            z-index: 10;
+        }
+        .menu-link:active {
+            transform: scale(0.96);
+        }
+
+        /* 4 áreas — posiciones coinciden con los crops de letrero-*.png */
+        .area-pide {
+            top: 16.5%;
+            left: 22%;
+            width: 56%;
+            height: 4%;
+        }
+        .area-shows {
+            top: 21.5%;
+            left: 2.5%;
+            width: 29%;
+            height: 14%;
+            transform-origin: center center;
+        }
+        .area-conoces {
+            top: 24.4%;
+            left: 68%;
+            width: 28.5%;
+            height: 5.6%;
+        }
+        .area-echame {
+            top: 29.5%;
+            left: 68%;
+            width: 28.5%;
+            height: 5%;
+        }
+
+        /* === PRÓXIMOS SHOWS plataformas === */
+        .platform-link {
+            position: absolute;
+            display: inline-block;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 3.1cqw;
+            line-height: 1;
+            color: #F2F2F2;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.18s ease;
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
+            letter-spacing: -0.005em;
+        }
+        .platform-link:hover,
+        .platform-link:active,
+        .platform-link:focus { color: #F29501; }
+
+        .pos-spotify { top: 94.38%; left: 45.71%; transform: translateY(-50%); }
+        .pos-youtube { top: 94.38%; left: 77.85%; transform: translateY(-50%); }
+        .pos-amazon  { top: 97.29%; left: 45.80%; transform: translateY(-50%); }
+        .pos-apple   { top: 97.29%; left: 77.92%; transform: translateY(-50%); }
+
+        /* === MERCH — items como texto real (clicables, deslizan al hover) + precios texto editable === */
+        .merch-item {
+            position: absolute;
+            display: inline-block;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 4.15cqw;
+            letter-spacing: -0.01em;
+            line-height: 1;
+            color: #1A1A1A;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.2s ease;
+            transform: translateY(-50%);
+        }
+        .merch-item:hover,
+        .merch-item:active,
+        .merch-item:focus {
+            transform: translateY(-50%) translateX(-12px);
+        }
+
+        .merch-price {
+            position: absolute;
+            display: inline-block;
+            font-family: 'Permanent Marker', cursive;
+            font-weight: 400;
+            font-style: italic;
+            font-size: 4.8cqw;
+            line-height: 1;
+            color: #1A1A1A;
+            white-space: nowrap;
+            pointer-events: none;
+            transform: translateY(-50%);
+        }
+
+        /* Posiciones de NOMBRES — Cocogoose 45pt → top = baseline approx */
+        .pos-pirat-playeras { top: 19.95%; left: 8.91%; }
+        .pos-pirat-chamarra { top: 22.78%; left: 8.91%; }
+        .pos-pirat-calcetas { top: 25.55%; left: 8.91%; }
+        .pos-orig-playeras  { top: 34.95%; left: 8.91%; }
+        .pos-orig-chamarra  { top: 37.78%; left: 8.91%; }
+        .pos-orig-calcetas  { top: 40.55%; left: 8.91%; }
+
+        /* Posiciones de PRECIOS */
+        .pos-price-pirat-pl { top: 20.05%; left: 80.4%; }
+        .pos-price-pirat-ch { top: 22.85%; left: 80.0%; }
+        .pos-price-pirat-ca { top: 25.85%; left: 80.5%; }
+        .pos-price-orig-pl  { top: 35.10%; left: 80.5%; }
+        .pos-price-orig-ch  { top: 37.70%; left: 79.0%; }
+        .pos-price-orig-ca  { top: 40.40%; left: 80.6%; }
+
+        /* === CONTACTO (Échame un grito) — stickers con efecto "despegar" en hover === */
+        .social-link {
+            position: absolute;
+            display: block;
+            cursor: pointer;
+            background: transparent;
+            -webkit-tap-highlight-color: rgba(252,202,15,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform-origin: bottom right;
+        }
+        .social-link::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px dashed rgba(255,255,255,0.6);
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        .social-link:hover {
+            transform: rotate(-8deg);
+            box-shadow: -6px 4px 14px rgba(0,0,0,0.4);
+        }
+        .social-link:hover::after { opacity: 0.9; }
+
+        /* Posiciones corregidas — calibradas pixel-perfect contra echame.png */
+        .social-fb     { top: 32%;   left: 77.5%; width: 15%;   height: 8%;    }
+        .social-ig     { top: 42.5%; left: 79%;   width: 12%;   height: 8%;    }
+        .social-email  { top: 56%;   left: 73%;   width: 22%;   height: 7%;    }
+        .social-tt     { top: 65%;   left: 77%;   width: 17%;   height: 10.5%; }
+
+        /* === SEO oculto === */
+        .seo-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .preview-tag {
+            position: fixed;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.75);
+            color: #ffd84a;
+            font-family: monospace;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 3px;
+            z-index: 200;
+            pointer-events: none;
+        }
+
+        @media (min-width: 540px) {
+            body { display: flex; justify-content: center; background: #0d0d0d; }
+            .portada-overlay { max-width: 540px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-wrap">
+
+        <!-- HEADLINER (sección 2) -->
+        <section id="headliner">
+            <img class="bg" src="assets/headliner-sin-textos.png" alt="El Huey Coyote — bienvenida al puesto">
+            <h1 class="seo-only">El Huey Coyote</h1>
+
+            <!-- 4 letreros clicables — cada uno carga el crop de SU letrero del headliner -->
+            <a class="menu-link area-pide" href="#merch" aria-label="Pide para llevar — Merch">
+                <img class="letrero" src="assets/letrero-pide-v3.png" alt="">
+            </a>
+            <a class="menu-link area-shows" href="#proximos-shows" aria-label="Próximos shows">
+                <img class="letrero" src="assets/letrero-shows-v4.png" alt="">
+            </a>
+            <a class="menu-link area-conoces" href="#sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
+                <img class="letrero" src="assets/letrero-conoces-v3.png" alt="">
+            </a>
+            <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto">
+                <img class="letrero" src="assets/letrero-echame-v3.png" alt="">
+            </a>
+        </section>
+
+        <!-- PRÓXIMOS SHOWS (sección 3) -->
+        <section id="proximos-shows">
+            <img class="bg" src="assets/shows-sin-nombres.png" alt="Próximos Shows — Presentaciones">
+
+            <h2 class="seo-only">Próximos Shows del Huey Coyote</h2>
+            <h3 class="seo-only">Recomendaciones de la casa</h3>
+            <ul class="seo-only">
+                <li>14 de julio — CDMX</li>
+                <li>22 de agosto — Guadalajara</li>
+                <li>02 de septiembre — Monterrey</li>
+                <li>04 de noviembre — Tijuana</li>
+            </ul>
+            <h3 class="seo-only">Especiales del mes</h3>
+            <ul class="seo-only">
+                <li>Niu Jork</li><li>Ostin</li><li>Mayami</li>
+            </ul>
+
+            <a class="platform-link pos-spotify"
+               href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw"
+               target="_blank" rel="noopener noreferrer">Spotify</a>
+            <a class="platform-link pos-youtube"
+               href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG"
+               target="_blank" rel="noopener noreferrer">Youtube</a>
+            <a class="platform-link pos-amazon"
+               href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M"
+               target="_blank" rel="noopener noreferrer">Amazon Music</a>
+            <a class="platform-link pos-apple"
+               href="https://music.apple.com/mx/artist/hueycoyote/1088136173"
+               target="_blank" rel="noopener noreferrer">Apple Music</a>
+        </section>
+
+        <!-- MERCH (sección 4) -->
+        <section id="merch">
+            <img class="bg" src="assets/merch-sin-textos.png?v=20260520-2225" alt="Merch — Llévele, llévele · Piratería oficial y La Original">
+            <h2 class="seo-only">Merch — Llévele, llévele</h2>
+
+            <!-- NOMBRES (clicables, deslizan a la izquierda al hover) -->
+            <a class="merch-item pos-pirat-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">PLAYERAS :</a>
+            <a class="merch-item pos-pirat-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CHAMARRA :</a>
+            <a class="merch-item pos-pirat-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CALCETAS :</a>
+            <a class="merch-item pos-orig-playeras"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">PLAYERAS :</a>
+            <a class="merch-item pos-orig-chamarra"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CHAMARRA :</a>
+            <a class="merch-item pos-orig-calcetas"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CALCETAS :</a>
+
+            <!-- PRECIOS (editables, no clicables) -->
+            <span class="merch-price pos-price-pirat-pl">$250</span>
+            <span class="merch-price pos-price-pirat-ch">$350</span>
+            <span class="merch-price pos-price-pirat-ca">3X50</span>
+            <span class="merch-price pos-price-orig-pl">$800</span>
+            <span class="merch-price pos-price-orig-ch">$1000</span>
+            <span class="merch-price pos-price-orig-ca">$150</span>
+        </section>
+
+        <!-- ¿YA ME CONOCES? (sección 5 — Sobre mí) -->
+        <section id="sobre-mi">
+            <img class="bg" src="assets/conoces.png" alt="¿Ya me conoces? — Sobre El Huey Coyote">
+            <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
+
+        </section>
+
+        <!-- ÉCHAME UN GRITO (sección 6 — Contacto) -->
+        <section id="contacto">
+            <img class="bg" src="assets/echame.png" alt="Échame un grito — Contacto del Huey Coyote">
+            <h2 class="seo-only">Échame un grito — Contacto del Huey Coyote</h2>
+
+            <!-- 4 stickers clicables → redes sociales -->
+            <a class="social-link social-fb"
+               href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA"
+               target="_blank" rel="noopener noreferrer" aria-label="Facebook"></a>
+            <a class="social-link social-ig"
+               href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA=="
+               target="_blank" rel="noopener noreferrer" aria-label="Instagram"></a>
+            <a class="social-link social-email"
+               href="mailto:contacto@elhueycoyote.com"
+               aria-label="Email contacto"></a>
+            <a class="social-link social-tt"
+               href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F"
+               target="_blank" rel="noopener noreferrer" aria-label="TikTok"></a>
+        </section>
+
+    </div>
+
+    <!-- PORTADA (cortina overlay encima de todo) -->
+    <button class="portada-overlay" id="portada" aria-label="Abre el changarro">
+        <img src="assets/portada.png" alt="El Huey Coyote — Abre el changarro">
+    </button>
+
+    <div class="preview-tag">Sitio completo · click cortina → Headliner → click letreros</div>
+
+    <script>
+        const portada = document.getElementById('portada');
+        portada.addEventListener('click', function () {
+            portada.classList.add('subida');
+            setTimeout(() => { portada.style.pointerEvents = 'none'; }, 1600);
+        });
+    </script>
+</body>
+</html>
