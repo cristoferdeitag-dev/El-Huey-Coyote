@@ -45,11 +45,27 @@
             top: 0;
             width: 100%;
             container-type: inline-size;
-            box-shadow: 0 -16px 32px -8px rgba(0,0,0,0.9), 0 -2px 8px rgba(0,0,0,0.6); /* sombra fuerte: "lámina cae encima" */
+            box-shadow: 0 -16px 32px -8px rgba(0,0,0,0.9), 0 -2px 8px rgba(0,0,0,0.6);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        opacity 0.5s ease,
+                        filter 0.5s ease;
+            transform-origin: center top;
+            will-change: transform, opacity, filter;
         }
 
-        /* La primera sección no necesita sombra arriba */
         section:first-of-type { box-shadow: none; }
+
+        /* Estado "cubierta" — la siguiente sección ya empezó a subir encima */
+        section.cubierta {
+            transform: scale(0.94) translateY(-12px);
+            opacity: 0.55;
+            filter: brightness(0.7) saturate(0.85);
+        }
+        section.cubierta-total {
+            transform: scale(0.88) translateY(-20px);
+            opacity: 0.3;
+            filter: brightness(0.5) saturate(0.7);
+        }
 
         section > img.bg {
             display: block;
@@ -303,6 +319,56 @@
             document.body.classList.remove('cortina-bajada');
             setTimeout(() => { portada.style.pointerEvents = 'none'; }, 1600);
         });
+
+        /* === Sticky scroll enhancement ===
+         * Detecta cuánto de la siguiente sección ya cubrió a la actual y le
+         * aplica scale-down + opacity-down para que se vea que "se retira"
+         * mientras la nueva sube por encima. Efecto Apple/Stripe.
+         */
+        (function() {
+            const sections = Array.from(document.querySelectorAll('.site-wrap > section'));
+            if (sections.length < 2) return;
+
+            function updateStates() {
+                const vh = window.innerHeight;
+                sections.forEach((sec, i) => {
+                    const next = sections[i + 1];
+                    if (!next) {
+                        sec.classList.remove('cubierta', 'cubierta-total');
+                        return;
+                    }
+                    const nextRect = next.getBoundingClientRect();
+                    // nextRect.top: 0 cuando la siguiente está justo encima de esta
+                    // negativo = la siguiente ya pasó del top, esta está completamente cubierta
+                    // positivo grande = la siguiente aún no entra
+                    if (nextRect.top <= 0) {
+                        // siguiente ya ocupa el top — esta sección queda "atrás"
+                        sec.classList.add('cubierta-total');
+                        sec.classList.remove('cubierta');
+                    } else if (nextRect.top < vh * 0.85) {
+                        // siguiente empezó a entrar al viewport
+                        sec.classList.add('cubierta');
+                        sec.classList.remove('cubierta-total');
+                    } else {
+                        sec.classList.remove('cubierta', 'cubierta-total');
+                    }
+                });
+            }
+
+            let ticking = false;
+            function onScroll() {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        updateStates();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll, { passive: true });
+            updateStates();
+        })();
     </script>
 </body>
 </html>
