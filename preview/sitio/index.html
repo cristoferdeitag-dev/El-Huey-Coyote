@@ -65,12 +65,9 @@
             height: 100vh;
             z-index: 100;
             overflow: hidden;
-            cursor: pointer;
             background: #2dbf86;
             transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
             will-change: transform;
-            border: 0;
-            padding: 0;
         }
         .portada-overlay img {
             display: block;
@@ -78,9 +75,23 @@
             height: 100%;
             object-fit: cover;
             object-position: center top;
+            pointer-events: none;
         }
         .portada-overlay.subida {
             transform: translateX(-50%) translateY(-100%);
+        }
+        /* Botón "Abre el changarro" — única zona clicable */
+        .btn-changarro {
+            position: absolute;
+            top: 62%;
+            left: 16%;
+            width: 68%;
+            height: 5%;
+            background: transparent;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+            z-index: 2;
         }
 
         /* === HEADLINER áreas clicables — el LETRERO mismo se alza + ilumina === */
@@ -405,16 +416,18 @@
     </div>
 
     <!-- PORTADA (cortina overlay encima de todo) -->
-    <button class="portada-overlay" id="portada" aria-label="Abre el changarro">
+    <div class="portada-overlay" id="portada">
         <img src="assets/portada.png" alt="El Huey Coyote — Abre el changarro">
-    </button>
+        <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro"></button>
+    </div>
 
     <div class="preview-tag">Sitio completo · click cortina → Headliner → click letreros</div>
 
     <script>
         document.body.classList.add('cortina-bajada');
         const portada = document.getElementById('portada');
-        portada.addEventListener('click', function () {
+        const btnChangarro = document.getElementById('btn-changarro');
+        btnChangarro.addEventListener('click', function () {
             portada.classList.add('subida');
             document.body.classList.remove('cortina-bajada');
             setTimeout(() => { portada.style.pointerEvents = 'none'; }, 1600);
