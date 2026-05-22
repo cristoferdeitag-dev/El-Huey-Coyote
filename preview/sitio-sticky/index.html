@@ -21,7 +21,6 @@
 
         html, body {
             background: #1a1a1a;
-            overflow-x: hidden;
             font-family: 'Quicksand', system-ui, sans-serif;
         }
 
@@ -37,6 +36,7 @@
             max-width: 540px;
             margin: 0 auto;
             background: #1a1a1a;
+            overflow-x: hidden;
         }
 
         /* === STICKY SCROLL · cada sección queda pegada y la siguiente sube por encima === */
@@ -45,7 +45,7 @@
             top: 0;
             width: 100%;
             container-type: inline-size;
-            box-shadow: 0 -30px 60px -20px rgba(0,0,0,0.75); /* sombra de "lámina encima" */
+            box-shadow: 0 -16px 32px -8px rgba(0,0,0,0.9), 0 -2px 8px rgba(0,0,0,0.6); /* sombra fuerte: "lámina cae encima" */
         }
 
         /* La primera sección no necesita sombra arriba */
