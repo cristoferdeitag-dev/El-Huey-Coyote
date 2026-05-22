@@ -80,20 +80,34 @@
         .portada-overlay.subida {
             transform: translateX(-50%) translateY(-100%);
         }
-        /* Botón "Abre el changarro" — única zona clicable */
+        /* Botón "Abre el changarro" — texto blanco = el botón */
         .btn-changarro {
             position: absolute;
-            top: 60%;
-            left: 6%;
-            width: 88%;
-            height: 10%;
+            top: 62%;
+            left: 50%;
+            transform: translateX(-50%);
             background: transparent;
             border: 0;
-            padding: 0;
+            padding: 2.5% 4%;
             cursor: pointer;
             z-index: 2;
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: clamp(18px, 5.2vw, 28px);
+            letter-spacing: 0.18em;
+            white-space: nowrap;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.35);
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0.15);
             touch-action: manipulation;
+            transition: transform 0.18s ease, text-shadow 0.18s ease;
+        }
+        .btn-changarro:hover,
+        .btn-changarro:active,
+        .btn-changarro:focus {
+            transform: translateX(-50%) scale(1.05);
+            text-shadow: 0 0 12px rgba(255,255,255,0.55), 0 2px 4px rgba(0,0,0,0.35);
+            outline: none;
         }
 
         /* === HEADLINER áreas clicables — el LETRERO mismo se alza + ilumina === */
@@ -425,8 +439,8 @@
 
     <!-- PORTADA (cortina overlay encima de todo) -->
     <div class="portada-overlay" id="portada">
-        <img src="assets/portada.png" alt="El Huey Coyote — Abre el changarro">
-        <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro"></button>
+        <img src="assets/portada.png" alt="El Huey Coyote">
+        <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
     </div>
 
     <div class="preview-tag">Sitio completo · click cortina → Headliner → click letreros</div>
