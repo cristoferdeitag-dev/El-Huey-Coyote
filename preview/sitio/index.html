@@ -27,6 +27,13 @@
             font-family: 'Quicksand', system-ui, sans-serif;
         }
 
+        /* Bloquea scroll mientras la cortina está bajada */
+        body.cortina-bajada {
+            overflow: hidden;
+            height: 100vh;
+            touch-action: none;
+        }
+
         .site-wrap {
             position: relative;
             width: 100vw;
@@ -405,9 +412,11 @@
     <div class="preview-tag">Sitio completo · click cortina → Headliner → click letreros</div>
 
     <script>
+        document.body.classList.add('cortina-bajada');
         const portada = document.getElementById('portada');
         portada.addEventListener('click', function () {
             portada.classList.add('subida');
+            document.body.classList.remove('cortina-bajada');
             setTimeout(() => { portada.style.pointerEvents = 'none'; }, 1600);
         });
     </script>
