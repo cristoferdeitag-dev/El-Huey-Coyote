@@ -80,14 +80,16 @@
         .portada-overlay.subida {
             transform: translateX(-50%) translateY(-100%);
         }
-        /* Botón "Abre el changarro" — texto blanco = el botón */
+        /* Botón "Abre el changarro" — texto blanco = el botón
+           DEBUG: outline temporal para que Anette vea el área clicable.
+           Quitar el border + background tinte cuando ya esté alineado. */
         .btn-changarro {
             position: absolute;
             top: 62%;
             left: 50%;
             transform: translateX(-50%);
-            background: transparent;
-            border: 0;
+            background: rgba(255, 200, 50, 0.25);
+            border: 2px dashed #ffd84a;
             padding: 2.5% 4%;
             cursor: pointer;
             z-index: 2;
