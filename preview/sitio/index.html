@@ -352,6 +352,33 @@
             transition-delay: 0.5s;
         }
 
+        /* "EL MERO MERO" — rayón sobre la lámina (aparece como si lo grabaran) */
+        .mero-mero {
+            position: absolute;
+            top: 5.5%;
+            left: 12%;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 4.2cqw;
+            letter-spacing: 0.05em;
+            color: rgba(245,245,245,0.55);
+            text-shadow: 0 0 1px rgba(0,0,0,0.4);
+            transform: rotate(-3deg);
+            white-space: nowrap;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            clip-path: inset(0 100% 0 0);
+        }
+        #sobre-mi.mero-scratched .mero-mero {
+            animation: scratch-in 1.1s steps(40, end) forwards;
+        }
+        @keyframes scratch-in {
+            0%   { clip-path: inset(0 100% 0 0); }
+            100% { clip-path: inset(0 0% 0 0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .mero-mero { clip-path: inset(0 0% 0 0); animation: none; }
+        }
+
         /* === SEO oculto === */
         .seo-only {
             position: absolute;
@@ -476,6 +503,7 @@
             <img class="poster poster-1" src="assets/conoces/poster1-tight.png?v=20260523-0311" alt="El Huey Coyote — El vato de las rolitas random — Para LATAM">
             <img class="poster poster-2" src="assets/conoces/poster2-tight.png?v=20260523-0311" alt="">
             <img class="poster poster-3" src="assets/conoces/poster3-tight.png?v=20260523-0311" alt="">
+            <span class="mero-mero" aria-hidden="true">EL MERO MERO</span>
         </section>
 
         <!-- Divisor: anuncia Échame un grito -->
@@ -537,13 +565,15 @@
             merchSection.classList.add('unrolled');
         }
 
-        // ¿YA ME CONOCES? — 3 posters vuelan y aterrizan al entrar al viewport
+        // ¿YA ME CONOCES? — 3 posters vuelan y aterrizan + "EL MERO MERO" se raya
         const conocesSection = document.getElementById('sobre-mi');
         if (conocesSection && 'IntersectionObserver' in window) {
             const conocesObs = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         conocesSection.classList.add('posters-landed');
+                        // El rayón empieza después que los posters aterricen (~1.6s)
+                        setTimeout(() => conocesSection.classList.add('mero-scratched'), 1600);
                         conocesObs.unobserve(conocesSection);
                     }
                 });
@@ -551,6 +581,7 @@
             conocesObs.observe(conocesSection);
         } else if (conocesSection) {
             conocesSection.classList.add('posters-landed');
+            conocesSection.classList.add('mero-scratched');
         }
     </script>
 </body>
