@@ -536,6 +536,7 @@
         <img src="assets/portada.png?v=20260523-0031" alt="El Huey Coyote">
         <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
     </div>
+    <audio id="audio-changarro" preload="auto" src="assets/audio/changarro-open.mp3?v=20260523-0458"></audio>
 
     <div class="preview-tag">Sitio completo · click cortina → Headliner → click letreros</div>
 
@@ -543,9 +544,15 @@
         document.body.classList.add('cortina-bajada');
         const portada = document.getElementById('portada');
         const btnChangarro = document.getElementById('btn-changarro');
+        const audioChangarro = document.getElementById('audio-changarro');
         btnChangarro.addEventListener('click', function () {
             portada.classList.add('subida');
             document.body.classList.remove('cortina-bajada');
+            // Reproduce el sonido del changarro en sincronía con la cortina subiendo
+            if (audioChangarro) {
+                audioChangarro.currentTime = 0;
+                audioChangarro.play().catch(() => { /* navegador bloqueó autoplay, no rompe nada */ });
+            }
             setTimeout(() => { portada.style.pointerEvents = 'none'; }, 1600);
         });
 
