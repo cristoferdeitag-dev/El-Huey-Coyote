@@ -153,8 +153,7 @@
             transform: scale(0.96);
         }
 
-        /* 4 áreas — coords exactas calculadas desde las medidas Photoshop de Anette
-           (canvas 1086×1937, reference point = centro del bounding box) */
+        /* 4 áreas — coords exactas Photoshop de Anette (canvas 1086×1937, X/Y = centro bbox) */
         .area-pide {
             top: 17.13%;
             left: 24.34%;
@@ -168,24 +167,27 @@
             font-size: clamp(16px, 5vw, 28px);
         }
         .area-shows {
-            top: 23.84%;
-            left: 1.38%;
-            width: 30%;
-            height: 12%;
+            top: 27.14%;
+            left: 4.79%;
+            width: 23.17%;
+            height: 5.40%;
+            overflow: visible;
             transform-origin: center center;
         }
         .area-shows .letrero-text {
             font-family: "open-sans-condensed", 'Oswald', sans-serif;
             font-weight: 800;
             font-style: italic;
-            font-size: clamp(16px, 5vw, 28px);
+            font-stretch: normal;
+            font-size: clamp(14px, 4.2vw, 22px);
             display: block;
             position: relative;
             line-height: 1;
+            overflow: visible;
         }
         .area-shows .word-proximos {
             position: absolute;
-            top: 8%;
+            top: -10%;
             left: 0;
             display: inline-block;
             transform: rotate(-8deg);
@@ -193,37 +195,45 @@
         }
         .area-shows .word-shows {
             position: absolute;
-            top: 55%;
-            left: 28%;
+            top: 50%;
+            left: 35%;
             display: inline-block;
             transform: rotate(-8deg);
             transform-origin: left center;
         }
         .area-conoces {
-            top: 25.67%;
-            left: 68.82%;
-            width: 30%;
-            height: 3.5%;
+            top: 26.32%;
+            left: 71.61%;
+            width: 24.40%;
+            height: 2.19%;
+            overflow: visible;
         }
         .area-conoces .letrero-text {
             font-family: "ciabatta", 'Permanent Marker', cursive;
             font-weight: 700;
             font-style: italic;
-            font-size: clamp(13px, 4vw, 22px);
+            font-stretch: normal;
+            font-size: clamp(13px, 3.8vw, 20px);
+            overflow: visible;
         }
         .area-echame {
-            top: 29.55%;
-            left: 69.17%;
-            width: 30%;
-            height: 5%;
+            top: 29.10%;
+            left: 74.21%;
+            width: 19.93%;
+            height: 5.91%;
+            overflow: visible;
+            transform-origin: center center;
         }
         .area-echame .letrero-text {
             font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
             font-weight: 400;
             font-style: normal;
-            font-size: clamp(13px, 4vw, 22px);
+            font-size: clamp(13px, 3.8vw, 20px);
             white-space: normal;
             line-height: 1;
+            transform: rotate(-6deg);
+            transform-origin: center center;
+            display: block;
         }
 
         /* === PRÓXIMOS SHOWS plataformas === */
