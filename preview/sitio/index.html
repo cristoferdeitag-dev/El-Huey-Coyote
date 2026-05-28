@@ -178,9 +178,25 @@
             font-weight: 800;
             font-style: italic;
             font-size: clamp(16px, 5vw, 28px);
-            white-space: normal;
-            flex-direction: column;
-            line-height: 0.95;
+            display: block;
+            position: relative;
+            line-height: 1;
+        }
+        .area-shows .word-proximos {
+            position: absolute;
+            top: 8%;
+            left: 0;
+            display: inline-block;
+            transform: rotate(-8deg);
+            transform-origin: left center;
+        }
+        .area-shows .word-shows {
+            position: absolute;
+            top: 55%;
+            left: 28%;
+            display: inline-block;
+            transform: rotate(-8deg);
+            transform-origin: left center;
         }
         .area-conoces {
             top: 24.4%;
@@ -460,7 +476,10 @@
                 <span class="letrero-text">PIDE PARA LLEVAR</span>
             </a>
             <a class="menu-link area-shows" href="#proximos-shows" aria-label="Próximos shows">
-                <span class="letrero-text">PRÓXIMOS<br>SHOWS</span>
+                <span class="letrero-text">
+                    <span class="word-proximos">PRÓXIMOS</span>
+                    <span class="word-shows">SHOWS</span>
+                </span>
             </a>
             <a class="menu-link area-conoces" href="#sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
                 <span class="letrero-text">¿YA ME CONOCES?</span>
