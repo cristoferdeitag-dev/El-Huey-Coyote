@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>El Huey Coyote — Próximos Shows</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            background: #1a1a1a;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Quicksand', system-ui, sans-serif;
+        }
+
+        .section-wrap {
+            position: relative;
+            width: 100vw;
+            max-width: 540px;
+            margin: 0 auto;
+            container-type: inline-size;
+        }
+
+        .section-wrap img.bg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Nombres de las plataformas — texto real, color blanco, cambia a amarillo al hover */
+        .platform-link {
+            position: absolute;
+            display: inline-block;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 3.1cqw;
+            line-height: 1;
+            color: #F2F2F2;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.18s ease;
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
+            letter-spacing: -0.005em;
+        }
+
+        .platform-link:hover,
+        .platform-link:active,
+        .platform-link:focus {
+            color: #F29501;
+        }
+
+        /* Posiciones — top = centro Y del bullet; translateY(-50%) centra el texto vertical sobre el bullet */
+        .pos-spotify { top: 94.38%; left: 45.71%; transform: translateY(-50%); }
+        .pos-youtube { top: 94.38%; left: 77.85%; transform: translateY(-50%); }
+        .pos-amazon  { top: 97.29%; left: 45.80%; transform: translateY(-50%); }
+        .pos-apple   { top: 97.29%; left: 77.92%; transform: translateY(-50%); }
+
+        /* Texto SEO oculto */
+        .seo-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .preview-tag {
+            position: fixed;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.75);
+            color: #ffd84a;
+            font-family: monospace;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 3px;
+            z-index: 200;
+            pointer-events: none;
+        }
+
+        @media (min-width: 540px) {
+            body {
+                display: flex;
+                justify-content: center;
+                background: #0d0d0d;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="section-wrap">
+        <img class="bg" src="assets/shows-sin-nombres.png" alt="Próximos Shows — Presentaciones del Huey Coyote">
+
+        <!-- SEO -->
+        <h2 class="seo-only">Próximos Shows del Huey Coyote</h2>
+        <h3 class="seo-only">Recomendaciones de la casa</h3>
+        <ul class="seo-only">
+            <li>14 de julio — CDMX</li>
+            <li>22 de agosto — Guadalajara</li>
+            <li>02 de septiembre — Monterrey</li>
+            <li>04 de noviembre — Tijuana</li>
+        </ul>
+        <h3 class="seo-only">Especiales del mes</h3>
+        <ul class="seo-only">
+            <li>Niu Jork</li>
+            <li>Ostin</li>
+            <li>Mayami</li>
+        </ul>
+
+        <!-- Nombres de plataformas como TEXTO REAL (cambian color al hover) -->
+        <a class="platform-link pos-spotify"
+           href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw"
+           target="_blank" rel="noopener noreferrer">Spotify</a>
+
+        <a class="platform-link pos-youtube"
+           href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG"
+           target="_blank" rel="noopener noreferrer">Youtube</a>
+
+        <a class="platform-link pos-amazon"
+           href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M"
+           target="_blank" rel="noopener noreferrer">Amazon Music</a>
+
+        <a class="platform-link pos-apple"
+           href="https://music.apple.com/mx/artist/hueycoyote/1088136173"
+           target="_blank" rel="noopener noreferrer">Apple Music</a>
+    </section>
+
+    <div class="preview-tag">Próximos Shows · texto real, color cambia al hover</div>
+</body>
+</html>
