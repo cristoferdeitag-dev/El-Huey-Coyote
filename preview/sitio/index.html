@@ -130,12 +130,19 @@
             -webkit-tap-highlight-color: transparent;
             transition: transform 0.25s ease, filter 0.25s ease;
         }
-        .menu-link img.letrero {
-            display: block;
+        .menu-link .letrero-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            color: #fff;
+            text-align: center;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.55), 0 0 8px rgba(0,0,0,0.35);
             pointer-events: none;
+            white-space: nowrap;
         }
         /* Efecto: el texto se alza un poquito (sin iluminación) */
         .menu-link:hover {
@@ -146,12 +153,18 @@
             transform: scale(0.96);
         }
 
-        /* 4 áreas — posiciones coinciden con los crops de letrero-*.png */
+        /* 4 áreas — posiciones coinciden con los letreros del bg headliner-sin-textos.png */
         .area-pide {
             top: 16.5%;
             left: 22%;
             width: 56%;
             height: 4%;
+        }
+        .area-pide .letrero-text {
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(18px, 5.5vw, 32px);
         }
         .area-shows {
             top: 21.5%;
@@ -160,17 +173,38 @@
             height: 14%;
             transform-origin: center center;
         }
+        .area-shows .letrero-text {
+            font-family: "open-sans-condensed", 'Oswald', sans-serif;
+            font-weight: 800;
+            font-style: italic;
+            font-size: clamp(16px, 5vw, 28px);
+            white-space: normal;
+            flex-direction: column;
+            line-height: 0.95;
+        }
         .area-conoces {
             top: 24.4%;
             left: 68%;
             width: 28.5%;
             height: 5.6%;
         }
+        .area-conoces .letrero-text {
+            font-family: "ciabatta", 'Permanent Marker', cursive;
+            font-weight: 700;
+            font-style: italic;
+            font-size: clamp(14px, 4.2vw, 24px);
+        }
         .area-echame {
             top: 29.5%;
             left: 68%;
             width: 28.5%;
             height: 5%;
+        }
+        .area-echame .letrero-text {
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(14px, 4.2vw, 24px);
         }
 
         /* === PRÓXIMOS SHOWS plataformas === */
@@ -421,18 +455,18 @@
             <img class="bg" src="assets/headliner-sin-textos.png" alt="El Huey Coyote — bienvenida al puesto">
             <h1 class="seo-only">El Huey Coyote</h1>
 
-            <!-- 4 letreros clicables — cada uno carga el crop de SU letrero del headliner -->
+            <!-- 4 letreros clicables — texto HTML con tipografías Adobe Fonts (Typekit kit yzd3dtz) -->
             <a class="menu-link area-pide" href="#merch" aria-label="Pide para llevar — Merch">
-                <img class="letrero" src="assets/letrero-pide-v3.png" alt="">
+                <span class="letrero-text">PIDE PARA LLEVAR</span>
             </a>
             <a class="menu-link area-shows" href="#proximos-shows" aria-label="Próximos shows">
-                <img class="letrero" src="assets/letrero-shows-v4.png" alt="">
+                <span class="letrero-text">PRÓXIMOS<br>SHOWS</span>
             </a>
             <a class="menu-link area-conoces" href="#sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
-                <img class="letrero" src="assets/letrero-conoces-v3.png" alt="">
+                <span class="letrero-text">¿YA ME CONOCES?</span>
             </a>
             <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto">
-                <img class="letrero" src="assets/letrero-echame-v3.png" alt="">
+                <span class="letrero-text">ÉCHAME UN GRITO</span>
             </a>
         </section>
 
