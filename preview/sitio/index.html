@@ -197,9 +197,15 @@
             font-style: italic;
             font-stretch: normal;
             font-size: clamp(13px, 4.7vw, 24px);
-            color: #e44b91;
-            -webkit-text-stroke: 3px #4eb32e;
-            text-shadow: 2px 3px 0 #2f6b2a, 3px 4px 0 #2f6b2a;
+            background: linear-gradient(178deg, #fdeb4a 0%, #fcca0f 40%, #e8519a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            -webkit-text-stroke: 0;
+            text-shadow: none;
+            position: relative;
+            isolation: isolate;
             transform: rotate(-8deg);
             transform-origin: center center;
             overflow: visible;
@@ -217,12 +223,45 @@
             font-style: italic;
             font-stretch: normal;
             font-size: clamp(12px, 4.3vw, 22px);
-            color: #e44b91;
-            -webkit-text-stroke: 3px #4eb32e;
-            text-shadow: 2px 3px 0 #2f6b2a, 3px 4px 0 #2f6b2a;
+            background: linear-gradient(178deg, #fdeb4a 0%, #fcca0f 40%, #e8519a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            -webkit-text-stroke: 0;
+            text-shadow: none;
+            position: relative;
+            isolation: isolate;
             transform: rotate(-8deg);
             transform-origin: center center;
             overflow: visible;
+        }
+        /* Capas de contorno PRÓXIMOS SHOWS: verde grueso (atrás) + negro fino (medio); el relleno degradado queda al frente */
+        .area-proximos .letrero-text::before,
+        .area-proximos .letrero-text::after,
+        .area-shows .letrero-text::before,
+        .area-shows .letrero-text::after {
+            content: attr(data-text);
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+        .area-proximos .letrero-text::before,
+        .area-shows .letrero-text::before {
+            -webkit-text-fill-color: #4eb32e;
+            color: #4eb32e;
+            -webkit-text-stroke: 8px #4eb32e;
+            z-index: -2;
+        }
+        .area-proximos .letrero-text::after,
+        .area-shows .letrero-text::after {
+            -webkit-text-fill-color: #111;
+            color: #111;
+            -webkit-text-stroke: 2px #111;
+            z-index: -1;
         }
         .area-conoces {
             top: 26.32%;
@@ -243,7 +282,7 @@
             overflow: visible;
         }
         .area-echame {
-            top: 31.6%;
+            top: 30.2%;
             left: 74.21%;
             width: 19.93%;
             height: 5.91%;
@@ -518,10 +557,10 @@
                 <span class="letrero-text">PIDE PARA LLEVAR</span>
             </a>
             <a class="menu-link area-proximos" href="#proximos-shows" aria-label="Próximos shows">
-                <span class="letrero-text">PRÓXIMOS</span>
+                <span class="letrero-text" data-text="PRÓXIMOS">PRÓXIMOS</span>
             </a>
             <a class="menu-link area-shows" href="#proximos-shows" aria-label="Próximos shows">
-                <span class="letrero-text">SHOWS</span>
+                <span class="letrero-text" data-text="SHOWS">SHOWS</span>
             </a>
             <a class="menu-link area-conoces" href="#sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
                 <span class="letrero-text">¿YA ME CONOCES?</span>
