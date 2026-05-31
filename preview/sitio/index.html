@@ -255,6 +255,7 @@
             font-weight: 400;
             font-style: normal;
             font-size: clamp(12px, 3.35vw, 18px);
+            color: #fcca0f;
             -webkit-text-stroke: 0.3px #000;
             white-space: normal;
             line-height: 1;
@@ -508,23 +509,26 @@
 
         <!-- HEADLINER (sección 2) -->
         <section id="headliner">
-            <img class="bg" src="assets/headliner-sin-textos.png" alt="El Huey Coyote — bienvenida al puesto">
-            <!-- Overlay: los 3 letreros estilizados (PRÓXIMOS SHOWS, ¿YA ME CONOCES?, ÉCHAME UN GRITO) vienen del SVG de Anette,
-                 con sus paths/gradients/outlines exactos. PIDE PARA LLEVAR se renderiza como texto HTML para usar la tipografía Adobe Fonts. -->
-            <img class="overlay" src="assets/headliner-overlay.svg" alt="">
+            <!-- Fondo v2: estrellas, trompeta y hamburguesa ya integradas; recuadros vacíos. Todos los textos van en HTML. -->
+            <img class="bg" src="assets/headliner-bg-v2.jpg" alt="El Huey Coyote — bienvenida al puesto">
             <h1 class="seo-only">El Huey Coyote</h1>
 
-            <!-- 4 áreas clicables transparentes encima del overlay -->
+            <!-- 4 letreros como texto HTML (control total de color/tamaño/posición) -->
             <a class="menu-link area-pide" href="#merch" aria-label="Pide para llevar — Merch">
                 <span class="letrero-text">PIDE PARA LLEVAR</span>
             </a>
-            <!-- PRÓXIMOS y SHOWS vienen del SVG de Anette (rosa+verde, diseño original) — solo área clicable, sin texto HTML -->
-            <a class="menu-link area-proximos" href="#proximos-shows" aria-label="Próximos shows"></a>
-            <a class="menu-link area-shows" href="#proximos-shows" aria-label="Próximos shows"></a>
+            <a class="menu-link area-proximos" href="#proximos-shows" aria-label="Próximos shows">
+                <span class="letrero-text">PRÓXIMOS</span>
+            </a>
+            <a class="menu-link area-shows" href="#proximos-shows" aria-label="Próximos shows">
+                <span class="letrero-text">SHOWS</span>
+            </a>
             <a class="menu-link area-conoces" href="#sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
                 <span class="letrero-text">¿YA ME CONOCES?</span>
             </a>
-            <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto"></a>
+            <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto">
+                <span class="letrero-text">ÉCHAME UN<br>GRITO</span>
+            </a>
         </section>
 
         <!-- Divisor: anuncia Próximos Shows -->
