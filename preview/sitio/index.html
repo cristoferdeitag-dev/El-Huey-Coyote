@@ -316,9 +316,18 @@
             line-height: 1;
             align-items: baseline;
         }
-        .shows-list .mes { color: #1a1a1a; }
-        .shows-list .dia { color: #00a99d; }
-        .shows-list .ciudad { color: #00a99d; white-space: nowrap; }
+        .shows-list .mes { color: #1a1a1a; -webkit-text-stroke: 0.45px #1a1a1a; }
+        .shows-list .dia { color: #00a99d; -webkit-text-stroke: 0.45px #00a99d; }
+        .shows-list .ciudad {
+            color: #00a99d;
+            -webkit-text-stroke: 0.45px #00a99d;
+            white-space: nowrap;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.18s ease, transform 0.18s ease;
+        }
+        .shows-list .ciudad:hover,
+        .shows-list .ciudad:focus { color: #b80d0e; }
         /* ESPECIALES DEL MES — ciudades (rojo, itálica) */
         .especial-ciudad {
             position: absolute;
@@ -595,18 +604,16 @@
             <h3 class="seo-only">Recomendaciones de la casa</h3>
 
             <!-- Lista de presentaciones (mes negro · día/ciudad teal; guiones rojos vienen del fondo) -->
+            <!-- Ciudades = botones: cada una llevará a la sub-sección con fotos/videos del show (destinos pendientes) -->
             <div class="shows-list">
-                <span class="mes">JUL</span><span class="dia">14</span><span class="ciudad">CDMX</span>
-                <span class="mes">AGO</span><span class="dia">22</span><span class="ciudad">GUADALAJARA</span>
-                <span class="mes">SEP</span><span class="dia">02</span><span class="ciudad">MONTERREY</span>
-                <span class="mes">NOV</span><span class="dia">04</span><span class="ciudad">TIJUANA</span>
+                <span class="mes">JUL</span><span class="dia">14</span><a class="ciudad" href="#show-cdmx" aria-label="Ver presentación en CDMX">CDMX</a>
+                <span class="mes">AGO</span><span class="dia">22</span><a class="ciudad" href="#show-guadalajara" aria-label="Ver presentación en Guadalajara">GUADALAJARA</a>
+                <span class="mes">SEP</span><span class="dia">02</span><a class="ciudad" href="#show-monterrey" aria-label="Ver presentación en Monterrey">MONTERREY</a>
+                <span class="mes">NOV</span><span class="dia">04</span><a class="ciudad" href="#show-tijuana" aria-label="Ver presentación en Tijuana">TIJUANA</a>
             </div>
 
-            <h3 class="seo-only">Especiales del mes</h3>
-            <!-- Ciudades especiales (la 2ª va tapada por el letrero "SE LA DEVEMOS JOVEN" del fondo) -->
-            <span class="especial-ciudad pos-niujork">NIU JORK</span>
-            <span class="especial-ciudad pos-ostin">OSTIN</span>
-            <span class="especial-ciudad pos-mayami">MAYAMI</span>
+            <h3 class="seo-only">Especiales del mes: Niu Jork, Ostin, Mayami</h3>
+            <!-- NIU JORK / OSTIN / MAYAMI ahora van integrados en la imagen de fondo (Anette los hornea al fondo nuevo) -->
 
             <a class="platform-link pos-spotify"
                href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw"
