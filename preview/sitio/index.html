@@ -475,13 +475,13 @@
         }
         /* Posiciones FINALES — calibradas contra 2do mockup que mandó Anette
            top/left = centro del poster; uso translate(-50%,-50%) en el transform */
-        .poster-1 { top: 21%; left: 73%; width: 53%; }
-        .poster-2 { top: 51%; left: 30%; width: 37%; }
-        .poster-3 { top: 79%; left: 65%; width: 58%; }
+        .poster-1 { top: 22%; left: 67%; width: 50%; }
+        .poster-2 { top: 46%; left: 22%; width: 37%; }
+        .poster-3 { top: 76%; left: 70%; width: 49%; }
 
         /* Texto encima de los pósters (rota/vuela junto con cada póster) */
         #sobre-mi .poster img { width: 100%; display: block; }
-        #sobre-mi .poster-2 { container-type: inline-size; }
+        #sobre-mi .poster { container-type: inline-size; }
         .poster-txt { position: absolute; inset: 0; color: #5b3a23; pointer-events: none; }
         .poster-txt .p-title {
             position: absolute; left: 8%; width: 84%; top: 8%;
@@ -490,17 +490,62 @@
             font-size: 7cqw; line-height: 0.9; letter-spacing: 0.01em;
         }
         .poster-txt .p-sub {
-            position: absolute; left: 8%; width: 84%; top: 15.5%;
+            position: absolute; left: 8%; width: 84%; top: 14.5%;
             text-align: center; font-family: "swiss-721-bt", 'Oswald', sans-serif;
-            font-weight: 700; font-style: italic; font-size: 4.6cqw;
+            font-weight: 700; font-style: italic; font-size: 4.4cqw;
         }
         .poster-txt .p-body {
             position: absolute; font-family: "swiss-721-bt", 'Oswald', sans-serif;
             font-weight: 700; font-size: 3.0cqw; line-height: 1.05; text-transform: uppercase;
         }
-        .p2-b1 { top: 22%; left: 40%; width: 52%; }
-        .p2-b2 { top: 40%; left: 40%; width: 52%; }
-        .p2-b3 { top: 60%; left: 14%; width: 52%; }
+        .p2-b1 { top: 20%; left: 40%; width: 54%; }
+        .p2-b2 { top: 38%; left: 40%; width: 54%; }
+        .p2-b3 { top: 56%; left: 10%; width: 54%; }
+
+        /* Póster 1 (Huey): EL VATO + resumen, en la parte baja */
+        .poster-txt.c1 .vato {
+            position: absolute; left: 22%; width: 74%; top: 63%;
+            text-align: center; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-size: 5.4cqw; line-height: 0.95; color: #c4161c;
+        }
+        .poster-txt.c1 .res {
+            position: absolute; left: 22%; width: 74%; top: 76%;
+            text-align: center; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-size: 2.8cqw; line-height: 1.05; color: #f5c400;
+        }
+        /* Póster 3 (verde): TEXTO MÁS TEXTO + bloques + Palabra súper cool + resaltar */
+        .poster-txt.c3 { color: #16361f; }
+        .poster-txt.c3 .t3 {
+            position: absolute; left: 6%; width: 88%; top: 8%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700;
+            font-size: 6.4cqw; line-height: 0.95;
+        }
+        .poster-txt.c3 .s3 {
+            position: absolute; left: 6%; width: 88%; top: 15.5%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700;
+            font-style: italic; font-size: 3.4cqw;
+        }
+        .poster-txt.c3 .bd3 {
+            position: absolute; left: 10%; width: 80%; top: 20%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 400;
+            font-size: 2.5cqw; line-height: 1.1; text-transform: uppercase;
+        }
+        .poster-txt.c3 .pc {
+            position: absolute; top: 62%; width: 30%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700;
+            font-style: italic; font-size: 3cqw;
+        }
+        .poster-txt.c3 .pc1 { left: 8%; }
+        .poster-txt.c3 .pc2 { left: 50%; }
+        .poster-txt.c3 .res3 {
+            position: absolute; left: 8%; top: 70%;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700; font-size: 3.4cqw;
+        }
+        .poster-txt.c3 .bd3b {
+            position: absolute; left: 8%; width: 84%; top: 75%;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 400;
+            font-size: 2.3cqw; line-height: 1.1; text-transform: uppercase;
+        }
 
         /* Estados INICIALES (off-screen + rotación heavy + escala) */
         #sobre-mi .poster-1 {
@@ -684,7 +729,13 @@
         <section id="sobre-mi">
             <img class="bg" src="assets/conoces/fondo.png?v=20260523-0103" alt="¿Ya me conoces? — Sobre El Huey Coyote">
             <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
-            <img class="poster poster-1" src="assets/conoces/poster1-tight.png?v=20260523-0311" alt="El Huey Coyote — El vato de las rolitas random — Para LATAM">
+            <div class="poster poster-1">
+                <img src="assets/conoces/poster1-huey-tight.png" alt="El Huey Coyote — El vato de las rolitas random — Para LATAM">
+                <div class="poster-txt c1">
+                    <div class="vato">EL VATO DE LAS ROLITAS RANDOM</div>
+                    <div class="res">Aquí va un pequeño resumen de él o información muy muy importante</div>
+                </div>
+            </div>
             <div class="poster poster-2">
                 <img src="assets/conoces/poster2-tight.png?v=20260523-0311" alt="">
                 <div class="poster-txt">
@@ -695,7 +746,18 @@
                     <div class="p-body p2-b3">Cosas sobre su nuevo historia, música, jodo instrumentos, hombres también podemos pod</div>
                 </div>
             </div>
-            <img class="poster poster-3" src="assets/conoces/poster3-tight.png?v=20260523-0311" alt="">
+            <div class="poster poster-3">
+                <img src="assets/conoces/poster3-tight.png?v=20260523-0311" alt="">
+                <div class="poster-txt c3">
+                    <div class="t3">TEXTO MÁS TEXTO</div>
+                    <div class="s3">Subtítulo lindo y nice</div>
+                    <div class="bd3">Aventura time aventuras más cosas random como esto para fun facts importantes de cosas random importantes</div>
+                    <div class="pc pc1">Palabra súper cool</div>
+                    <div class="pc pc2">Palabra súper cool</div>
+                    <div class="res3">ALGO PARA RESALTAR</div>
+                    <div class="bd3b">Comentar cosas que faltan recomendaciones cositas divertidas aleatorias importantes</div>
+                </div>
+            </div>
             <span class="mero-mero" aria-hidden="true">El mEro MeRo</span>
         </section>
 
