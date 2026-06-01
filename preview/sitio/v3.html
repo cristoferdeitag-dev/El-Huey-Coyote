@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>El Huey Coyote</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@500;600;700;800&family=Quicksand:ital,wght@0,500;0,600;1,500;1,600&family=Permanent+Marker&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/yzd3dtz.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @font-face {
+            font-family: 'Inlanders Demo';
+            src: url('assets/fonts/InlandersDemo.otf') format('opentype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'DK Drop Dead Gorgeous';
+            src: url('assets/fonts/DKDropDeadGorgeous.otf') format('opentype');
+            font-display: swap;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        html, body {
+            background: #1a1a1a;
+            overflow-x: hidden;
+            font-family: 'Quicksand', system-ui, sans-serif;
+        }
+
+        /* Bloquea scroll mientras la cortina está bajada */
+        body.cortina-bajada {
+            overflow: hidden;
+            height: 100vh;
+            touch-action: none;
+        }
+
+        .site-wrap {
+            position: relative;
+            width: 100vw;
+            max-width: 540px;
+            margin: 0 auto;
+            background: #1a1a1a;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            container-type: inline-size;
+        }
+
+        section > img.bg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        /* Overlay SVG del headliner — encima del bg, mismas dimensiones */
+        #headliner {
+            position: relative;
+        }
+        #headliner img.overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* === PORTADA (cortina overlay) === */
+        .portada-overlay {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 540px;
+            height: 100vh;
+            z-index: 100;
+            overflow: hidden;
+            background: #2dbf86;
+            transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+            will-change: transform;
+        }
+        .portada-overlay img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            pointer-events: none;
+        }
+        .portada-overlay.subida {
+            transform: translateX(-50%) translateY(-100%);
+        }
+        /* Botón "Abre el changarro" — texto blanco = el botón
+           DEBUG: outline temporal para que Anette vea el área clicable.
+           Quitar el border + background tinte cuando ya esté alineado. */
+        .btn-changarro {
+            position: absolute;
+            top: 62%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 200, 50, 0.25);
+            border: 2px dashed #ffd84a;
+            padding: 2.5% 4%;
+            cursor: pointer;
+            z-index: 2;
+            color: #fff;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(24px, 7vw, 38px);
+            letter-spacing: 0.06em;
+            white-space: nowrap;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.35);
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0.15);
+            touch-action: manipulation;
+            transition: transform 0.18s ease, text-shadow 0.18s ease;
+        }
+        .btn-changarro:hover,
+        .btn-changarro:active,
+        .btn-changarro:focus {
+            transform: translateX(-50%) scale(1.05);
+            text-shadow: 0 0 12px rgba(255,255,255,0.55), 0 2px 4px rgba(0,0,0,0.35);
+            outline: none;
+        }
+
+        /* === HEADLINER áreas clicables — el LETRERO mismo se alza + ilumina === */
+        .menu-link {
+            position: absolute;
+            display: block;
+            cursor: pointer;
+            border: 0;
+            background: transparent;
+            padding: 0;
+            z-index: 2;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+        .menu-link .letrero-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            text-align: center;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            -webkit-text-stroke: 1.3px #000;
+            paint-order: stroke fill;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        /* Efecto: el texto se alza un poquito (sin iluminación) */
+        .menu-link:hover {
+            transform: scale(1.08);
+            z-index: 10;
+        }
+        .menu-link:active {
+            transform: scale(0.96);
+        }
+
+        /* 4 áreas — coords exactas Photoshop de Anette (canvas 1086×1937, X/Y = centro bbox) */
+        .area-pide {
+            top: 17.13%;
+            left: 24.34%;
+            width: 51.87%;
+            height: 4.59%;
+        }
+        .area-pide .letrero-text {
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(18px, 6vw, 33px);
+            -webkit-text-stroke: 1.3px #000;
+        }
+        /* PRÓXIMOS y SHOWS son 2 áreas separadas con coords individuales de Illustrator */
+        .area-proximos {
+            top: 27.13%;
+            left: 2.98%;
+            width: 20.48%;
+            height: 3.77%;
+            overflow: visible;
+        }
+        .area-proximos .letrero-text {
+            font-family: "open-sans-condensed", 'Oswald', sans-serif;
+            font-weight: 800;
+            font-style: italic;
+            font-stretch: normal;
+            font-size: clamp(13px, 4.7vw, 24px);
+            background: linear-gradient(180deg, #eef60a 0%, #ddfc0b 28%, #e06396 64%, #e8388d 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            -webkit-text-stroke: 0.8px #111;
+            paint-order: stroke fill;
+            filter: drop-shadow(1px 0 0 #4eb32e) drop-shadow(-1px 0 0 #4eb32e) drop-shadow(0 1px 0 #4eb32e) drop-shadow(0 -1px 0 #4eb32e);
+            text-shadow: none;
+            position: relative;
+            transform: rotate(-8deg);
+            transform-origin: center center;
+            overflow: visible;
+        }
+        .area-shows {
+            top: 29.09%;
+            left: 15.22%;
+            width: 14.54%;
+            height: 3.45%;
+            overflow: visible;
+        }
+        .area-shows .letrero-text {
+            font-family: "open-sans-condensed", 'Oswald', sans-serif;
+            font-weight: 800;
+            font-style: italic;
+            font-stretch: normal;
+            font-size: clamp(12px, 4.3vw, 22px);
+            background: linear-gradient(180deg, #eef60a 0%, #ddfc0b 28%, #e06396 64%, #e8388d 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            -webkit-text-stroke: 0.8px #111;
+            paint-order: stroke fill;
+            filter: drop-shadow(1px 0 0 #4eb32e) drop-shadow(-1px 0 0 #4eb32e) drop-shadow(0 1px 0 #4eb32e) drop-shadow(0 -1px 0 #4eb32e);
+            text-shadow: none;
+            position: relative;
+            transform: rotate(-8deg);
+            transform-origin: center center;
+            overflow: visible;
+        }
+        .area-conoces {
+            top: 26.32%;
+            left: 71.61%;
+            width: 24.40%;
+            height: 2.19%;
+            overflow: visible;
+        }
+        .area-conoces .letrero-text {
+            font-family: "ciabatta", 'Permanent Marker', cursive;
+            font-weight: 700;
+            font-style: italic;
+            font-stretch: normal;
+            font-size: clamp(10px, 3.0vw, 15px);
+            color: #111;
+            -webkit-text-stroke: 0;
+            text-shadow: none;
+            overflow: visible;
+        }
+        .area-echame {
+            top: 30.2%;
+            left: 74.21%;
+            width: 19.93%;
+            height: 5.91%;
+            overflow: visible;
+            transform-origin: center center;
+        }
+        .area-echame .letrero-text {
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(12px, 3.35vw, 18px);
+            color: #fcca0f;
+            -webkit-text-stroke: 0.3px #000;
+            white-space: normal;
+            line-height: 1;
+            transform: rotate(-6deg);
+            transform-origin: center center;
+            display: block;
+        }
+
+        /* === PRÓXIMOS SHOWS plataformas === */
+        .platform-link {
+            position: absolute;
+            display: inline-block;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 3.1cqw;
+            line-height: 1;
+            color: #F2F2F2;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.18s ease;
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
+            letter-spacing: -0.005em;
+        }
+        .platform-link:hover,
+        .platform-link:active,
+        .platform-link:focus { color: #F29501; }
+
+        /* === PRÓXIMOS SHOWS — lista de presentaciones (texto variable sobre el fondo) === */
+        .shows-list {
+            position: absolute;
+            top: 13.5%;
+            left: 8%;
+            width: 84%;
+            display: grid;
+            grid-template-columns: 2.5em 1.7em auto;
+            row-gap: 0.36em;
+            column-gap: 0.7em;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 4.1cqw;
+            line-height: 1;
+            align-items: baseline;
+        }
+        .shows-list .mes { color: #1a1a1a; -webkit-text-stroke: 0.45px #1a1a1a; }
+        .shows-list .dia { color: #00a99d; -webkit-text-stroke: 0.45px #00a99d; }
+        .shows-list .ciudad {
+            color: #00a99d;
+            -webkit-text-stroke: 0.45px #00a99d;
+            white-space: nowrap;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.18s ease, transform 0.18s ease;
+        }
+        .shows-list .ciudad:hover,
+        .shows-list .ciudad:focus { color: #b80d0e; }
+        /* ESPECIALES DEL MES — ciudades (rojo, itálica) */
+        .especial-ciudad {
+            position: absolute;
+            left: 8%;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 4.4cqw;
+            line-height: 1;
+            color: #b80d0e;
+            white-space: nowrap;
+            transform: translateY(-50%);
+            letter-spacing: 0.01em;
+        }
+        .pos-niujork { top: 60%; }
+        .pos-ostin   { top: 66%; }
+        .pos-mayami  { top: 74%; }
+
+        .pos-spotify { top: 94.38%; left: 45.71%; transform: translateY(-50%); }
+        .pos-youtube { top: 94.38%; left: 77.85%; transform: translateY(-50%); }
+        .pos-amazon  { top: 97.29%; left: 45.80%; transform: translateY(-50%); }
+        .pos-apple   { top: 97.29%; left: 77.92%; transform: translateY(-50%); }
+
+        /* === MERCH — items como texto real (clicables, deslizan al hover) + precios texto editable === */
+        .merch-item {
+            position: absolute;
+            display: inline-block;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 4.15cqw;
+            letter-spacing: -0.01em;
+            line-height: 1;
+            color: #1A1A1A;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.2s ease;
+            transform: translateY(-50%);
+        }
+        .merch-item:hover,
+        .merch-item:active,
+        .merch-item:focus {
+            transform: translateY(-50%) translateX(-12px);
+        }
+
+        .merch-price {
+            position: absolute;
+            display: inline-block;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 4.3cqw;
+            line-height: 1;
+            color: #1A1A1A;
+            white-space: nowrap;
+            pointer-events: none;
+            transform: translateY(-50%);
+        }
+
+        /* Posiciones de NOMBRES — Cocogoose 45pt → top = baseline approx */
+        .pos-pirat-playeras { top: 20.8%; left: 8.91%; }
+        .pos-pirat-chamarra { top: 23.5%; left: 8.91%; }
+        .pos-pirat-calcetas { top: 26.3%; left: 8.91%; }
+        .pos-orig-playeras  { top: 35.2%; left: 8.91%; }
+        .pos-orig-chamarra  { top: 38.4%; left: 8.91%; }
+        .pos-orig-calcetas  { top: 41.4%; left: 8.91%; }
+
+        /* Posiciones de PRECIOS */
+        .pos-price-pirat-pl { top: 20.8%; left: 80.4%; }
+        .pos-price-pirat-ch { top: 23.5%; left: 80.0%; }
+        .pos-price-pirat-ca { top: 26.3%; left: 80.5%; }
+        .pos-price-orig-pl  { top: 35.2%; left: 80.5%; }
+        .pos-price-orig-ch  { top: 38.4%; left: 79.0%; }
+        .pos-price-orig-ca  { top: 41.4%; left: 80.6%; }
+
+        /* === CONTACTO (Échame un grito) — stickers con efecto "despegar" === */
+        .social-link {
+            position: absolute;
+            display: block;
+            cursor: pointer;
+            background: transparent;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.25s ease;
+            transform-origin: bottom right;
+        }
+        .social-link::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(252,202,15,0);
+            border-radius: 4px;
+            pointer-events: none;
+            transition: background 0.2s ease, box-shadow 0.2s ease;
+        }
+        .social-link:hover,
+        .social-link:active,
+        .social-link:focus {
+            transform: rotate(-7deg) translateY(-3px);
+            outline: none;
+        }
+        .social-link:hover::after,
+        .social-link:active::after,
+        .social-link:focus::after {
+            background: rgba(252,202,15,0.35);
+            box-shadow: -4px 4px 10px rgba(0,0,0,0.35);
+        }
+
+        /* Posiciones corregidas — calibradas pixel-perfect contra echame.png */
+        .social-fb     { top: 32%;   left: 77.5%; width: 15%;   height: 8%;    }
+        .social-ig     { top: 42.5%; left: 79%;   width: 12%;   height: 8%;    }
+        .social-email  { top: 56%;   left: 73%;   width: 22%;   height: 7%;    }
+        .social-tt     { top: 65%;   left: 77%;   width: 17%;   height: 10.5%; }
+
+        /* === DIVISORES ENTRE SECCIONES === */
+        .divider {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* === MERCH desenrolla como lona === */
+        #merch {
+            clip-path: inset(0 0 100% 0);
+            transition: clip-path 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #merch.unrolled {
+            clip-path: inset(0 0 0% 0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #merch { clip-path: none; transition: none; }
+            #sobre-mi .poster { opacity: 1; transform: none; transition: none; }
+        }
+
+        /* === ¿YA ME CONOCES? — 3 posters vuelan y aterrizan === */
+        #sobre-mi .poster {
+            position: absolute;
+            display: block;
+            pointer-events: none;
+            opacity: 0;
+            transform-origin: center center;
+            transition: opacity 0.2s linear, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity;
+        }
+        /* Posiciones FINALES — calibradas contra 2do mockup que mandó Anette
+           top/left = centro del poster; uso translate(-50%,-50%) en el transform */
+        /* Posiciones EXACTAS extraídas del .ai (mesa 1086×1937) — centros/anchos del archivo de Anette */
+        .poster-1 { top: 27.6%; left: 68%; width: 63.7%; }
+        .poster-2 { top: 57.9%; left: 23.6%; width: 51%; }
+        .poster-3 { top: 78.8%; left: 70.3%; width: 52.7%; }
+
+        /* Texto encima de los pósters (rota/vuela junto con cada póster) */
+        /* Recorta el sangrado de los pósters como la mesa de Illustrator */
+        #sobre-mi { overflow: hidden; }
+        #sobre-mi .poster img { width: 100%; display: block; }
+        #sobre-mi .poster { container-type: inline-size; }
+
+        /* === Capa de textos en coordenadas ABSOLUTAS exactas del .ai === */
+        .conoce-text { position: absolute; inset: 0; z-index: 6; pointer-events: none; opacity: 0; transition: opacity 0.5s ease 0.7s; }
+        #sobre-mi.posters-landed .conoce-text { opacity: 1; }
+        .conoce-text .ct {
+            position: absolute; transform-origin: center center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            line-height: 1.06; text-align: center; white-space: nowrap;
+        }
+        .poster-txt { position: absolute; inset: 0; color: #5b3a23; pointer-events: none; }
+        .poster-txt .p-title {
+            position: absolute; left: 8%; width: 84%; top: 8%;
+            text-align: center; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-style: normal;
+            font-size: 7cqw; line-height: 0.9; letter-spacing: 0.01em;
+        }
+        .poster-txt .p-sub {
+            position: absolute; left: 8%; width: 84%; top: 14.5%;
+            text-align: center; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-style: italic; font-size: 4.4cqw;
+        }
+        .poster-txt .p-body {
+            position: absolute; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-size: 3.0cqw; line-height: 1.05; text-transform: uppercase;
+        }
+        .p2-b1 { top: 20%; left: 40%; width: 54%; }
+        .p2-b2 { top: 38%; left: 40%; width: 54%; }
+        .p2-b3 { top: 56%; left: 10%; width: 54%; }
+
+        /* Póster 1 (Huey): EL VATO + resumen, en la parte baja */
+        .poster-txt.c1 .vato {
+            position: absolute; left: 22%; width: 74%; top: 63%;
+            text-align: center; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-size: 5.4cqw; line-height: 0.95; color: #c4161c;
+        }
+        .poster-txt.c1 .res {
+            position: absolute; left: 22%; width: 74%; top: 76%;
+            text-align: center; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-size: 2.8cqw; line-height: 1.05; color: #f5c400;
+        }
+        /* Póster 3 (verde): TEXTO MÁS TEXTO + bloques + Palabra súper cool + resaltar */
+        .poster-txt.c3 { color: #16361f; }
+        .poster-txt.c3 .t3 {
+            position: absolute; left: 6%; width: 88%; top: 8%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700;
+            font-size: 6.4cqw; line-height: 0.95;
+        }
+        .poster-txt.c3 .s3 {
+            position: absolute; left: 6%; width: 88%; top: 15.5%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700;
+            font-style: italic; font-size: 3.4cqw;
+        }
+        .poster-txt.c3 .bd3 {
+            position: absolute; left: 10%; width: 80%; top: 20%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 400;
+            font-size: 2.5cqw; line-height: 1.1; text-transform: uppercase;
+        }
+        .poster-txt.c3 .pc {
+            position: absolute; top: 62%; width: 30%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700;
+            font-style: italic; font-size: 3cqw;
+        }
+        .poster-txt.c3 .pc1 { left: 8%; }
+        .poster-txt.c3 .pc2 { left: 50%; }
+        .poster-txt.c3 .res3 {
+            position: absolute; left: 8%; top: 70%;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700; font-size: 3.4cqw;
+        }
+        .poster-txt.c3 .bd3b {
+            position: absolute; left: 8%; width: 84%; top: 75%;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 400;
+            font-size: 2.3cqw; line-height: 1.1; text-transform: uppercase;
+        }
+
+        /* Estados INICIALES (off-screen + rotación heavy + escala) */
+        #sobre-mi .poster-1 {
+            transform: translate(-50%,-50%) translate(-200%,-180%) rotate(-45deg) scale(0.55);
+        }
+        #sobre-mi .poster-2 {
+            transform: translate(-50%,-50%) translate(-220%, 100%) rotate(50deg) scale(0.55);
+        }
+        #sobre-mi .poster-3 {
+            transform: translate(-50%,-50%) translate(200%, 180%) rotate(-50deg) scale(0.55);
+        }
+
+        /* Estado ATERRIZADO con rotaciones exactas de Anette */
+        #sobre-mi.posters-landed .poster {
+            opacity: 1;
+        }
+        #sobre-mi.posters-landed .poster-1 {
+            transform: translate(-50%,-50%) rotate(-2.5deg) scale(1);
+            transition-delay: 0s;
+        }
+        #sobre-mi.posters-landed .poster-2 {
+            transform: translate(-50%,-50%) rotate(8.98deg) scale(1);
+            transition-delay: 0.25s;
+        }
+        #sobre-mi.posters-landed .poster-3 {
+            transform: translate(-50%,-50%) rotate(-10.71deg) scale(1);
+            transition-delay: 0.5s;
+        }
+
+        /* "EL MERO MERO" — rayón sobre la lámina (aparece como si lo grabaran) */
+        .mero-mero {
+            position: absolute;
+            top: 5.5%;
+            left: 12%;
+            font-family: 'VT323', monospace;
+            font-size: 5.8cqw;
+            letter-spacing: 0.08em;
+            color: rgba(245,245,245,0.55);
+            text-shadow: 0 0 1px rgba(0,0,0,0.4);
+            transform: rotate(-3deg);
+            white-space: nowrap;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            clip-path: inset(0 100% 0 0);
+        }
+        #sobre-mi.mero-scratched .mero-mero {
+            animation: scratch-in 1.1s steps(40, end) forwards;
+        }
+        @keyframes scratch-in {
+            0%   { clip-path: inset(0 100% 0 0); }
+            100% { clip-path: inset(0 0% 0 0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .mero-mero { clip-path: inset(0 0% 0 0); animation: none; }
+        }
+
+        /* === SEO oculto === */
+        .seo-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .preview-tag {
+            position: fixed;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.75);
+            color: #ffd84a;
+            font-family: monospace;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 3px;
+            z-index: 200;
+            pointer-events: none;
+        }
+
+        @media (min-width: 540px) {
+            body { display: flex; justify-content: center; background: #0d0d0d; }
+            .portada-overlay { max-width: 540px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-wrap">
+
+        <!-- HEADLINER (sección 2) -->
+        <section id="headliner">
+            <!-- Fondo v2: estrellas, trompeta y hamburguesa ya integradas; recuadros vacíos. Todos los textos van en HTML. -->
+            <img class="bg" src="assets/headliner-bg-v4.png" alt="El Huey Coyote — bienvenida al puesto">
+            <h1 class="seo-only">El Huey Coyote</h1>
+
+            <!-- 4 letreros como texto HTML (control total de color/tamaño/posición) -->
+            <a class="menu-link area-pide" href="#merch" aria-label="Pide para llevar — Merch">
+                <span class="letrero-text">PIDE PARA LLEVAR</span>
+            </a>
+            <a class="menu-link area-proximos" href="#proximos-shows" aria-label="Próximos shows">
+                <span class="letrero-text" data-text="PRÓXIMOS">PRÓXIMOS</span>
+            </a>
+            <a class="menu-link area-shows" href="#proximos-shows" aria-label="Próximos shows">
+                <span class="letrero-text" data-text="SHOWS">SHOWS</span>
+            </a>
+            <a class="menu-link area-conoces" href="#sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
+                <span class="letrero-text">¿YA ME CONOCES?</span>
+            </a>
+            <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto">
+                <span class="letrero-text">ÉCHAME UN<br>GRITO</span>
+            </a>
+        </section>
+
+        <!-- Divisor: anuncia Próximos Shows -->
+        <img class="divider" src="assets/divider-proximos-shows.png" alt="Próximos Shows">
+
+        <!-- PRÓXIMOS SHOWS (sección 3) -->
+        <section id="proximos-shows">
+            <img class="bg" src="assets/proximos-shows-sintexto-v2.png" alt="Próximos Shows — Presentaciones">
+
+            <h2 class="seo-only">Próximos Shows del Huey Coyote</h2>
+            <h3 class="seo-only">Recomendaciones de la casa</h3>
+
+            <!-- Lista de presentaciones (mes negro · día/ciudad teal; guiones rojos vienen del fondo) -->
+            <!-- Ciudades = botones: cada una llevará a la sub-sección con fotos/videos del show (destinos pendientes) -->
+            <div class="shows-list">
+                <span class="mes">JUL</span><span class="dia">14</span><a class="ciudad" href="#show-cdmx" aria-label="Ver presentación en CDMX">CDMX</a>
+                <span class="mes">AGO</span><span class="dia">22</span><a class="ciudad" href="#show-guadalajara" aria-label="Ver presentación en Guadalajara">GUADALAJARA</a>
+                <span class="mes">SEP</span><span class="dia">02</span><a class="ciudad" href="#show-monterrey" aria-label="Ver presentación en Monterrey">MONTERREY</a>
+                <span class="mes">NOV</span><span class="dia">04</span><a class="ciudad" href="#show-tijuana" aria-label="Ver presentación en Tijuana">TIJUANA</a>
+            </div>
+
+            <h3 class="seo-only">Especiales del mes: Niu Jork, Ostin, Mayami</h3>
+            <!-- NIU JORK / OSTIN / MAYAMI ahora van integrados en la imagen de fondo (Anette los hornea al fondo nuevo) -->
+
+            <a class="platform-link pos-spotify"
+               href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw"
+               target="_blank" rel="noopener noreferrer">Spotify</a>
+            <a class="platform-link pos-youtube"
+               href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG"
+               target="_blank" rel="noopener noreferrer">Youtube</a>
+            <a class="platform-link pos-amazon"
+               href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M"
+               target="_blank" rel="noopener noreferrer">Amazon Music</a>
+            <a class="platform-link pos-apple"
+               href="https://music.apple.com/mx/artist/hueycoyote/1088136173"
+               target="_blank" rel="noopener noreferrer">Apple Music</a>
+        </section>
+
+        <!-- Divisor: anuncia La Merch -->
+        <img class="divider" src="assets/divider-la-merch.png" alt="La Merch">
+
+        <!-- MERCH (sección 4) -->
+        <section id="merch">
+            <img class="bg" src="assets/merch-sintexto-v2.png" alt="Merch — Llévele, llévele · Piratería oficial y La Original">
+            <h2 class="seo-only">Merch — Llévele, llévele</h2>
+
+            <!-- NOMBRES (clicables, deslizan a la izquierda al hover) -->
+            <a class="merch-item pos-pirat-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">PLAYERAS :</a>
+            <a class="merch-item pos-pirat-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CHAMARRA :</a>
+            <a class="merch-item pos-pirat-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CALCETAS :</a>
+            <a class="merch-item pos-orig-playeras"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">PLAYERAS :</a>
+            <a class="merch-item pos-orig-chamarra"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CHAMARRA :</a>
+            <a class="merch-item pos-orig-calcetas"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CALCETAS :</a>
+
+            <!-- PRECIOS (editables, no clicables) -->
+            <span class="merch-price pos-price-pirat-pl">$250</span>
+            <span class="merch-price pos-price-pirat-ch">$350</span>
+            <span class="merch-price pos-price-pirat-ca">3X50</span>
+            <span class="merch-price pos-price-orig-pl">$800</span>
+            <span class="merch-price pos-price-orig-ch">$1000</span>
+            <span class="merch-price pos-price-orig-ca">$150</span>
+        </section>
+
+        <!-- Divisor: anuncia ¿Ya me conoces? -->
+        <img class="divider" src="assets/divider-ya-me-conoces.png" alt="¿Ya me conoces?">
+
+        <!-- ¿YA ME CONOCES? (sección 5 — Sobre mí) -->
+        <section id="sobre-mi">
+            <img class="bg" src="assets/conoces/fondo.png?v=20260523-0103" alt="¿Ya me conoces? — Sobre El Huey Coyote">
+            <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
+            <div class="poster poster-1"><img src="assets/conoces/poster1-huey-tight.png" alt="El Huey Coyote — El vato de las rolitas random"></div>
+            <div class="poster poster-2"><img src="assets/conoces/poster2-tight.png?v=20260523-0311" alt=""></div>
+            <div class="poster poster-3"><img src="assets/conoces/poster3-tight.png?v=20260523-0311" alt=""></div>
+
+            <!-- Capa de TEXTOS: coordenadas ABSOLUTAS exactas del .ai (page-coords); aparece al aterrizar los pósters -->
+            <div class="conoce-text">
+                <div class="ct" style="left:71.7%;top:33.7%;font-size:6.83cqw;color:#e0d846;font-weight:700;transform:translate(-50%,-50%) rotate(-2.5deg);text-shadow:1.5px 1.5px 0 #1a1308;-webkit-text-stroke:0.6px #2a2410;paint-order:stroke fill">EL VATO DE LAS</div>
+                <div class="ct" style="left:70.5%;top:37.8%;font-size:6.83cqw;color:#e0d846;font-weight:700;transform:translate(-50%,-50%) rotate(-2.5deg);text-shadow:1.5px 1.5px 0 #1a1308;-webkit-text-stroke:0.6px #2a2410;paint-order:stroke fill">ROLITAS RANDOM</div>
+                <div class="ct" style="left:66.9%;top:41.9%;font-size:2.43cqw;color:#f22b2a;font-weight:700;transform:translate(-50%,-50%) rotate(-2.5deg);text-shadow:0 0 3px #fff,0 0 1.5px #fff">AQUÍ VA UN PEQUEÑO RESUMEN</div>
+                <div class="ct" style="left:18.3%;top:43.3%;font-size:4.45cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">UN TÍTULO COOL</div>
+                <div class="ct" style="left:67.1%;top:44.3%;font-size:2.43cqw;color:#f22b2a;font-weight:700;transform:translate(-50%,-50%) rotate(-2.5deg);text-shadow:0 0 3px #fff,0 0 1.5px #fff">DE ÉL O INFORMACIÓN MUY MUY</div>
+                <div class="ct" style="left:55.2%;top:46.0%;font-size:2.43cqw;color:#f22b2a;font-weight:700;transform:translate(-50%,-50%) rotate(-2.5deg);text-shadow:0 0 3px #fff,0 0 1.5px #fff">IMPORTANTE</div>
+                <div class="ct" style="left:12.6%;top:46.4%;font-size:2.51cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">AQUÍ UN SUBTÍTULO</div>
+                <div class="ct" style="left:11.2%;top:48.6%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">COSAS SOBRE SU NUEVO</div>
+                <div class="ct" style="left:11.8%;top:50.0%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">HISTORIA, MÚSICA, JODO</div>
+                <div class="ct" style="left:12.6%;top:51.4%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">INSTRUMENTOS, HOMBRES</div>
+                <div class="ct" style="left:12.8%;top:52.8%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">TAMBIÉN PODEMOS POD</div>
+                <div class="ct" style="left:31.6%;top:54.8%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">COSAS SOBRE SU NUEVO</div>
+                <div class="ct" style="left:32.1%;top:56.2%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">HISTORIA, MÚSICA, JODO</div>
+                <div class="ct" style="left:32.4%;top:57.6%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">INSTRUMENTOS, HOMBRES</div>
+                <div class="ct" style="left:33.3%;top:58.9%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">TAMBIÉN PODEMOS POD</div>
+                <div class="ct" style="left:34.3%;top:60.6%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">COSAS SOBRE SU NUEVO</div>
+                <div class="ct" style="left:34.7%;top:62.0%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">HISTORIA, MÚSICA, JODO</div>
+                <div class="ct" style="left:65.0%;top:62.8%;font-size:2.94cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(-10.71deg)">TEXTO</div>
+                <div class="ct" style="left:81.8%;top:64.5%;font-size:2.94cqw;color:#333333;font-weight:700;transform:translate(-50%,-50%) rotate(-10.71deg)">MÁS TEXTO</div>
+                <div class="ct" style="left:26.5%;top:64.7%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">COSAS SOBRE SU NUEVO</div>
+                <div class="ct" style="left:74.3%;top:65.9%;font-size:2.12cqw;color:#333333;font-weight:700;transform:translate(-50%,-50%) rotate(-10.71deg)">SUBTÍTULO LINDO Y NICE</div>
+                <div class="ct" style="left:26.9%;top:66.8%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">COSAS SOBRE SU NUEVO</div>
+                <div class="ct" style="left:73.8%;top:68.2%;font-size:1.20cqw;color:#333333;font-weight:400;transform:translate(-50%,-50%) rotate(-10.71deg)">HISTORIA TIME, AVENTURAS, MÁS COSAS PARA</div>
+                <div class="ct" style="left:27.5%;top:68.2%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">HISTORIA, MÚSICA, JODO</div>
+                <div class="ct" style="left:73.4%;top:69.2%;font-size:1.20cqw;color:#333333;font-weight:400;transform:translate(-50%,-50%) rotate(-10.71deg)">COMPARTIR CON FANS. FUN FACTS, RECOMENDACIONES</div>
+                <div class="ct" style="left:28.1%;top:69.6%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">INSTRUMENTOS, HOMBRES</div>
+                <div class="ct" style="left:73.1%;top:70.2%;font-size:1.20cqw;color:#333333;font-weight:400;transform:translate(-50%,-50%) rotate(-10.71deg)">TOS, COSAS DIVERTIDAS, EVENTOS IMPORTANTES.</div>
+                <div class="ct" style="left:28.6%;top:71.0%;font-size:1.64cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">TAMBIÉN PODEMOS POD</div>
+                <div class="ct" style="left:72.8%;top:71.1%;font-size:1.20cqw;color:#333333;font-weight:400;transform:translate(-50%,-50%) rotate(-10.71deg)">VIAJES Y MIL COSAS MÁS</div>
+                <div class="ct" style="left:58.8%;top:83.1%;font-size:2.75cqw;color:#241a1a;font-weight:700;transform:translate(-50%,-50%) rotate(-10.71deg)">Palabra</div>
+                <div class="ct" style="left:58.3%;top:84.6%;font-size:2.75cqw;color:#241a1a;font-weight:700;transform:translate(-50%,-50%) rotate(-10.71deg)">súper cool</div>
+                <div class="ct" style="left:77.8%;top:85.2%;font-size:2.75cqw;color:#241a1a;font-weight:700;transform:translate(-50%,-50%) rotate(-10.71deg)">Palabra</div>
+                <div class="ct" style="left:77.3%;top:86.7%;font-size:2.75cqw;color:#241a1a;font-weight:700;transform:translate(-50%,-50%) rotate(-10.71deg)">súper cool</div>
+                <div class="ct" style="left:66.3%;top:88.5%;font-size:2.81cqw;color:#cccccc;font-weight:700;transform:translate(-50%,-50%) rotate(-10.71deg)">ALGO PARA RESALTAR</div>
+                <div class="ct" style="left:66.8%;top:90.3%;font-size:1.20cqw;color:#333333;font-weight:400;transform:translate(-50%,-50%) rotate(-10.71deg)">HISTORIA TIME, AVENTURAS, MÁS COSAS PARA</div>
+                <div class="ct" style="left:66.5%;top:91.3%;font-size:1.20cqw;color:#333333;font-weight:400;transform:translate(-50%,-50%) rotate(-10.71deg)">COMPARTIR CON FANS. FUN FACTS, RECOMENDACIONES</div>
+                <div class="ct" style="left:66.1%;top:92.3%;font-size:1.20cqw;color:#333333;font-weight:400;transform:translate(-50%,-50%) rotate(-10.71deg)">TOS, COSAS DIVERTIDAS, EVENTOS IMPORTANTES.</div>
+                <div class="ct" style="left:65.8%;top:93.3%;font-size:1.20cqw;color:#333333;font-weight:400;transform:translate(-50%,-50%) rotate(-10.71deg)">VIAJES Y MIL COSAS MÁS.</div>
+                <div class="ct" style="left:65.5%;top:94.3%;font-size:1.20cqw;color:#333333;font-weight:400;transform:translate(-50%,-50%) rotate(-10.71deg)">COSITAS Y MÁS COSITAS</div>
+            </div>
+            <span class="mero-mero" aria-hidden="true">El mEro MeRo</span>
+        </section>
+
+        <!-- Divisor: anuncia Échame un grito -->
+        <img class="divider" src="assets/divider-echame-un-grito.png" alt="Échame un grito">
+
+        <!-- ÉCHAME UN GRITO (sección 6 — Contacto) -->
+        <section id="contacto">
+            <img class="bg" src="assets/echame.png" alt="Échame un grito — Contacto del Huey Coyote">
+            <h2 class="seo-only">Échame un grito — Contacto del Huey Coyote</h2>
+
+            <!-- 4 stickers clicables → redes sociales -->
+            <a class="social-link social-fb"
+               href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA"
+               target="_blank" rel="noopener noreferrer" aria-label="Facebook"></a>
+            <a class="social-link social-ig"
+               href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA=="
+               target="_blank" rel="noopener noreferrer" aria-label="Instagram"></a>
+            <a class="social-link social-email"
+               href="mailto:contacto@elhueycoyote.com"
+               aria-label="Email contacto"></a>
+            <a class="social-link social-tt"
+               href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F"
+               target="_blank" rel="noopener noreferrer" aria-label="TikTok"></a>
+        </section>
+
+    </div>
+
+    <!-- PORTADA (cortina overlay encima de todo) -->
+    <div class="portada-overlay" id="portada">
+        <img src="assets/portada.png?v=20260523-0031" alt="El Huey Coyote">
+        <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
+    </div>
+    <audio id="audio-changarro" preload="auto" src="assets/audio/changarro-open.mp3?v=20260523-0514"></audio>
+
+    <div class="preview-tag">Sitio completo · click cortina → Headliner → click letreros</div>
+
+    <script>
+        document.body.classList.add('cortina-bajada');
+        const portada = document.getElementById('portada');
+        const btnChangarro = document.getElementById('btn-changarro');
+        const audioChangarro = document.getElementById('audio-changarro');
+        btnChangarro.addEventListener('click', function () {
+            portada.classList.add('subida');
+            document.body.classList.remove('cortina-bajada');
+            // Reproduce el sonido del changarro en sincronía con la cortina subiendo
+            if (audioChangarro) {
+                audioChangarro.currentTime = 0;
+                audioChangarro.play().catch(() => { /* navegador bloqueó autoplay, no rompe nada */ });
+            }
+            setTimeout(() => { portada.style.pointerEvents = 'none'; }, 1600);
+        });
+
+        // MERCH se desenrolla como lona al entrar al viewport
+        const merchSection = document.getElementById('merch');
+        if (merchSection && 'IntersectionObserver' in window) {
+            const merchObs = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        merchSection.classList.add('unrolled');
+                        merchObs.unobserve(merchSection);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+            merchObs.observe(merchSection);
+        } else if (merchSection) {
+            merchSection.classList.add('unrolled');
+        }
+
+        // ¿YA ME CONOCES? — 3 posters vuelan y aterrizan + "EL MERO MERO" se raya
+        const conocesSection = document.getElementById('sobre-mi');
+        if (conocesSection && 'IntersectionObserver' in window) {
+            const conocesObs = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        conocesSection.classList.add('posters-landed');
+                        // El rayón empieza después que los posters aterricen (~1.6s)
+                        setTimeout(() => conocesSection.classList.add('mero-scratched'), 1600);
+                        conocesObs.unobserve(conocesSection);
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+            conocesObs.observe(conocesSection);
+        } else if (conocesSection) {
+            conocesSection.classList.add('posters-landed');
+            conocesSection.classList.add('mero-scratched');
+        }
+    </script>
+</body>
+</html>
