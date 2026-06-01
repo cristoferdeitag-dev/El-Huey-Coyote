@@ -487,8 +487,7 @@
         #sobre-mi .poster { container-type: inline-size; }
 
         /* === Capa de textos en coordenadas ABSOLUTAS exactas del .ai === */
-        .conoce-text { position: absolute; inset: 0; z-index: 6; pointer-events: none; opacity: 0; transition: opacity 0.5s ease 0.7s; }
-        #sobre-mi.posters-landed .conoce-text { opacity: 1; }
+        .conoce-text { position: absolute; inset: 0; z-index: 6; pointer-events: none; opacity: 1; }
         .conoce-text .ct {
             position: absolute; transform-origin: center center;
             font-family: "swiss-721-bt", 'Oswald', sans-serif;
@@ -739,16 +738,11 @@
 
         <!-- ¿YA ME CONOCES? (sección 5 — Sobre mí) -->
         <section id="sobre-mi">
-            <img class="bg" src="assets/conoces/fondo.png?v=20260523-0103" alt="¿Ya me conoces? — Sobre El Huey Coyote">
+            <img class="bg" src="assets/conoces/seccion-diseno.png?v=aifinal" alt="¿Ya me conoces? — Sobre El Huey Coyote">
             <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
-            <div class="poster poster-1"><img src="assets/conoces/poster1-huey-tight.png" alt="El Huey Coyote — El vato de las rolitas random"></div>
-            <div class="poster poster-2"><img src="assets/conoces/poster2-tight.png?v=20260523-0311" alt=""></div>
-            <div class="poster poster-3"><img src="assets/conoces/poster3-tight.png?v=20260523-0311" alt=""></div>
 
             <!-- Capa de TEXTOS: coordenadas ABSOLUTAS exactas del .ai (page-coords); aparece al aterrizar los pósters -->
             <div class="conoce-text">
-                <div class="ct" style="left:71.7%;top:33.7%;font-size:6.83cqw;color:#e0d846;font-weight:700;transform:translate(-50%,-50%) rotate(-2.5deg);text-shadow:1.5px 1.5px 0 #1a1308;-webkit-text-stroke:0.6px #2a2410;paint-order:stroke fill">EL VATO DE LAS</div>
-                <div class="ct" style="left:70.5%;top:37.8%;font-size:6.83cqw;color:#e0d846;font-weight:700;transform:translate(-50%,-50%) rotate(-2.5deg);text-shadow:1.5px 1.5px 0 #1a1308;-webkit-text-stroke:0.6px #2a2410;paint-order:stroke fill">ROLITAS RANDOM</div>
                 <div class="ct" style="left:66.9%;top:41.9%;font-size:2.43cqw;color:#f22b2a;font-weight:700;transform:translate(-50%,-50%) rotate(-2.5deg);text-shadow:0 0 3px #fff,0 0 1.5px #fff">AQUÍ VA UN PEQUEÑO RESUMEN</div>
                 <div class="ct" style="left:18.3%;top:43.3%;font-size:4.45cqw;color:#000000;font-weight:700;transform:translate(-50%,-50%) rotate(8.98deg)">UN TÍTULO COOL</div>
                 <div class="ct" style="left:67.1%;top:44.3%;font-size:2.43cqw;color:#f22b2a;font-weight:700;transform:translate(-50%,-50%) rotate(-2.5deg);text-shadow:0 0 3px #fff,0 0 1.5px #fff">DE ÉL O INFORMACIÓN MUY MUY</div>
@@ -787,7 +781,6 @@
                 <div class="ct" style="left:65.8%;top:93.3%;font-size:1.20cqw;color:#333333;font-weight:400;transform:translate(-50%,-50%) rotate(-10.71deg)">VIAJES Y MIL COSAS MÁS.</div>
                 <div class="ct" style="left:65.5%;top:94.3%;font-size:1.20cqw;color:#333333;font-weight:400;transform:translate(-50%,-50%) rotate(-10.71deg)">COSITAS Y MÁS COSITAS</div>
             </div>
-            <span class="mero-mero" aria-hidden="true">El mEro MeRo</span>
         </section>
 
         <!-- Divisor: anuncia Échame un grito -->
