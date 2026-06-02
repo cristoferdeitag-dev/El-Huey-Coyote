@@ -39,14 +39,14 @@
   @keyframes dscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
   /* === Portada (cortina) === */
-  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86;display:grid;place-items:center;transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
-  .portada-inner{position:relative;width:100%;max-width:2032px;aspect-ratio:2032/1143}
-  .portada-inner img{display:block;width:100%;height:100%;object-fit:cover}
+  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain.png?v=6') top center/100% auto repeat-y;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2vw;transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
   .portada.subida{transform:translateY(-100%)}
-  .btn-changarro{position:absolute;top:74%;left:50%;transform:translateX(-50%);background:transparent;border:none;cursor:pointer;z-index:2;
-    color:#fff;font-family:'DK Drop Dead Gorgeous','Permanent Marker',sans-serif;font-size:clamp(28px,3.4vw,64px);letter-spacing:.02em;white-space:nowrap;
+  .portada-logo{width:min(58%,1080px);height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
+  .btn-changarro{background:transparent;border:none;cursor:pointer;
+    color:#fff;font-family:'DK Drop Dead Gorgeous','eds-market-bold-slant',sans-serif;font-size:clamp(26px,3vw,56px);letter-spacing:.02em;white-space:nowrap;
     text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45);transition:transform .18s ease}
-  .btn-changarro:hover{transform:translateX(-50%) scale(1.05)}
+  .btn-changarro:hover{transform:scale(1.05)}
 
   /* === Botón de música === */
   .music-fab{position:fixed;right:20px;bottom:20px;z-index:90;display:none;align-items:center;gap:10px;background:#c4161c;color:#fff;
@@ -70,9 +70,11 @@
 </head>
 <body>
   <div class="site">
-<section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner.png?v=5" alt="El Huey Coyote"><div class="ovl">
-  <a class="menu-link" href="#sec-proximos" style="left:23.29%;top:17.58%;font-size:1.9cqw;color:#fff;font-family:'eds-market-bold-slant',sans-serif">Pide para lLevar</a>
-  <a class="menu-link" href="#sec-conoces" style="left:60%;top:12%;font-size:2.3cqw;color:#fff;font-family:'ciabatta',cursive;font-style:italic">¿YA ME CONOCES?</a>
+<section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner.png?v=6" alt="El Huey Coyote"><div class="ovl">
+  <a class="menu-link" href="#sec-merch"    style="left:23%;top:16%;font-size:1.8cqw;color:#fff;font-family:'eds-market-bold-slant',sans-serif">PIDE PARA LLEVAR</a>
+  <a class="menu-link" href="#sec-proximos" style="left:5%;top:38%;font-size:1.5cqw;color:#fff;font-family:'eds-market-bold-slant',sans-serif">PRÓXIMOS SHOWS</a>
+  <a class="menu-link" href="#sec-conoces"  style="left:61.5%;top:14%;font-size:2.1cqw;color:#fff;font-family:'ciabatta',cursive;font-style:italic">¿YA ME CONOCES?</a>
+  <a class="menu-link" href="#sec-echame"   style="left:48%;top:16%;font-size:1.6cqw;color:#fff;font-family:'eds-market-bold-slant',sans-serif">ÉCHAME UN GRITO</a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=5" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=5" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.png?v=5" alt="proximos"><div class="ovl"><div class="ct" style="left:3.73%;top:93.97%;font-size:2.46cqw;color:#f29501;font-family:'DK Drop Dead Gorgeous',cursive;font-weight:400;">Extras</div>
@@ -229,10 +231,8 @@
 
   <!-- Portada (cortina) -->
   <div class="portada" id="portada">
-    <div class="portada-inner">
-      <img src="../sitio/assets/compu/bg-portada.png?v=5" alt="El Huey Coyote">
-      <button class="btn-changarro" id="btn-changarro">ABRE EL CHANGARRO</button>
-    </div>
+    <img class="portada-logo" src="../sitio/assets/compu/portada-logo.png?v=6" alt="El Huey Coyote">
+    <button class="btn-changarro" id="btn-changarro">ABRE EL CHANGARRO</button>
   </div>
   <audio id="audio-changarro" preload="auto" src="../sitio/assets/audio/changarro-open.mp3"></audio>
 
