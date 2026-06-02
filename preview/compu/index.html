@@ -23,10 +23,11 @@
   .ovl{position:absolute;inset:0;z-index:2;pointer-events:none}
   .ct{position:absolute;white-space:nowrap;line-height:1}
   .dsec{scroll-margin-top:9vw}
-  .menu-link{position:absolute;white-space:nowrap;line-height:1;pointer-events:auto;cursor:pointer;text-decoration:none;font-weight:400;
-    text-shadow:0 2px 4px rgba(0,0,0,.5);-webkit-text-stroke:.4px rgba(0,0,0,.3);transition:transform .22s ease, filter .22s ease;transform-origin:center}
-  .menu-link:hover{transform:scale(1.09);filter:drop-shadow(0 4px 9px rgba(0,0,0,.45));z-index:10}
-  .menu-link:active{transform:scale(.97)}
+  .menu-link{position:absolute;display:block;pointer-events:auto;cursor:pointer;text-decoration:none;
+    transition:transform .22s ease, filter .22s ease;transform-origin:center}
+  .menu-link img{display:block;width:100%;height:auto}
+  .menu-link:hover{transform:scale(1.08) translateY(-4px);filter:drop-shadow(0 6px 10px rgba(0,0,0,.45));z-index:10}
+  .menu-link:active{transform:scale(.98)}
 
   /* Aparición al hacer scroll */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease, transform .9s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
@@ -39,10 +40,10 @@
   @keyframes dscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
   /* === Portada (cortina) === */
-  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain.png?v=6') top center/100% auto repeat-y;
+  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain.png?v=7') top center/100% auto repeat-y;
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2vw;transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
   .portada.subida{transform:translateY(-100%)}
-  .portada-logo{width:min(58%,1080px);height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
+  .portada-logo{width:min(46%,860px);height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
   .btn-changarro{background:transparent;border:none;cursor:pointer;
     color:#fff;font-family:'DK Drop Dead Gorgeous','eds-market-bold-slant',sans-serif;font-size:clamp(26px,3vw,56px);letter-spacing:.02em;white-space:nowrap;
     text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45);transition:transform .18s ease}
@@ -70,11 +71,11 @@
 </head>
 <body>
   <div class="site">
-<section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner.png?v=6" alt="El Huey Coyote"><div class="ovl">
-  <a class="menu-link" href="#sec-merch"    style="left:23%;top:16%;font-size:1.8cqw;color:#fff;font-family:'eds-market-bold-slant',sans-serif">PIDE PARA LLEVAR</a>
-  <a class="menu-link" href="#sec-proximos" style="left:5%;top:38%;font-size:1.5cqw;color:#fff;font-family:'eds-market-bold-slant',sans-serif">PRÓXIMOS SHOWS</a>
-  <a class="menu-link" href="#sec-conoces"  style="left:61.5%;top:14%;font-size:2.1cqw;color:#fff;font-family:'ciabatta',cursive;font-style:italic">¿YA ME CONOCES?</a>
-  <a class="menu-link" href="#sec-echame"   style="left:48%;top:16%;font-size:1.6cqw;color:#fff;font-family:'eds-market-bold-slant',sans-serif">ÉCHAME UN GRITO</a>
+<section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner.png?v=7" alt="El Huey Coyote"><div class="ovl">
+  <a class="menu-link" href="#sec-merch"    aria-label="Pide para llevar" style="left:23.03%;top:17.94%;width:15.35%"><img src="../sitio/assets/compu/text-pide.png?v=1" alt="Pide para llevar"></a>
+  <a class="menu-link" href="#sec-proximos" aria-label="Próximos shows"    style="left:4.72%;top:29.92%;width:15.06%"><img src="../sitio/assets/compu/text-proximos.png?v=1" alt="Próximos shows"></a>
+  <a class="menu-link" href="#sec-conoces"  aria-label="¿Ya me conoces?"   style="left:61.27%;top:11.37%;width:18.21%"><img src="../sitio/assets/compu/text-conoces.png?v=1" alt="¿Ya me conoces?"></a>
+  <a class="menu-link" href="#sec-echame"   aria-label="Échame un grito"   style="left:61.52%;top:18.02%;width:17.81%"><img src="../sitio/assets/compu/text-echame.png?v=1" alt="Échame un grito"></a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=5" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=5" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.png?v=5" alt="proximos"><div class="ovl"><div class="ct" style="left:3.73%;top:93.97%;font-size:2.46cqw;color:#f29501;font-family:'DK Drop Dead Gorgeous',cursive;font-weight:400;">Extras</div>
@@ -231,7 +232,7 @@
 
   <!-- Portada (cortina) -->
   <div class="portada" id="portada">
-    <img class="portada-logo" src="../sitio/assets/compu/portada-logo.png?v=6" alt="El Huey Coyote">
+    <img class="portada-logo" src="../sitio/assets/compu/portada-logo.png?v=7" alt="El Huey Coyote">
     <button class="btn-changarro" id="btn-changarro">ABRE EL CHANGARRO</button>
   </div>
   <audio id="audio-changarro" preload="auto" src="../sitio/assets/audio/changarro-open.mp3"></audio>
