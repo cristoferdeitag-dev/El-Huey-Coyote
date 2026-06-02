@@ -3,31 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache">
-<title>El Huey Coyote — versión compu (borrador)</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>El Huey Coyote · versión compu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@400;600;700;800&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/yzd3dtz.css">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#141414}
-  .wrap{max-width:2032px;margin:0 auto}
-  .sec img,.div img{display:block;width:100%;height:auto}
-  .tag{position:fixed;top:8px;left:8px;background:rgba(0,0,0,.7);color:#ffd84a;font:13px/1.3 Arial;padding:6px 10px;border-radius:6px;z-index:9}
+  @font-face{font-family:'DK Drop Dead Gorgeous';src:url('../sitio/assets/fonts/DKDropDeadGorgeous.otf') format('opentype');font-display:swap}
+  html{scroll-behavior:smooth}
+  html,body{background:#101010;overflow-x:hidden;font-family:'Poppins',system-ui,sans-serif}
+  body.cortina-bajada{overflow:hidden;height:100vh}
+  .site{max-width:2032px;margin:0 auto;position:relative}
+
+  /* Secciones (fondo full-width) */
+  .dsec{position:relative;width:100%;line-height:0;container-type:inline-size}
+  .dsec>img.bg{display:block;width:100%;height:auto}
+
+  /* Aparición al hacer scroll */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease, transform .9s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
+  .reveal.shown{opacity:1;transform:none}
+
+  /* === Divisores: MARQUEE (metal fijo + texto deslizando) === */
+  .dmarquee{width:100%;overflow:hidden;line-height:0;background:url('../sitio/assets/compu/divmetal.png') center/100% 100% no-repeat}
+  .dtrack{display:flex;width:max-content;animation:dscroll 26s linear infinite}
+  .dtrack img{height:8.3vw;max-height:168px;width:auto;display:block;flex:0 0 auto}
+  @keyframes dscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* === Portada (cortina) === */
+  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86;transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
+  .portada img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+  .portada.subida{transform:translateY(-100%)}
+  .btn-changarro{position:absolute;top:74%;left:50%;transform:translateX(-50%);background:transparent;border:none;cursor:pointer;z-index:2;
+    color:#fff;font-family:'DK Drop Dead Gorgeous','Permanent Marker',sans-serif;font-size:clamp(28px,3.4vw,64px);letter-spacing:.02em;white-space:nowrap;
+    text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45);transition:transform .18s ease}
+  .btn-changarro:hover{transform:translateX(-50%) scale(1.05)}
+
+  /* === Botón de música === */
+  .music-fab{position:fixed;right:20px;bottom:20px;z-index:90;display:none;align-items:center;gap:10px;background:#c4161c;color:#fff;
+    border:3px solid #ffd84a;border-radius:44px;padding:10px 20px 10px 10px;font-family:'DK Drop Dead Gorgeous','Permanent Marker',sans-serif;font-size:20px;cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,.4);animation:mpulse 1.9s ease-in-out infinite}
+  body.changarro-abierto .music-fab{display:inline-flex}
+  .music-fab .disc{width:36px;height:36px;border-radius:50%;flex:0 0 auto;background:repeating-radial-gradient(circle,#1a1a1a 0 2px,#333 2px 3px);display:grid;place-items:center;box-shadow:inset 0 0 0 2px #000;animation:spin 3.2s linear infinite}
+  .music-fab .disc::before{content:"";width:11px;height:11px;border-radius:50%;background:#ffd84a}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes mpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+  .music-panel{position:fixed;right:20px;bottom:84px;z-index:91;width:min(420px,92vw);display:none;background:#161616;border:3px solid #ffd84a;border-radius:14px;padding:34px 10px 10px;box-shadow:0 12px 30px rgba(0,0,0,.55)}
+  body.music-open .music-panel{display:block}
+  .music-panel .mclose{position:absolute;top:6px;right:10px;background:none;border:0;color:#fff;font-size:20px;cursor:pointer}
+  .music-panel iframe{display:block;border:0;border-radius:10px}
+
+  @media (prefers-reduced-motion:reduce){
+    .dtrack,.music-fab,.music-fab .disc{animation:none}
+    .reveal{opacity:1;transform:none;transition:none}
+  }
 </style>
 </head>
 <body>
-  <div class="tag">BORRADOR compu · tu diseño en el navegador · faltan: fuentes comerciales + animaciones</div>
-  <div class="wrap">
-    <div class="sec"><img src="../sitio/assets/compu/full-portada.png?v=1" alt="Portada"></div>
-    <div class="sec"><img src="../sitio/assets/compu/full-headliner.png?v=1" alt="Headliner"></div>
-    <div class="div"><img src="../sitio/assets/compu/div-p6.png?v=1" alt="Próximos Shows"></div>
-    <div class="sec"><img src="../sitio/assets/compu/full-proximos.png?v=1" alt="Próximos Shows"></div>
-    <div class="div"><img src="../sitio/assets/compu/div-p7.png?v=1" alt="Échame un grito"></div>
-    <div class="sec"><img src="../sitio/assets/compu/full-echame.png?v=1" alt="Échame un grito"></div>
-    <div class="div"><img src="../sitio/assets/compu/div-p8.png?v=1" alt="¿Ya me conoces?"></div>
-    <div class="sec"><img src="../sitio/assets/compu/full-conoces.png?v=1" alt="¿Ya me conoces?"></div>
-    <div class="div"><img src="../sitio/assets/compu/div-p9.png?v=1" alt="Collabs Destacadas"></div>
-    <div class="sec"><img src="../sitio/assets/compu/full-extra.png?v=1" alt="Collabs Destacadas"></div>
-    <div class="div"><img src="../sitio/assets/compu/div-p10.png?v=1" alt="La Merch"></div>
-    <div class="sec"><img src="../sitio/assets/compu/full-merch.png?v=1" alt="La Merch"></div>
+  <div class="site">
+    <!-- HEADLINER -->
+    <section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/full-headliner.png?v=2" alt="El Huey Coyote"></section>
+
+    <!-- PRÓXIMOS SHOWS -->
+    <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack">
+      <img src="../sitio/assets/compu/divtext-proximos.png?v=2" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=2" alt="" aria-hidden="true"></div></div>
+    <section class="dsec reveal"><img class="bg" src="../sitio/assets/compu/full-proximos.png?v=2" alt="Próximos Shows"></section>
+
+    <!-- ÉCHAME UN GRITO -->
+    <div class="dmarquee" role="img" aria-label="Échame un grito"><div class="dtrack">
+      <img src="../sitio/assets/compu/divtext-echame.png?v=2" alt="Échame un grito"><img src="../sitio/assets/compu/divtext-echame.png?v=2" alt="" aria-hidden="true"></div></div>
+    <section class="dsec reveal"><img class="bg" src="../sitio/assets/compu/full-echame.png?v=2" alt="Échame un grito"></section>
+
+    <!-- ¿YA ME CONOCES? -->
+    <div class="dmarquee" role="img" aria-label="¿Ya me conoces?"><div class="dtrack">
+      <img src="../sitio/assets/compu/divtext-conoces.png?v=2" alt="¿Ya me conoces?"><img src="../sitio/assets/compu/divtext-conoces.png?v=2" alt="" aria-hidden="true"></div></div>
+    <section class="dsec reveal"><img class="bg" src="../sitio/assets/compu/full-conoces.png?v=2" alt="¿Ya me conoces?"></section>
+
+    <!-- COLLABS DESTACADAS -->
+    <div class="dmarquee" role="img" aria-label="Collabs Destacadas"><div class="dtrack">
+      <img src="../sitio/assets/compu/divtext-collabs.png?v=2" alt="Collabs Destacadas"><img src="../sitio/assets/compu/divtext-collabs.png?v=2" alt="" aria-hidden="true"></div></div>
+    <section class="dsec reveal"><img class="bg" src="../sitio/assets/compu/full-extra.png?v=2" alt="Collabs Destacadas"></section>
+
+    <!-- LA MERCH -->
+    <div class="dmarquee" role="img" aria-label="La Merch"><div class="dtrack">
+      <img src="../sitio/assets/compu/divtext-merch.png?v=2" alt="La Merch"><img src="../sitio/assets/compu/divtext-merch.png?v=2" alt="" aria-hidden="true"></div></div>
+    <section class="dsec reveal"><img class="bg" src="../sitio/assets/compu/full-merch.png?v=2" alt="La Merch"></section>
   </div>
+
+  <!-- Portada (cortina) -->
+  <div class="portada" id="portada">
+    <img src="../sitio/assets/compu/bg-portada.png?v=2" alt="El Huey Coyote">
+    <button class="btn-changarro" id="btn-changarro">ABRE EL CHANGARRO</button>
+  </div>
+
+  <!-- Botón de música -->
+  <button class="music-fab" id="music-fab" aria-label="Pon una rolita"><span class="disc" aria-hidden="true"></span> Pon una rolita</button>
+  <div class="music-panel" id="music-panel"><button class="mclose" id="mclose" aria-label="Cerrar">✕</button><div id="membed"></div></div>
+
+  <script>
+    document.body.classList.add('cortina-bajada');
+    const portada=document.getElementById('portada');
+    document.getElementById('btn-changarro').addEventListener('click',function(){
+      portada.classList.add('subida');
+      document.body.classList.remove('cortina-bajada');
+      document.body.classList.add('changarro-abierto');
+      setTimeout(()=>{portada.style.pointerEvents='none';},1600);
+    });
+    // Reveal on scroll
+    const rev=document.querySelectorAll('.reveal');
+    if('IntersectionObserver' in window){
+      const ob=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('shown');ob.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
+      rev.forEach(el=>ob.observe(el));
+    } else rev.forEach(el=>el.classList.add('shown'));
+    // Música (Spotify Tirando Flow Sesh #10)
+    const fab=document.getElementById('music-fab'),mp=document.getElementById('music-panel'),me=document.getElementById('membed');
+    const EMBED='<iframe style="border-radius:10px" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src="https://open.spotify.com/embed/track/6WmCmQuse2SjjSVab5EHxg?utm_source=generator"></iframe>';
+    fab.addEventListener('click',()=>{const o=document.body.classList.toggle('music-open');if(o&&!me.innerHTML)me.innerHTML=EMBED;});
+    document.getElementById('mclose').addEventListener('click',()=>{document.body.classList.remove('music-open');me.innerHTML='';});
+  </script>
 </body>
 </html>
