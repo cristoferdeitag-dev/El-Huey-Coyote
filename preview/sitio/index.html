@@ -485,7 +485,10 @@
             transform: translateY(0);
         }
 
-        /* === MERCH siempre visible (animación de desenrollar removida para que se vea en todos los dispositivos) === */
+        /* === MERCH siempre visible — animación removida + altura garantizada por CSS (aspect-ratio)
+              para que NUNCA colapse a 0 en Android aunque container-type/imagen tarden o fallen === */
+        #merch { aspect-ratio: 1086 / 1937; min-height: 60vw; }
+        #merch > img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         @media (prefers-reduced-motion: reduce) {
             #sobre-mi .poster { animation: none; }
             #sobre-mi .conoce-text { transition: none; }
