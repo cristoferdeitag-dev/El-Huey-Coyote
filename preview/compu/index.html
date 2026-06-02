@@ -23,11 +23,19 @@
   .ovl{position:absolute;inset:0;z-index:2;pointer-events:none}
   .ct{position:absolute;white-space:nowrap;line-height:1}
   .dsec{scroll-margin-top:9vw}
-  .menu-link{position:absolute;display:block;pointer-events:auto;cursor:pointer;text-decoration:none;
-    transition:transform .22s ease, filter .22s ease;transform-origin:center}
-  .menu-link img{display:block;width:100%;height:auto}
-  .menu-link:hover{transform:scale(1.08) translateY(-4px);filter:drop-shadow(0 6px 10px rgba(0,0,0,.45));z-index:10}
-  .menu-link:active{transform:scale(.98)}
+  .menu-link{position:absolute;display:block;pointer-events:auto;cursor:pointer;text-decoration:none;line-height:1;white-space:nowrap;
+    transition:transform .22s ease, filter .22s ease;transform:translate(-50%,-50%);transform-origin:center}
+  .menu-link:hover{transform:translate(-50%,-50%) scale(1.08) translateY(-4px);filter:drop-shadow(0 5px 9px rgba(0,0,0,.4));z-index:10}
+  .menu-link:active{transform:translate(-50%,-50%) scale(.98)}
+  /* tipografías comerciales por letrero (mismas que la versión teléfono) */
+  .ml-pide{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#fff;-webkit-text-stroke:1.1px #000;paint-order:stroke fill;letter-spacing:.01em}
+  .ml-conoces{font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#141414}
+  .ml-echame{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#fcca0f;-webkit-text-stroke:.4px #000;paint-order:stroke fill;display:inline-block;transform:rotate(-4deg)}
+  .ml-prox{display:flex;flex-direction:column;align-items:center;line-height:.92;transform:rotate(-8deg);
+    font-family:'open-sans-condensed','Oswald',sans-serif;font-weight:800;font-style:italic;text-align:center;
+    background:linear-gradient(180deg,#eef60a 0%,#ddfc0b 28%,#e06396 64%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    -webkit-text-stroke:.8px #111;paint-order:stroke fill;
+    filter:drop-shadow(1.2px 0 0 #4eb32e) drop-shadow(-1.2px 0 0 #4eb32e) drop-shadow(0 1.2px 0 #4eb32e) drop-shadow(0 -1.2px 0 #4eb32e)}
 
   /* Aparición al hacer scroll */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease, transform .9s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
@@ -43,7 +51,7 @@
   .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain.png?v=7') top center/100% auto repeat-y;
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2vw;transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
   .portada.subida{transform:translateY(-100%)}
-  .portada-logo{width:min(46%,860px);height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
+  .portada-logo{width:min(52%,960px);height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
   .btn-changarro{background:transparent;border:none;cursor:pointer;
     color:#fff;font-family:'DK Drop Dead Gorgeous','eds-market-bold-slant',sans-serif;font-size:clamp(26px,3vw,56px);letter-spacing:.02em;white-space:nowrap;
     text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45);transition:transform .18s ease}
@@ -72,10 +80,10 @@
 <body>
   <div class="site">
 <section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner.png?v=7" alt="El Huey Coyote"><div class="ovl">
-  <a class="menu-link" href="#sec-merch"    aria-label="Pide para llevar" style="left:23.03%;top:17.94%;width:15.35%"><img src="../sitio/assets/compu/text-pide.png?v=1" alt="Pide para llevar"></a>
-  <a class="menu-link" href="#sec-proximos" aria-label="Próximos shows"    style="left:4.72%;top:29.92%;width:15.06%"><img src="../sitio/assets/compu/text-proximos.png?v=1" alt="Próximos shows"></a>
-  <a class="menu-link" href="#sec-conoces"  aria-label="¿Ya me conoces?"   style="left:61.27%;top:11.37%;width:18.21%"><img src="../sitio/assets/compu/text-conoces.png?v=1" alt="¿Ya me conoces?"></a>
-  <a class="menu-link" href="#sec-echame"   aria-label="Échame un grito"   style="left:61.52%;top:18.02%;width:17.81%"><img src="../sitio/assets/compu/text-echame.png?v=1" alt="Échame un grito"></a>
+  <a class="menu-link ml-pide"    href="#sec-merch"    style="left:30.68%;top:20.1%;font-size:2.15cqw">PIDE PARA LLEVAR</a>
+  <a class="menu-link ml-prox"    href="#sec-proximos" style="left:12.3%;top:36.0%;font-size:2.55cqw"><span>PRÓXIMOS</span><span>SHOWS</span></a>
+  <a class="menu-link ml-conoces" href="#sec-conoces"  style="left:70.35%;top:14.6%;font-size:2.75cqw">¿Ya me conoces?</a>
+  <a class="menu-link ml-echame"  href="#sec-echame"   style="left:70.0%;top:21.4%;font-size:2.9cqw">ÉCHAME UN GRITO</a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=5" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=5" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.png?v=5" alt="proximos"><div class="ovl"><div class="ct" style="left:3.73%;top:93.97%;font-size:2.46cqw;color:#f29501;font-family:'DK Drop Dead Gorgeous',cursive;font-weight:400;">Extras</div>
