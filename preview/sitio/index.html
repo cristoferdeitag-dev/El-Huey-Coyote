@@ -485,16 +485,8 @@
             transform: translateY(0);
         }
 
-        /* === MERCH desenrolla como lona === */
-        #merch {
-            clip-path: inset(0 0 100% 0);
-            transition: clip-path 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        #merch.unrolled {
-            clip-path: inset(0 0 0% 0);
-        }
+        /* === MERCH siempre visible (animación de desenrollar removida para que se vea en todos los dispositivos) === */
         @media (prefers-reduced-motion: reduce) {
-            #merch { clip-path: none; transition: none; }
             #sobre-mi .poster { animation: none; }
             #sobre-mi .conoce-text { transition: none; }
             .divider-track { animation: none; }
@@ -986,21 +978,7 @@
             });
         }
 
-        // MERCH se desenrolla como lona al entrar al viewport
-        const merchSection = document.getElementById('merch');
-        if (merchSection && 'IntersectionObserver' in window) {
-            const merchObs = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        merchSection.classList.add('unrolled');
-                        merchObs.unobserve(merchSection);
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
-            merchObs.observe(merchSection);
-        } else if (merchSection) {
-            merchSection.classList.add('unrolled');
-        }
+        // MERCH: animación de desenrollar removida — la sección se muestra siempre, en todos los dispositivos
 
         // ¿YA ME CONOCES? — 3 posters vuelan y aterrizan + "EL MERO MERO" se raya
         const conocesSection = document.getElementById('sobre-mi');
