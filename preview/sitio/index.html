@@ -677,8 +677,6 @@
         .music-fab.playing { background: #1a7a32; }
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes music-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        /* Zorro gris vectorial (SVG) en el título — se ve igual en cualquier marca, no depende de emojis */
-        .panel-title .fox-ico { width: 22px; height: 22px; display: inline-block; vertical-align: -5px; }
 
         .music-panel {
             position: fixed;
@@ -963,7 +961,7 @@
     </button>
     <div class="music-panel" id="music-panel">
         <button class="music-close" id="music-close" aria-label="Cerrar música">✕</button>
-        <p class="panel-title">Las rolitas del Huey <svg class="fox-ico" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="#8f8f8f" d="M20 16 L10 3 L7 21 L11 34 L17 41 L32 57 L47 41 L53 34 L57 21 L54 3 L44 16 L32 20 Z"/><path fill="#cfcfcf" d="M14 15 L11 6 L19 14 Z"/><path fill="#cfcfcf" d="M50 15 L53 6 L45 14 Z"/><path fill="#dadada" d="M16 36 Q32 42 48 36 L40 47 L32 57 L24 47 Z"/><circle fill="#333" cx="23" cy="30" r="2.6"/><circle fill="#333" cx="41" cy="30" r="2.6"/><path fill="#2a2a2a" d="M29 45 L35 45 L32 49 Z"/></svg></p>
+        <p class="panel-title">Las rolitas del HueyCoyote</p>
         <ul class="song-list" id="song-list"></ul>
         <div id="music-embed"></div>
     </div>
