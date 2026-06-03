@@ -666,13 +666,19 @@
             animation: music-pulse 1.9s ease-in-out infinite;
         }
         body.changarro-abierto .music-fab { display: inline-flex; }
-        /* Coyote vectorial (SVG) — se ve idéntico en iPhone, Android y cualquier marca, no depende de emojis */
-        .coyote-ico { width: 30px; height: 30px; display: block; flex: 0 0 auto; }
-        .panel-title .coyote-ico { width: 22px; height: 22px; display: inline-block; vertical-align: -5px; }
-        .music-fab.playing .coyote-ico { animation: coyote-bob 0.9s ease-in-out infinite; transform-origin: 50% 80%; }
+        .music-fab .disc {
+            width: 30px; height: 30px; border-radius: 50%; flex: 0 0 auto;
+            background: repeating-radial-gradient(circle, #1a1a1a 0 2px, #333 2px 3px);
+            position: relative; display: grid; place-items: center;
+            box-shadow: inset 0 0 0 2px #000;
+            animation: spin 3.2s linear infinite;
+        }
+        .music-fab .disc::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #ffd84a; }
         .music-fab.playing { background: #1a7a32; }
-        @keyframes coyote-bob { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-2px) rotate(-5deg); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes music-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        /* Zorro gris vectorial (SVG) en el título — se ve igual en cualquier marca, no depende de emojis */
+        .panel-title .fox-ico { width: 22px; height: 22px; display: inline-block; vertical-align: -5px; }
 
         .music-panel {
             position: fixed;
@@ -722,7 +728,7 @@
         #music-embed:empty { display: none; }
         @media (prefers-reduced-motion: reduce) {
             .music-fab { animation: none; }
-            .music-fab.playing .coyote-ico { animation: none; }
+            .music-fab .disc { animation: none; }
         }
 
         /* === SEO oculto === */
@@ -953,11 +959,11 @@
 
     <!-- Botón de música: aparece al abrir el changarro; reproduce al Huey Coyote -->
     <button class="music-fab" id="music-fab" aria-label="Pon una rolita del Huey Coyote">
-        <svg class="coyote-ico" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="#ffd84a" d="M7 25 L12 4 L25 20 L32 23 L39 20 L52 4 L57 25 L49 45 L32 61 L15 45 Z"/><path fill="#c4161c" d="M21 29 L29 33 L21 36 Z"/><path fill="#c4161c" d="M43 29 L35 33 L43 36 Z"/><circle fill="#c4161c" cx="32" cy="49" r="3.2"/></svg> Pon una rolita
+        <span class="disc" aria-hidden="true"></span> Pon una rolita
     </button>
     <div class="music-panel" id="music-panel">
         <button class="music-close" id="music-close" aria-label="Cerrar música">✕</button>
-        <p class="panel-title">Las rolitas del Huey <svg class="coyote-ico" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="#ffd84a" d="M7 25 L12 4 L25 20 L32 23 L39 20 L52 4 L57 25 L49 45 L32 61 L15 45 Z"/><path fill="#c4161c" d="M21 29 L29 33 L21 36 Z"/><path fill="#c4161c" d="M43 29 L35 33 L43 36 Z"/><circle fill="#161616" cx="32" cy="49" r="3.2"/></svg></p>
+        <p class="panel-title">Las rolitas del Huey <svg class="fox-ico" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="#8f8f8f" d="M20 16 L10 3 L7 21 L11 34 L17 41 L32 57 L47 41 L53 34 L57 21 L54 3 L44 16 L32 20 Z"/><path fill="#cfcfcf" d="M14 15 L11 6 L19 14 Z"/><path fill="#cfcfcf" d="M50 15 L53 6 L45 14 Z"/><path fill="#dadada" d="M16 36 Q32 42 48 36 L40 47 L32 57 L24 47 Z"/><circle fill="#333" cx="23" cy="30" r="2.6"/><circle fill="#333" cx="41" cy="30" r="2.6"/><path fill="#2a2a2a" d="M29 45 L35 45 L32 49 Z"/></svg></p>
         <ul class="song-list" id="song-list"></ul>
         <div id="music-embed"></div>
     </div>
