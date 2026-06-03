@@ -690,6 +690,8 @@
             border-radius: 12px;
             padding: 30px 8px 8px;
             box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+            max-height: calc(100vh - 90px);
+            overflow-y: auto;
         }
         body.music-open .music-panel { display: block; }
         .music-panel .music-close {
@@ -698,6 +700,30 @@
             cursor: pointer; line-height: 1; padding: 2px 6px;
         }
         .music-panel iframe { display: block; border: 0; border-radius: 6px; }
+        /* Lista de rolitas — mismo estilo de letra/colores que el botón */
+        .music-panel .panel-title {
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            color: #ffd84a; font-size: 16px; text-align: center;
+            margin: 0 0 9px; letter-spacing: 0.03em;
+        }
+        .song-list { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+        .song-item {
+            display: flex; align-items: center; gap: 8px; width: 100%; text-align: left;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-size: 14px; letter-spacing: 0.02em; line-height: 1.15;
+            color: #fff; background: #c4161c; border: 2px solid #ffd84a;
+            border-radius: 24px; padding: 9px 12px; cursor: pointer;
+            transition: transform .15s ease, background .15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .song-item:hover { transform: translateX(3px); }
+        .song-item.active { background: #1a7a32; }
+        .song-item .num {
+            flex: 0 0 auto; color: #ffd84a; font-size: 13px;
+            width: 18px; text-align: center;
+        }
+        #music-embed { margin-top: 8px; }
+        #music-embed:empty { display: none; }
         @media (prefers-reduced-motion: reduce) {
             .music-fab { animation: none; }
             .music-fab .disc { animation: none; }
@@ -935,6 +961,8 @@
     </button>
     <div class="music-panel" id="music-panel">
         <button class="music-close" id="music-close" aria-label="Cerrar música">✕</button>
+        <p class="panel-title">Las rolitas del Huey 🎶</p>
+        <ul class="song-list" id="song-list"></ul>
         <div id="music-embed"></div>
     </div>
 
@@ -957,26 +985,53 @@
             setTimeout(() => { portada.style.pointerEvents = 'none'; }, 1600);
         });
 
-        // Botón de música: al click abre el reproductor del Huey Coyote y suena
+        // Botón de música: al click abre la lista de rolitas del Huey Coyote
         const musicFab = document.getElementById('music-fab');
         const musicPanel = document.getElementById('music-panel');
         const musicEmbed = document.getElementById('music-embed');
         const musicClose = document.getElementById('music-close');
-        // "Tirando Flow Sesh #10" (Dan García feat. El Huey Coyote) — reproductor de Spotify
-        const SC_EMBED = '<iframe style="border-radius:10px" width="100%" height="152" frameborder="0" ' +
-            'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" ' +
-            'src="https://open.spotify.com/embed/track/6WmCmQuse2SjjSVab5EHxg?utm_source=generator"></iframe>';
+        const songListEl = document.getElementById('song-list');
+
+        // Rolitas del Huey Coyote en Spotify (orden pedido por Anette)
+        const SONGS = [
+            { t: 'Tirando Flow · Sesh #10',      id: '6WmCmQuse2SjjSVab5EHxg' },
+            { t: 'Fantasías',                    id: '5eHegIfGPku1Jo70rRzv6k' },
+            { t: 'Domingo Sin Bajón',            id: '3CsC05AC1I7KGaE2CyyGVf' },
+            { t: 'El Corrido de Harry Potter',   id: '5ttVu9xFETiJjKx0OmBKMz' },
+            { t: 'Como un Ladrón',               id: '5HYLD6LFmwssarqIfYCrZe' },
+        ];
+        function spotifyEmbed(id) {
+            return '<iframe style="border-radius:10px" width="100%" height="152" frameborder="0" ' +
+                'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" ' +
+                'src="https://open.spotify.com/embed/track/' + id + '?utm_source=generator"></iframe>';
+        }
+        // Pinta la lista de canciones
+        if (songListEl) {
+            SONGS.forEach(function (s, i) {
+                const li = document.createElement('li');
+                const b = document.createElement('button');
+                b.type = 'button';
+                b.className = 'song-item';
+                b.innerHTML = '<span class="num">' + (i + 1) + '</span><span>' + s.t + '</span>';
+                b.addEventListener('click', function () {
+                    // marca la elegida y reproduce esa rolita
+                    document.querySelectorAll('.song-item').forEach(function (el) { el.classList.remove('active'); });
+                    b.classList.add('active');
+                    musicEmbed.innerHTML = spotifyEmbed(s.id);   // inyecta tras gesto → reproduce
+                    musicFab.classList.add('playing');
+                });
+                li.appendChild(b);
+                songListEl.appendChild(li);
+            });
+        }
         if (musicFab) {
             musicFab.addEventListener('click', function () {
-                const open = document.body.classList.toggle('music-open');
-                if (open) {
-                    if (!musicEmbed.innerHTML) musicEmbed.innerHTML = SC_EMBED;  // inyecta tras gesto → auto_play permitido
-                    musicFab.classList.add('playing');
-                }
+                document.body.classList.toggle('music-open');   // abre/cierra la lista de rolitas
             });
             musicClose.addEventListener('click', function () {
                 document.body.classList.remove('music-open');
                 musicEmbed.innerHTML = '';   // detiene la música
+                document.querySelectorAll('.song-item').forEach(function (el) { el.classList.remove('active'); });
                 musicFab.classList.remove('playing');
             });
         }
