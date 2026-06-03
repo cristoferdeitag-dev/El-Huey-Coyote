@@ -143,6 +143,7 @@
             text-decoration: none;
             -webkit-tap-highlight-color: transparent;
             transition: transform 0.25s ease, filter 0.25s ease;
+            touch-action: pan-y;   /* deja que el dedo baje de inmediato aunque empiece sobre un enlace */
         }
         .menu-link .letrero-text {
             display: flex;
@@ -1019,6 +1020,8 @@
             // Marca la cortina como vista: ya no volverá a salir en futuros refresh
             try { localStorage.setItem(PORTADA_KEY, '1'); } catch (e) {}
             portada.classList.add('subida');
+            // Deja de capturar el dedo de inmediato: el usuario puede scrollear aunque la cortina siga subiendo
+            portada.style.pointerEvents = 'none';
             document.body.classList.remove('cortina-bajada');
             // Reproduce el sonido del changarro en sincronía con la cortina subiendo
             if (audioChangarro) {
