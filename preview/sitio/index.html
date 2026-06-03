@@ -678,6 +678,30 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes music-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
+        /* === HEADER fijo (siempre arriba, aunque se scrollee) === */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 540px;
+            z-index: 95;
+            display: none;            /* aparece al abrir el changarro */
+            align-items: center;
+            justify-content: center;
+            height: 48px;
+            background: #c4161c;
+            border-bottom: 3px solid #ffd84a;
+            color: #fff;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-size: 22px;
+            letter-spacing: 0.10em;
+            text-transform: uppercase;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.45);
+        }
+        body.changarro-abierto .site-header { display: flex; }
+
         .music-panel {
             position: fixed;
             right: 14px;
@@ -762,6 +786,8 @@
     </style>
 </head>
 <body>
+    <!-- HEADER fijo: siempre arriba al scrollear -->
+    <header class="site-header" id="site-header">Menú</header>
     <div class="site-wrap">
 
         <!-- HEADLINER (sección 2) -->
