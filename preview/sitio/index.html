@@ -98,6 +98,8 @@
         .portada-overlay.subida {
             transform: translateX(-50%) translateY(-100%);
         }
+        /* Si el usuario ya vio la cortina antes, no se vuelve a mostrar (ni un parpadeo) */
+        html.portada-vista .portada-overlay { display: none !important; }
         /* Botón "Abre el changarro" — texto blanco = el botón (sin marco, área clicable invisible) */
         .btn-changarro {
             position: absolute;
@@ -785,6 +787,8 @@
     </style>
 </head>
 <body>
+    <!-- Si ya vio la cortina antes, entrar directo sin parpadeo (se evalúa antes de pintar) -->
+    <script>try{if(localStorage.getItem('huey_portada_vista')==='1'){document.documentElement.classList.add('portada-vista');document.body.classList.add('changarro-abierto');}}catch(e){}</script>
     <!-- HEADER fijo: siempre arriba al scrollear -->
     <header class="site-header" id="site-header">Menú</header>
     <div class="site-wrap">
@@ -993,11 +997,27 @@
 
 
     <script>
-        document.body.classList.add('cortina-bajada');
+        const PORTADA_KEY = 'huey_portada_vista';
         const portada = document.getElementById('portada');
         const btnChangarro = document.getElementById('btn-changarro');
         const audioChangarro = document.getElementById('audio-changarro');
-        btnChangarro.addEventListener('click', function () {
+
+        // ¿El usuario ya vio la cortina antes? (se guarda en el navegador)
+        let portadaVista = false;
+        try { portadaVista = localStorage.getItem(PORTADA_KEY) === '1'; } catch (e) {}
+
+        if (portadaVista) {
+            // Visitante que regresa / hace refresh → entra directo, sin cortina
+            if (portada) { portada.style.pointerEvents = 'none'; portada.style.display = 'none'; }
+            document.body.classList.add('changarro-abierto');
+        } else {
+            // Primera vez → muestra la cortina y bloquea el scroll detrás de ella
+            document.body.classList.add('cortina-bajada');
+        }
+
+        if (btnChangarro) btnChangarro.addEventListener('click', function () {
+            // Marca la cortina como vista: ya no volverá a salir en futuros refresh
+            try { localStorage.setItem(PORTADA_KEY, '1'); } catch (e) {}
             portada.classList.add('subida');
             document.body.classList.remove('cortina-bajada');
             // Reproduce el sonido del changarro en sincronía con la cortina subiendo
