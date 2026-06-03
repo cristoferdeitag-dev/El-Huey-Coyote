@@ -57,6 +57,7 @@
             width: 100%;
             height: auto;
             aspect-ratio: 1086 / 1937;   /* reserva la altura desde el inicio → el scroll no salta al cargar imágenes */
+            filter: brightness(0.85);    /* oscurece un poquito el fondo → los botones/textos resaltan */
         }
 
         /* El navegador salta el render de lo que está fuera de pantalla → scroll mucho más fluido
@@ -466,6 +467,7 @@
             overflow: hidden;
             line-height: 0;
             background: url('assets/divider-metal-bg.png?v=3') center center / 100% 100% no-repeat;
+            filter: brightness(0.85);    /* mismo oscurecido suave que las secciones, para que toda la página sea uniforme */
         }
         .divider-track {
             display: flex;
