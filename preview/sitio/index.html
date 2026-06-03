@@ -25,8 +25,6 @@
             font-display: swap;
         }
 
-        html { scroll-behavior: smooth; }
-
         html, body {
             background: #1a1a1a;
             overflow-x: hidden;
@@ -58,6 +56,7 @@
             display: block;
             width: 100%;
             height: auto;
+            aspect-ratio: 1086 / 1937;   /* reserva la altura desde el inicio → el scroll no salta al cargar imágenes */
         }
         /* Overlay SVG del headliner — encima del bg, mismas dimensiones */
         #headliner {
@@ -793,7 +792,7 @@
         <!-- HEADLINER (sección 2) -->
         <section id="headliner">
             <!-- Fondo v2: estrellas, trompeta y hamburguesa ya integradas; recuadros vacíos. Todos los textos van en HTML. -->
-            <img class="bg" src="assets/headliner-bg-v4.png" alt="El Huey Coyote — bienvenida al puesto" decoding="async" fetchpriority="high">
+            <img class="bg" src="assets/headliner-bg-v4.webp?v=603w" alt="El Huey Coyote — bienvenida al puesto" decoding="async" fetchpriority="high">
             <h1 class="seo-only">El Huey Coyote</h1>
 
             <!-- 4 letreros como texto HTML (control total de color/tamaño/posición) -->
@@ -824,7 +823,7 @@
 
         <!-- PRÓXIMOS SHOWS (sección 3) -->
         <section id="proximos-shows" class="reveal-init">
-            <img class="bg" src="assets/proximos-shows-sintexto-v2.png" alt="Próximos Shows — Presentaciones" loading="lazy" decoding="async">
+            <img class="bg" src="assets/proximos-shows-sintexto-v2.webp?v=603w" alt="Próximos Shows — Presentaciones" loading="lazy" decoding="async">
 
             <h2 class="seo-only">Próximos Shows del Huey Coyote</h2>
             <h3 class="seo-only">Recomendaciones de la casa</h3>
@@ -865,7 +864,7 @@
 
         <!-- MERCH (sección 4) -->
         <section id="merch">
-            <img class="bg" src="assets/merch-sintexto-v2.png" alt="Merch — Llévele, llévele · Piratería oficial y La Original" loading="lazy" decoding="async">
+            <img class="bg" src="assets/merch-sintexto-v2.webp?v=603w" alt="Merch — Llévele, llévele · Piratería oficial y La Original" loading="lazy" decoding="async">
             <h2 class="seo-only">Merch — Llévele, llévele</h2>
 
             <!-- NOMBRES (clicables, deslizan a la izquierda al hover) -->
@@ -895,7 +894,7 @@
 
         <!-- ¿YA ME CONOCES? (sección 5 — Sobre mí) -->
         <section id="sobre-mi">
-            <img class="bg" src="assets/conoces/seccion-diseno-anette.png?v=oficial" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
+            <img class="bg" src="assets/conoces/seccion-diseno-anette.webp?v=603w" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
 
             <!-- Tapa que oculta el horneado + "El mero mero" animado que se raya -->
@@ -954,7 +953,7 @@
 
         <!-- ÉCHAME UN GRITO (sección 6 — Contacto) -->
         <section id="contacto" class="reveal-init">
-            <img class="bg" src="assets/echame.png" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
+            <img class="bg" src="assets/echame.webp?v=603w" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">Échame un grito — Contacto del Huey Coyote</h2>
 
             <!-- 4 stickers clicables → redes sociales -->
