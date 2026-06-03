@@ -27,7 +27,7 @@
 
         html, body {
             background: #1a1a1a;
-            overflow-x: hidden;
+            overflow-x: clip;   /* clip (no 'hidden') evita crear un contenedor de scroll que traba el deslizamiento en móvil */
             font-family: 'Quicksand', system-ui, sans-serif;
         }
 
@@ -96,7 +96,6 @@
             overflow: hidden;
             background: #2dbf86;
             transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
-            will-change: transform;
         }
         .portada-overlay img {
             display: block;
@@ -471,7 +470,6 @@
         .divider-track {
             display: flex;
             width: max-content;
-            will-change: transform;
             animation: divider-scroll 22s linear infinite;
         }
         .divider-track img {
@@ -491,7 +489,6 @@
             opacity: 0;
             transform: translateY(42px);
             transition: opacity 0.85s ease, transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: opacity, transform;
         }
         .reveal-init.revealed {
             opacity: 1;
@@ -517,7 +514,6 @@
             opacity: 1;
             transform-origin: center center;
             transform: translate(-50%,-50%);
-            will-change: transform;
             animation: poster-sway 5s ease-in-out infinite;
         }
         /* Posiciones FINALES — calibradas contra 2do mockup que mandó Anette
@@ -808,7 +804,7 @@
         <!-- HEADLINER (sección 2) -->
         <section id="headliner">
             <!-- Fondo v2: estrellas, trompeta y hamburguesa ya integradas; recuadros vacíos. Todos los textos van en HTML. -->
-            <img class="bg" src="assets/headliner-bg-v4.webp?v=603w" alt="El Huey Coyote — bienvenida al puesto" decoding="async" fetchpriority="high">
+            <img class="bg" src="assets/headliner-bg-v4.webp?v=603sm" alt="El Huey Coyote — bienvenida al puesto" decoding="async" fetchpriority="high">
             <h1 class="seo-only">El Huey Coyote</h1>
 
             <!-- 4 letreros como texto HTML (control total de color/tamaño/posición) -->
@@ -839,7 +835,7 @@
 
         <!-- PRÓXIMOS SHOWS (sección 3) -->
         <section id="proximos-shows" class="reveal-init">
-            <img class="bg" src="assets/proximos-shows-sintexto-v2.webp?v=603w" alt="Próximos Shows — Presentaciones" loading="lazy" decoding="async">
+            <img class="bg" src="assets/proximos-shows-sintexto-v2.webp?v=603sm" alt="Próximos Shows — Presentaciones" loading="lazy" decoding="async">
 
             <h2 class="seo-only">Próximos Shows del Huey Coyote</h2>
             <h3 class="seo-only">Recomendaciones de la casa</h3>
@@ -880,7 +876,7 @@
 
         <!-- MERCH (sección 4) -->
         <section id="merch">
-            <img class="bg" src="assets/merch-sintexto-v2.webp?v=603w" alt="Merch — Llévele, llévele · Piratería oficial y La Original" loading="lazy" decoding="async">
+            <img class="bg" src="assets/merch-sintexto-v2.webp?v=603sm" alt="Merch — Llévele, llévele · Piratería oficial y La Original" loading="lazy" decoding="async">
             <h2 class="seo-only">Merch — Llévele, llévele</h2>
 
             <!-- NOMBRES (clicables, deslizan a la izquierda al hover) -->
@@ -910,7 +906,7 @@
 
         <!-- ¿YA ME CONOCES? (sección 5 — Sobre mí) -->
         <section id="sobre-mi">
-            <img class="bg" src="assets/conoces/seccion-diseno-anette.webp?v=603w" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
+            <img class="bg" src="assets/conoces/seccion-diseno-anette.webp?v=603sm" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
 
             <!-- Tapa que oculta el horneado + "El mero mero" animado que se raya -->
@@ -969,7 +965,7 @@
 
         <!-- ÉCHAME UN GRITO (sección 6 — Contacto) -->
         <section id="contacto" class="reveal-init">
-            <img class="bg" src="assets/echame.webp?v=603w" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
+            <img class="bg" src="assets/echame.webp?v=603sm" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">Échame un grito — Contacto del Huey Coyote</h2>
 
             <!-- 4 stickers clicables → redes sociales -->
