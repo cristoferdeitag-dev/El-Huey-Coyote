@@ -898,7 +898,7 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes music-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-        /* === HEADER fijo (siempre arriba, aunque se scrollee) === */
+        /* === HEADER fijo TRANSPARENTE con el divisor "El Huey Coyote" === */
         .site-header {
             position: fixed;
             top: 0;
@@ -910,15 +910,14 @@
             display: none;            /* aparece al abrir el changarro */
             align-items: center;
             justify-content: center;
-            height: 48px;
-            background: #c4161c;
-            border-bottom: 3px solid #ffd84a;
-            color: #fff;
-            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
-            font-size: 22px;
-            letter-spacing: 0.10em;
-            text-transform: uppercase;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.45);
+            background: transparent;  /* header transparente */
+            padding: 0;
+            line-height: 0;
+        }
+        .site-header .header-divider {
+            display: block;
+            width: 100%;
+            height: auto;
         }
         body.changarro-abierto .site-header { display: flex; }
 
@@ -1009,7 +1008,7 @@
     <!-- Si ya vio la cortina antes, entrar directo sin parpadeo (se evalúa antes de pintar) -->
     <script>try{if(localStorage.getItem('huey_portada_vista')==='1'){document.documentElement.classList.add('portada-vista');document.body.classList.add('changarro-abierto');}}catch(e){}</script>
     <!-- HEADER fijo: siempre arriba al scrollear -->
-    <header class="site-header" id="site-header">Menú</header>
+    <header class="site-header" id="site-header"><img class="header-divider" src="assets/divider-headliner-elhuey.webp?v=1" alt="El Huey Coyote"></header>
     <div class="site-wrap">
 
         <!-- HEADLINER (sección 2) -->
