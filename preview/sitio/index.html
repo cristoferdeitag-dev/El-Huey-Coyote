@@ -314,12 +314,12 @@
         }
         .stool-btn:hover { transform: scale(1.08); z-index: 12; }
         .stool-btn:active { transform: scale(0.94); }
-        /* Apple (izquierda) — confinado al asiento (marca morada de Anette) */
-        .stool-apple   { top: 83.0%; left: 4.1%;  width: 12.3%; height: 3.4%; }
-        /* YouTube (centro) */
-        .stool-youtube { top: 83.0%; left: 33.7%; width: 11.1%; height: 3.4%; }
-        /* Amazon (derecha) */
-        .stool-amazon  { top: 82.3%; left: 71.9%; width: 11.4%; height: 3.9%; }
+        /* Apple (izquierda) — confinado al asiento (marca morada de Anette); achicado un chirris */
+        .stool-apple   { top: 83.13%; left: 4.6%;  width: 11.3%; height: 3.15%; }
+        /* YouTube (centro) — achicado un chirris */
+        .stool-youtube { top: 83.13%; left: 34.1%; width: 10.3%; height: 3.15%; }
+        /* Amazon (derecha) — reducido más (se veía grande) */
+        .stool-amazon  { top: 82.7%;  left: 73.1%; width: 9.0%;  height: 3.1%; }
 
         /* Interstitial "PARA LOS MÁS FRESAS" antes de abrir Apple Music */
         .apple-ad-overlay {
@@ -428,7 +428,6 @@
             font-size: 4.1cqw;
             line-height: 1;
             align-items: baseline;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.28);
         }
         .shows-list .mes { color: #1a1a1a; -webkit-text-stroke: 0.45px #1a1a1a; }
         .shows-list .dia { color: #00a99d; -webkit-text-stroke: 0.45px #00a99d; }
@@ -436,12 +435,11 @@
             color: #00bfb0;
             -webkit-text-stroke: 0.45px #00a99d;
             white-space: nowrap;
-            text-decoration: underline;
-            text-decoration-color: #b80d0e;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 2px;
+            text-decoration: none;
             cursor: pointer;
             transition: color 0.18s ease, transform 0.18s ease;
+            /* iluminación delgada (igual que MERCH) */
+            text-shadow: 0 0 2px rgba(255,255,255,0.95), 0 0 4px rgba(255,255,255,0.6);
         }
         .shows-list .ciudad:hover,
         .shows-list .ciudad:focus { color: #b80d0e; }
@@ -479,16 +477,14 @@
             letter-spacing: -0.01em;
             line-height: 1;
             color: #111;
-            text-decoration: underline;
-            text-decoration-color: #c4161c;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 2px;
+            text-decoration: none;
             cursor: pointer;
             white-space: nowrap;
             -webkit-tap-highlight-color: transparent;
             transition: transform 0.2s ease;
             transform: translateY(-50%);
-            text-shadow: 0 1px 2px rgba(0,0,0,0.30);
+            /* iluminación delgada: halo claro fino que levanta el texto, sin parecer letrero de circo */
+            text-shadow: 0 0 2px rgba(255,255,255,0.95), 0 0 4px rgba(255,255,255,0.65);
         }
         .merch-item:hover,
         .merch-item:active,
