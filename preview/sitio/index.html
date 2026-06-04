@@ -66,10 +66,9 @@
             content-visibility: auto;
             contain-intrinsic-size: auto 760px;
         }
-        .divider-marquee {
-            content-visibility: auto;
-            contain-intrinsic-size: auto 80px;
-        }
+        /* OJO: a los divisores (.divider-marquee) NO se les pone content-visibility:
+           apagaría su render en los bordes de pantalla y la animación de giro se estancaría.
+           Son chiquitos, no necesitan esa optimización → siempre renderizados = siempre girando. */
         /* Overlay SVG del headliner — encima del bg, mismas dimensiones */
         #headliner {
             position: relative;
