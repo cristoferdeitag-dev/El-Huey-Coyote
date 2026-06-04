@@ -398,6 +398,19 @@
         .platform-link:hover,
         .platform-link:active,
         .platform-link:focus { color: #F29501; }
+        /* EXTRAS: logos en vez de texto (blancos sobre la barra roja) */
+        .platform-logo { display: flex; align-items: center; padding: 0; }
+        .platform-logo img {
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 1px 1.5px rgba(0,0,0,0.35));
+            transition: transform 0.18s ease;
+        }
+        .platform-logo:hover img,
+        .platform-logo:active img { transform: scale(1.06); }
+        .platform-logo .logo-apple   { height: 3.7cqw; }
+        .platform-logo .logo-youtube { height: 4.0cqw; }
+        .platform-logo .logo-amazon  { height: 4.6cqw; }
 
         /* === PRÓXIMOS SHOWS — lista de presentaciones (texto variable sobre el fondo) === */
         .shows-list {
@@ -415,14 +428,18 @@
             font-size: 4.1cqw;
             line-height: 1;
             align-items: baseline;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.28);
         }
         .shows-list .mes { color: #1a1a1a; -webkit-text-stroke: 0.45px #1a1a1a; }
         .shows-list .dia { color: #00a99d; -webkit-text-stroke: 0.45px #00a99d; }
         .shows-list .ciudad {
-            color: #00a99d;
+            color: #00bfb0;
             -webkit-text-stroke: 0.45px #00a99d;
             white-space: nowrap;
-            text-decoration: none;
+            text-decoration: underline;
+            text-decoration-color: #b80d0e;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 2px;
             cursor: pointer;
             transition: color 0.18s ease, transform 0.18s ease;
         }
@@ -461,13 +478,17 @@
             font-size: 4.15cqw;
             letter-spacing: -0.01em;
             line-height: 1;
-            color: #1A1A1A;
-            text-decoration: none;
+            color: #111;
+            text-decoration: underline;
+            text-decoration-color: #c4161c;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 2px;
             cursor: pointer;
             white-space: nowrap;
             -webkit-tap-highlight-color: transparent;
             transition: transform 0.2s ease;
             transform: translateY(-50%);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.30);
         }
         .merch-item:hover,
         .merch-item:active,
@@ -966,15 +987,15 @@
             <a class="platform-link pos-spotify"
                href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw"
                target="_blank" rel="noopener noreferrer">Spotify</a>
-            <a class="platform-link pos-youtube"
+            <a class="platform-link platform-logo pos-youtube"
                href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG"
-               target="_blank" rel="noopener noreferrer">Youtube</a>
-            <a class="platform-link pos-amazon"
+               target="_blank" rel="noopener noreferrer" aria-label="YouTube Music"><img class="logo-youtube" src="assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
+            <a class="platform-link platform-logo pos-amazon"
                href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M"
-               target="_blank" rel="noopener noreferrer">Amazon Music</a>
-            <a class="platform-link pos-apple"
+               target="_blank" rel="noopener noreferrer" aria-label="Amazon Music"><img class="logo-amazon" src="assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async"></a>
+            <a class="platform-link platform-logo pos-apple"
                href="https://music.apple.com/mx/artist/hueycoyote/1088136173"
-               target="_blank" rel="noopener noreferrer">Apple Music</a>
+               target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img class="logo-apple" src="assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
         </section>
 
         <!-- Divisor: anuncia La Merch -->
