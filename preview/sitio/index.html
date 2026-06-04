@@ -289,6 +289,96 @@
             display: block;
         }
 
+        /* === 3 logos-botón sobre los bancos rojos del headliner === */
+        .stool-btn {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            z-index: 4;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.2s ease, filter 0.2s ease;
+            touch-action: pan-y;
+        }
+        .stool-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.45));
+            pointer-events: none;
+        }
+        .stool-btn:hover { transform: scale(1.08); z-index: 12; }
+        .stool-btn:active { transform: scale(0.94); }
+        /* Apple (izquierda) */
+        .stool-apple   { top: 84.0%; left: 2.3%;  width: 19.5%; height: 6.6%; }
+        /* YouTube (centro) */
+        .stool-youtube { top: 84.4%; left: 26.6%; width: 19.5%; height: 6.6%; }
+        /* Amazon (derecha) */
+        .stool-amazon  { top: 84.0%; left: 69.6%; width: 19.5%; height: 7.0%; }
+
+        /* Interstitial "PARA LOS MÁS FRESAS" antes de abrir Apple Music */
+        .apple-ad-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.88);
+            padding: 22px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .apple-ad-overlay.abierto { display: flex; }
+        .apple-ad-overlay .ad-box {
+            position: relative;
+            max-width: 540px;
+            width: 100%;
+            animation: adPop 0.32s ease;
+        }
+        @keyframes adPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .apple-ad-overlay img.ad-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 14px;
+            border: 3px solid #ffd84a;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+        .apple-ad-overlay .ad-go {
+            display: block;
+            margin: 14px auto 0;
+            background: #c4161c;
+            color: #fff;
+            border: 2px solid #ffd84a;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-size: 18px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 11px 26px;
+            border-radius: 40px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .apple-ad-overlay .ad-cerrar {
+            position: absolute;
+            top: -14px; right: -10px;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: #fff;
+            color: #c4161c;
+            border: 2px solid #c4161c;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+
         /* === PRÓXIMOS SHOWS plataformas === */
         .platform-link {
             position: absolute;
@@ -824,7 +914,27 @@
             <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto">
                 <span class="letrero-text">ÉCHAME UN<br>GRITO</span>
             </a>
+
+            <!-- 3 logos-botón sobre los bancos rojos -->
+            <a class="stool-btn stool-apple" id="btn-apple" href="#" data-url="APPLE_MUSIC_URL" aria-label="Apple Music del Huey Coyote">
+                <img src="assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async">
+            </a>
+            <a class="stool-btn stool-youtube" href="#" data-url="YOUTUBE_MUSIC_URL" target="_blank" rel="noopener" aria-label="YouTube Music del Huey Coyote">
+                <img src="assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async">
+            </a>
+            <a class="stool-btn stool-amazon" href="#" data-url="AMAZON_MUSIC_URL" target="_blank" rel="noopener" aria-label="Amazon Music del Huey Coyote">
+                <img src="assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async">
+            </a>
         </section>
+
+        <!-- Interstitial Apple Music: "PARA LOS MÁS FRESAS" -->
+        <div class="apple-ad-overlay" id="apple-ad">
+            <div class="ad-box">
+                <button class="ad-cerrar" id="apple-ad-cerrar" aria-label="Cerrar">&times;</button>
+                <img class="ad-img" src="assets/apple-fresas-ad.webp?v=604" alt="Para los más fresas — El Huey Coyote">
+                <a class="ad-go" id="apple-ad-go" href="#" target="_blank" rel="noopener">Ir a Apple Music 🍎</a>
+            </div>
+        </div>
 
         <!-- Divisor: anuncia Próximos Shows -->
         <div class="divider-marquee" role="img" aria-label="Próximos Shows">
@@ -1128,6 +1238,43 @@
             revealEls.forEach((el) => revealObs.observe(el));
         } else {
             revealEls.forEach((el) => el.classList.add('revealed'));
+        }
+
+        /* === Botones de plataformas en los bancos === */
+        const PLACEHOLDER = ['APPLE_MUSIC_URL', 'YOUTUBE_MUSIC_URL', 'AMAZON_MUSIC_URL'];
+        function abrirURL(u) {
+            if (!u || PLACEHOLDER.indexOf(u) !== -1) {
+                alert('Esta cuenta todavía no tiene liga configurada.');
+                return false;
+            }
+            window.open(u, '_blank', 'noopener');
+            return true;
+        }
+        // YouTube y Amazon: abren directo en pestaña nueva
+        document.querySelectorAll('.stool-youtube, .stool-amazon').forEach(function (el) {
+            el.addEventListener('click', function (e) {
+                e.preventDefault();
+                abrirURL(el.getAttribute('data-url'));
+            });
+        });
+        // Apple: muestra primero el anuncio "PARA LOS MÁS FRESAS"
+        const appleBtn = document.getElementById('btn-apple');
+        const appleAd = document.getElementById('apple-ad');
+        const appleAdGo = document.getElementById('apple-ad-go');
+        const appleAdCerrar = document.getElementById('apple-ad-cerrar');
+        function cerrarAppleAd() { if (appleAd) appleAd.classList.remove('abierto'); }
+        if (appleBtn && appleAd) {
+            appleBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                appleAd.classList.add('abierto');
+            });
+            appleAdGo.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (abrirURL(appleBtn.getAttribute('data-url'))) cerrarAppleAd();
+            });
+            appleAdCerrar.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); cerrarAppleAd(); });
+            // tocar el fondo oscuro cierra el anuncio
+            appleAd.addEventListener('click', function (e) { if (e.target === appleAd) cerrarAppleAd(); });
         }
     </script>
 </body>
