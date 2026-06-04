@@ -1352,6 +1352,11 @@
             document.body.classList.add('cortina-bajada');
             document.body.classList.remove('changarro-abierto');
             document.body.classList.remove('headliner-anim');
+            // mismo sonido del changarro que al abrir
+            if (audioChangarro) {
+                audioChangarro.currentTime = 0;
+                audioChangarro.play().catch(() => { /* el navegador puede bloquear autoplay; no rompe nada */ });
+            }
         });
 
         // Botón de música: al click abre la lista de rolitas del Huey Coyote
