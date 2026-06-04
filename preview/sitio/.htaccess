@@ -1,0 +1,9 @@
+# Preview en iteración: el HTML nunca se cachea, así los cambios se ven al instante.
+# (Imágenes/assets siguen con su cache-busting ?v=N normal.)
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>
