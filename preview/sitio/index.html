@@ -1412,9 +1412,10 @@
                 e.preventDefault();
                 appleAd.classList.add('abierto');   // solo muestra la pantalla completa
             });
-            // El botón es un enlace real (href a Apple Music) → navega nativo, sin window.open
-            // (que el navegador móvil suele bloquear). Solo cerramos la pantalla completa.
-            appleAdGo.addEventListener('click', function () { cerrarAppleAd(); });
+            // El botón es un enlace real (href a Apple Music) → navega nativo.
+            // NO cerramos el overlay de forma síncrona: ocultarlo en el mismo clic CANCELA
+            // la navegación en móvil. Lo cerramos diferido para no romper el enlace.
+            appleAdGo.addEventListener('click', function () { setTimeout(cerrarAppleAd, 400); });
             appleAdCerrar.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); cerrarAppleAd(); });
             // tocar la imagen (fuera del botón) cierra la pantalla completa
             if (appleAdImg) appleAdImg.addEventListener('click', function () { cerrarAppleAd(); });
