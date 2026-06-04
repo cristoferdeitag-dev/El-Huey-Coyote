@@ -632,6 +632,14 @@
             margin: 0 0 6px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
+        /* Logo "El Huey Coyote" en el footer (reemplaza el texto de la marca) */
+        .footer-logo {
+            display: block;
+            margin: 0 auto 8px;
+            height: clamp(40px, 13vw, 64px);
+            width: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.45));
+        }
         .footer-tag {
             font-size: clamp(12px, 3.6vw, 15px);
             font-weight: 600;
@@ -1212,7 +1220,7 @@
             <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
 
             <!-- 3 pósters individuales (cada imagen ya viene posicionada en su lienzo), sobre el fondo -->
-            <img class="poster-ov poster-ov-1" src="assets/poster1.webp?v=1" alt="" aria-hidden="true" loading="lazy">
+            <img class="poster-ov poster-ov-1" src="assets/poster1.webp?v=2" alt="" aria-hidden="true" loading="lazy">
             <img class="poster-ov poster-ov-2" src="assets/poster2.webp?v=1" alt="" aria-hidden="true" loading="lazy">
             <img class="poster-ov poster-ov-3" src="assets/poster3.webp?v=1" alt="" aria-hidden="true" loading="lazy">
 
@@ -1284,7 +1292,7 @@
         <!-- FOOTER (final de la página) -->
         <footer class="site-footer">
             <div class="footer-inner">
-                <p class="footer-brand">EL HUEY COYOTE</p>
+                <img class="footer-logo" src="assets/header-logo.webp?v=1" alt="El Huey Coyote">
                 <p class="footer-tag">Puro corrido, pura fiesta · Changarro musical 🌮🎸</p>
                 <nav class="footer-social" aria-label="Redes sociales">
                     <a href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
