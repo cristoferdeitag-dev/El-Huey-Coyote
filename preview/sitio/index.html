@@ -206,12 +206,14 @@
         body.headliner-anim .area-echame {
             animation: headliner-hop 7.2s ease-in-out infinite;
         }
-        /* PRÓXIMOS y SHOWS brincan juntos como un solo letrero */
-        .area-proximos,
-        .area-shows { animation-delay: 0s; }
-        .area-pide    { animation-delay: 1.8s; }
-        .area-conoces { animation-delay: 3.6s; }
-        .area-echame  { animation-delay: 5.4s; }
+        /* Delays con la MISMA especificidad que la regla de animación (body.headliner-anim ...)
+           y declarados DESPUÉS, para que el shorthand 'animation' no los resetee a 0.
+           PRÓXIMOS y SHOWS brincan juntos como un solo letrero. */
+        body.headliner-anim .area-proximos,
+        body.headliner-anim .area-shows   { animation-delay: 0s;   }
+        body.headliner-anim .area-pide     { animation-delay: 1.8s; }
+        body.headliner-anim .area-conoces  { animation-delay: 3.6s; }
+        body.headliner-anim .area-echame   { animation-delay: 5.4s; }
 
         @media (prefers-reduced-motion: reduce) {
             .area-pide, .area-proximos, .area-shows,
@@ -365,71 +367,56 @@
         /* Amazon (derecha) — reducido aún más (re-centrado) */
         .stool-amazon  { top: 83.19%; left: 74.45%; width: 6.3%;  height: 2.15%; }
 
-        /* Interstitial "PARA LOS MÁS FRESAS" antes de abrir Apple Music */
+        /* "PARA LOS MÁS FRESAS" — PANTALLA COMPLETA al tocar el logo de Apple Music */
         .apple-ad-overlay {
             position: fixed;
             inset: 0;
             z-index: 9999;
             display: none;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,0,0,0.88);
-            padding: 22px;
-            cursor: pointer;
+            background: #000;
             -webkit-tap-highlight-color: transparent;
         }
-        .apple-ad-overlay.abierto { display: flex; }
-        .apple-ad-overlay .ad-box {
-            position: relative;
-            display: inline-block;
-            animation: adPop 0.32s ease;
-        }
-        @keyframes adPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .apple-ad-overlay img.ad-img {
-            display: block;
-            height: auto; width: auto;
-            max-height: 86vh; max-width: 90vw;
-            border-radius: 14px;
-            border: 3px solid #ffd84a;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-        }
-        /* Atenúa la imagen (un poco más arriba) y deja BRILLANTE la parte de abajo
-           donde está la manzanita + "El HueyCoyote" → eso es lo que resalta. */
-        .apple-ad-overlay .ad-dim {
+        .apple-ad-overlay.abierto { display: block; animation: adFade 0.28s ease; }
+        @keyframes adFade { from { opacity: 0; } to { opacity: 1; } }
+        /* La imagen abarca TODA la pantalla (no marco, no caja de anuncio) */
+        .apple-ad-overlay .ad-img {
             position: absolute; inset: 0;
-            border-radius: 14px;
-            pointer-events: none;
-            background: linear-gradient(to bottom,
-                rgba(0,0,0,0.45) 0%,
-                rgba(0,0,0,0.34) 50%,
-                rgba(0,0,0,0.12) 76%,
-                rgba(0,0,0,0.00) 86%);
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(0.72);
+            cursor: pointer;
         }
-        /* Botón = la manzanita + "El HueyCoyote" abajo; va a Apple Music, con glow que late */
+        /* Capa-recorte solo de la manzanita + "El HueyCoyote", con contorno de
+           iluminación (igual que los textos de las secciones) para que sobresalga. */
+        .apple-ad-overlay .ad-glow {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            filter: drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 3px #fff) drop-shadow(0 0 7px rgba(255,255,255,0.95)) drop-shadow(0 0 14px rgba(255,255,255,0.75));
+            animation: cta-glow-pulse 1.9s ease-in-out infinite;
+        }
+        @keyframes cta-glow-pulse { 0%,100% { opacity: 0.8; } 50% { opacity: 1; } }
+        /* Zona clicable sobre la manzanita + nombre → cuenta de Apple Music */
         .apple-ad-overlay .ad-cta {
             position: absolute;
-            left: 7%; right: 7%;
-            bottom: 11%; height: 10%;
+            left: 22%; right: 10%;
+            bottom: 12%; height: 9%;
             cursor: pointer;
-            border-radius: 16px;
             -webkit-tap-highlight-color: transparent;
-            animation: cta-glow 1.7s ease-in-out infinite;
-        }
-        @keyframes cta-glow {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(255,216,74,0); }
-            50%      { box-shadow: 0 0 20px 5px rgba(255,216,74,0.6); }
         }
         .apple-ad-overlay .ad-cerrar {
             position: absolute;
-            top: -14px; right: -10px;
-            width: 36px; height: 36px;
+            top: 16px; right: 16px;
+            width: 40px; height: 40px;
             border-radius: 50%;
-            background: #fff;
+            background: rgba(255,255,255,0.92);
             color: #c4161c;
             border: 2px solid #c4161c;
-            font-size: 20px;
+            font-size: 22px;
             line-height: 1;
             cursor: pointer;
+            z-index: 2;
             display: flex; align-items: center; justify-content: center;
         }
 
@@ -1060,14 +1047,12 @@
             </a>
         </section>
 
-        <!-- Interstitial Apple Music: "PARA LOS MÁS FRESAS" -->
+        <!-- Apple Music: "PARA LOS MÁS FRESAS" a pantalla completa -->
         <div class="apple-ad-overlay" id="apple-ad">
-            <div class="ad-box">
-                <button class="ad-cerrar" id="apple-ad-cerrar" aria-label="Cerrar">&times;</button>
-                <img class="ad-img" src="assets/apple-fresas-ad.webp?v=606" alt="Para los más fresas — El Huey Coyote">
-                <div class="ad-dim" aria-hidden="true"></div>
-                <a class="ad-cta" id="apple-ad-go" href="#" target="_blank" rel="noopener" aria-label="Ir a Apple Music del Huey Coyote"></a>
-            </div>
+            <button class="ad-cerrar" id="apple-ad-cerrar" aria-label="Cerrar">&times;</button>
+            <img class="ad-img" src="assets/apple-fresas-ad.webp?v=606" alt="Para los más fresas — El Huey Coyote">
+            <img class="ad-glow" src="assets/apple-cta-glow.png?v=1" alt="" aria-hidden="true">
+            <a class="ad-cta" id="apple-ad-go" href="#" target="_blank" rel="noopener" aria-label="Ir a Apple Music del Huey Coyote"></a>
         </div>
 
         <!-- Divisor: anuncia Próximos Shows -->
@@ -1414,27 +1399,26 @@
                 abrirURL(el.getAttribute('data-url'));
             });
         });
-        // Apple: te lleva a Apple Music (pestaña nueva) Y muestra el anuncio "PARA LOS MÁS FRESAS"
+        // Apple: el logo abre la imagen "PARA LOS MÁS FRESAS" a pantalla completa.
+        // El botón (manzanita + "El HueyCoyote") lleva a Apple Music. Tocar la imagen cierra.
         const appleBtn = document.getElementById('btn-apple');
         const appleAd = document.getElementById('apple-ad');
         const appleAdGo = document.getElementById('apple-ad-go');
         const appleAdCerrar = document.getElementById('apple-ad-cerrar');
+        const appleAdImg = appleAd ? appleAd.querySelector('.ad-img') : null;
         function cerrarAppleAd() { if (appleAd) appleAd.classList.remove('abierto'); }
         if (appleBtn && appleAd) {
             appleBtn.addEventListener('click', function (e) {
                 e.preventDefault();
-                // 1) abre Apple Music en pestaña nueva (te lleva a la página)
-                abrirURL(appleBtn.getAttribute('data-url'));
-                // 2) y deja el anuncio puesto en nuestra pestaña, como si fuera el anuncio de esa visita
-                appleAd.classList.add('abierto');
+                appleAd.classList.add('abierto');   // solo muestra la pantalla completa
             });
             appleAdGo.addEventListener('click', function (e) {
                 e.preventDefault();
                 if (abrirURL(appleBtn.getAttribute('data-url'))) cerrarAppleAd();
             });
             appleAdCerrar.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); cerrarAppleAd(); });
-            // tocar el fondo oscuro cierra el anuncio
-            appleAd.addEventListener('click', function (e) { if (e.target === appleAd) cerrarAppleAd(); });
+            // tocar la imagen (fuera del botón) cierra la pantalla completa
+            if (appleAdImg) appleAdImg.addEventListener('click', function () { cerrarAppleAd(); });
         }
     </script>
 </body>
