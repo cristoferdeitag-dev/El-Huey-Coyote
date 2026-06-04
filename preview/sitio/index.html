@@ -1052,7 +1052,7 @@
             <button class="ad-cerrar" id="apple-ad-cerrar" aria-label="Cerrar">&times;</button>
             <img class="ad-img" src="assets/apple-fresas-ad.webp?v=606" alt="Para los más fresas — El Huey Coyote" loading="lazy" decoding="async">
             <img class="ad-glow" src="assets/apple-cta-glow.png?v=2" alt="" aria-hidden="true" loading="lazy" decoding="async">
-            <a class="ad-cta" id="apple-ad-go" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Ir a Apple Music del Huey Coyote"></a>
+            <a class="ad-cta" id="apple-ad-go" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" aria-label="Ir a Apple Music del Huey Coyote"></a>
         </div>
 
         <!-- Divisor: anuncia Próximos Shows -->
@@ -1412,10 +1412,9 @@
                 e.preventDefault();
                 appleAd.classList.add('abierto');   // solo muestra la pantalla completa
             });
-            // El botón es un enlace real (href a Apple Music) → navega nativo.
-            // NO cerramos el overlay de forma síncrona: ocultarlo en el mismo clic CANCELA
-            // la navegación en móvil. Lo cerramos diferido para no romper el enlace.
-            appleAdGo.addEventListener('click', function () { setTimeout(cerrarAppleAd, 400); });
+            // El botón es un enlace real (href a Apple Music) y abre en la MISMA pestaña.
+            // No le ponemos JS: el navegador navega solo al tocarlo. (Abrir en pestaña nueva
+            // lo bloquea el navegador dentro de apps como Telegram → por eso, misma pestaña.)
             appleAdCerrar.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); cerrarAppleAd(); });
             // tocar la imagen (fuera del botón) cierra la pantalla completa
             if (appleAdImg) appleAdImg.addEventListener('click', function () { cerrarAppleAd(); });
