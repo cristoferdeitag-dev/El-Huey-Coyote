@@ -751,14 +751,25 @@
             width: 100%; height: auto;
             pointer-events: none;
             z-index: 2;
+            animation: poster-zoom 15s ease-in-out infinite;
         }
+        /* Zoom secuencial: cada póster hace zoom suave (~5s) alrededor de SU centro, uno tras otro, en bucle */
+        @keyframes poster-zoom {
+            0%     { transform: scale(1); }
+            16.6%  { transform: scale(1.08); }
+            33.3%  { transform: scale(1); }
+            100%   { transform: scale(1); }
+        }
+        #sobre-mi .poster-ov-1 { transform-origin: 68.2% 27.4%; animation-delay: 0s;  }
+        #sobre-mi .poster-ov-2 { transform-origin: 29.9% 58.1%; animation-delay: 5s;  }
+        #sobre-mi .poster-ov-3 { transform-origin: 70.1% 78.6%; animation-delay: 10s; }
 
         /* === MERCH siempre visible — animación removida + altura garantizada por CSS (aspect-ratio)
               para que NUNCA colapse a 0 en Android aunque container-type/imagen tarden o fallen === */
         #merch { aspect-ratio: 1086 / 1937; min-height: 60vw; }
         #merch > img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         @media (prefers-reduced-motion: reduce) {
-            #sobre-mi .poster, #sobre-mi .poster img { animation: none; }
+            #sobre-mi .poster, #sobre-mi .poster img, #sobre-mi .poster-ov { animation: none; }
             #sobre-mi .conoce-text { transition: none; }
             .divider-track { animation: none; }
             .reveal-init { opacity: 1; transform: none; transition: none; }
@@ -1197,7 +1208,7 @@
 
         <!-- ¿YA ME CONOCES? (sección 5 — Sobre mí) -->
         <section id="sobre-mi">
-            <img class="bg" src="assets/conoces/seccion-diseno-anette.webp?v=604mero" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
+            <img class="bg" src="assets/conoces/conoces-fondo-limpio.webp?v=1" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
 
             <!-- 3 pósters individuales (cada imagen ya viene posicionada en su lienzo), sobre el fondo -->
