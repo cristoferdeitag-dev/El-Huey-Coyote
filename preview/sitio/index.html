@@ -400,8 +400,8 @@
         /* Zona clicable sobre la manzanita + nombre → cuenta de Apple Music */
         .apple-ad-overlay .ad-cta {
             position: absolute;
-            left: 22%; right: 10%;
-            bottom: 12%; height: 9%;
+            left: 14%; right: 6%;
+            bottom: 9%; height: 14%;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
         }
@@ -1052,7 +1052,7 @@
             <button class="ad-cerrar" id="apple-ad-cerrar" aria-label="Cerrar">&times;</button>
             <img class="ad-img" src="assets/apple-fresas-ad.webp?v=606" alt="Para los más fresas — El Huey Coyote" loading="lazy" decoding="async">
             <img class="ad-glow" src="assets/apple-cta-glow.png?v=2" alt="" aria-hidden="true" loading="lazy" decoding="async">
-            <a class="ad-cta" id="apple-ad-go" href="#" target="_blank" rel="noopener" aria-label="Ir a Apple Music del Huey Coyote"></a>
+            <a class="ad-cta" id="apple-ad-go" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Ir a Apple Music del Huey Coyote"></a>
         </div>
 
         <!-- Divisor: anuncia Próximos Shows -->
@@ -1412,10 +1412,9 @@
                 e.preventDefault();
                 appleAd.classList.add('abierto');   // solo muestra la pantalla completa
             });
-            appleAdGo.addEventListener('click', function (e) {
-                e.preventDefault();
-                if (abrirURL(appleBtn.getAttribute('data-url'))) cerrarAppleAd();
-            });
+            // El botón es un enlace real (href a Apple Music) → navega nativo, sin window.open
+            // (que el navegador móvil suele bloquear). Solo cerramos la pantalla completa.
+            appleAdGo.addEventListener('click', function () { cerrarAppleAd(); });
             appleAdCerrar.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); cerrarAppleAd(); });
             // tocar la imagen (fuera del botón) cierra la pantalla completa
             if (appleAdImg) appleAdImg.addEventListener('click', function () { cerrarAppleAd(); });
