@@ -564,23 +564,24 @@
         .pos-price-orig-ch  { top: 38.4%; left: 79.0%; }
         .pos-price-orig-ca  { top: 41.4%; left: 80.6%; }
 
-        /* === CONTACTO (Échame un grito) — botones sticker (lienzo completo) + destello secuencial === */
-        /* Capa visual de cada botón: imagen a lienzo completo, encimada sobre el fondo */
-        .ech-layer {
-            position: absolute; inset: 0;
-            width: 100%;
-            pointer-events: none;
-            z-index: 2;
+        /* === CONTACTO (Échame un grito) — botones sticker posicionados (diseño original) + destello secuencial === */
+        /* Cada botón es un enlace posicionado en la columna derecha, a su tamaño real */
+        .ech-btn {
+            position: absolute;
+            display: block;
+            z-index: 3;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
-        .ech-layer img {
+        .ech-btn img {
             display: block; width: 100%; height: auto;
+            pointer-events: none;
             filter: drop-shadow(0 3px 5px rgba(0,0,0,0.38));
         }
         /* Destello tipo sticker: una franja de luz cruza la FORMA del botón (mask) */
         .ech-shine {
             position: absolute; inset: 0;
             pointer-events: none;
-            z-index: 3;
             background: linear-gradient(112deg, rgba(255,255,255,0) 38%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0) 62%);
             background-repeat: no-repeat;
             background-size: 230% 100%;
@@ -604,15 +605,11 @@
         .ech-ig    .ech-shine { animation-delay: 1.5s; }
         .ech-email .ech-shine { animation-delay: 3s;   }
         .ech-tt    .ech-shine { animation-delay: 4.5s; }
-        /* Zonas clicables sobre cada botón (bbox real de cada imagen) */
-        .ech-hit {
-            position: absolute; display: block; z-index: 4;
-            cursor: pointer; -webkit-tap-highlight-color: transparent;
-        }
-        .ech-fb-hit    { left: 41%; top: 8.5%;  width: 25%; height: 15.5%; }
-        .ech-ig-hit    { left: 41%; top: 29.5%; width: 24%; height: 13%;   }
-        .ech-email-hit { left: 36%; top: 51.5%; width: 34%; height: 14%;   }
-        .ech-tt-hit    { left: 40%; top: 72.5%; width: 29%; height: 17.5%; }
+        /* Posiciones de la columna derecha (calibradas contra el diseño original de Anette) */
+        .ech-fb    { left: 78%;   top: 30%;   width: 15.5%; }
+        .ech-ig    { left: 78.3%; top: 42.6%; width: 14.8%; }
+        .ech-email { left: 70.5%; top: 55.8%; width: 24.5%; }
+        .ech-tt    { left: 78%;   top: 66.8%; width: 16.5%; }
 
         /* === FOOTER (final de la página) === */
         .site-footer {
@@ -1212,17 +1209,11 @@
             <img class="bg" src="assets/echame.webp?v=605fondo" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">Échame un grito — Contacto del Huey Coyote</h2>
 
-            <!-- 4 botones-sticker (cada imagen ya viene posicionada en su lienzo) + destello -->
-            <div class="ech-layer ech-fb"><img src="assets/ech-fb.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-fb.webp?v=1');mask-image:url('assets/ech-fb.webp?v=1')"></span></div>
-            <div class="ech-layer ech-ig"><img src="assets/ech-ig.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-ig.webp?v=1');mask-image:url('assets/ech-ig.webp?v=1')"></span></div>
-            <div class="ech-layer ech-email"><img src="assets/ech-email.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-email.webp?v=1');mask-image:url('assets/ech-email.webp?v=1')"></span></div>
-            <div class="ech-layer ech-tt"><img src="assets/ech-tt.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-tt.webp?v=1');mask-image:url('assets/ech-tt.webp?v=1')"></span></div>
-
-            <!-- zonas clicables sobre cada botón → redes sociales (misma pestaña: el navegador in-app bloquea _blank) -->
-            <a class="ech-hit ech-fb-hit"    href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" aria-label="Facebook"></a>
-            <a class="ech-hit ech-ig-hit"    href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" aria-label="Instagram"></a>
-            <a class="ech-hit ech-email-hit" href="mailto:contacto@elhueycoyote.com" aria-label="Email contacto"></a>
-            <a class="ech-hit ech-tt-hit"    href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" aria-label="TikTok"></a>
+            <!-- 4 botones-sticker posicionados en la columna derecha (diseño original) + destello, clicables (misma pestaña) -->
+            <a class="ech-btn ech-fb" href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" aria-label="Facebook"><img src="assets/ech-fb-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-fb-c.webp?v=1');mask-image:url('assets/ech-fb-c.webp?v=1')"></span></a>
+            <a class="ech-btn ech-ig" href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" aria-label="Instagram"><img src="assets/ech-ig-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-ig-c.webp?v=1');mask-image:url('assets/ech-ig-c.webp?v=1')"></span></a>
+            <a class="ech-btn ech-email" href="mailto:contacto@elhueycoyote.com" aria-label="Email contacto"><img src="assets/ech-email-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-email-c.webp?v=1');mask-image:url('assets/ech-email-c.webp?v=1')"></span></a>
+            <a class="ech-btn ech-tt" href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" aria-label="TikTok"><img src="assets/ech-tt-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-tt-c.webp?v=1');mask-image:url('assets/ech-tt-c.webp?v=1')"></span></a>
         </section>
 
         <!-- FOOTER (final de la página) -->
