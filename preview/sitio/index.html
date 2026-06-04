@@ -605,11 +605,11 @@
         .ech-ig    .ech-shine { animation-delay: 1.5s; }
         .ech-email .ech-shine { animation-delay: 3s;   }
         .ech-tt    .ech-shine { animation-delay: 4.5s; }
-        /* Posiciones de la columna derecha (calibradas contra el diseño original de Anette) */
-        .ech-fb    { left: 78%;   top: 30%;   width: 15.5%; }
-        .ech-ig    { left: 78.3%; top: 42.6%; width: 14.8%; }
-        .ech-email { left: 70.5%; top: 55.8%; width: 24.5%; }
-        .ech-tt    { left: 78%;   top: 66.8%; width: 16.5%; }
+        /* Posiciones de la columna derecha (calibradas contra el diseño original de Anette) — un poco más chicos */
+        .ech-fb    { left: 79.1%; top: 30.7%; width: 13.2%; }
+        .ech-ig    { left: 79.4%; top: 43.2%; width: 12.6%; }
+        .ech-email { left: 72.3%; top: 56.5%; width: 20.8%; }
+        .ech-tt    { left: 79.2%; top: 67.5%; width: 14%;   }
 
         /* === FOOTER (final de la página) === */
         .site-footer {
@@ -911,7 +911,8 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes music-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-        /* === HEADER fijo TRANSPARENTE con el divisor "El Huey Coyote" === */
+        /* === HEADER fijo: divisor "El Huey Coyote" — alto como los otros divisores,
+              fondo metálico más transparente, logo a tono = botón al inicio === */
         .site-header {
             position: fixed;
             top: 0;
@@ -923,14 +924,28 @@
             display: none;            /* aparece al abrir el changarro */
             align-items: center;
             justify-content: center;
-            background: transparent;  /* header transparente */
-            padding: 0;
-            line-height: 0;
+            height: calc(min(100vw, 540px) * 0.16435);   /* mismo alto que los divisores */
+            overflow: hidden;
         }
-        .site-header .header-divider {
-            display: block;
-            width: 100%;
-            height: auto;
+        /* fondo metálico (igual que los divisores) pero más transparente */
+        .site-header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url('assets/divider-metal-bg.png?v=3') center center / 100% 100% no-repeat;
+            filter: brightness(0.85);
+            opacity: 0.42;
+            pointer-events: none;
+        }
+        /* el logo es un botón que lleva al inicio (headliner); queda a tono full */
+        .site-header .header-logo-link {
+            position: relative; z-index: 1;
+            display: flex; align-items: center; justify-content: center;
+            height: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .site-header .header-logo-link img {
+            height: 74%; width: auto; display: block;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.45));
         }
         body.changarro-abierto .site-header { display: flex; }
 
@@ -1021,7 +1036,7 @@
     <!-- Si ya vio la cortina antes, entrar directo sin parpadeo (se evalúa antes de pintar) -->
     <script>try{if(localStorage.getItem('huey_portada_vista')==='1'){document.documentElement.classList.add('portada-vista');document.body.classList.add('changarro-abierto');}}catch(e){}</script>
     <!-- HEADER fijo: siempre arriba al scrollear -->
-    <header class="site-header" id="site-header"><img class="header-divider" src="assets/divider-headliner-elhuey.webp?v=1" alt="El Huey Coyote"></header>
+    <header class="site-header" id="site-header"><a class="header-logo-link" href="#headliner" aria-label="Ir al inicio (Headliner)"><img src="assets/header-logo.webp?v=1" alt="El Huey Coyote"></a></header>
     <div class="site-wrap">
 
         <!-- HEADLINER (sección 2) -->
