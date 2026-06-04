@@ -745,6 +745,14 @@
             transform: translateY(0);
         }
 
+        /* Pósters individuales de ¿Ya me conoces? — cada imagen es lienzo completo, encimada sobre el fondo */
+        #sobre-mi .poster-ov {
+            position: absolute; inset: 0;
+            width: 100%; height: auto;
+            pointer-events: none;
+            z-index: 2;
+        }
+
         /* === MERCH siempre visible — animación removida + altura garantizada por CSS (aspect-ratio)
               para que NUNCA colapse a 0 en Android aunque container-type/imagen tarden o fallen === */
         #merch { aspect-ratio: 1086 / 1937; min-height: 60vw; }
@@ -1192,11 +1200,16 @@
             <img class="bg" src="assets/conoces/seccion-diseno-anette.webp?v=604mero" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
 
+            <!-- 3 pósters individuales (cada imagen ya viene posicionada en su lienzo), sobre el fondo -->
+            <img class="poster-ov poster-ov-1" src="assets/poster1.webp?v=1" alt="" aria-hidden="true" loading="lazy">
+            <img class="poster-ov poster-ov-2" src="assets/poster2.webp?v=1" alt="" aria-hidden="true" loading="lazy">
+            <img class="poster-ov poster-ov-3" src="assets/poster3.webp?v=1" alt="" aria-hidden="true" loading="lazy">
+
             <!-- "El mero mero" animado que se raya (el horneado del fondo ya fue borrado del webp) -->
             <div class="mero-mero"><span style="transform:translateY(2px) rotate(-5deg)">E</span><span style="transform:translateY(-2px) rotate(3deg)">l</span> <span style="transform:translateY(1px) rotate(-6deg)">m</span><span style="transform:translateY(-3px) rotate(2deg)">E</span><span style="transform:translateY(2px) rotate(-3deg)">R</span><span style="transform:translateY(-1px) rotate(4deg)">o</span> <span style="transform:translateY(-2px) rotate(-4deg)">m</span><span style="transform:translateY(2px) rotate(5deg)">E</span><span style="transform:translateY(-2px) rotate(-5deg)">R</span><span style="transform:translateY(1px) rotate(2deg)">o</span></div>
 
-            <!-- Capa de TEXTOS: coordenadas ABSOLUTAS exactas del .ai (page-coords) -->
-            <div class="conoce-text">
+            <!-- Capa de TEXTOS HTML: ya NO se usa (los pósters nuevos traen su texto integrado) -->
+            <div class="conoce-text" style="display:none">
                 <div class="ct" style="left:66.9%;top:41.9%;font-size:2.6cqw;color:#f22b2a;font-weight:800;font-family:'Poppins',sans-serif;-webkit-text-stroke:1px #ffffff;paint-order:stroke fill;filter:drop-shadow(1.3px 0 0 #0070c0) drop-shadow(-1.3px 0 0 #0070c0) drop-shadow(0 1.3px 0 #0070c0) drop-shadow(0 -1.3px 0 #0070c0);transform:translate(-50%,-50%) rotate(5.52deg)">AQUÍ VA UN PEQUEÑO RESUMEN</div>
                 <div class="ct" style="left:18.3%;top:43.3%;font-size:4.2cqw;color:#000000;font-weight:900;-webkit-text-stroke:0.08px #000000;paint-order:stroke fill;transform:translate(-50%,-50%) rotate(-12.5deg)">UN TÍTULO COOL</div>
                 <div class="ct" style="left:64.3%;top:44.3%;font-size:2.6cqw;color:#f22b2a;font-weight:800;font-family:'Poppins',sans-serif;-webkit-text-stroke:1px #ffffff;paint-order:stroke fill;filter:drop-shadow(1.3px 0 0 #0070c0) drop-shadow(-1.3px 0 0 #0070c0) drop-shadow(0 1.3px 0 #0070c0) drop-shadow(0 -1.3px 0 #0070c0);transform:translate(-50%,-50%) rotate(5.52deg)">DE ÉL O INFORMACIÓN MUY</div>
