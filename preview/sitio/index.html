@@ -194,6 +194,8 @@
             font-style: normal;
             font-size: clamp(18px, 6vw, 33px);
             -webkit-text-stroke: 1.3px #000;
+            /* brillo más tenue que el resto de letreros */
+            text-shadow: 0 0 2px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.45);
         }
         /* PRÓXIMOS y SHOWS son 2 áreas separadas con coords individuales de Illustrator */
         .area-proximos {
@@ -265,7 +267,8 @@
             font-size: clamp(10px, 3.0vw, 15px);
             color: #111;
             -webkit-text-stroke: 0;
-            text-shadow: none;
+            /* contorno de brillo para que resalte como los demás */
+            text-shadow: 0 0 4px rgba(255,255,255,0.95), 0 0 7px rgba(255,255,255,0.6);
             overflow: visible;
         }
         .area-echame {
@@ -319,8 +322,8 @@
         .stool-apple   { top: 83.13%; left: 4.6%;  width: 11.3%; height: 3.15%; }
         /* YouTube (centro) — achicado un chirris */
         .stool-youtube { top: 83.13%; left: 34.1%; width: 10.3%; height: 3.15%; }
-        /* Amazon (derecha) — reducido más (se veía grande) */
-        .stool-amazon  { top: 82.7%;  left: 73.1%; width: 9.0%;  height: 3.1%; }
+        /* Amazon (derecha) — reducido un poco más */
+        .stool-amazon  { top: 82.88%; left: 73.6%; width: 8.0%;  height: 2.75%; }
 
         /* Interstitial "PARA LOS MÁS FRESAS" antes de abrir Apple Music */
         .apple-ad-overlay {
@@ -409,8 +412,8 @@
         }
         .platform-logo:hover img,
         .platform-logo:active img { transform: scale(1.06); }
-        .platform-logo .logo-apple   { height: 3.7cqw; }
-        .platform-logo .logo-youtube { height: 4.0cqw; }
+        .platform-logo .logo-apple   { height: 3.4cqw; }
+        .platform-logo .logo-youtube { height: 3.6cqw; }
         .platform-logo .logo-amazon  { height: 4.6cqw; }
         .platform-logo .logo-spotify { height: 4.0cqw; }
 
@@ -561,6 +564,71 @@
         .social-ig     { top: 42.5%; left: 79%;   width: 12%;   height: 8%;    }
         .social-email  { top: 56%;   left: 73%;   width: 22%;   height: 7%;    }
         .social-tt     { top: 65%;   left: 77%;   width: 17%;   height: 10.5%; }
+
+        /* === FOOTER (final de la página) === */
+        .site-footer {
+            width: 100%;
+            background: #b3120f;
+            background-image: linear-gradient(180deg, #c4161c 0%, #9e0f0c 100%);
+            border-top: 4px solid #ffd84a;
+            color: #fff;
+            padding: 26px 18px 30px;
+            text-align: center;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .footer-inner { max-width: 540px; margin: 0 auto; }
+        .footer-brand {
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-size: clamp(24px, 8vw, 38px);
+            letter-spacing: 0.04em;
+            color: #ffd84a;
+            margin: 0 0 6px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+        .footer-tag {
+            font-size: clamp(12px, 3.6vw, 15px);
+            font-weight: 600;
+            color: #ffe9a6;
+            margin: 0 0 16px;
+        }
+        .footer-social {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .footer-social a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: clamp(13px, 3.8vw, 16px);
+            transition: color 0.18s ease;
+        }
+        .footer-social a:hover,
+        .footer-social a:active { color: #ffd84a; }
+        .footer-social .dot { color: #ffd84a; font-weight: 700; }
+        .footer-mail {
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: clamp(13px, 3.8vw, 15px);
+            border-bottom: 2px solid rgba(255,216,74,0.7);
+            padding-bottom: 1px;
+            margin-bottom: 16px;
+            transition: color 0.18s ease, border-color 0.18s ease;
+        }
+        .footer-mail:hover,
+        .footer-mail:active { color: #ffd84a; border-color: #ffd84a; }
+        .footer-copy {
+            font-size: clamp(10px, 3vw, 12px);
+            color: rgba(255,255,255,0.78);
+            margin: 0;
+            letter-spacing: 0.02em;
+        }
 
         /* === DIVISORES ENTRE SECCIONES === */
         .divider {
@@ -1112,6 +1180,23 @@
                href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F"
                target="_blank" rel="noopener noreferrer" aria-label="TikTok"></a>
         </section>
+
+        <!-- FOOTER (final de la página) -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <p class="footer-brand">EL HUEY COYOTE</p>
+                <p class="footer-tag">Puro corrido, pura fiesta · Changarro musical 🌮🎸</p>
+                <nav class="footer-social" aria-label="Redes sociales">
+                    <a href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
+                    <span class="dot">•</span>
+                    <a href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <span class="dot">•</span>
+                    <a href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" target="_blank" rel="noopener noreferrer">TikTok</a>
+                </nav>
+                <a class="footer-mail" href="mailto:contacto@elhueycoyote.com">contacto@elhueycoyote.com</a>
+                <p class="footer-copy">© 2026 El Huey Coyote · Todos los derechos reservados</p>
+            </div>
+        </footer>
 
     </div>
 
