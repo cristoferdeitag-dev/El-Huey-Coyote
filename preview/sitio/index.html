@@ -167,7 +167,8 @@
             letter-spacing: 0.02em;
             -webkit-text-stroke: 1.3px #000;
             paint-order: stroke fill;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            /* contorno de brillo + sombra para que los letreros sobresalgan del fondo */
+            text-shadow: 0 0 4px rgba(255,255,255,0.9), 0 0 8px rgba(255,255,255,0.55), 0 2px 4px rgba(0,0,0,0.45);
             pointer-events: none;
             white-space: nowrap;
         }
@@ -411,6 +412,7 @@
         .platform-logo .logo-apple   { height: 3.7cqw; }
         .platform-logo .logo-youtube { height: 4.0cqw; }
         .platform-logo .logo-amazon  { height: 4.6cqw; }
+        .platform-logo .logo-spotify { height: 4.0cqw; }
 
         /* === PRÓXIMOS SHOWS — lista de presentaciones (texto variable sobre el fondo) === */
         .shows-list {
@@ -483,8 +485,8 @@
             -webkit-tap-highlight-color: transparent;
             transition: transform 0.2s ease;
             transform: translateY(-50%);
-            /* iluminación delgada: halo claro fino que levanta el texto, sin parecer letrero de circo */
-            text-shadow: 0 0 2px rgba(255,255,255,0.95), 0 0 4px rgba(255,255,255,0.65);
+            /* iluminación delgada: halo claro que levanta el texto, sin parecer letrero de circo */
+            text-shadow: 0 0 3px rgba(255,255,255,1), 0 0 6px rgba(255,255,255,0.85), 0 0 9px rgba(255,255,255,0.5);
         }
         .merch-item:hover,
         .merch-item:active,
@@ -980,9 +982,9 @@
             <h3 class="seo-only">Especiales del mes: Niu Jork, Ostin, Mayami</h3>
             <!-- NIU JORK / OSTIN / MAYAMI ahora van integrados en la imagen de fondo (Anette los hornea al fondo nuevo) -->
 
-            <a class="platform-link pos-spotify"
+            <a class="platform-link platform-logo pos-spotify"
                href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw"
-               target="_blank" rel="noopener noreferrer">Spotify</a>
+               target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img class="logo-spotify" src="assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
             <a class="platform-link platform-logo pos-youtube"
                href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG"
                target="_blank" rel="noopener noreferrer" aria-label="YouTube Music"><img class="logo-youtube" src="assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
