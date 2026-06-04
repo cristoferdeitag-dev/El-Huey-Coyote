@@ -218,7 +218,7 @@
         @media (prefers-reduced-motion: reduce) {
             .area-pide, .area-proximos, .area-shows,
             .area-conoces, .area-echame,
-            .social-link { animation: none; }
+            .ech-shine { animation: none; }
         }
 
         /* 4 áreas — coords exactas Photoshop de Anette (canvas 1086×1937, X/Y = centro bbox) */
@@ -564,39 +564,55 @@
         .pos-price-orig-ch  { top: 38.4%; left: 79.0%; }
         .pos-price-orig-ca  { top: 41.4%; left: 80.6%; }
 
-        /* === CONTACTO (Échame un grito) — stickers recortados que brincan en secuencia === */
-        .social-link {
-            position: absolute;
-            display: block;
-            cursor: pointer;
-            background: transparent;
-            -webkit-tap-highlight-color: transparent;
-            transform-origin: center center;
-            /* mismo mini-brinco suave que el headliner */
-            animation: letrero-hop 5.5s ease-in-out infinite;
-        }
-        .social-link img {
+        /* === CONTACTO (Échame un grito) — botones sticker (lienzo completo) + destello secuencial === */
+        /* Capa visual de cada botón: imagen a lienzo completo, encimada sobre el fondo */
+        .ech-layer {
+            position: absolute; inset: 0;
             width: 100%;
-            height: 100%;
-            object-fit: fill;
-            display: block;
             pointer-events: none;
-            /* sombrita para que se sienta que se alza del muro */
-            filter: drop-shadow(0 3px 4px rgba(0,0,0,0.45));
+            z-index: 2;
         }
-        .social-link:active img { filter: drop-shadow(0 4px 5px rgba(0,0,0,0.5)) brightness(1.08); }
-
-        /* Orden del brinco: Facebook → Instagram → contacto@ → TikTok, y se repite */
-        .social-fb    { animation-delay: 0s;   }
-        .social-ig    { animation-delay: 0.5s; }
-        .social-email { animation-delay: 1.0s; }
-        .social-tt    { animation-delay: 1.5s; }
-
-        /* Posiciones corregidas — calibradas pixel-perfect contra echame.png */
-        .social-fb     { top: 32%;   left: 77.5%; width: 15%;   height: 8%;    }
-        .social-ig     { top: 42.5%; left: 79%;   width: 12%;   height: 8%;    }
-        .social-email  { top: 56%;   left: 73%;   width: 22%;   height: 7%;    }
-        .social-tt     { top: 65%;   left: 77%;   width: 17%;   height: 10.5%; }
+        .ech-layer img {
+            display: block; width: 100%; height: auto;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.38));
+        }
+        /* Destello tipo sticker: una franja de luz cruza la FORMA del botón (mask) */
+        .ech-shine {
+            position: absolute; inset: 0;
+            pointer-events: none;
+            z-index: 3;
+            background: linear-gradient(112deg, rgba(255,255,255,0) 38%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0) 62%);
+            background-repeat: no-repeat;
+            background-size: 230% 100%;
+            background-position: 190% 0;
+            -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            mix-blend-mode: screen;
+            opacity: 0;
+            animation: ech-shine 6s ease-in-out infinite;
+        }
+        /* el destello entra, cruza y sale; el resto del ciclo está apagado (para que sea por turnos) */
+        @keyframes ech-shine {
+            0%   { background-position: 190% 0; opacity: 0; }
+            2%   { opacity: 1; }
+            13%  { background-position: -70% 0; opacity: 1; }
+            16%  { background-position: -70% 0; opacity: 0; }
+            100% { background-position: -70% 0; opacity: 0; }
+        }
+        /* Orden del destello: Facebook → Instagram → contacto@ → TikTok, y se repite */
+        .ech-fb    .ech-shine { animation-delay: 0s;   }
+        .ech-ig    .ech-shine { animation-delay: 1.5s; }
+        .ech-email .ech-shine { animation-delay: 3s;   }
+        .ech-tt    .ech-shine { animation-delay: 4.5s; }
+        /* Zonas clicables sobre cada botón (bbox real de cada imagen) */
+        .ech-hit {
+            position: absolute; display: block; z-index: 4;
+            cursor: pointer; -webkit-tap-highlight-color: transparent;
+        }
+        .ech-fb-hit    { left: 41%; top: 8.5%;  width: 25%; height: 15.5%; }
+        .ech-ig-hit    { left: 41%; top: 29.5%; width: 24%; height: 13%;   }
+        .ech-email-hit { left: 36%; top: 51.5%; width: 34%; height: 14%;   }
+        .ech-tt-hit    { left: 40%; top: 72.5%; width: 29%; height: 17.5%; }
 
         /* === FOOTER (final de la página) === */
         .site-footer {
@@ -1193,22 +1209,20 @@
 
         <!-- ÉCHAME UN GRITO (sección 6 — Contacto) -->
         <section id="contacto" class="reveal-init">
-            <img class="bg" src="assets/echame.webp?v=604st" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
+            <img class="bg" src="assets/echame.webp?v=605fondo" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">Échame un grito — Contacto del Huey Coyote</h2>
 
-            <!-- 4 stickers clicables → redes sociales -->
-            <a class="social-link social-fb"
-               href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA"
-               target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="assets/st-fb.png?v=1" alt="" aria-hidden="true"></a>
-            <a class="social-link social-ig"
-               href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA=="
-               target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="assets/st-ig.png?v=1" alt="" aria-hidden="true"></a>
-            <a class="social-link social-email"
-               href="mailto:contacto@elhueycoyote.com"
-               aria-label="Email contacto"><img src="assets/st-email.png?v=1" alt="" aria-hidden="true"></a>
-            <a class="social-link social-tt"
-               href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F"
-               target="_blank" rel="noopener noreferrer" aria-label="TikTok"><img src="assets/st-tt.png?v=1" alt="" aria-hidden="true"></a>
+            <!-- 4 botones-sticker (cada imagen ya viene posicionada en su lienzo) + destello -->
+            <div class="ech-layer ech-fb"><img src="assets/ech-fb.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-fb.webp?v=1');mask-image:url('assets/ech-fb.webp?v=1')"></span></div>
+            <div class="ech-layer ech-ig"><img src="assets/ech-ig.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-ig.webp?v=1');mask-image:url('assets/ech-ig.webp?v=1')"></span></div>
+            <div class="ech-layer ech-email"><img src="assets/ech-email.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-email.webp?v=1');mask-image:url('assets/ech-email.webp?v=1')"></span></div>
+            <div class="ech-layer ech-tt"><img src="assets/ech-tt.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-tt.webp?v=1');mask-image:url('assets/ech-tt.webp?v=1')"></span></div>
+
+            <!-- zonas clicables sobre cada botón → redes sociales (misma pestaña: el navegador in-app bloquea _blank) -->
+            <a class="ech-hit ech-fb-hit"    href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" aria-label="Facebook"></a>
+            <a class="ech-hit ech-ig-hit"    href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" aria-label="Instagram"></a>
+            <a class="ech-hit ech-email-hit" href="mailto:contacto@elhueycoyote.com" aria-label="Email contacto"></a>
+            <a class="ech-hit ech-tt-hit"    href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" aria-label="TikTok"></a>
         </section>
 
         <!-- FOOTER (final de la página) -->
