@@ -1412,9 +1412,12 @@
                 e.preventDefault();
                 appleAd.classList.add('abierto');   // solo muestra la pantalla completa
             });
-            // El botón es un enlace real (href a Apple Music) y abre en la MISMA pestaña.
-            // No le ponemos JS: el navegador navega solo al tocarlo. (Abrir en pestaña nueva
-            // lo bloquea el navegador dentro de apps como Telegram → por eso, misma pestaña.)
+            // El botón es un enlace real (href a Apple Music, misma pestaña). Además
+            // forzamos la navegación por JS (window.location) como respaldo: así funciona
+            // aunque algún navegador in-app (Telegram, etc.) ignore el clic del enlace.
+            appleAdGo.addEventListener('click', function () {
+                window.location.href = 'https://music.apple.com/mx/artist/hueycoyote/1088136173';
+            });
             appleAdCerrar.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); cerrarAppleAd(); });
             // tocar la imagen (fuera del botón) cierra la pantalla completa
             if (appleAdImg) appleAdImg.addEventListener('click', function () { cerrarAppleAd(); });
