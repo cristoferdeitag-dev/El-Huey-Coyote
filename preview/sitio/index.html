@@ -198,11 +198,12 @@
             11%   { transform: translateY(0); }
             100%  { transform: translateY(0); }
         }
-        .area-pide,
-        .area-proximos,
-        .area-shows,
-        .area-conoces,
-        .area-echame {
+        /* El brinco solo arranca cuando el changarro ya abrió del todo (body.headliner-anim) */
+        body.headliner-anim .area-pide,
+        body.headliner-anim .area-proximos,
+        body.headliner-anim .area-shows,
+        body.headliner-anim .area-conoces,
+        body.headliner-anim .area-echame {
             animation: headliner-hop 7.2s ease-in-out infinite;
         }
         /* PRÓXIMOS y SHOWS brincan juntos como un solo letrero */
@@ -380,33 +381,43 @@
         .apple-ad-overlay.abierto { display: flex; }
         .apple-ad-overlay .ad-box {
             position: relative;
-            max-width: 540px;
-            width: 100%;
+            display: inline-block;
             animation: adPop 0.32s ease;
         }
         @keyframes adPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .apple-ad-overlay img.ad-img {
-            width: 100%;
-            height: auto;
             display: block;
+            height: auto; width: auto;
+            max-height: 86vh; max-width: 90vw;
             border-radius: 14px;
             border: 3px solid #ffd84a;
             box-shadow: 0 10px 40px rgba(0,0,0,0.6);
         }
-        .apple-ad-overlay .ad-go {
-            display: block;
-            margin: 14px auto 0;
-            background: #c4161c;
-            color: #fff;
-            border: 2px solid #ffd84a;
-            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
-            font-size: 18px;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            padding: 11px 26px;
-            border-radius: 40px;
+        /* Atenúa la imagen (un poco más arriba) y deja BRILLANTE la parte de abajo
+           donde está la manzanita + "El HueyCoyote" → eso es lo que resalta. */
+        .apple-ad-overlay .ad-dim {
+            position: absolute; inset: 0;
+            border-radius: 14px;
+            pointer-events: none;
+            background: linear-gradient(to bottom,
+                rgba(0,0,0,0.45) 0%,
+                rgba(0,0,0,0.34) 50%,
+                rgba(0,0,0,0.12) 76%,
+                rgba(0,0,0,0.00) 86%);
+        }
+        /* Botón = la manzanita + "El HueyCoyote" abajo; va a Apple Music, con glow que late */
+        .apple-ad-overlay .ad-cta {
+            position: absolute;
+            left: 7%; right: 7%;
+            bottom: 11%; height: 10%;
             cursor: pointer;
-            text-decoration: none;
+            border-radius: 16px;
+            -webkit-tap-highlight-color: transparent;
+            animation: cta-glow 1.7s ease-in-out infinite;
+        }
+        @keyframes cta-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,216,74,0); }
+            50%      { box-shadow: 0 0 20px 5px rgba(255,216,74,0.6); }
         }
         .apple-ad-overlay .ad-cerrar {
             position: absolute;
@@ -1053,8 +1064,9 @@
         <div class="apple-ad-overlay" id="apple-ad">
             <div class="ad-box">
                 <button class="ad-cerrar" id="apple-ad-cerrar" aria-label="Cerrar">&times;</button>
-                <img class="ad-img" src="assets/apple-fresas-ad.webp?v=605" alt="Para los más fresas — El Huey Coyote">
-                <a class="ad-go" id="apple-ad-go" href="#" target="_blank" rel="noopener">Ir a Apple Music 🍎</a>
+                <img class="ad-img" src="assets/apple-fresas-ad.webp?v=606" alt="Para los más fresas — El Huey Coyote">
+                <div class="ad-dim" aria-hidden="true"></div>
+                <a class="ad-cta" id="apple-ad-go" href="#" target="_blank" rel="noopener" aria-label="Ir a Apple Music del Huey Coyote"></a>
             </div>
         </div>
 
@@ -1267,6 +1279,8 @@
             // Visitante que regresa / hace refresh → entra directo, sin cortina
             if (portada) { portada.style.pointerEvents = 'none'; portada.style.display = 'none'; }
             document.body.classList.add('changarro-abierto');
+            // changarro ya abierto → arranca el brinco del headliner
+            document.body.classList.add('headliner-anim');
         } else {
             // Primera vez → muestra la cortina y bloquea el scroll detrás de ella
             document.body.classList.add('cortina-bajada');
@@ -1287,7 +1301,12 @@
             // Muestra el botón de música del Huey Coyote ya que se abrió el changarro
             document.body.classList.add('changarro-abierto');
             // Ya que la cortina terminó de subir, la sacamos del render (libera GPU → scroll más fluido)
-            setTimeout(() => { portada.style.pointerEvents = 'none'; portada.style.display = 'none'; }, 1700);
+            //  y HASTA ENTONCES arranca el brinco de los letreros del headliner.
+            setTimeout(() => {
+                portada.style.pointerEvents = 'none';
+                portada.style.display = 'none';
+                document.body.classList.add('headliner-anim');
+            }, 1700);
         });
 
         // Botón de música: al click abre la lista de rolitas del Huey Coyote
