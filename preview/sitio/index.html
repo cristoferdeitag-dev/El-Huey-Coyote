@@ -181,6 +181,36 @@
             transform: scale(0.96);
         }
 
+        /* === Mini-brinco suave en secuencia, en bucle ===
+           Orden: PRÓXIMOS SHOWS → PIDE PARA LLEVAR → ¿YA ME CONOCES? → ÉCHAME UN GRITO,
+           pausa, y se repite. */
+        @keyframes letrero-hop {
+            0%   { transform: translateY(0); }
+            4%   { transform: translateY(-10px); }
+            9%   { transform: translateY(0); }
+            12%  { transform: translateY(-3px); }
+            16%  { transform: translateY(0); }
+            100% { transform: translateY(0); }
+        }
+        .area-pide,
+        .area-proximos,
+        .area-shows,
+        .area-conoces,
+        .area-echame {
+            animation: letrero-hop 4.5s ease-in-out infinite;
+        }
+        /* PRÓXIMOS y SHOWS brincan juntos como un solo letrero */
+        .area-proximos,
+        .area-shows { animation-delay: 0s; }
+        .area-pide    { animation-delay: 0.5s; }
+        .area-conoces { animation-delay: 1.0s; }
+        .area-echame  { animation-delay: 1.5s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .area-pide, .area-proximos, .area-shows,
+            .area-conoces, .area-echame { animation: none; }
+        }
+
         /* 4 áreas — coords exactas Photoshop de Anette (canvas 1086×1937, X/Y = centro bbox) */
         .area-pide {
             top: 17.13%;
@@ -286,6 +316,8 @@
             font-size: clamp(12px, 3.35vw, 18px);
             color: #fcca0f;
             -webkit-text-stroke: 0.3px #000;
+            /* sin brillo: solo una sombra fina para legibilidad */
+            text-shadow: 0 1px 2px rgba(0,0,0,0.45);
             white-space: normal;
             line-height: 1;
             transform: rotate(-6deg);
