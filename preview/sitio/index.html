@@ -190,12 +190,13 @@
             20%  { transform: translateY(0); }
             100% { transform: translateY(0); }
         }
-        /* Headliner: estrictamente UNO A LA VEZ — un letrero brinca (~0.8s),
-           ~1s de espera, y hasta entonces brinca el siguiente. Ciclo = 4 × 1.8s. */
+        /* Headliner: estrictamente UNO A LA VEZ — un letrero brinca (~0.6s, un pelín
+           más rápido), corta espera, y hasta entonces brinca el siguiente.
+           Ciclo = 5 × 1.4s = 7s. */
         @keyframes headliner-hop {
             0%    { transform: translateY(0); }
-            5.5%  { transform: translateY(-9px); }
-            11%   { transform: translateY(0); }
+            4%    { transform: translateY(-9px); }
+            8.6%  { transform: translateY(0); }
             100%  { transform: translateY(0); }
         }
         /* El brinco solo arranca cuando el changarro ya abrió del todo (body.headliner-anim) */
@@ -203,21 +204,24 @@
         body.headliner-anim .area-proximos,
         body.headliner-anim .area-shows,
         body.headliner-anim .area-conoces,
-        body.headliner-anim .area-echame {
-            animation: headliner-hop 7.2s ease-in-out infinite;
+        body.headliner-anim .area-echame,
+        body.headliner-anim .area-fotitos {
+            animation: headliner-hop 7s ease-in-out infinite;
         }
         /* Delays con la MISMA especificidad que la regla de animación (body.headliner-anim ...)
            y declarados DESPUÉS, para que el shorthand 'animation' no los resetee a 0.
-           PRÓXIMOS y SHOWS brincan juntos como un solo letrero. */
+           PRÓXIMOS y SHOWS brincan juntos como un solo letrero.
+           FOTITOS brinca al final, justo después de ÉCHAME UN GRITO. */
         body.headliner-anim .area-proximos,
         body.headliner-anim .area-shows   { animation-delay: 0s;   }
-        body.headliner-anim .area-pide     { animation-delay: 1.8s; }
-        body.headliner-anim .area-conoces  { animation-delay: 3.6s; }
-        body.headliner-anim .area-echame   { animation-delay: 5.4s; }
+        body.headliner-anim .area-pide     { animation-delay: 1.4s; }
+        body.headliner-anim .area-conoces  { animation-delay: 2.8s; }
+        body.headliner-anim .area-echame   { animation-delay: 4.2s; }
+        body.headliner-anim .area-fotitos  { animation-delay: 5.6s; }
 
         @media (prefers-reduced-motion: reduce) {
             .area-pide, .area-proximos, .area-shows,
-            .area-conoces, .area-echame,
+            .area-conoces, .area-echame, .area-fotitos,
             .ech-shine { animation: none; }
         }
 
@@ -1414,8 +1418,8 @@
         <!-- Divisor: anuncia Fotitos (Galería) -->
         <div class="divider-marquee" role="img" aria-label="Fotitos">
             <div class="divider-track">
-                <img src="assets/divider-fotitos-text.png?v=1" alt="Fotitos">
-                <img src="assets/divider-fotitos-text.png?v=1" alt="" aria-hidden="true">
+                <img src="assets/divider-fotitos-text.png?v=2" alt="Fotitos">
+                <img src="assets/divider-fotitos-text.png?v=2" alt="" aria-hidden="true">
             </div>
         </div>
 
