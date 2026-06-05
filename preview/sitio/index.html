@@ -1411,11 +1411,17 @@
             </div>
         </section>
 
+        <!-- Divisor: anuncia Fotitos (Galería) -->
+        <div class="divider-marquee" role="img" aria-label="Fotitos">
+            <div class="divider-track">
+                <img src="assets/divider-fotitos-text.png?v=1" alt="Fotitos">
+                <img src="assets/divider-fotitos-text.png?v=1" alt="" aria-hidden="true">
+            </div>
+        </div>
+
         <!-- GALERÍA DE FOTOS (Fotitos) -->
         <section id="galeria">
             <div class="galeria-inner">
-                <h2 class="galeria-titulo">Galería</h2>
-                <p class="galeria-sub">📸 Fotitos del Huey Coyote</p>
                 <div class="galeria-grid" id="galeria-grid">
                     <img src="assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
                     <img src="assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
@@ -1551,13 +1557,24 @@
         if (btnCierra && portada) btnCierra.addEventListener('click', function () {
             document.documentElement.classList.remove('portada-vista');
             window.scrollTo(0, 0);
+            // 1) Coloca la cortina arriba (fuera de pantalla por arriba) SIN transición,
+            //    para garantizar el punto de partida del deslizamiento de bajada.
+            portada.style.transition = 'none';
+            portada.classList.add('subida');      // translateY(-100%) = arriba, fuera de vista
             portada.style.display = '';
             portada.style.pointerEvents = 'auto';
-            void portada.offsetHeight;            // reflow → se ve la transición de bajada
-            portada.classList.remove('subida');   // baja la cortina (cierra)
             document.body.classList.add('cortina-bajada');
             document.body.classList.remove('changarro-abierto');
             document.body.classList.remove('headliner-anim');
+            // 2) Doble requestAnimationFrame: aseguramos que el navegador pinte el estado
+            //    "arriba" antes de animar; así la transición de bajada se ve siempre
+            //    (incluso en el navegador in-app de Telegram / Safari).
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    portada.style.transition = '';     // restaura la transición de 1.6s
+                    portada.classList.remove('subida'); // baja la cortina: arriba → abajo
+                });
+            });
             // mismo sonido del changarro que al abrir
             if (audioChangarro) {
                 audioChangarro.currentTime = 0;
