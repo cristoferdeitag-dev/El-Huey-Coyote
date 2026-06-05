@@ -1022,6 +1022,58 @@
         }
         body.changarro-abierto .site-header { display: flex; }
 
+        /* === Menú hamburguesa (esquina del header) === */
+        .menu-toggle {
+            position: absolute;
+            top: 50%; right: 14px;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: 32px; height: 26px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            background: transparent; border: 0; padding: 3px 0; cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .menu-toggle span {
+            display: block; height: 3px; width: 100%;
+            background: #fff; border-radius: 3px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+            transition: transform 0.28s ease, opacity 0.2s ease;
+        }
+        body.menu-open .menu-toggle span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+        body.menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+        body.menu-open .menu-toggle span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+
+        .nav-menu {
+            position: fixed;
+            top: calc(min(100vw, 540px) * 0.16435);   /* justo debajo del header */
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            width: 100%; max-width: 540px;
+            z-index: 94;
+            background: rgba(22,22,24,0.97);
+            border-bottom: 3px solid #ffd84a;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+            display: flex; flex-direction: column;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.22s ease, transform 0.22s ease;
+        }
+        body.menu-open .nav-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+        .nav-menu a {
+            color: #fff; text-decoration: none;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-size: clamp(16px, 4.6vw, 21px);
+            letter-spacing: 0.04em; text-transform: uppercase;
+            padding: 14px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .nav-menu a:last-child { border-bottom: 0; }
+        .nav-menu a:hover, .nav-menu a:active { background: rgba(255,216,74,0.16); color: #ffd84a; }
+        /* las secciones se alinean bajo el header fijo al saltar desde el menú */
+        #merch, #proximos-shows, #sobre-mi, #contacto {
+            scroll-margin-top: calc(min(100vw, 540px) * 0.16435 + 6px);
+        }
+
         .music-panel {
             position: fixed;
             right: 14px;
@@ -1109,7 +1161,17 @@
     <!-- Si ya vio la cortina antes, entrar directo sin parpadeo (se evalúa antes de pintar) -->
     <script>try{if(localStorage.getItem('huey_portada_vista')==='1'){document.documentElement.classList.add('portada-vista');document.body.classList.add('changarro-abierto');}}catch(e){}</script>
     <!-- HEADER fijo: siempre arriba al scrollear -->
-    <header class="site-header" id="site-header"><a class="header-logo-link" href="#headliner" aria-label="Ir al inicio (Headliner)"><img src="assets/header-logo.webp?v=1" alt="El Huey Coyote"></a></header>
+    <header class="site-header" id="site-header">
+        <a class="header-logo-link" href="#headliner" aria-label="Ir al inicio (Headliner)"><img src="assets/header-logo.webp?v=1" alt="El Huey Coyote"></a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    </header>
+    <nav class="nav-menu" id="nav-menu" aria-label="Menú principal">
+        <a href="#merch">Tienda</a>
+        <a href="#proximos-shows">Shows</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#galeria">Galería de fotos</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
     <div class="site-wrap">
 
         <!-- HEADLINER (sección 2) -->
@@ -1134,7 +1196,7 @@
             <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto">
                 <span class="letrero-text">ÉCHAME UN<br>GRITO</span>
             </a>
-            <a class="menu-link area-fotitos" href="#" aria-label="Fotitos">
+            <a class="menu-link area-fotitos" href="#galeria" aria-label="Fotitos — Galería de fotos">
                 <span class="letrero-text">FOTITOS</span>
             </a>
 
@@ -1413,6 +1475,30 @@
                 audioChangarro.play().catch(() => { /* el navegador puede bloquear autoplay; no rompe nada */ });
             }
         });
+
+        // Menú hamburguesa (header)
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const open = document.body.classList.toggle('menu-open');
+                menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+            navMenu.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', function () {
+                    document.body.classList.remove('menu-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+            document.addEventListener('click', function (e) {
+                if (document.body.classList.contains('menu-open') &&
+                    !navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                    document.body.classList.remove('menu-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
 
         // Botón de música: al click abre la lista de rolitas del Huey Coyote
         const musicFab = document.getElementById('music-fab');
