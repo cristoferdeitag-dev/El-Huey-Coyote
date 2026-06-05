@@ -334,6 +334,26 @@
             transform-origin: center center;
             display: block;
         }
+        /* FOTITOS — texto blanco sobre la bolsa verde, Swiss 721 Black (estirado = "Extended") */
+        .area-fotitos {
+            top: 47.6%;
+            left: 21.5%;
+            width: 24.5%;
+            height: 4%;
+            overflow: visible;
+        }
+        .area-fotitos .letrero-text {
+            font-family: "swiss-721-bt", 'Anton', sans-serif;
+            font-weight: 900;
+            font-style: normal;
+            font-size: clamp(11px, 3.7vw, 20px);
+            color: #fff;
+            letter-spacing: 0.01em;
+            transform: scaleX(1.12);          /* simula la versión "Extended" (más ancha) */
+            -webkit-text-stroke: 0;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.45), 0 0 4px rgba(0,0,0,0.3);
+            overflow: visible;
+        }
 
         /* === 3 logos-botón sobre los bancos rojos del headliner === */
         .stool-btn {
@@ -404,10 +424,6 @@
             bottom: 3.5%; height: 5.5%;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
-            /* TEMPORAL: marca amarilla para que Anette confirme la posición del área del botón */
-            background: rgba(255,221,51,0.40);
-            border: 2px dashed #ffd84a;
-            border-radius: 10px;
         }
         .apple-ad-overlay .ad-cerrar {
             position: absolute;
@@ -1118,6 +1134,9 @@
             <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto">
                 <span class="letrero-text">ÉCHAME UN<br>GRITO</span>
             </a>
+            <a class="menu-link area-fotitos" href="#" aria-label="Fotitos">
+                <span class="letrero-text">FOTITOS</span>
+            </a>
 
             <!-- 3 logos-botón sobre los bancos rojos -->
             <a class="stool-btn stool-apple" id="btn-apple" href="#" data-url="https://music.apple.com/mx/artist/hueycoyote/1088136173" aria-label="Apple Music del Huey Coyote">
@@ -1296,7 +1315,7 @@
         <!-- FOOTER (final de la página) -->
         <footer class="site-footer">
             <div class="footer-inner">
-                <img class="footer-logo" src="assets/header-logo.webp?v=1" alt="El Huey Coyote">
+                <img class="footer-logo" src="assets/footer-logo-v2.webp?v=1" alt="El Huey Coyote">
                 <p class="footer-tag">Puro corrido, pura fiesta 🌮🎸</p>
                 <nav class="footer-social" aria-label="Redes sociales">
                     <a href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
