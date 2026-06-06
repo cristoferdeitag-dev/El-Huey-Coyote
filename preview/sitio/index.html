@@ -1160,37 +1160,39 @@
         }
 
         /* === GALERÍA DE FOTOS === */
-        #galeria {
-            background: #161618;
-            background-image: linear-gradient(180deg, #20201f 0%, #131315 100%);
-            padding: 42px 14px 50px;
-            scroll-margin-top: calc(min(100vw, 540px) * 0.16435 + 6px);
+        /* === FOTITOS: galería horizontal tipo carteles sobre fondo de metal === */
+        #galeria { background: #161618; scroll-margin-top: 0; }
+        .galeria-scroll { position: relative; }   /* el alto lo fija el JS = 100vh + recorrido horizontal */
+        .galeria-sticky {
+            position: sticky; top: 0; height: 100vh; overflow: hidden;
+            background: url('assets/galeria/galeria-fondo.webp?v=1') center center / cover no-repeat;
         }
-        .galeria-inner { max-width: 540px; margin: 0 auto; }
-        .galeria-titulo {
-            text-align: center;
-            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
-            font-size: clamp(30px, 9.5vw, 46px);
-            color: #ffd84a;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            text-shadow: 2px 3px 0 rgba(0,0,0,0.55);
-            margin: 0 0 4px;
+        .galeria-strip {
+            position: absolute; top: 0; left: 0; height: 100%;
+            display: flex; align-items: center; gap: 5vw;
+            padding: 0 16vw; will-change: transform;
         }
-        .galeria-sub {
-            text-align: center; color: #fff; opacity: 0.85;
-            font-family: 'Quicksand', sans-serif;
-            font-size: clamp(12px, 3.6vw, 15px); margin: 0 0 22px;
+        .galeria-strip img.gp {
+            width: 44vw; max-width: 240px; aspect-ratio: 1 / 1; object-fit: cover;
+            flex: 0 0 auto; display: block; cursor: pointer; background: #fff;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.5);
+            transition: filter 0.2s ease;
         }
-        .galeria-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        .galeria-grid img {
-            width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
-            display: block; border-radius: 8px;
-            border: 2px solid rgba(255,216,74,0.25);
-            cursor: pointer;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+        .galeria-strip img.gp:active { filter: brightness(1.07); }
+        /* bordes variados, tipo carteles (se repiten algunos a propósito) */
+        .gp.b1 { border: 9px solid #ffffff; }
+        .gp.b2 { border: 8px solid #15110f; }
+        .gp.b3 { border: 8px solid #e23b2e; }
+        .gp.b4 { border: 9px solid #ffd84a; }
+        .gp.b5 { border: 8px solid #1f8a3b; }
+        .gp.b6 { border: 7px solid #ffffff; outline: 4px solid #00abab; outline-offset: 0; }
+        .galeria-hint {
+            position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
+            display: flex; align-items: center; gap: 7px;
+            color: #fff; font-family: 'Quicksand', sans-serif; font-size: 13px; font-weight: 600;
+            background: rgba(0,0,0,0.5); padding: 7px 15px; border-radius: 22px;
+            pointer-events: none; letter-spacing: 0.02em; transition: opacity 0.4s ease;
         }
-        .galeria-grid img:hover, .galeria-grid img:active { transform: scale(1.03); border-color: #ffd84a; }
         /* Lightbox (ver foto grande) */
         .lightbox {
             position: fixed; inset: 0; z-index: 9998;
@@ -1424,24 +1426,27 @@
 
         <!-- GALERÍA DE FOTOS (Fotitos) -->
         <section id="galeria">
-            <div class="galeria-inner">
-                <div class="galeria-grid" id="galeria-grid">
-                    <img src="assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
-                    <img src="assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
-                    <img src="assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
-                    <img src="assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
-                    <img src="assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
-                    <img src="assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
-                    <img src="assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
-                    <img src="assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
-                    <img src="assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
-                    <img src="assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
-                    <img src="assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
-                    <img src="assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
-                    <img src="assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
-                    <img src="assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
-                    <img src="assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
-                    <img src="assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
+            <div class="galeria-scroll" id="galeria-scroll">
+                <div class="galeria-sticky">
+                    <div class="galeria-strip" id="galeria-grid">
+                        <img class="gp b1" style="transform:rotate(-5deg) translateY(-18px)" src="assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
+                        <img class="gp b3" style="transform:rotate(4deg) translateY(16px)" src="assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
+                        <img class="gp b2" style="transform:rotate(-3deg) translateY(26px)" src="assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
+                        <img class="gp b4" style="transform:rotate(6deg) translateY(-12px)" src="assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
+                        <img class="gp b5" style="transform:rotate(-7deg) translateY(18px)" src="assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
+                        <img class="gp b1" style="transform:rotate(3deg) translateY(-24px)" src="assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
+                        <img class="gp b6" style="transform:rotate(-4deg) translateY(12px)" src="assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
+                        <img class="gp b3" style="transform:rotate(7deg) translateY(22px)" src="assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
+                        <img class="gp b2" style="transform:rotate(-6deg) translateY(-14px)" src="assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
+                        <img class="gp b4" style="transform:rotate(5deg) translateY(16px)" src="assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
+                        <img class="gp b5" style="transform:rotate(-2deg) translateY(-20px)" src="assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
+                        <img class="gp b1" style="transform:rotate(8deg) translateY(12px)" src="assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
+                        <img class="gp b6" style="transform:rotate(-5deg) translateY(-16px)" src="assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
+                        <img class="gp b2" style="transform:rotate(4deg) translateY(24px)" src="assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
+                        <img class="gp b3" style="transform:rotate(-8deg) translateY(-12px)" src="assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
+                        <img class="gp b4" style="transform:rotate(5deg) translateY(18px)" src="assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
+                    </div>
+                    <div class="galeria-hint" id="galeria-hint">↓ desliza para ver más →</div>
                 </div>
             </div>
         </section>
@@ -1647,6 +1652,34 @@
             document.getElementById('lb-prev').addEventListener('click', function (e) { e.stopPropagation(); show(cur - 1); });
             document.getElementById('lb-next').addEventListener('click', function (e) { e.stopPropagation(); show(cur + 1); });
             lb.addEventListener('click', function (e) { if (e.target === lb) cerrar(); });
+        })();
+
+        // FOTITOS: al bajar por la sección, la galería se desliza HORIZONTAL (sección fija)
+        (function () {
+            const sec = document.getElementById('galeria-scroll');
+            const strip = document.getElementById('galeria-grid');
+            const hint = document.getElementById('galeria-hint');
+            if (!sec || !strip) return;
+            let maxX = 0;
+            function layout() {
+                maxX = Math.max(0, strip.scrollWidth - window.innerWidth);
+                sec.style.height = (window.innerHeight + maxX) + 'px';
+                onScroll();
+            }
+            function onScroll() {
+                const top = sec.getBoundingClientRect().top;
+                const prog = Math.min(1, Math.max(0, -top / (maxX || 1)));
+                strip.style.transform = 'translateX(' + (-prog * maxX) + 'px)';
+                if (hint) hint.style.opacity = prog > 0.02 ? '0' : '1';
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', layout);
+            window.addEventListener('load', layout);
+            strip.querySelectorAll('img').forEach(function (im) {
+                if (im.complete) layout(); else im.addEventListener('load', layout);
+            });
+            setTimeout(layout, 400);
+            layout();
         })();
 
         // Botón de música: al click abre la lista de rolitas del Huey Coyote
