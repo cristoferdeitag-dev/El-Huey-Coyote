@@ -338,25 +338,26 @@
             transform-origin: center center;
             display: block;
         }
-        /* FOTITOS — texto blanco sobre la bolsa verde, Swiss 721 Black (estirado = "Extended") */
+        /* FOTITOS — verde oscuro con contorno blanco, EdsMarketBoldSlant (igual al Illustrator de Anette).
+           Coords exactas del PDF (canvas 1086×1936): bbox x286.7-450.9 y935.9-1006.4 */
         .area-fotitos {
-            top: 47%;
-            left: 18.5%;
-            width: 25%;
-            height: 4%;
+            top: 48.33%;
+            left: 26.39%;
+            width: 15.12%;
+            height: 3.64%;
             text-align: center;
             overflow: visible;
         }
         .area-fotitos .letrero-text {
-            font-family: "ciabatta", 'Permanent Marker', cursive;
-            font-weight: 700;
-            font-style: italic;
-            font-stretch: normal;
-            font-size: clamp(13px, 4.4vw, 24px);
-            color: #fff;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(14px, 5vw, 27px);
+            color: #00381e;
             letter-spacing: 0.01em;
-            -webkit-text-stroke: 0;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.45), 0 0 4px rgba(0,0,0,0.3);
+            -webkit-text-stroke: 2.5px #fff;
+            paint-order: stroke fill;
+            text-shadow: 0 0 3px #fff, 0 0 5px rgba(255,255,255,0.7), 0 1px 2px rgba(0,0,0,0.4);
             overflow: visible;
         }
 
@@ -1529,6 +1530,26 @@
             // Primera vez → muestra la cortina y bloquea el scroll detrás de ella
             document.body.classList.add('cortina-bajada');
         }
+
+        // === Fix: los divisores SIEMPRE giran desde el inicio (sin necesidad de refresh) ===
+        // En móvil, la animación marquee a veces no arranca hasta que las imágenes terminan de
+        // decodificarse. Reiniciamos la animación cuando cada imagen carga, al window load y con refuerzos.
+        (function () {
+            function kick(track) {
+                if (!track) return;
+                track.style.animation = 'none';
+                void track.offsetWidth;   // fuerza reflow → la animación recalcula con el ancho ya listo
+                track.style.animation = '';
+            }
+            function kickAll() { document.querySelectorAll('.divider-track').forEach(kick); }
+            document.querySelectorAll('.divider-track img').forEach(function (img) {
+                if (img.complete) kick(img.closest('.divider-track'));
+                else img.addEventListener('load', function () { kick(img.closest('.divider-track')); });
+            });
+            window.addEventListener('load', kickAll);
+            setTimeout(kickAll, 600);
+            setTimeout(kickAll, 1800);
+        })();
 
         if (btnChangarro) btnChangarro.addEventListener('click', function () {
             // Marca la cortina como vista: ya no volverá a salir en futuros refresh
