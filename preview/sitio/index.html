@@ -978,13 +978,9 @@
         }
         body.changarro-abierto .music-fab { display: inline-flex; }
         .music-fab .disc {
-            width: 30px; height: 30px; border-radius: 50%; flex: 0 0 auto;
-            background: repeating-radial-gradient(circle, #1a1a1a 0 2px, #333 2px 3px);
-            position: relative; display: grid; place-items: center;
-            box-shadow: inset 0 0 0 2px #000;
-            animation: spin 3.2s linear infinite;
+            width: 30px; height: 30px; flex: 0 0 auto;
+            background: url('assets/spotify-black.png?v=1') center/contain no-repeat;
         }
-        .music-fab .disc::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #ffd84a; }
         .music-fab.playing { background: #1a7a32; }
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes music-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
@@ -1419,8 +1415,8 @@
         <!-- Divisor: anuncia Fotitos (Galería) -->
         <div class="divider-marquee" role="img" aria-label="Fotitos">
             <div class="divider-track">
-                <img src="assets/divider-fotitos-text.png?v=6" alt="Fotitos">
-                <img src="assets/divider-fotitos-text.png?v=6" alt="" aria-hidden="true">
+                <img src="assets/divider-fotitos-text.png?v=7" alt="Fotitos">
+                <img src="assets/divider-fotitos-text.png?v=7" alt="" aria-hidden="true">
             </div>
         </div>
 
