@@ -37,6 +37,19 @@
     -webkit-text-stroke:.8px #111;paint-order:stroke fill;
     filter:drop-shadow(1.2px 0 0 #4eb32e) drop-shadow(-1.2px 0 0 #4eb32e) drop-shadow(0 1.2px 0 #4eb32e) drop-shadow(0 -1.2px 0 #4eb32e)}
 
+  /* === Brinco sincronizado del headliner (uno a la vez, en bucle) — igual que la versión móvil.
+     Usa la propiedad `translate` para no chocar con el transform de posicionamiento === */
+  @keyframes hl-hop{0%{translate:0 0}4%{translate:0 -1cqw}8.6%{translate:0 0}100%{translate:0 0}}
+  body.headliner-anim #headliner .ml-prox,
+  body.headliner-anim #headliner .ml-pide,
+  body.headliner-anim #headliner .ml-conoces,
+  body.headliner-anim #headliner .ml-echame{animation:hl-hop 7s ease-in-out infinite}
+  body.headliner-anim #headliner .ml-prox{animation-delay:0s}
+  body.headliner-anim #headliner .ml-pide{animation-delay:1.4s}
+  body.headliner-anim #headliner .ml-conoces{animation-delay:2.8s}
+  body.headliner-anim #headliner .ml-echame{animation-delay:4.2s}
+  @media (prefers-reduced-motion:reduce){body.headliner-anim #headliner .menu-link{animation:none}}
+
   /* Aparición al hacer scroll */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease, transform .9s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
   .reveal.shown{opacity:1;transform:none}
@@ -259,7 +272,7 @@
       document.body.classList.remove('cortina-bajada');
       document.body.classList.add('changarro-abierto');
       if(audioChangarro){audioChangarro.currentTime=0;audioChangarro.play().catch(()=>{});}
-      setTimeout(()=>{portada.style.pointerEvents='none';},1600);
+      setTimeout(()=>{portada.style.pointerEvents='none';document.body.classList.add('headliner-anim');},1600);
     });
     // Reveal on scroll
     const rev=document.querySelectorAll('.reveal');
