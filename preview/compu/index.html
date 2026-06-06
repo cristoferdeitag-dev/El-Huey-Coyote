@@ -30,8 +30,9 @@
   /* tipografías comerciales por letrero (mismas que la versión teléfono) */
   .ml-pide{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#fff;-webkit-text-stroke:1.1px #000;paint-order:stroke fill;letter-spacing:.01em}
   .ml-conoces{font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#141414}
-  .ml-echame{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#fcca0f;-webkit-text-stroke:.4px #000;paint-order:stroke fill;display:inline-block;transform:rotate(-4deg)}
-  .ml-prox{display:flex;flex-direction:column;align-items:center;line-height:.92;transform:rotate(-8deg);
+  .ml-echame{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#fcca0f;-webkit-text-stroke:.4px #000;paint-order:stroke fill;display:inline-block;white-space:normal;text-align:center;line-height:.95;transform:translate(-50%,-50%) rotate(-4deg)}
+  .ml-fotitos{font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#f3efe6;-webkit-text-stroke:.5px rgba(0,0,0,.25);paint-order:stroke fill;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+  .ml-prox{display:flex;flex-direction:column;align-items:center;line-height:.92;transform:translate(-50%,-50%) rotate(-8deg);
     font-family:'open-sans-condensed','Oswald',sans-serif;font-weight:800;font-style:italic;text-align:center;
     background:linear-gradient(180deg,#eef60a 0%,#ddfc0b 28%,#e06396 64%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
     -webkit-text-stroke:.8px #111;paint-order:stroke fill;
@@ -43,11 +44,13 @@
   body.headliner-anim #headliner .ml-prox,
   body.headliner-anim #headliner .ml-pide,
   body.headliner-anim #headliner .ml-conoces,
-  body.headliner-anim #headliner .ml-echame{animation:hl-hop 7s ease-in-out infinite}
+  body.headliner-anim #headliner .ml-echame,
+  body.headliner-anim #headliner .ml-fotitos{animation:hl-hop 7s ease-in-out infinite}
   body.headliner-anim #headliner .ml-prox{animation-delay:0s}
   body.headliner-anim #headliner .ml-pide{animation-delay:1.4s}
   body.headliner-anim #headliner .ml-conoces{animation-delay:2.8s}
   body.headliner-anim #headliner .ml-echame{animation-delay:4.2s}
+  body.headliner-anim #headliner .ml-fotitos{animation-delay:5.6s}
   @media (prefers-reduced-motion:reduce){body.headliner-anim #headliner .menu-link{animation:none}}
 
   /* Aparición al hacer scroll */
@@ -95,9 +98,10 @@
   <div class="site">
 <section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner.png?v=7" alt="El Huey Coyote"><div class="ovl">
   <a class="menu-link ml-pide"    href="#sec-merch"    style="left:30.68%;top:20.1%;font-size:2.15cqw">PIDE PARA LLEVAR</a>
-  <a class="menu-link ml-prox"    href="#sec-proximos" style="left:12.3%;top:36.0%;font-size:2.55cqw"><span>PRÓXIMOS</span><span>SHOWS</span></a>
-  <a class="menu-link ml-conoces" href="#sec-conoces"  style="left:70.35%;top:14.6%;font-size:2.75cqw">¿Ya me conoces?</a>
-  <a class="menu-link ml-echame"  href="#sec-echame"   style="left:70.0%;top:21.4%;font-size:2.9cqw">ÉCHAME UN GRITO</a>
+  <a class="menu-link ml-prox"    href="#sec-proximos" style="left:11.0%;top:37.0%;font-size:2.55cqw"><span>PRÓXIMOS</span><span>SHOWS</span></a>
+  <a class="menu-link ml-conoces" href="#sec-conoces"  style="left:70.3%;top:14.8%;font-size:2.05cqw">¿YA ME CONOCES?</a>
+  <a class="menu-link ml-echame"  href="#sec-echame"   style="left:70.3%;top:22.2%;font-size:2.5cqw">ÉCHAME UN<br>GRITO</a>
+  <a class="menu-link ml-fotitos" href="#sec-conoces"  style="left:30.6%;top:31.5%;font-size:2.0cqw">FOTITOS</a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=5" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=5" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.png?v=5" alt="proximos"><div class="ovl"><div class="ct" style="left:3.73%;top:93.97%;font-size:2.46cqw;color:#f29501;font-family:'DK Drop Dead Gorgeous',cursive;font-weight:400;">Extras</div>
