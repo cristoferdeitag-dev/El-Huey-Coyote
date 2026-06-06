@@ -48,13 +48,14 @@
   @keyframes dscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
   /* === Portada (cortina) === */
-  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-compu-full.webp?v=1') center center/cover no-repeat;
+  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain.png?v=7') top center/100% auto repeat-y;
     transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
   .portada.subida{transform:translateY(-100%)}
-  .portada-logo{width:min(75%,1560px);height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
-  .btn-changarro{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);background:transparent;border:none;cursor:pointer;
-    color:#fff;font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;font-style:normal;font-size:clamp(24px,3vw,58px);letter-spacing:.02em;white-space:nowrap;
-    text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45);transition:transform .18s ease}
+  .portada-logo{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:min(68%,1380px);height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
+  .btn-changarro{position:absolute;left:50%;bottom:6.5%;transform:translateX(-50%);background:transparent;border:none;cursor:pointer;
+    color:#fff;font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;font-style:normal;font-size:clamp(26px,3.3vw,64px);letter-spacing:.02em;white-space:nowrap;
+    -webkit-text-stroke:1.3px #0d3a26;paint-order:stroke fill;
+    text-shadow:.05em .07em 0 #156d45,.02em .04em 3px rgba(0,0,0,.3);transition:transform .18s ease}
   .btn-changarro:hover{transform:translateX(-50%) scale(1.05)}
 
   /* === Botón de música === */
@@ -239,7 +240,8 @@
 </div>
 
   <!-- Portada (cortina) -->
-  <div class="portada" id="portada" role="img" aria-label="El Huey Coyote">
+  <div class="portada" id="portada">
+    <img class="portada-logo" src="../sitio/assets/compu/portada-logo-clean.webp?v=1" alt="El Huey Coyote">
     <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
   </div>
   <audio id="audio-changarro" preload="auto" src="../sitio/assets/audio/changarro-open.mp3"></audio>
