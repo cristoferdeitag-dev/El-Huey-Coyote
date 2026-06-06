@@ -48,8 +48,8 @@
   @keyframes dscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
   /* === Portada (cortina) === */
-  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain.png?v=7') top center/100% auto repeat-y;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2vw;transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
+  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-compu-full.webp?v=1') center center/cover no-repeat;
+    transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
   .portada.subida{transform:translateY(-100%)}
   .portada-logo{width:min(75%,1560px);height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
   .btn-changarro{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);background:transparent;border:none;cursor:pointer;
@@ -239,9 +239,8 @@
 </div>
 
   <!-- Portada (cortina) -->
-  <div class="portada" id="portada">
-    <img class="portada-logo" src="../sitio/assets/compu/portada-logo.png?v=7" alt="El Huey Coyote">
-    <button class="btn-changarro" id="btn-changarro">ABRE EL CHANGARRO</button>
+  <div class="portada" id="portada" role="img" aria-label="El Huey Coyote">
+    <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
   </div>
   <audio id="audio-changarro" preload="auto" src="../sitio/assets/audio/changarro-open.mp3"></audio>
 
