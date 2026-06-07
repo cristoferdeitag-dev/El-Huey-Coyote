@@ -34,24 +34,11 @@
   .ml-fotitos{font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#00381e;letter-spacing:.01em;-webkit-text-stroke:1.6px #fff;paint-order:stroke fill;text-shadow:none}
   .ml-prox{display:flex;flex-direction:column;align-items:center;line-height:.92;transform:translate(-50%,-50%) rotate(-8deg);
     font-family:'open-sans-condensed','Oswald',sans-serif;font-weight:800;font-style:italic;text-align:center;
-    background:linear-gradient(180deg,#e9f60a 0%,#cfe80c 26%,#a6d61a 52%,#79b62b 78%,#5aa62f 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    background:linear-gradient(180deg,#d9ef10 0%,#a2c217 32%,#90b91c 62%,#6fa526 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
     -webkit-text-stroke:.8px #111;paint-order:stroke fill;
     filter:drop-shadow(1.2px 0 0 #4eb32e) drop-shadow(-1.2px 0 0 #4eb32e) drop-shadow(0 1.2px 0 #4eb32e) drop-shadow(0 -1.2px 0 #4eb32e)}
 
-  /* === Brinco sincronizado del headliner (uno a la vez, en bucle) — igual que la versión móvil.
-     Usa la propiedad `translate` para no chocar con el transform de posicionamiento === */
-  @keyframes hl-hop{0%{translate:0 0}4%{translate:0 -1cqw}8.6%{translate:0 0}100%{translate:0 0}}
-  body.headliner-anim #headliner .ml-prox,
-  body.headliner-anim #headliner .ml-pide,
-  body.headliner-anim #headliner .ml-conoces,
-  body.headliner-anim #headliner .ml-echame,
-  body.headliner-anim #headliner .ml-fotitos{animation:hl-hop 7s ease-in-out infinite}
-  body.headliner-anim #headliner .ml-prox{animation-delay:0s}
-  body.headliner-anim #headliner .ml-pide{animation-delay:1.4s}
-  body.headliner-anim #headliner .ml-conoces{animation-delay:2.8s}
-  body.headliner-anim #headliner .ml-echame{animation-delay:4.2s}
-  body.headliner-anim #headliner .ml-fotitos{animation-delay:5.6s}
-  @media (prefers-reduced-motion:reduce){body.headliner-anim #headliner .menu-link{animation:none}}
+  /* Brinco del headliner ELIMINADO a pedido de Anette (2026-06-07) — botones estáticos. */
 
   /* Aparición al hacer scroll */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease, transform .9s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
@@ -64,7 +51,7 @@
   @keyframes dscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
   /* === Portada (cortina) === */
-  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain-clean.webp?v=2') center center/100% 100% no-repeat;
+  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain-clean.webp?v=3') center center/100% 100% no-repeat;
     transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
   .portada.subida{transform:translateY(-100%)}
   .portada-logo{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(84%,1720px);max-height:64vh;object-fit:contain;height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
@@ -258,7 +245,7 @@
 
   <!-- Portada (cortina) -->
   <div class="portada" id="portada">
-    <img class="portada-logo" src="../sitio/assets/compu/portada-logo-clean.webp?v=1" alt="El Huey Coyote">
+    <img class="portada-logo" src="../sitio/assets/compu/portada-logo-clean.webp?v=2" alt="El Huey Coyote">
     <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
   </div>
   <audio id="audio-changarro" preload="auto" src="../sitio/assets/audio/changarro-open.mp3"></audio>
