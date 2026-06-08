@@ -260,7 +260,7 @@
             font-size: clamp(15px, 5.42vw, 30px);
             color: #00381e;
             letter-spacing: 0.01em;
-            -webkit-text-stroke: 1.1px #f2f3f5;
+            -webkit-text-stroke: 1.7px #f2f3f5;
             paint-order: stroke fill;
             text-shadow: none;
             display: inline-block;
@@ -359,9 +359,10 @@
             font-style: normal;
             font-size: clamp(12px, 3.35vw, 18px);
             color: #fcca0f;
-            -webkit-text-stroke: 0.3px #000;
-            /* sin brillo: solo una sombra fina para legibilidad */
-            text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+            -webkit-text-stroke: 0.3px #4d4d4d;
+            paint-order: stroke fill;
+            /* sombra paralela del diseño de Ani: X-5.67 Y1.42 blur0 negro 71% (en em p/escalar) */
+            text-shadow: -0.155em 0.039em 0 rgba(0,0,0,0.71);
             white-space: normal;
             line-height: 1;
             transform: rotate(-6deg);
@@ -378,14 +379,14 @@
             overflow: visible;
         }
         .area-fotitos .letrero-text {
-            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
-            font-weight: 400;
-            font-style: normal;
+            font-family: "ciabatta", 'Permanent Marker', cursive;
+            font-weight: 700;
+            font-style: italic;
             font-size: clamp(13px, 4.26vw, 24px);
             color: #111;
-            -webkit-text-stroke: 0.3px #000;
+            -webkit-text-stroke: 0.3px #111;
             paint-order: stroke fill;
-            text-shadow: 0 2px 3px rgba(0,0,0,0.4);
+            text-shadow: none;
             white-space: nowrap;
             overflow: visible;
         }
@@ -1307,7 +1308,7 @@
                 <span class="letrero-text" data-text="SHOWS">SHOWS</span>
             </a>
             <a class="menu-link area-conoces" href="#sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
-                <span class="letrero-text" data-text="¿Ya me conoces?">¿Ya me conoces?</span>
+                <span class="letrero-text" data-text="¿  Ya me conoces  ?">¿  Ya me conoces  ?</span>
             </a>
             <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto">
                 <span class="letrero-text" data-text="ÉCHAME UN&#10;GRITO">ÉCHAME UN<br>GRITO</span>
