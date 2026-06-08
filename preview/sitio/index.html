@@ -367,11 +367,12 @@
         }
         .area-conoces .q-open  { left: 0;  top: 50%; transform: translateY(-50%); }
         .area-conoces .q-close { right: 0; top: 50%; transform: translateY(-50%); }
-        /* YA ME CONOCES es casi blanco → un rayo blanco no contrasta. Aquí el rayo lleva
-           borde tenue oscuro alrededor de la línea brillante para que SÍ se vea el destello. */
+        /* YA ME CONOCES es casi blanco → un rayo blanco no contrasta. Banda FINA y nítida:
+           línea brillante con un filo oscuro delgado a los lados (glint limpio, sin borrón). */
         .area-conoces .letrero-text::after {
             display: block;
-            background: linear-gradient(112deg, rgba(58,60,70,0) 42%, rgba(58,60,70,0.42) 47%, rgba(255,255,255,1) 50%, rgba(58,60,70,0.42) 53%, rgba(58,60,70,0) 58%);
+            background: linear-gradient(112deg, rgba(70,72,84,0) 48.3%, rgba(70,72,84,0.5) 49.4%, #ffffff 50%, rgba(70,72,84,0.5) 50.6%, rgba(70,72,84,0) 51.7%);
+            background-size: 320% 100%;
             mix-blend-mode: normal;
         }
         .area-echame {
@@ -1267,8 +1268,8 @@
         }
         .galeria-strip {
             position: absolute; inset: 0;
-            display: flex; align-items: center; gap: 5vw;
-            padding: 0 14vw;
+            display: flex; align-items: center; gap: 4vw;
+            padding: 0 6vw;
             overflow-x: auto; overflow-y: hidden;
             -webkit-overflow-scrolling: touch;
             scroll-snap-type: x proximity;
@@ -1276,8 +1277,9 @@
         }
         .galeria-strip::-webkit-scrollbar { display: none; }
         .galeria-strip img.gp { scroll-snap-align: center; }
+        /* marco = forma natural de la foto (sin recortar) + ~3 por pantalla */
         .galeria-strip img.gp {
-            width: 44vw; max-width: 240px; aspect-ratio: 1 / 1; object-fit: cover;
+            width: 28vw; max-width: 158px; height: auto;
             flex: 0 0 auto; display: block; cursor: pointer; background: #fff;
             box-shadow: 0 10px 24px rgba(0,0,0,0.5);
             transition: filter 0.2s ease;
@@ -1525,8 +1527,8 @@
         <!-- Divisor: anuncia Fotitos (Galería) -->
         <div class="divider-marquee" role="img" aria-label="Con la raza">
             <div class="divider-track">
-                <img src="assets/divider-con-la-raza-text.png?v=2" alt="Con la raza">
-                <img src="assets/divider-con-la-raza-text.png?v=2" alt="" aria-hidden="true">
+                <img src="assets/divider-con-la-raza-text.png?v=3" alt="Con la raza">
+                <img src="assets/divider-con-la-raza-text.png?v=3" alt="" aria-hidden="true">
             </div>
         </div>
 
