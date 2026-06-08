@@ -381,8 +381,8 @@
             color: #fcca0f;
             -webkit-text-stroke: 0.3px #4d4d4d;
             paint-order: stroke fill;
-            /* sombra paralela del diseño de Ani: X-5.67 Y1.42 blur0 color #000704 71% (en em p/escalar) */
-            text-shadow: -0.155em 0.039em 0 rgba(0,7,4,0.71);
+            /* sombra paralela de Ani: X-5.67 Y1.42 blur0 #000704 71% — filter:drop-shadow = silueta SÓLIDA rellena */
+            filter: drop-shadow(-0.155em 0.039em 0 rgba(0,7,4,0.82));
             white-space: normal;
             line-height: 1;
             transform: rotate(-6deg);
@@ -406,8 +406,8 @@
             color: #111;
             -webkit-text-stroke: 0.3px #111;
             paint-order: stroke fill;
-            /* sombra paralela verde de Ani: X3 Y2 blur1 #72b293 75% (em p/escalar) */
-            text-shadow: 0.065em 0.043em 0.022em rgba(114,178,147,0.75);
+            /* sombra paralela verde de Ani: X3 Y2 blur1 #72b293 75% — filter:drop-shadow = silueta SÓLIDA rellena */
+            filter: drop-shadow(0.085em 0.057em 0.025em rgba(114,178,147,0.85));
             white-space: nowrap;
             overflow: visible;
         }
