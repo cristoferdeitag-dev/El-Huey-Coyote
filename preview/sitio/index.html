@@ -113,7 +113,7 @@
         /* Botón "Abre el changarro" — texto blanco = el botón (sin marco, área clicable invisible) */
         .btn-changarro {
             position: absolute;
-            top: 62%;
+            top: 77%;
             left: 50%;
             transform: translateX(-50%);
             background: transparent;
@@ -193,35 +193,53 @@
         /* Headliner: estrictamente UNO A LA VEZ — un letrero brinca (~0.6s, un pelín
            más rápido), corta espera, y hasta entonces brinca el siguiente.
            Ciclo = 5 × 1.4s = 7s. */
-        @keyframes headliner-hop {
-            0%    { transform: translateY(0); }
-            4%    { transform: translateY(-9px); }
-            8.6%  { transform: translateY(0); }
-            100%  { transform: translateY(0); }
+        /* En vez del brinco: un DESTELLO de luz cruza las letras de cada letrero, por turnos
+           (mismo efecto que los botones de la sección ÉCHAME UN GRITO). Ciclo = 5 × 1.4s = 7s. */
+        .menu-link .letrero-text { position: relative; }
+        .menu-link .letrero-text::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0; top: 0;
+            width: 100%;
+            text-align: inherit;
+            white-space: inherit;
+            line-height: inherit;
+            background: linear-gradient(112deg, rgba(255,255,255,0) 42%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0) 58%);
+            background-repeat: no-repeat;
+            background-size: 230% 100%;
+            background-position: 190% 0;
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+            -webkit-text-stroke: 0;
+            mix-blend-mode: screen;
+            opacity: 0;
+            pointer-events: none;
         }
-        /* El brinco solo arranca cuando el changarro ya abrió del todo (body.headliner-anim) */
-        body.headliner-anim .area-pide,
-        body.headliner-anim .area-proximos,
-        body.headliner-anim .area-shows,
-        body.headliner-anim .area-conoces,
-        body.headliner-anim .area-echame,
-        body.headliner-anim .area-fotitos {
-            animation: headliner-hop 7s ease-in-out infinite;
+        /* ÉCHAME UN GRITO va en dos renglones: el destello respeta el salto */
+        .area-echame .letrero-text::after { white-space: pre; text-align: left; }
+        /* el destello sólo corre cuando el changarro ya abrió del todo */
+        body.headliner-anim .menu-link .letrero-text::after {
+            animation: letrero-shine 7s ease-in-out infinite;
         }
-        /* Delays con la MISMA especificidad que la regla de animación (body.headliner-anim ...)
-           y declarados DESPUÉS, para que el shorthand 'animation' no los resetee a 0.
-           PRÓXIMOS y SHOWS brincan juntos como un solo letrero.
-           FOTITOS brinca al final, justo después de ÉCHAME UN GRITO. */
-        body.headliner-anim .area-proximos,
-        body.headliner-anim .area-shows   { animation-delay: 0s;   }
-        body.headliner-anim .area-pide     { animation-delay: 1.4s; }
-        body.headliner-anim .area-conoces  { animation-delay: 2.8s; }
-        body.headliner-anim .area-echame   { animation-delay: 4.2s; }
-        body.headliner-anim .area-fotitos  { animation-delay: 5.6s; }
+        @keyframes letrero-shine {
+            0%   { background-position: 190% 0; opacity: 0; }
+            2%   { opacity: 1; }
+            13%  { background-position: -70% 0; opacity: 1; }
+            16%  { background-position: -70% 0; opacity: 0; }
+            100% { background-position: -70% 0; opacity: 0; }
+        }
+        /* por turnos: PRÓXIMOS+SHOWS → PIDE → ¿YA ME CONOCES? → ÉCHAME → FOTITOS */
+        body.headliner-anim .area-proximos .letrero-text::after,
+        body.headliner-anim .area-shows   .letrero-text::after { animation-delay: 0s;   }
+        body.headliner-anim .area-pide     .letrero-text::after { animation-delay: 1.4s; }
+        body.headliner-anim .area-conoces  .letrero-text::after { animation-delay: 2.8s; }
+        body.headliner-anim .area-echame   .letrero-text::after { animation-delay: 4.2s; }
+        body.headliner-anim .area-fotitos  .letrero-text::after { animation-delay: 5.6s; }
 
         @media (prefers-reduced-motion: reduce) {
             .area-pide, .area-proximos, .area-shows,
             .area-conoces, .area-echame, .area-fotitos,
+            .menu-link .letrero-text::after,
             .ech-shine { animation: none; }
         }
 
@@ -1244,7 +1262,7 @@
 
             <!-- 4 letreros como texto HTML (control total de color/tamaño/posición) -->
             <a class="menu-link area-pide" href="#merch" aria-label="Pide para llevar — Merch">
-                <span class="letrero-text">PIDE PARA LLEVAR</span>
+                <span class="letrero-text" data-text="PIDE PARA LLEVAR">PIDE PARA LLEVAR</span>
             </a>
             <a class="menu-link area-proximos" href="#proximos-shows" aria-label="Próximos shows">
                 <span class="letrero-text" data-text="PRÓXIMOS">PRÓXIMOS</span>
@@ -1253,13 +1271,13 @@
                 <span class="letrero-text" data-text="SHOWS">SHOWS</span>
             </a>
             <a class="menu-link area-conoces" href="#sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
-                <span class="letrero-text">¿YA ME CONOCES?</span>
+                <span class="letrero-text" data-text="¿YA ME CONOCES?">¿YA ME CONOCES?</span>
             </a>
             <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto">
-                <span class="letrero-text">ÉCHAME UN<br>GRITO</span>
+                <span class="letrero-text" data-text="ÉCHAME UN&#10;GRITO">ÉCHAME UN<br>GRITO</span>
             </a>
             <a class="menu-link area-fotitos" href="#galeria" aria-label="Fotitos — Galería de fotos">
-                <span class="letrero-text">FOTITOS</span>
+                <span class="letrero-text" data-text="FOTITOS">FOTITOS</span>
             </a>
 
             <!-- 3 logos-botón sobre los bancos rojos -->
