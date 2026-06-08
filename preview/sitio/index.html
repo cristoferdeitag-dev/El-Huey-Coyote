@@ -59,6 +59,8 @@
             aspect-ratio: 1086 / 1937;   /* reserva la altura desde el inicio → el scroll no salta al cargar imágenes */
             filter: brightness(0.85);    /* oscurece un poquito el fondo → los botones/textos resaltan */
         }
+        /* PRÓXIMOS SHOWS: fondo nuevo con proporción propia (Ani lo quiere tal cual, sin forzar) */
+        #proximos-shows > img.bg { aspect-ratio: 1126 / 1700; }
 
         /* El navegador salta el render de lo que está fuera de pantalla → scroll mucho más fluido
            (la sección "¿Ya me conoces?" tiene decenas de textos con filtros = muy pesada de pintar) */
@@ -592,10 +594,11 @@
         .pos-ostin   { top: 66%; }
         .pos-mayami  { top: 74%; }
 
-        .pos-spotify { top: 94.38%; left: 45.71%; transform: translateY(-50%); }
-        .pos-youtube { top: 94.38%; left: 77.85%; transform: translateY(-50%); }
-        .pos-amazon  { top: 97.29%; left: 45.80%; transform: translateY(-50%); }
-        .pos-apple   { top: 97.29%; left: 77.92%; transform: translateY(-50%); }
+        /* fondo nuevo: 4 logos en cuadrícula 2×2 dentro del banner EXTRAS (reemplazan los nombres) */
+        .pos-spotify { top: 93.6%; left: 44%;  transform: translateY(-50%); }
+        .pos-youtube { top: 93.6%; left: 73%;  transform: translateY(-50%); }
+        .pos-amazon  { top: 96.9%; left: 44%;  transform: translateY(-50%); }
+        .pos-apple   { top: 96.9%; left: 73%;  transform: translateY(-50%); }
 
         /* === MERCH — items como texto real (clicables, deslizan al hover) + precios texto editable === */
         .merch-item {
@@ -1460,7 +1463,7 @@
 
         <!-- PRÓXIMOS SHOWS (sección 3) -->
         <section id="proximos-shows" class="reveal-init">
-            <img class="bg" src="assets/proximos-shows-sintexto-v2.webp?v=603sm" alt="Próximos Shows — Presentaciones" loading="lazy" decoding="async">
+            <img class="bg" src="assets/proximos-fondo-nuevo.webp?v=1" alt="Próximos Shows — Presentaciones" loading="lazy" decoding="async">
 
             <h2 class="seo-only">Próximos Shows del Huey Coyote</h2>
             <h3 class="seo-only">Recomendaciones de la casa</h3>
