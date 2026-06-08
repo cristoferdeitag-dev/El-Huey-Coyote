@@ -113,7 +113,7 @@
         /* Botón "Abre el changarro" — texto blanco = el botón (sin marco, área clicable invisible) */
         .btn-changarro {
             position: absolute;
-            top: 81%;
+            top: 79%;
             left: 50%;
             transform: translateX(-50%);
             background: transparent;
@@ -591,6 +591,32 @@
             white-space: nowrap;
             pointer-events: none;
             transform: translateY(-50%);
+        }
+
+        /* Brillo tipo ÉCHAME UN GRITO en los textos de PRÓXIMOS SHOWS y LA MERCH:
+           una banda de luz cruza las letras. Gradiente con currentColor (conserva color y hovers)
+           + banda blanca; sólo se ve la banda al pasar. */
+        .shows-list .mes, .shows-list .dia, .shows-list .ciudad,
+        .merch-item, .merch-price {
+            background-image: linear-gradient(112deg, currentColor 42%, #ffffff 50%, currentColor 58%);
+            background-repeat: no-repeat;
+            background-size: 230% 100%;
+            background-position: 190% 0;
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: text-shine 6s ease-in-out infinite;
+        }
+        @keyframes text-shine {
+            0%   { background-position: 190% 0; }
+            3%   { background-position: 190% 0; }
+            15%  { background-position: -70% 0; }
+            100% { background-position: -70% 0; }
+        }
+        /* por turnos: PRÓXIMOS SHOWS primero, LA MERCH después */
+        .merch-item, .merch-price { animation-delay: 1.6s; }
+        @media (prefers-reduced-motion: reduce) {
+            .shows-list .mes, .shows-list .dia, .shows-list .ciudad,
+            .merch-item, .merch-price { animation: none; }
         }
 
         /* Posiciones de NOMBRES — Cocogoose 45pt → top = baseline approx */
