@@ -232,13 +232,13 @@
             16%  { background-position: -70% 0; opacity: 0; }
             100% { background-position: -70% 0; opacity: 0; }
         }
-        /* por turnos: PRÓXIMOS+SHOWS → PIDE → ¿YA ME CONOCES? → ÉCHAME → FOTITOS */
+        /* orden del rayo (Ani): PRÓXIMOS SHOWS → YA ME CONOCES → LA RAZA → ÉCHAME → PA' LLEVAR, 0.5s entre c/u */
         body.headliner-anim .area-proximos .letrero-text::after,
         body.headliner-anim .area-shows   .letrero-text::after { animation-delay: 0s;   }
-        body.headliner-anim .area-pide     .letrero-text::after { animation-delay: 1.4s; }
-        body.headliner-anim .area-conoces  .letrero-text::after { animation-delay: 2.8s; }
-        body.headliner-anim .area-echame   .letrero-text::after { animation-delay: 4.2s; }
-        body.headliner-anim .area-fotitos  .letrero-text::after { animation-delay: 5.6s; }
+        body.headliner-anim .area-conoces  .letrero-text::after { animation-delay: 0.5s; }
+        body.headliner-anim .area-fotitos  .letrero-text::after { animation-delay: 1s;   }
+        body.headliner-anim .area-echame   .letrero-text::after { animation-delay: 1.5s; }
+        body.headliner-anim .area-pide     .letrero-text::after { animation-delay: 2s;   }
 
         @media (prefers-reduced-motion: reduce) {
             .area-pide, .area-proximos, .area-shows,
@@ -352,8 +352,6 @@
             position: absolute;
             top: 0;
         }
-        /* sin destello/glow en YA ME CONOCES (Ani no lo quiere ahí) */
-        .area-conoces .letrero-text::after { display: none; }
         /* override del glow/stroke base (.menu-link .letrero-text) — Ani NO quiere contorno de luz */
         .area-conoces .letrero-text {
             left: 50%;
@@ -1518,10 +1516,10 @@
 
 
         <!-- Divisor: anuncia Fotitos (Galería) -->
-        <div class="divider-marquee" role="img" aria-label="Fotitos">
+        <div class="divider-marquee" role="img" aria-label="Con la raza">
             <div class="divider-track">
-                <img src="assets/divider-fotitos-v2.png?v=1" alt="Fotitos">
-                <img src="assets/divider-fotitos-v2.png?v=1" alt="" aria-hidden="true">
+                <img src="assets/divider-con-la-raza-text.png?v=1" alt="Con la raza">
+                <img src="assets/divider-con-la-raza-text.png?v=1" alt="" aria-hidden="true">
             </div>
         </div>
 
@@ -1604,8 +1602,6 @@
         <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
     </div>
     <audio id="audio-changarro" preload="auto" src="assets/audio/changarro-open.mp3?v=20260523-0514"></audio>
-    <!-- Canción FANTASIAS: arranca cuando el sonido del changarro termina (pendiente subir el mp3) -->
-    <audio id="audio-fantasias" preload="auto" src="assets/audio/fantasias.mp3?v=1"></audio>
 
     <!-- Botón de música: aparece al abrir el changarro; reproduce al Huey Coyote -->
     <button class="music-fab" id="music-fab" aria-label="Pon una rolita del Huey Coyote">
@@ -1674,14 +1670,19 @@
             if (audioChangarro) {
                 audioChangarro.currentTime = 0;
                 audioChangarro.play().catch(() => { /* navegador bloqueó autoplay, no rompe nada */ });
-                // Cuando el sonido del changarro TERMINA, arranca la canción FANTASIAS
-                const fantasias = document.getElementById('audio-fantasias');
-                if (fantasias) {
-                    audioChangarro.addEventListener('ended', function () {
-                        fantasias.currentTime = 0;
-                        fantasias.play().catch(() => { /* el navegador puede bloquear; no rompe nada */ });
-                    }, { once: true });
-                }
+                // Cuando el sonido del changarro TERMINA, arranca FANTASIAS desde Spotify
+                audioChangarro.addEventListener('ended', function () {
+                    const embed = document.getElementById('music-embed');
+                    const fab = document.getElementById('music-fab');
+                    if (embed) {
+                        // mismo iframe que el panel de música (reproduce tras el gesto del changarro)
+                        embed.innerHTML = '<iframe style="border-radius:10px" width="100%" height="152" frameborder="0" '
+                            + 'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" '
+                            + 'src="https://open.spotify.com/embed/track/5eHegIfGPku1Jo70rRzv6k?utm_source=generator"></iframe>';
+                        document.body.classList.add('music-open');
+                        if (fab) fab.classList.add('playing');
+                    }
+                }, { once: true });
             }
             // Muestra el botón de música del Huey Coyote ya que se abrió el changarro
             document.body.classList.add('changarro-abierto');
