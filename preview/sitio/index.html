@@ -128,7 +128,11 @@
             font-size: clamp(20px, 5.8vw, 34px);
             letter-spacing: 0.02em;
             white-space: nowrap;
-            text-shadow: 2px 4px 4px rgba(0,0,0,0.55), 0 2px 2px rgba(0,0,0,0.45);
+            /* trazo + sombra paralela del diseño de Ani: trazo 1pt #49838f, sombra X7 Y7 blur0 #156d45 75% */
+            -webkit-text-stroke: 0.7px #49838f;
+            paint-order: stroke fill;
+            text-shadow: none;
+            filter: drop-shadow(0.12em 0.12em 0 rgba(21,109,69,0.78));
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0.15);
             touch-action: manipulation;
             transition: transform 0.18s ease, text-shadow 0.18s ease;
@@ -381,6 +385,7 @@
             color: #fcca0f;
             -webkit-text-stroke: 0.3px #4d4d4d;
             paint-order: stroke fill;
+            text-shadow: none;
             /* sombra paralela de Ani: X-5.67 Y1.42 blur0 #000704 71% — filter:drop-shadow = silueta SÓLIDA rellena */
             filter: drop-shadow(-0.155em 0.039em 0 rgba(0,7,4,0.82));
             white-space: normal;
@@ -406,6 +411,7 @@
             color: #111;
             -webkit-text-stroke: 0.3px #111;
             paint-order: stroke fill;
+            text-shadow: none;
             /* sombra paralela verde de Ani: X3 Y2 blur1 #72b293 75% — filter:drop-shadow = silueta SÓLIDA rellena */
             filter: drop-shadow(0.085em 0.057em 0.025em rgba(114,178,147,0.85));
             white-space: nowrap;
@@ -557,8 +563,8 @@
             text-decoration: none;
             cursor: pointer;
             transition: color 0.18s ease, transform 0.18s ease;
-            /* iluminación delgada (igual que MERCH) */
-            text-shadow: 0 0 2px rgba(255,255,255,0.95), 0 0 4px rgba(255,255,255,0.6);
+            /* sin contorno brilloso (Ani) — solo el rayo ::after */
+            text-shadow: none;
         }
         .shows-list .ciudad:hover,
         .shows-list .ciudad:focus { color: #b80d0e; }
@@ -602,8 +608,8 @@
             -webkit-tap-highlight-color: transparent;
             transition: transform 0.2s ease;
             transform: translateY(-50%);
-            /* iluminación delgada: halo claro que levanta el texto, sin parecer letrero de circo */
-            text-shadow: 0 0 3px rgba(255,255,255,1), 0 0 6px rgba(255,255,255,0.85), 0 0 9px rgba(255,255,255,0.5);
+            /* sin contorno brilloso (Ani) — solo el rayo ::after */
+            text-shadow: none;
         }
         .merch-item:hover,
         .merch-item:active,
@@ -628,8 +634,8 @@
         /* Rayo brillante IGUAL al de los botones de ÉCHAME UN GRITO, sobre los textos de
            PRÓXIMOS SHOWS y LA MERCH: un destello blanco cruza las letras SIN cambiar su color
            (overlay ::after clip-text + mezcla screen). data-text se llena por JS abajo. */
-        .shows-list .mes, .shows-list .dia, .shows-list .ciudad,
-        .merch-item, .merch-price { position: relative; }
+        /* shows-list son estáticos → relative para el ::after. merch-item/price YA son absolute (positioned) → NO tocar su position. */
+        .shows-list .mes, .shows-list .dia, .shows-list .ciudad { position: relative; }
         .shows-list .mes::after, .shows-list .dia::after, .shows-list .ciudad::after,
         .merch-item::after, .merch-price::after {
             content: attr(data-text);
@@ -1248,16 +1254,23 @@
         /* === GALERÍA DE FOTOS === */
         /* === FOTITOS: galería horizontal tipo carteles sobre fondo de metal === */
         #galeria { background: #161618; scroll-margin-top: 0; }
-        .galeria-scroll { position: relative; }   /* el alto lo fija el JS = 100vh + recorrido horizontal */
+        .galeria-scroll { position: relative; }
+        /* Galería = scroll HORIZONTAL (swipe derecha); el scroll vertical sigue bajando por la página */
         .galeria-sticky {
-            position: sticky; top: 0; height: 100vh; overflow: hidden;
+            position: relative; height: 80vh; overflow: hidden;
             background: url('assets/galeria/galeria-fondo.webp?v=1') center center / cover no-repeat;
         }
         .galeria-strip {
-            position: absolute; top: 0; left: 0; height: 100%;
+            position: absolute; inset: 0;
             display: flex; align-items: center; gap: 5vw;
-            padding: 0 16vw; will-change: transform;
+            padding: 0 14vw;
+            overflow-x: auto; overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x proximity;
+            scrollbar-width: none;
         }
+        .galeria-strip::-webkit-scrollbar { display: none; }
+        .galeria-strip img.gp { scroll-snap-align: center; }
         .galeria-strip img.gp {
             width: 44vw; max-width: 240px; aspect-ratio: 1 / 1; object-fit: cover;
             flex: 0 0 auto; display: block; cursor: pointer; background: #fff;
@@ -1534,7 +1547,7 @@
                         <img class="gp b3" style="transform:rotate(-8deg) translateY(-12px)" src="assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
                         <img class="gp b4" style="transform:rotate(5deg) translateY(18px)" src="assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
                     </div>
-                    <div class="galeria-hint" id="galeria-hint">↓ desliza para ver más →</div>
+                    <div class="galeria-hint" id="galeria-hint">desliza para ver más fotos →</div>
                 </div>
             </div>
         </section>
@@ -1755,32 +1768,14 @@
             lb.addEventListener('click', function (e) { if (e.target === lb) cerrar(); });
         })();
 
-        // FOTITOS: al bajar por la sección, la galería se desliza HORIZONTAL (sección fija)
+        // FOTITOS: galería de scroll HORIZONTAL (swipe a la derecha). El scroll vertical sigue la página.
         (function () {
-            const sec = document.getElementById('galeria-scroll');
             const strip = document.getElementById('galeria-grid');
             const hint = document.getElementById('galeria-hint');
-            if (!sec || !strip) return;
-            let maxX = 0;
-            function layout() {
-                maxX = Math.max(0, strip.scrollWidth - window.innerWidth);
-                sec.style.height = (window.innerHeight + maxX) + 'px';
-                onScroll();
-            }
-            function onScroll() {
-                const top = sec.getBoundingClientRect().top;
-                const prog = Math.min(1, Math.max(0, -top / (maxX || 1)));
-                strip.style.transform = 'translateX(' + (-prog * maxX) + 'px)';
-                if (hint) hint.style.opacity = prog > 0.02 ? '0' : '1';
-            }
-            window.addEventListener('scroll', onScroll, { passive: true });
-            window.addEventListener('resize', layout);
-            window.addEventListener('load', layout);
-            strip.querySelectorAll('img').forEach(function (im) {
-                if (im.complete) layout(); else im.addEventListener('load', layout);
-            });
-            setTimeout(layout, 400);
-            layout();
+            if (!strip) return;
+            strip.addEventListener('scroll', function () {
+                if (hint) hint.style.opacity = strip.scrollLeft > 12 ? '0' : '1';
+            }, { passive: true });
         })();
 
         // Botón de música: al click abre la lista de rolitas del Huey Coyote
