@@ -225,13 +225,14 @@
         .area-echame .letrero-text::after { white-space: pre; text-align: left; }
         /* el destello sólo corre cuando el changarro ya abrió del todo */
         body.headliner-anim .menu-link .letrero-text::after {
-            animation: letrero-shine 5s ease-in-out infinite;
+            /* 3.9s: con delays 0/0.5/1/1.5/2, el último termina ~3.4s y la secuencia reinicia a 3.9s = ~0.5s de pausa */
+            animation: letrero-shine 3.9s ease-in-out infinite;
         }
         @keyframes letrero-shine {
             0%   { background-position: 190% 0; opacity: 0; }
             3%   { opacity: 1; }
-            27%  { background-position: -70% 0; opacity: 1; }
-            31%  { background-position: -70% 0; opacity: 0; }
+            33%  { background-position: -70% 0; opacity: 1; }
+            36%  { background-position: -70% 0; opacity: 0; }
             100% { background-position: -70% 0; opacity: 0; }
         }
         /* orden del rayo (Ani): PRÓXIMOS SHOWS → YA ME CONOCES → LA RAZA → ÉCHAME → PA' LLEVAR, 0.5s entre c/u */
@@ -373,8 +374,10 @@
            línea brillante con un filo oscuro delgado a los lados (glint limpio, sin borrón). */
         .area-conoces .letrero-text::after {
             display: block;
-            background: linear-gradient(112deg, rgba(70,72,84,0) 48.3%, rgba(70,72,84,0.5) 49.4%, #ffffff 50%, rgba(70,72,84,0.5) 50.6%, rgba(70,72,84,0) 51.7%);
+            background-image: linear-gradient(112deg, rgba(70,72,84,0) 48.3%, rgba(70,72,84,0.5) 49.4%, #ffffff 50%, rgba(70,72,84,0.5) 50.6%, rgba(70,72,84,0) 51.7%);
+            background-repeat: no-repeat;
             background-size: 320% 100%;
+            background-position: 190% 0;
             mix-blend-mode: normal;
         }
         .area-echame {
@@ -646,7 +649,7 @@
         /* shows-list son estáticos → relative para el ::after. merch-item/price YA son absolute (positioned) → NO tocar su position. */
         .shows-list .mes, .shows-list .dia, .shows-list .ciudad { position: relative; }
         .shows-list .mes::after, .shows-list .dia::after, .shows-list .ciudad::after,
-        .merch-item::after, .merch-price::after {
+        .merch-item::after {
             content: attr(data-text);
             position: absolute;
             left: 0; top: 0;
@@ -670,10 +673,10 @@
             100% { background-position: -70% 0; opacity: 0; }
         }
         /* por turnos: PRÓXIMOS SHOWS primero, LA MERCH después */
-        .merch-item::after, .merch-price::after { animation-delay: 1.6s; }
+        .merch-item::after { animation-delay: 1.6s; }
         @media (prefers-reduced-motion: reduce) {
             .shows-list .mes::after, .shows-list .dia::after, .shows-list .ciudad::after,
-            .merch-item::after, .merch-price::after { animation: none; }
+            .merch-item::after { animation: none; }
         }
 
         /* Posiciones de NOMBRES — Cocogoose 45pt → top = baseline approx */
@@ -1530,8 +1533,8 @@
         <!-- Divisor: anuncia Fotitos (Galería) -->
         <div class="divider-marquee" role="img" aria-label="Con la raza">
             <div class="divider-track">
-                <img src="assets/divider-con-la-raza-text.png?v=3" alt="Con la raza">
-                <img src="assets/divider-con-la-raza-text.png?v=3" alt="" aria-hidden="true">
+                <img src="assets/divider-con-la-raza-text.png?v=4" alt="Con la raza">
+                <img src="assets/divider-con-la-raza-text.png?v=4" alt="" aria-hidden="true">
             </div>
         </div>
 
