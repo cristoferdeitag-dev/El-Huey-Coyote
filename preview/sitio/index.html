@@ -223,13 +223,13 @@
         .area-echame .letrero-text::after { white-space: pre; text-align: left; }
         /* el destello sólo corre cuando el changarro ya abrió del todo */
         body.headliner-anim .menu-link .letrero-text::after {
-            animation: letrero-shine 7s ease-in-out infinite;
+            animation: letrero-shine 5s ease-in-out infinite;
         }
         @keyframes letrero-shine {
             0%   { background-position: 190% 0; opacity: 0; }
-            2%   { opacity: 1; }
-            13%  { background-position: -70% 0; opacity: 1; }
-            16%  { background-position: -70% 0; opacity: 0; }
+            3%   { opacity: 1; }
+            27%  { background-position: -70% 0; opacity: 1; }
+            31%  { background-position: -70% 0; opacity: 0; }
             100% { background-position: -70% 0; opacity: 0; }
         }
         /* orden del rayo (Ani): PRÓXIMOS SHOWS → YA ME CONOCES → LA RAZA → ÉCHAME → PA' LLEVAR, 0.5s entre c/u */
@@ -367,6 +367,13 @@
         }
         .area-conoces .q-open  { left: 0;  top: 50%; transform: translateY(-50%); }
         .area-conoces .q-close { right: 0; top: 50%; transform: translateY(-50%); }
+        /* YA ME CONOCES es casi blanco → un rayo blanco no contrasta. Aquí el rayo lleva
+           borde tenue oscuro alrededor de la línea brillante para que SÍ se vea el destello. */
+        .area-conoces .letrero-text::after {
+            display: block;
+            background: linear-gradient(112deg, rgba(58,60,70,0) 42%, rgba(58,60,70,0.42) 47%, rgba(255,255,255,1) 50%, rgba(58,60,70,0.42) 53%, rgba(58,60,70,0) 58%);
+            mix-blend-mode: normal;
+        }
         .area-echame {
             top: 30.2%;
             left: 74.20%;
@@ -1518,8 +1525,8 @@
         <!-- Divisor: anuncia Fotitos (Galería) -->
         <div class="divider-marquee" role="img" aria-label="Con la raza">
             <div class="divider-track">
-                <img src="assets/divider-con-la-raza-text.png?v=1" alt="Con la raza">
-                <img src="assets/divider-con-la-raza-text.png?v=1" alt="" aria-hidden="true">
+                <img src="assets/divider-con-la-raza-text.png?v=2" alt="Con la raza">
+                <img src="assets/divider-con-la-raza-text.png?v=2" alt="" aria-hidden="true">
             </div>
         </div>
 
