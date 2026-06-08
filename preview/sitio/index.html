@@ -113,7 +113,7 @@
         /* Botón "Abre el changarro" — texto blanco = el botón (sin marco, área clicable invisible) */
         .btn-changarro {
             position: absolute;
-            top: 79%;
+            top: 76%;
             left: 50%;
             transform: translateX(-50%);
             background: transparent;
@@ -244,20 +244,30 @@
         }
 
         /* 4 áreas — coords exactas Photoshop de Anette (canvas 1086×1937, X/Y = centro bbox) */
+        /* PA' LLEVAR (antes PIDE) — Ciabatta verde, va al centro (slot bolsa). Link → Merch. Coords SVG Ani 1086×1936 */
         .area-pide {
-            top: 17.13%;
-            left: 24.34%;
-            width: 51.87%;
-            height: 4.59%;
+            top: 49.4%;
+            left: 24.1%;
+            width: 22.7%;
+            height: 4%;
+            text-align: center;
+            overflow: visible;
         }
         .area-pide .letrero-text {
-            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            font-size: clamp(18px, 6vw, 33px);
-            -webkit-text-stroke: 1.3px #000;
-            /* brillo más tenue que el resto de letreros */
-            text-shadow: 0 0 2px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.45);
+            font-family: "ciabatta", 'Permanent Marker', cursive;
+            font-weight: 700;
+            font-style: italic;
+            font-size: clamp(15px, 5.42vw, 30px);
+            color: #00381e;
+            letter-spacing: 0.01em;
+            -webkit-text-stroke: 1.1px #f2f3f5;
+            paint-order: stroke fill;
+            text-shadow: none;
+            display: inline-block;
+            transform: scaleX(0.82);
+            transform-origin: left center;
+            white-space: nowrap;
+            overflow: visible;
         }
         /* PRÓXIMOS y SHOWS son 2 áreas separadas con coords individuales de Illustrator */
         .area-proximos {
@@ -314,23 +324,25 @@
             transform-origin: center center;
             overflow: visible;
         }
+        /* ¿Ya me conoces? (nueva tipografía/lugar) — EdsMarket hueso, va ARRIBA. Link → Sobre mí. Coords SVG Ani */
         .area-conoces {
-            top: 26.32%;
-            left: 71.61%;
-            width: 24.40%;
-            height: 2.19%;
+            top: 17.6%;
+            left: 23.6%;
+            width: 52.4%;
+            height: 4.5%;
+            text-align: center;
             overflow: visible;
         }
         .area-conoces .letrero-text {
-            font-family: "ciabatta", 'Permanent Marker', cursive;
-            font-weight: 700;
-            font-style: italic;
-            font-stretch: normal;
-            font-size: clamp(10px, 3.0vw, 15px);
-            color: #111;
-            -webkit-text-stroke: 0;
-            /* contorno de brillo bien marcado para que resalte como ÉCHAME UN GRITO */
-            text-shadow: 0 0 3px #fff, 0 0 6px rgba(255,255,255,0.98), 0 0 11px rgba(255,255,255,0.78), 0 0 18px rgba(255,255,255,0.5);
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(18px, 6.07vw, 34px);
+            color: #f2f2f2;
+            -webkit-text-stroke: 1px #575759;
+            paint-order: stroke fill;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            white-space: nowrap;
             overflow: visible;
         }
         .area-echame {
@@ -356,27 +368,25 @@
             transform-origin: center center;
             display: block;
         }
-        /* FOTITOS — verde oscuro con contorno blanco, EdsMarketBoldSlant (igual al Illustrator de Anette).
-           Coords exactas del PDF (canvas 1086×1936): bbox x286.7-450.9 y935.9-1006.4 */
+        /* LA RAZA (antes FOTITOS) — EdsMarket negro, va en el letrero verde arriba de ÉCHAME. Link → Galería. Coords SVG Ani */
         .area-fotitos {
-            top: 48.33%;
-            left: 26.39%;
-            width: 15.12%;
-            height: 3.64%;
+            top: 26.3%;
+            left: 75.8%;
+            width: 16.6%;
+            height: 3%;
             text-align: center;
             overflow: visible;
         }
         .area-fotitos .letrero-text {
-            font-family: "ciabatta", 'Permanent Marker', cursive;
-            font-weight: 700;
-            font-style: italic;
-            font-stretch: normal;
-            font-size: clamp(13px, 3.9vw, 21px);
-            color: #00381e;
-            letter-spacing: 0.01em;
-            -webkit-text-stroke: 1.1px #fff;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(13px, 4.26vw, 24px);
+            color: #111;
+            -webkit-text-stroke: 0.3px #000;
             paint-order: stroke fill;
-            text-shadow: none;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.4);
+            white-space: nowrap;
             overflow: visible;
         }
 
@@ -1287,8 +1297,8 @@
             <h1 class="seo-only">El Huey Coyote</h1>
 
             <!-- 4 letreros como texto HTML (control total de color/tamaño/posición) -->
-            <a class="menu-link area-pide" href="#merch" aria-label="Pide para llevar — Merch">
-                <span class="letrero-text" data-text="PIDE PARA LLEVAR">PIDE PARA LLEVAR</span>
+            <a class="menu-link area-pide" href="#merch" aria-label="Pa' llevar — Merch">
+                <span class="letrero-text" data-text="PA’ LLEVAR">PA’ LLEVAR</span>
             </a>
             <a class="menu-link area-proximos" href="#proximos-shows" aria-label="Próximos shows">
                 <span class="letrero-text" data-text="PRÓXIMOS">PRÓXIMOS</span>
@@ -1297,13 +1307,13 @@
                 <span class="letrero-text" data-text="SHOWS">SHOWS</span>
             </a>
             <a class="menu-link area-conoces" href="#sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
-                <span class="letrero-text" data-text="¿YA ME CONOCES?">¿YA ME CONOCES?</span>
+                <span class="letrero-text" data-text="¿Ya me conoces?">¿Ya me conoces?</span>
             </a>
             <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto">
                 <span class="letrero-text" data-text="ÉCHAME UN&#10;GRITO">ÉCHAME UN<br>GRITO</span>
             </a>
-            <a class="menu-link area-fotitos" href="#galeria" aria-label="Fotitos — Galería de fotos">
-                <span class="letrero-text" data-text="FOTITOS">FOTITOS</span>
+            <a class="menu-link area-fotitos" href="#galeria" aria-label="La Raza — Galería de fotos">
+                <span class="letrero-text" data-text="LA RAZA">LA RAZA</span>
             </a>
 
             <!-- 3 logos-botón sobre los bancos rojos -->
