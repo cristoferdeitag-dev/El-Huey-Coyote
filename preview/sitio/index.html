@@ -113,9 +113,9 @@
         /* Botón "Abre el changarro" — texto blanco = el botón (sin marco, área clicable invisible) */
         .btn-changarro {
             position: absolute;
-            top: 76%;
+            top: 81.96%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             background: transparent;
             border: none;
             padding: 2.5% 4%;
@@ -247,7 +247,7 @@
         /* PA' LLEVAR (antes PIDE) — Ciabatta verde, va al centro (slot bolsa). Link → Merch. Coords SVG Ani 1086×1936 */
         .area-pide {
             top: 49.06%;
-            left: 22%;
+            left: 23%;
             width: 19.91%;
             height: 3.26%;
             text-align: center;
@@ -260,7 +260,7 @@
             font-size: clamp(15px, 5.42vw, 30px);
             color: #00381e;
             letter-spacing: 0.01em;
-            -webkit-text-stroke: 1.7px #f2f3f5;
+            -webkit-text-stroke: 0.8px #f2f3f5;
             paint-order: stroke fill;
             text-shadow: none;
             display: inline-block;
@@ -350,9 +350,21 @@
         }
         /* sin destello/glow en YA ME CONOCES (Ani no lo quiere ahí) */
         .area-conoces .letrero-text::after { display: none; }
-        .area-conoces .letrero-text { left: 50%; transform: translateX(-50%); }
-        .area-conoces .q-open  { left: 0; }
-        .area-conoces .q-close { right: 0; }
+        /* override del glow/stroke base (.menu-link .letrero-text) — Ani NO quiere contorno de luz */
+        .area-conoces .letrero-text {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #f2f2f2;
+            -webkit-text-fill-color: #f2f2f2;
+            -webkit-text-stroke: 1.2px #575759;
+            text-shadow: none;
+            display: block;
+            width: auto;
+            height: auto;
+        }
+        .area-conoces .q-open  { left: 0;  top: 50%; transform: translateY(-50%); }
+        .area-conoces .q-close { right: 0; top: 50%; transform: translateY(-50%); }
         .area-echame {
             top: 30.2%;
             left: 74.20%;
@@ -1579,6 +1591,8 @@
         <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
     </div>
     <audio id="audio-changarro" preload="auto" src="assets/audio/changarro-open.mp3?v=20260523-0514"></audio>
+    <!-- Canción FANTASIAS: arranca cuando el sonido del changarro termina (pendiente subir el mp3) -->
+    <audio id="audio-fantasias" preload="auto" src="assets/audio/fantasias.mp3?v=1"></audio>
 
     <!-- Botón de música: aparece al abrir el changarro; reproduce al Huey Coyote -->
     <button class="music-fab" id="music-fab" aria-label="Pon una rolita del Huey Coyote">
@@ -1647,6 +1661,14 @@
             if (audioChangarro) {
                 audioChangarro.currentTime = 0;
                 audioChangarro.play().catch(() => { /* navegador bloqueó autoplay, no rompe nada */ });
+                // Cuando el sonido del changarro TERMINA, arranca la canción FANTASIAS
+                const fantasias = document.getElementById('audio-fantasias');
+                if (fantasias) {
+                    audioChangarro.addEventListener('ended', function () {
+                        fantasias.currentTime = 0;
+                        fantasias.play().catch(() => { /* el navegador puede bloquear; no rompe nada */ });
+                    }, { once: true });
+                }
             }
             // Muestra el botón de música del Huey Coyote ya que se abrió el changarro
             document.body.classList.add('changarro-abierto');
