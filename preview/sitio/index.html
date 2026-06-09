@@ -1533,8 +1533,8 @@
         <!-- Divisor: anuncia Fotitos (Galería) -->
         <div class="divider-marquee" role="img" aria-label="Con la raza">
             <div class="divider-track">
-                <img src="assets/divider-con-la-raza-text.png?v=5" alt="Con la raza">
-                <img src="assets/divider-con-la-raza-text.png?v=5" alt="" aria-hidden="true">
+                <img src="assets/divider-con-la-raza-text.png?v=6" alt="Con la raza">
+                <img src="assets/divider-con-la-raza-text.png?v=6" alt="" aria-hidden="true">
             </div>
         </div>
 
@@ -1617,6 +1617,8 @@
         <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
     </div>
     <audio id="audio-changarro" preload="auto" src="assets/audio/changarro-open.mp3?v=20260523-0514"></audio>
+    <!-- Reproductor OCULTO de FANTASIAS (suena al terminar el changarro, sin abrir el panel). Renderizado fuera de pantalla. -->
+    <div id="fantasias-player" aria-hidden="true" style="position:fixed; left:-10000px; top:0; width:320px; height:80px; opacity:0; pointer-events:none;"></div>
 
     <!-- Botón de música: aparece al abrir el changarro; reproduce al Huey Coyote -->
     <button class="music-fab" id="music-fab" aria-label="Pon una rolita del Huey Coyote">
@@ -1686,16 +1688,13 @@
                 audioChangarro.currentTime = 0;
                 audioChangarro.play().catch(() => { /* navegador bloqueó autoplay, no rompe nada */ });
                 // Cuando el sonido del changarro TERMINA, arranca FANTASIAS desde Spotify
+                // en un reproductor OCULTO (no abre el panel de "PON UNA ROLITA").
                 audioChangarro.addEventListener('ended', function () {
-                    const embed = document.getElementById('music-embed');
-                    const fab = document.getElementById('music-fab');
-                    if (embed) {
-                        // mismo iframe que el panel de música (reproduce tras el gesto del changarro)
-                        embed.innerHTML = '<iframe style="border-radius:10px" width="100%" height="152" frameborder="0" '
-                            + 'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" '
-                            + 'src="https://open.spotify.com/embed/track/5eHegIfGPku1Jo70rRzv6k?utm_source=generator"></iframe>';
-                        document.body.classList.add('music-open');
-                        if (fab) fab.classList.add('playing');
+                    const fp = document.getElementById('fantasias-player');
+                    if (fp) {
+                        fp.innerHTML = '<iframe width="320" height="80" frameborder="0" '
+                            + 'allow="autoplay; encrypted-media" '
+                            + 'src="https://open.spotify.com/embed/track/5eHegIfGPku1Jo70rRzv6k?utm_source=generator&autoplay=1"></iframe>';
                     }
                 }, { once: true });
             }
