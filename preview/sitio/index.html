@@ -889,7 +889,7 @@
             0%, 18%, 22%, 25%, 53%, 57%, 83%, 100% {
                 opacity: 1;
                 text-shadow: 2px 4px 4px rgba(0,0,0,0.55), 0 2px 2px rgba(0,0,0,0.45),
-                             0 0 7px rgba(255,240,180,0.95), 0 0 15px rgba(255,205,70,0.8), 0 0 28px rgba(255,170,30,0.5);
+                             0 0 7px rgba(190,255,240,0.95), 0 0 15px rgba(60,224,200,0.85), 0 0 28px rgba(0,171,171,0.6);
             }
             20%, 24%, 55%, 84% {
                 opacity: 0.55;
@@ -1333,8 +1333,9 @@
         .galeria-scroll { position: relative; }
         /* Galería = scroll HORIZONTAL (swipe derecha); el scroll vertical sigue bajando por la página */
         .galeria-sticky {
-            position: relative; height: 80vh; overflow: hidden;
-            background: url('assets/galeria/galeria-fondo-v2.webp?v=609') center center / cover no-repeat;
+            /* aspect-ratio = tamaño real de la imagen (1086×1937) → se ve COMPLETA, sin cortar (Ani) */
+            position: relative; aspect-ratio: 1086 / 1937; overflow: hidden;
+            background: url('assets/galeria/galeria-fondo-v2.webp?v=609') center center / 100% 100% no-repeat;
         }
         .galeria-strip {
             position: absolute; inset: 0;
@@ -1587,7 +1588,7 @@
 
         <!-- MERCH (sección 4) -->
         <section id="merch">
-            <img class="bg" src="assets/merch-sintexto-v3.webp?v=609" alt="Merch — Llévele, llévele · Piratería oficial y La Original" loading="lazy" decoding="async">
+            <img class="bg" src="assets/merch-sintexto-v4.webp?v=609b" alt="Merch — Llévele, llévele · Piratería oficial y La Original" loading="lazy" decoding="async">
             <h2 class="seo-only">Merch — Llévele, llévele</h2>
 
             <!-- NOMBRES (clicables, deslizan a la izquierda al hover) -->
