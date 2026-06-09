@@ -887,6 +887,9 @@
             line-height: 0;
             background: url('assets/divider-metal-bg.png?v=3') center center / 100% 100% no-repeat;
             filter: brightness(0.85);    /* mismo oscurecido suave que las secciones, para que toda la página sea uniforme */
+            /* Al navegar desde el headliner/menú, el divisor aterriza justo DEBAJO del header fijo
+               (offset = alto del header). Así la sección queda en su lugar y no tapada. */
+            scroll-margin-top: calc(min(100vw, 540px) * 0.16435 + 6px);
         }
         .divider-track {
             display: flex;
@@ -1372,11 +1375,11 @@
         <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
     </header>
     <nav class="nav-menu" id="nav-menu" aria-label="Menú principal">
-        <a href="#sobre-mi">Sobre El HueyCoyote</a>
-        <a href="#proximos-shows">Próximos Shows</a>
-        <a href="#merch">Tienda</a>
-        <a href="#galeria">Galería de fotos</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#d-sobre-mi">Sobre El HueyCoyote</a>
+        <a href="#d-proximos-shows">Próximos Shows</a>
+        <a href="#d-merch">Tienda</a>
+        <a href="#d-galeria">Galería de fotos</a>
+        <a href="#d-contacto">Contacto</a>
     </nav>
     <div class="site-wrap">
 
@@ -1387,22 +1390,22 @@
             <h1 class="seo-only">El Huey Coyote</h1>
 
             <!-- 4 letreros como texto HTML (control total de color/tamaño/posición) -->
-            <a class="menu-link area-pide" href="#merch" aria-label="Pa' llevar — Merch">
+            <a class="menu-link area-pide" href="#d-merch" aria-label="Pa' llevar — Merch">
                 <span class="letrero-text" data-text="PA’ LLEVAR">PA’ LLEVAR</span>
             </a>
-            <a class="menu-link area-proximos" href="#proximos-shows" aria-label="Próximos shows">
+            <a class="menu-link area-proximos" href="#d-proximos-shows" aria-label="Próximos shows">
                 <span class="letrero-text" data-text="PRÓXIMOS">PRÓXIMOS</span>
             </a>
-            <a class="menu-link area-shows" href="#proximos-shows" aria-label="Próximos shows">
+            <a class="menu-link area-shows" href="#d-proximos-shows" aria-label="Próximos shows">
                 <span class="letrero-text" data-text="SHOWS">SHOWS</span>
             </a>
-            <a class="menu-link area-conoces" href="#sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
+            <a class="menu-link area-conoces" href="#d-sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
                 <span class="q-open" aria-hidden="true">¿</span><span class="letrero-text" data-text="YA ME CONOCES">YA ME CONOCES</span><span class="q-close" aria-hidden="true">?</span>
             </a>
-            <a class="menu-link area-echame" href="#contacto" aria-label="Échame un grito — Contacto">
+            <a class="menu-link area-echame" href="#d-contacto" aria-label="Échame un grito — Contacto">
                 <span class="letrero-text" data-text="ÉCHAME UN&#10;GRITO">ÉCHAME UN<br>GRITO</span>
             </a>
-            <a class="menu-link area-fotitos" href="#galeria" aria-label="La Raza — Galería de fotos">
+            <a class="menu-link area-fotitos" href="#d-galeria" aria-label="La Raza — Galería de fotos">
                 <span class="letrero-text" data-text="LA RAZA">LA RAZA</span>
             </a>
 
@@ -1427,7 +1430,7 @@
         </div>
 
         <!-- Divisor: anuncia Próximos Shows -->
-        <div class="divider-marquee" role="img" aria-label="¿Ya me conoces?">
+        <div class="divider-marquee" id="d-sobre-mi" role="img" aria-label="¿Ya me conoces?">
             <div class="divider-track">
                 <img src="assets/divider-ya-me-conoces-text.png?v=neg" alt="¿Ya me conoces?">
                 <img src="assets/divider-ya-me-conoces-text.png?v=neg" alt="" aria-hidden="true">
@@ -1489,7 +1492,7 @@
             </div>
         </section>
 
-        <div class="divider-marquee" role="img" aria-label="Próximos Shows">
+        <div class="divider-marquee" id="d-proximos-shows" role="img" aria-label="Próximos Shows">
             <div class="divider-track">
                 <img src="assets/divider-proximos-shows-text.png?v=neg" alt="Próximos Shows">
                 <img src="assets/divider-proximos-shows-text.png?v=neg" alt="" aria-hidden="true">
@@ -1530,7 +1533,7 @@
         </section>
 
         <!-- Divisor: anuncia La Merch -->
-        <div class="divider-marquee" role="img" aria-label="La Merch">
+        <div class="divider-marquee" id="d-merch" role="img" aria-label="La Merch">
             <div class="divider-track">
                 <img src="assets/divider-la-merch-text.png?v=neg" alt="La Merch">
                 <img src="assets/divider-la-merch-text.png?v=neg" alt="" aria-hidden="true">
@@ -1563,7 +1566,7 @@
 
 
         <!-- Divisor: anuncia Fotitos (Galería) -->
-        <div class="divider-marquee" role="img" aria-label="Con la raza">
+        <div class="divider-marquee" id="d-galeria" role="img" aria-label="Con la raza">
             <div class="divider-track">
                 <img src="assets/divider-con-la-raza-text.png?v=6" alt="Con la raza">
                 <img src="assets/divider-con-la-raza-text.png?v=6" alt="" aria-hidden="true">
@@ -1604,7 +1607,7 @@
         </div>
 
         <!-- Divisor: anuncia Échame un grito -->
-        <div class="divider-marquee" role="img" aria-label="Échame un grito">
+        <div class="divider-marquee" id="d-contacto" role="img" aria-label="Échame un grito">
             <div class="divider-track">
                 <img src="assets/divider-echame-un-grito-text.png?v=neg" alt="Échame un grito">
                 <img src="assets/divider-echame-un-grito-text.png?v=neg" alt="" aria-hidden="true">
