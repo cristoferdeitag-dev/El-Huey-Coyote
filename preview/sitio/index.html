@@ -140,8 +140,8 @@
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0.15);
             touch-action: manipulation;
             transition: transform 0.18s ease, text-shadow 0.18s ease;
-            /* mismo glow de neón (verde agua) que CIERRA EL CHANGARRO (Ani) */
-            animation: neon-flicker 5s linear infinite;
+            /* glow de neón BLANCO/plateado (Ani: que se note más sobre la cortina verde) */
+            animation: neon-flicker-white 5s linear infinite;
         }
         .btn-changarro:hover,
         .btn-changarro:active,
@@ -607,7 +607,7 @@
         /* fondo nuevo: 4 logos en cuadrícula 2×2 dentro del banner EXTRAS (reemplazan los nombres) */
         .pos-spotify { top: 94.3%; left: 44%;  transform: translateY(-50%); }
         .pos-youtube { top: 94.3%; left: 73%;  transform: translateY(-50%); }
-        .pos-amazon  { top: 97.5%; left: 44%;  transform: translateY(-50%); }
+        .pos-amazon  { top: 97.5%; left: 46.5%; transform: translateY(-50%); } /* centrado con Spotify (Ani) */
         .pos-apple   { top: 97.5%; left: 73%;  transform: translateY(-50%); }
 
         /* === MERCH — items como texto real (clicables, deslizan al hover) + precios texto editable === */
@@ -696,17 +696,21 @@
         /* LA MERCH: mismo efecto de ZOOM que el botón PON UNA ROLITA (music-pulse): cada botón
            late de escala en bucle. Conserva translateY(-50%) para no perder el centrado.
            Stagger leve para que sea una ola suave, no todos a la vez. */
+        /* zoom UNO POR UNO: cada botón late ~0.4s y arranca 0.5s después del anterior (Ani).
+           Ciclo 3s = 6 botones × 0.5s. */
         @keyframes merch-zoom {
-            0%, 100% { transform: translateY(-50%) scale(1);    }
-            50%      { transform: translateY(-50%) scale(1.06); }
+            0%   { transform: translateY(-50%) scale(1);    }
+            7%   { transform: translateY(-50%) scale(1.09); }
+            14%  { transform: translateY(-50%) scale(1);    }
+            100% { transform: translateY(-50%) scale(1);    }
         }
-        .merch-item { animation: merch-zoom 1.9s ease-in-out infinite; }
-        .merch-item.pos-pirat-playeras { animation-delay: 0s;    }
-        .merch-item.pos-pirat-chamarra { animation-delay: 0.12s; }
-        .merch-item.pos-pirat-calcetas { animation-delay: 0.24s; }
-        .merch-item.pos-orig-playeras  { animation-delay: 0.36s; }
-        .merch-item.pos-orig-chamarra  { animation-delay: 0.48s; }
-        .merch-item.pos-orig-calcetas  { animation-delay: 0.6s;  }
+        .merch-item { animation: merch-zoom 3s ease-in-out infinite; }
+        .merch-item.pos-pirat-playeras { animation-delay: 0s;   }
+        .merch-item.pos-pirat-chamarra { animation-delay: 0.5s; }
+        .merch-item.pos-pirat-calcetas { animation-delay: 1s;   }
+        .merch-item.pos-orig-playeras  { animation-delay: 1.5s; }
+        .merch-item.pos-orig-chamarra  { animation-delay: 2s;   }
+        .merch-item.pos-orig-calcetas  { animation-delay: 2.5s; }
         @media (prefers-reduced-motion: reduce) {
             .shows-list .ciudad::after { animation: none; }
             .merch-item { animation: none; }
@@ -899,6 +903,21 @@
         .btn-cierra { animation: neon-flicker 5s linear infinite; }
         @media (prefers-reduced-motion: reduce) {
             .btn-cierra { animation: none; }
+        }
+        /* ABRE EL CHANGARRO: mismo parpadeo pero glow BLANCO/plateado — sobre la cortina verde
+           el verde agua casi no se veía; el blanco resalta mucho más (Ani). */
+        @keyframes neon-flicker-white {
+            0%, 18%, 22%, 25%, 53%, 57%, 83%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 6px rgba(255,255,255,0.98), 0 0 14px rgba(240,245,250,0.92), 0 0 26px rgba(205,220,230,0.78);
+            }
+            20%, 24%, 55%, 84% {
+                opacity: 0.62;
+                text-shadow: none;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-changarro { animation: none; }
         }
 
         /* === DIVISORES ENTRE SECCIONES === */
