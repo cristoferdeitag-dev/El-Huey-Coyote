@@ -376,7 +376,8 @@
             display: block;
             background-image: linear-gradient(112deg, rgba(70,72,84,0) 48.7%, rgba(70,72,84,0.5) 49.5%, #ffffff 50%, rgba(70,72,84,0.5) 50.5%, rgba(70,72,84,0) 51.3%);
             background-repeat: no-repeat;
-            background-size: 230% 100%;
+            /* bg-size más chico = barrido más lento (Ani pidió bajarle un poquito la velocidad) */
+            background-size: 200% 100%;
             background-position: 190% 0;
             mix-blend-mode: normal;
         }
@@ -646,9 +647,10 @@
         /* Rayo brillante IGUAL al de los botones de ÉCHAME UN GRITO, sobre los textos de
            PRÓXIMOS SHOWS y LA MERCH: un destello blanco cruza las letras SIN cambiar su color
            (overlay ::after clip-text + mezcla screen). data-text se llena por JS abajo. */
-        /* shows-list son estáticos → relative para el ::after. merch-item/price YA son absolute (positioned) → NO tocar su position. */
-        .shows-list .mes, .shows-list .dia, .shows-list .ciudad { position: relative; }
-        .shows-list .mes::after, .shows-list .dia::after, .shows-list .ciudad::after,
+        /* Solo las CIUDADES llevan rayo en PRÓXIMOS (no mes/dia, Ani). LA MERCH igual.
+           Ambas secciones: el destello va UNO POR UNO (no todos a la vez) y se repite en bucle. */
+        .shows-list .ciudad { position: relative; }
+        .shows-list .ciudad::after,
         .merch-item::after {
             content: attr(data-text);
             position: absolute;
@@ -663,19 +665,30 @@
             -webkit-text-stroke: 0;
             opacity: 0;
             pointer-events: none;
-            animation: text-shine 6s ease-in-out infinite;
         }
         @keyframes text-shine {
             0%   { background-position: 190% 0; opacity: 0; }
-            2%   { opacity: 1; }
-            15%  { background-position: -70% 0; opacity: 1; }
-            18%  { opacity: 0; }
+            1%   { opacity: 1; }
+            10%  { background-position: -70% 0; opacity: 1; }
+            12%  { opacity: 0; }
             100% { background-position: -70% 0; opacity: 0; }
         }
-        /* por turnos: PRÓXIMOS SHOWS primero, LA MERCH después */
-        .merch-item::after { animation-delay: 1.6s; }
+        /* PRÓXIMOS: 4 ciudades una por una (CDMX→GDL→MONTERREY→TIJUANA), bucle 5s con pausa */
+        .shows-list .ciudad::after { animation: text-shine 5s ease-in-out infinite; }
+        .shows-list .ciudad:nth-of-type(1)::after { animation-delay: 0s;   }
+        .shows-list .ciudad:nth-of-type(2)::after { animation-delay: 0.6s; }
+        .shows-list .ciudad:nth-of-type(3)::after { animation-delay: 1.2s; }
+        .shows-list .ciudad:nth-of-type(4)::after { animation-delay: 1.8s; }
+        /* LA MERCH: 6 items uno por uno, bucle 6s con pausa */
+        .merch-item::after { animation: text-shine 6s ease-in-out infinite; }
+        .merch-item.pos-pirat-playeras::after { animation-delay: 0s;    }
+        .merch-item.pos-pirat-chamarra::after { animation-delay: 0.75s; }
+        .merch-item.pos-pirat-calcetas::after { animation-delay: 1.5s;  }
+        .merch-item.pos-orig-playeras::after  { animation-delay: 2.25s; }
+        .merch-item.pos-orig-chamarra::after  { animation-delay: 3s;    }
+        .merch-item.pos-orig-calcetas::after  { animation-delay: 3.75s; }
         @media (prefers-reduced-motion: reduce) {
-            .shows-list .mes::after, .shows-list .dia::after, .shows-list .ciudad::after,
+            .shows-list .ciudad::after,
             .merch-item::after { animation: none; }
         }
 
@@ -745,8 +758,15 @@
         /* === FOOTER (final de la página) === */
         .site-footer {
             width: 100%;
-            background: #1e1e20;
-            background-image: linear-gradient(180deg, #242427 0%, #161618 100%);
+            background-color: #1a1f1c;
+            /* Fondo: lámina de metal (parte de abajo de la imagen de Ani), atenuada con una
+               capa oscura encima para que resalte el texto — igual que las demás secciones. */
+            background-image:
+                linear-gradient(rgba(18,24,21,0.66), rgba(18,24,21,0.66)),
+                url("assets/footer-fondo.webp?v=1");
+            background-size: auto, cover;
+            background-position: center, center bottom;
+            background-repeat: no-repeat, no-repeat;
             border-top: 4px solid #ffd84a;
             color: #fff;
             padding: 26px 18px 30px;
