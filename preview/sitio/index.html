@@ -857,6 +857,7 @@
         /* Botón "CIERRA EL CHANGARRO" — mismas letras/estilo que "ABRE EL CHANGARRO" de la portada */
         .btn-cierra {
             display: inline-block;
+            position: relative;          /* ancla el rayo dorado ::after */
             margin: 4px auto 20px;
             background: transparent;
             border: none;
@@ -879,6 +880,27 @@
             transform: scale(1.06);
             text-shadow: 2px 5px 6px rgba(0,0,0,0.6), 0 2px 2px rgba(0,0,0,0.5);
             outline: none;
+        }
+        /* Rayo DORADO sobre CIERRA EL CHANGARRO: como el destello de ÉCHAME/merch pero en
+           dorado, para que SÍ se note sobre el texto blanco. Cruza las letras en bucle. */
+        .btn-cierra::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0; top: 0;
+            width: 100%;
+            background: linear-gradient(112deg, rgba(255,216,74,0) 44%, rgba(255,216,74,0.98) 50%, rgba(255,216,74,0) 56%);
+            background-repeat: no-repeat;
+            background-size: 260% 100%;
+            background-position: 190% 0;
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+            text-shadow: none;
+            opacity: 0;
+            pointer-events: none;
+            animation: text-shine 3.6s ease-in-out infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-cierra::after { animation: none; }
         }
 
         /* === DIVISORES ENTRE SECCIONES === */
@@ -1648,7 +1670,7 @@
                     <a href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" target="_blank" rel="noopener noreferrer">TikTok</a>
                 </nav>
                 <a class="footer-mail" href="mailto:contacto@elhueycoyote.com">contacto@elhueycoyote.com</a>
-                <button class="btn-cierra" id="btn-cierra" type="button" aria-label="Cierra el changarro">CIERRA EL CHANGARRO</button>
+                <button class="btn-cierra" id="btn-cierra" type="button" aria-label="Cierra el changarro" data-text="CIERRA EL CHANGARRO">CIERRA EL CHANGARRO</button>
                 <p class="footer-copy">© 2026 El Huey Coyote · Todos los derechos reservados</p>
             </div>
         </footer>
