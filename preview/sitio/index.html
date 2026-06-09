@@ -140,6 +140,8 @@
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0.15);
             touch-action: manipulation;
             transition: transform 0.18s ease, text-shadow 0.18s ease;
+            /* mismo glow de neón (verde agua) que CIERRA EL CHANGARRO (Ani) */
+            animation: neon-flicker 5s linear infinite;
         }
         .btn-changarro:hover,
         .btn-changarro:active,
@@ -691,22 +693,20 @@
         .shows-list .ciudad:nth-of-type(2)::after { animation-delay: 1.4s; }
         .shows-list .ciudad:nth-of-type(3)::after { animation-delay: 2.8s; }
         .shows-list .ciudad:nth-of-type(4)::after { animation-delay: 4.2s; }
-        /* LA MERCH: ya NO lleva rayo de luz (Ani). En su lugar, cada botón se desliza un
-           poquito a la IZQUIERDA y regresa a su lugar, uno por uno, en bucle.
-           El keyframe conserva translateY(-50%) para no perder el centrado vertical. */
-        @keyframes merch-nudge {
-            0%   { transform: translateY(-50%) translateX(0); }
-            6%   { transform: translateY(-50%) translateX(-10px); }
-            12%  { transform: translateY(-50%) translateX(0); }
-            100% { transform: translateY(-50%) translateX(0); }
+        /* LA MERCH: mismo efecto de ZOOM que el botón PON UNA ROLITA (music-pulse): cada botón
+           late de escala en bucle. Conserva translateY(-50%) para no perder el centrado.
+           Stagger leve para que sea una ola suave, no todos a la vez. */
+        @keyframes merch-zoom {
+            0%, 100% { transform: translateY(-50%) scale(1);    }
+            50%      { transform: translateY(-50%) scale(1.06); }
         }
-        .merch-item { animation: merch-nudge 6s ease-in-out infinite; }
+        .merch-item { animation: merch-zoom 1.9s ease-in-out infinite; }
         .merch-item.pos-pirat-playeras { animation-delay: 0s;    }
-        .merch-item.pos-pirat-chamarra { animation-delay: 0.75s; }
-        .merch-item.pos-pirat-calcetas { animation-delay: 1.5s;  }
-        .merch-item.pos-orig-playeras  { animation-delay: 2.25s; }
-        .merch-item.pos-orig-chamarra  { animation-delay: 3s;    }
-        .merch-item.pos-orig-calcetas  { animation-delay: 3.75s; }
+        .merch-item.pos-pirat-chamarra { animation-delay: 0.12s; }
+        .merch-item.pos-pirat-calcetas { animation-delay: 0.24s; }
+        .merch-item.pos-orig-playeras  { animation-delay: 0.36s; }
+        .merch-item.pos-orig-chamarra  { animation-delay: 0.48s; }
+        .merch-item.pos-orig-calcetas  { animation-delay: 0.6s;  }
         @media (prefers-reduced-motion: reduce) {
             .shows-list .ciudad::after { animation: none; }
             .merch-item { animation: none; }
@@ -772,7 +772,7 @@
         /* Posiciones columna derecha; FB, IG y TikTok alineados al MISMO centro (≈83.8%) y movidos a la izquierda; email más chico */
         .ech-fb    { left: 77.2%; top: 30.7%; width: 13.2%; }
         .ech-ig    { left: 77.5%; top: 43.2%; width: 12.6%; }
-        .ech-email { left: 73.7%; top: 57%;   width: 18%;   }
+        .ech-email { left: 73.7%; top: 54%;   width: 18%;   }
         .ech-tt    { left: 76.8%; top: 67.5%; width: 14%;   }
 
         /* === FOOTER (final de la página) === */
@@ -1101,8 +1101,11 @@
             font-family: 'stratum-2-web', 'bc-barell-condensed-thin', sans-serif;
             font-size: 5cqw;
             letter-spacing: 0.02em;
-            color: rgba(248,248,245,0.92);
-            -webkit-text-stroke: 0.6px rgba(248,248,245,0.9);
+            /* gris clarito GRABADO en la lámina: filo oscuro fino + emboss (luz abajo / sombra arriba)
+               para que parezca rayado en el metal y aun así se lea (Ani). */
+            color: #c2c4c7;
+            -webkit-text-stroke: 0.5px rgba(48,50,54,0.55);
+            text-shadow: 0 1px 0 rgba(255,255,255,0.4), 0 -1px 1px rgba(0,0,0,0.5), 0 0 2px rgba(0,0,0,0.25);
             transform: rotate(-6deg);
             white-space: nowrap;
             pointer-events: none;
@@ -1424,8 +1427,8 @@
     <nav class="nav-menu" id="nav-menu" aria-label="Menú principal">
         <a href="#d-sobre-mi">Sobre El HueyCoyote</a>
         <a href="#d-proximos-shows">Próximos Shows</a>
-        <a href="#d-merch">Tienda</a>
-        <a href="#d-galeria">Galería de fotos</a>
+        <a href="#d-merch">Tienda online</a>
+        <a href="#d-galeria">Galería</a>
         <a href="#d-contacto">Contacto</a>
     </nav>
     <div class="site-wrap">
@@ -1865,14 +1868,46 @@
             lb.addEventListener('click', function (e) { if (e.target === lb) cerrar(); });
         })();
 
-        // FOTITOS: galería de scroll HORIZONTAL (swipe a la derecha). El scroll vertical sigue la página.
+        // FOTITOS: galería de scroll HORIZONTAL con AUTO-PASE (Ani). Las fotos avanzan solas
+        // (ping-pong suave). Al primer toque/scroll del usuario, se detiene el auto y se ocultan
+        // las flechitas (ya entendió hacia dónde deslizar).
         (function () {
             const strip = document.getElementById('galeria-grid');
             const hint = document.getElementById('galeria-hint');
             if (!strip) return;
-            strip.addEventListener('scroll', function () {
-                if (hint) hint.style.opacity = strip.scrollLeft > 12 ? '0' : '1';
-            }, { passive: true });
+            let dir = 1, paused = false, resumeTimer = null;
+            const SPEED = 1.3; // px por frame (~78px/s)
+            // OJO: el scroll-snap (proximity) jala de vuelta cada micro-incremento → se apaga
+            // mientras corre el auto y se restaura al pausar (para que el swipe manual centre).
+            strip.style.scrollSnapType = 'none';
+            function tick() {
+                if (!paused) {
+                    const max = strip.scrollWidth - strip.clientWidth;
+                    if (max > 4) {
+                        strip.scrollLeft += dir * SPEED;
+                        if (strip.scrollLeft >= max - 1) dir = -1;
+                        else if (strip.scrollLeft <= 0) dir = 1;
+                    }
+                }
+                requestAnimationFrame(tick); // SIEMPRE re-agenda: nunca se mata el bucle
+            }
+            requestAnimationFrame(tick);
+            // Al tocar/deslizar, se pausa el auto (snap on para swipe manual + se ocultan flechitas);
+            // tras 4s de inactividad, se reanuda solo. Robusto ante un evento "fantasma" al cargar.
+            function pause() {
+                paused = true;
+                strip.style.scrollSnapType = '';
+                if (hint) hint.style.opacity = '0';
+                clearTimeout(resumeTimer);
+                resumeTimer = setTimeout(function () {
+                    paused = false;
+                    strip.style.scrollSnapType = 'none';
+                    if (hint) hint.style.opacity = '';
+                }, 4000);
+            }
+            ['pointerdown', 'touchstart', 'wheel'].forEach(function (ev) {
+                strip.addEventListener(ev, pause, { passive: true });
+            });
         })();
 
         // Botón de música: al click abre la lista de rolitas del Huey Coyote
