@@ -601,10 +601,10 @@
         .pos-mayami  { top: 74%; }
 
         /* fondo nuevo: 4 logos en cuadrícula 2×2 dentro del banner EXTRAS (reemplazan los nombres) */
-        .pos-spotify { top: 94.7%; left: 44%;  transform: translateY(-50%); }
-        .pos-youtube { top: 94.7%; left: 73%;  transform: translateY(-50%); }
-        .pos-amazon  { top: 97.9%; left: 44%;  transform: translateY(-50%); }
-        .pos-apple   { top: 97.9%; left: 73%;  transform: translateY(-50%); }
+        .pos-spotify { top: 94.3%; left: 44%;  transform: translateY(-50%); }
+        .pos-youtube { top: 94.3%; left: 73%;  transform: translateY(-50%); }
+        .pos-amazon  { top: 97.5%; left: 44%;  transform: translateY(-50%); }
+        .pos-apple   { top: 97.5%; left: 73%;  transform: translateY(-50%); }
 
         /* === MERCH — items como texto real (clicables, deslizan al hover) + precios texto editable === */
         .merch-item {
@@ -675,12 +675,20 @@
             12%  { opacity: 0; }
             100% { background-position: -70% 0; opacity: 0; }
         }
-        /* PRÓXIMOS: 4 ciudades una por una (CDMX→GDL→MONTERREY→TIJUANA), bucle 5s con pausa */
-        .shows-list .ciudad::after { animation: text-shine 5s ease-in-out infinite; }
+        /* sweep MUCHO más lento y visible para las ciudades (Ani: iban muy rápido y ni se veían) */
+        @keyframes ciudad-shine {
+            0%   { background-position: 190% 0; opacity: 0; }
+            1%   { opacity: 1; }
+            16%  { background-position: -70% 0; opacity: 1; }
+            18%  { opacity: 0; }
+            100% { background-position: -70% 0; opacity: 0; }
+        }
+        /* PRÓXIMOS: 4 ciudades una por una (CDMX→GDL→MONTERREY→TIJUANA), lento (sweep ~1.3s), separadas 1.4s, bucle 8s */
+        .shows-list .ciudad::after { animation: ciudad-shine 8s ease-in-out infinite; }
         .shows-list .ciudad:nth-of-type(1)::after { animation-delay: 0s;   }
-        .shows-list .ciudad:nth-of-type(2)::after { animation-delay: 0.6s; }
-        .shows-list .ciudad:nth-of-type(3)::after { animation-delay: 1.2s; }
-        .shows-list .ciudad:nth-of-type(4)::after { animation-delay: 1.8s; }
+        .shows-list .ciudad:nth-of-type(2)::after { animation-delay: 1.4s; }
+        .shows-list .ciudad:nth-of-type(3)::after { animation-delay: 2.8s; }
+        .shows-list .ciudad:nth-of-type(4)::after { animation-delay: 4.2s; }
         /* LA MERCH: 6 items uno por uno, bucle 6s con pausa */
         .merch-item::after { animation: text-shine 6s ease-in-out infinite; }
         .merch-item.pos-pirat-playeras::after { animation-delay: 0s;    }
@@ -1305,21 +1313,21 @@
         }
         .galeria-strip::-webkit-scrollbar { display: none; }
         .galeria-strip img.gp { scroll-snap-align: center; }
-        /* marco = forma natural de la foto (sin recortar) + ~3 por pantalla */
+        /* marco = forma natural de la foto (sin recortar). Más grandes (Ani) → ~2.5 por pantalla */
         .galeria-strip img.gp {
-            width: 28vw; max-width: 158px; height: auto;
+            width: 36vw; max-width: 200px; height: auto;
             flex: 0 0 auto; display: block; cursor: pointer; background: #fff;
-            box-shadow: 0 10px 24px rgba(0,0,0,0.5);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.55);
             transition: filter 0.2s ease;
         }
         .galeria-strip img.gp:active { filter: brightness(1.07); }
-        /* bordes variados, tipo carteles (se repiten algunos a propósito) */
-        .gp.b1 { border: 9px solid #ffffff; }
-        .gp.b2 { border: 8px solid #15110f; }
-        .gp.b3 { border: 8px solid #e23b2e; }
-        .gp.b4 { border: 9px solid #ffd84a; }
-        .gp.b5 { border: 8px solid #1f8a3b; }
-        .gp.b6 { border: 7px solid #ffffff; outline: 4px solid #00abab; outline-offset: 0; }
+        /* bordes variados, tipo carteles (se repiten algunos a propósito) — un poco más gruesos por el tamaño */
+        .gp.b1 { border: 11px solid #ffffff; }
+        .gp.b2 { border: 10px solid #15110f; }
+        .gp.b3 { border: 10px solid #e23b2e; }
+        .gp.b4 { border: 11px solid #ffd84a; }
+        .gp.b5 { border: 10px solid #1f8a3b; }
+        .gp.b6 { border: 9px solid #ffffff; outline: 5px solid #00abab; outline-offset: 0; }
         .galeria-hint {
             position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
             display: flex; align-items: center; gap: 7px;
@@ -1565,22 +1573,22 @@
             <div class="galeria-scroll" id="galeria-scroll">
                 <div class="galeria-sticky">
                     <div class="galeria-strip" id="galeria-grid">
-                        <img class="gp b1" style="transform:rotate(-5deg) translateY(-18px)" src="assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
-                        <img class="gp b3" style="transform:rotate(4deg) translateY(16px)" src="assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
-                        <img class="gp b2" style="transform:rotate(-3deg) translateY(26px)" src="assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
-                        <img class="gp b4" style="transform:rotate(6deg) translateY(-12px)" src="assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
-                        <img class="gp b5" style="transform:rotate(-7deg) translateY(18px)" src="assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
-                        <img class="gp b1" style="transform:rotate(3deg) translateY(-24px)" src="assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
-                        <img class="gp b6" style="transform:rotate(-4deg) translateY(12px)" src="assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
-                        <img class="gp b3" style="transform:rotate(7deg) translateY(22px)" src="assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
-                        <img class="gp b2" style="transform:rotate(-6deg) translateY(-14px)" src="assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
-                        <img class="gp b4" style="transform:rotate(5deg) translateY(16px)" src="assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
-                        <img class="gp b5" style="transform:rotate(-2deg) translateY(-20px)" src="assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
-                        <img class="gp b1" style="transform:rotate(8deg) translateY(12px)" src="assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
-                        <img class="gp b6" style="transform:rotate(-5deg) translateY(-16px)" src="assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
-                        <img class="gp b2" style="transform:rotate(4deg) translateY(24px)" src="assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
-                        <img class="gp b3" style="transform:rotate(-8deg) translateY(-12px)" src="assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
-                        <img class="gp b4" style="transform:rotate(5deg) translateY(18px)" src="assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
+                        <img class="gp b1" style="transform:rotate(-5deg) translateY(-60px)" src="assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
+                        <img class="gp b3" style="transform:rotate(4deg) translateY(52px)" src="assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
+                        <img class="gp b2" style="transform:rotate(-3deg) translateY(-50px)" src="assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
+                        <img class="gp b4" style="transform:rotate(6deg) translateY(58px)" src="assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
+                        <img class="gp b5" style="transform:rotate(-7deg) translateY(-56px)" src="assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
+                        <img class="gp b1" style="transform:rotate(3deg) translateY(50px)" src="assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
+                        <img class="gp b6" style="transform:rotate(-4deg) translateY(-62px)" src="assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
+                        <img class="gp b3" style="transform:rotate(7deg) translateY(54px)" src="assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
+                        <img class="gp b2" style="transform:rotate(-6deg) translateY(-52px)" src="assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
+                        <img class="gp b4" style="transform:rotate(5deg) translateY(60px)" src="assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
+                        <img class="gp b5" style="transform:rotate(-2deg) translateY(-58px)" src="assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
+                        <img class="gp b1" style="transform:rotate(8deg) translateY(50px)" src="assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
+                        <img class="gp b6" style="transform:rotate(-5deg) translateY(-54px)" src="assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
+                        <img class="gp b2" style="transform:rotate(4deg) translateY(62px)" src="assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
+                        <img class="gp b3" style="transform:rotate(-8deg) translateY(-56px)" src="assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
+                        <img class="gp b4" style="transform:rotate(5deg) translateY(52px)" src="assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
                     </div>
                     <div class="galeria-hint" id="galeria-hint">desliza para ver más fotos →</div>
                 </div>
