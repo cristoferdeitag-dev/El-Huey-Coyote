@@ -11,7 +11,7 @@
     <title>El Huey Coyote</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Quicksand:ital,wght@0,500;0,600;1,500;1,600&family=Permanent+Marker&family=Rock+Salt&family=Rubik+Spray+Paint&family=Shadows+Into+Light+Two&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Quicksand:ital,wght@0,500;0,600;1,500;1,600&family=Permanent+Marker&family=Rock+Salt&family=Shadows+Into+Light+Two&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/yzd3dtz.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -787,12 +787,12 @@
             position: absolute;
             left: 49.77%; top: 59.54%;
             transform: translate(-50%, -50%) rotate(-0.24deg);
-            font-family: 'Rubik Spray Paint', 'swiss-721-bt', sans-serif;
-            font-size: 3.2cqw;
+            font-family: 'brush-up', 'swiss-721-bt', cursive;
+            font-size: 5.2cqw;
             line-height: 1;
             white-space: nowrap;
-            color: #18120f;                 /* spray oscuro como el original */
-            -webkit-text-stroke: 0.4px rgba(20,16,14,0.55);
+            color: #333333;
+            -webkit-text-stroke: 0.2px rgba(51,51,51,0.35);
             letter-spacing: 0.005em;
             pointer-events: none;
             z-index: 3;
@@ -1162,9 +1162,14 @@
             letter-spacing: 0.02em;
             /* gris clarito GRABADO en la lámina: filo oscuro fino + emboss (luz abajo / sombra arriba)
                para que parezca rayado en el metal y aun así se lea (Ani). */
-            color: #c2c4c7;
-            -webkit-text-stroke: 0.5px rgba(48,50,54,0.55);
-            text-shadow: 0 1px 0 rgba(255,255,255,0.4), 0 -1px 1px rgba(0,0,0,0.5), 0 0 2px rgba(0,0,0,0.25);
+            /* gris plateado con vetas brillantes (gradiente clip-text) = parece metal con
+               partes plateadas; trazo más DELGADO (0.25 vs 0.5) por pedido de Ani. */
+            color: #c2c4c7; /* fallback */
+            background: linear-gradient(100deg, #b0b2b5 0%, #eef0f2 19%, #a9abae 37%, #e2e4e6 55%, #a7a9ac 73%, #edeff1 100%);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 0.25px rgba(60,62,66,0.4);
+            text-shadow: 0 1px 1px rgba(0,0,0,0.4), 0 -1px 0 rgba(255,255,255,0.22);
             transform: rotate(-6deg);
             white-space: nowrap;
             pointer-events: none;
