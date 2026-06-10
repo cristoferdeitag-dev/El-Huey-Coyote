@@ -1169,12 +1169,14 @@
                para que parezca rayado en el metal y aun así se lea (Ani). */
             /* gris plateado con vetas brillantes (gradiente clip-text) = parece metal con
                partes plateadas; trazo más DELGADO (0.25 vs 0.5) por pedido de Ani. */
-            color: #cdcfd2; /* fallback */
-            background: linear-gradient(100deg, #b6b8bb 0%, #fafcfe 18%, #b0b2b5 36%, #f3f5f7 54%, #b3b5b8 72%, #fcfeff 100%);
-            -webkit-background-clip: text; background-clip: text;
-            -webkit-text-fill-color: transparent;
-            -webkit-text-stroke: 0.18px rgba(58,60,64,0.42);
-            text-shadow: 0 1px 1px rgba(0,0,0,0.34), 0 -1px 0 rgba(255,255,255,0.28);
+            /* OSCURO con contornos plateados en partes (Ani): relleno gris oscuro + filo plata
+               fino + emboss (brillo plata arriba-izq / sombra abajo-der) = metal oscuro cuyos
+               bordes brillan plateado en algunas partes. */
+            color: #2c2d2f;
+            -webkit-text-fill-color: #2c2d2f;
+            background: none; -webkit-background-clip: border-box; background-clip: border-box;
+            -webkit-text-stroke: 0.3px rgba(206,210,214,0.5);
+            text-shadow: -0.6px -0.6px 0.3px rgba(230,234,238,0.6), 0.7px 0.9px 1.2px rgba(0,0,0,0.55);
             transform: rotate(-6deg);
             white-space: nowrap;
             pointer-events: none;
