@@ -778,6 +778,30 @@
         .ech-ig    { left: 77.5%; top: 43.2%; width: 12.6%; }
         .ech-email { left: 73.7%; top: 54%;   width: 18%;   }
         .ech-tt    { left: 76.8%; top: 67.5%; width: 14%;   }
+        /* Rayo de luz que barre el NÚMERO telefónico (horneado en el fondo): glint blanco
+           que cruza la placa cada cierto rato (Ani). Posición sobre "2226740285". */
+        .ech-phone-shine {
+            position: absolute;
+            left: 36.5%; top: 56.4%; width: 34%; height: 5.4%;
+            border-radius: 30px;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 3;
+            background: linear-gradient(115deg, rgba(255,255,255,0) 42%, rgba(255,255,255,0.72) 50%, rgba(255,255,255,0) 58%);
+            background-repeat: no-repeat;
+            background-size: 240% 100%;
+            background-position: 200% 0;
+            mix-blend-mode: screen;
+            animation: phone-shine 3.6s ease-in-out infinite;
+        }
+        @keyframes phone-shine {
+            0%   { background-position: 200% 0; }
+            22%  { background-position: -100% 0; }
+            100% { background-position: -100% 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .ech-phone-shine { animation: none; opacity: 0; }
+        }
 
         /* === FOOTER (final de la página) === */
         .site-footer {
@@ -1135,12 +1159,17 @@
             display: inline-block;
             line-height: 1;
         }
+        /* Se raya al entrar a la sección y se REPITE en bucle (Ani): raya de izq→der,
+           se queda un rato, se borra de izq→der y vuelve a empezar (sin costura porque
+           ambos extremos del ciclo están "en nada"). */
         #sobre-mi.mero-scratched .mero-mero {
-            animation: scratch-in 1.3s steps(46, end) forwards;
+            animation: scratch-loop 7s steps(46, end) infinite;
         }
-        @keyframes scratch-in {
-            0%   { clip-path: inset(0 100% 0 0); }
-            100% { clip-path: inset(0 0 0 0); }
+        @keyframes scratch-loop {
+            0%   { clip-path: inset(0 100% 0 0); }  /* nada (recortado desde la derecha) */
+            20%  { clip-path: inset(0 0 0 0);    }  /* rayado completo, visible */
+            80%  { clip-path: inset(0 0 0 0);    }  /* se queda visible */
+            100% { clip-path: inset(0 0 0 100%); }  /* se borra de izq→der → queda en nada */
         }
         @media (prefers-reduced-motion: reduce) {
             .mero-mero { clip-path: inset(0 0 0 0); animation: none; }
@@ -1664,7 +1693,6 @@
                         <img class="gp b3" style="transform:rotate(-8deg) translateY(-56px)" src="assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
                         <img class="gp b4" style="transform:rotate(5deg) translateY(52px)" src="assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
                     </div>
-                    <div class="galeria-hint" id="galeria-hint" aria-label="Desliza a la derecha para ver más fotos"><span class="ghint-arrow">›</span><span class="ghint-arrow">›</span><span class="ghint-arrow">›</span></div>
                 </div>
             </div>
         </section>
@@ -1693,6 +1721,7 @@
             <a class="ech-btn ech-ig" href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" aria-label="Instagram"><img src="assets/ech-ig-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-ig-c.webp?v=1');mask-image:url('assets/ech-ig-c.webp?v=1')"></span></a>
             <a class="ech-btn ech-email" href="mailto:contacto@elhueycoyote.com" aria-label="Email contacto"><img src="assets/ech-email-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-email-c.webp?v=1');mask-image:url('assets/ech-email-c.webp?v=1')"></span></a>
             <a class="ech-btn ech-tt" href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" aria-label="TikTok"><img src="assets/ech-tt-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-tt-c.webp?v=1');mask-image:url('assets/ech-tt-c.webp?v=1')"></span></a>
+            <span class="ech-phone-shine" aria-hidden="true"></span>
         </section>
 
         <!-- FOOTER (final de la página) -->
@@ -1989,8 +2018,8 @@
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         conocesSection.classList.add('posters-landed');
-                        // El rayón empieza después que los posters aterricen (~1.6s)
-                        setTimeout(() => conocesSection.classList.add('mero-scratched'), 1600);
+                        // El rayón arranca pronto al entrar a la sección y luego corre en bucle (CSS infinite)
+                        setTimeout(() => conocesSection.classList.add('mero-scratched'), 600);
                         conocesObs.unobserve(conocesSection);
                     }
                 });
