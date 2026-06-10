@@ -760,7 +760,7 @@
             -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
             mix-blend-mode: screen;
             opacity: 0;
-            animation: ech-shine 6s ease-in-out infinite;
+            animation: ech-shine 8s ease-in-out infinite;
         }
         /* el destello entra, cruza y sale; el resto del ciclo está apagado (para que sea por turnos) */
         @keyframes ech-shine {
@@ -771,10 +771,11 @@
             100% { background-position: -70% 0; opacity: 0; }
         }
         /* Orden del destello: Facebook → Instagram → contacto@ → TikTok, y se repite */
-        .ech-fb    .ech-shine { animation-delay: 0s;   }
-        .ech-ig    .ech-shine { animation-delay: 1.5s; }
-        .ech-email .ech-shine { animation-delay: 3s;   }
-        .ech-tt    .ech-shine { animation-delay: 4.5s; }
+        /* Orden del rayo (Ani): Teléfono(0s) → Facebook(1.6s) → Instagram(3.2s) → Email(4.8s) → TikTok(6.4s), bucle */
+        .ech-fb    .ech-shine { animation-delay: 1.6s; }
+        .ech-ig    .ech-shine { animation-delay: 3.2s; }
+        .ech-email .ech-shine { animation-delay: 4.8s; }
+        .ech-tt    .ech-shine { animation-delay: 6.4s; }
         /* Posiciones columna derecha; FB, IG y TikTok alineados al MISMO centro (≈83.8%) y movidos a la izquierda; email más chico */
         .ech-fb    { left: 77.2%; top: 30.7%; width: 13.2%; }
         .ech-ig    { left: 77.5%; top: 43.2%; width: 12.6%; }
@@ -806,13 +807,17 @@
             -webkit-text-fill-color: transparent; color: transparent;
             -webkit-text-stroke: 0;
             opacity: 0; pointer-events: none;
-            animation: phone-text-shine 3.4s ease-in-out infinite;
+            /* mismo ciclo (8s) que los botones para que el rayo vaya en secuencia:
+               TELÉFONO (0s) → FB (1.6s) → IG (3.2s) → Email (4.8s) → TikTok (6.4s). El barrido
+               del teléfono es más lento (0-20% = 1.6s) porque pasaba muy rápido (Ani). */
+            animation: phone-text-shine 8s ease-in-out infinite;
+            animation-delay: 0s;
         }
         @keyframes phone-text-shine {
             0%   { background-position: 190% 0; opacity: 0; }
-            2%   { opacity: 1; }
-            14%  { background-position: -70% 0; opacity: 1; }
-            17%  { opacity: 0; }
+            1%   { opacity: 1; }
+            20%  { background-position: -70% 0; opacity: 1; }
+            22%  { opacity: 0; }
             100% { background-position: -70% 0; opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -1164,12 +1169,12 @@
                para que parezca rayado en el metal y aun así se lea (Ani). */
             /* gris plateado con vetas brillantes (gradiente clip-text) = parece metal con
                partes plateadas; trazo más DELGADO (0.25 vs 0.5) por pedido de Ani. */
-            color: #c2c4c7; /* fallback */
-            background: linear-gradient(100deg, #b0b2b5 0%, #eef0f2 19%, #a9abae 37%, #e2e4e6 55%, #a7a9ac 73%, #edeff1 100%);
+            color: #cdcfd2; /* fallback */
+            background: linear-gradient(100deg, #b6b8bb 0%, #fafcfe 18%, #b0b2b5 36%, #f3f5f7 54%, #b3b5b8 72%, #fcfeff 100%);
             -webkit-background-clip: text; background-clip: text;
             -webkit-text-fill-color: transparent;
-            -webkit-text-stroke: 0.25px rgba(60,62,66,0.4);
-            text-shadow: 0 1px 1px rgba(0,0,0,0.4), 0 -1px 0 rgba(255,255,255,0.22);
+            -webkit-text-stroke: 0.18px rgba(58,60,64,0.42);
+            text-shadow: 0 1px 1px rgba(0,0,0,0.34), 0 -1px 0 rgba(255,255,255,0.28);
             transform: rotate(-6deg);
             white-space: nowrap;
             pointer-events: none;
