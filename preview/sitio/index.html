@@ -24,6 +24,11 @@
             src: url('assets/fonts/DKDropDeadGorgeous.otf') format('opentype');
             font-display: swap;
         }
+        @font-face {
+            font-family: 'Spray Letters';
+            src: url('assets/fonts/SprayLetters.otf') format('opentype');
+            font-display: swap;
+        }
 
         html, body {
             background: #1a1a1a;
@@ -778,29 +783,43 @@
         .ech-ig    { left: 77.5%; top: 43.2%; width: 12.6%; }
         .ech-email { left: 73.7%; top: 54%;   width: 18%;   }
         .ech-tt    { left: 76.8%; top: 67.5%; width: 14%;   }
-        /* Rayo de luz que barre el NÚMERO telefónico (horneado en el fondo): glint blanco
-           que cruza la placa cada cierto rato (Ani). Posición sobre "2226740285". */
-        .ech-phone-shine {
+        /* NÚMERO telefónico como TEXTO VIVO (fuente Spray Letters) para que el rayo de luz
+           recorte a las letras (Ani). Coords del panel Transformar de Ani (centro del bbox,
+           lienzo 1086×1937): X540.55 Y1153.27 → centro 49.77%/59.54%; trazo 0.5pt. */
+        .ech-phone {
             position: absolute;
-            left: 36.5%; top: 56.4%; width: 34%; height: 5.4%;
-            border-radius: 30px;
+            left: 49.77%; top: 59.54%;
+            transform: translate(-50%, -50%) rotate(-0.24deg);
+            font-family: 'Spray Letters', 'swiss-721-bt', sans-serif;
+            font-size: 4.25cqw;
+            line-height: 1;
+            white-space: nowrap;
+            color: #18120f;                 /* spray oscuro como el original */
+            -webkit-text-stroke: 0.4px rgba(20,16,14,0.55);
+            letter-spacing: 0.005em;
             pointer-events: none;
-            overflow: hidden;
             z-index: 3;
-            background: linear-gradient(115deg, rgba(255,255,255,0) 42%, rgba(255,255,255,0.72) 50%, rgba(255,255,255,0) 58%);
-            background-repeat: no-repeat;
-            background-size: 240% 100%;
-            background-position: 200% 0;
-            mix-blend-mode: screen;
-            animation: phone-shine 3.6s ease-in-out infinite;
         }
-        @keyframes phone-shine {
-            0%   { background-position: 200% 0; }
-            22%  { background-position: -100% 0; }
-            100% { background-position: -100% 0; }
+        .ech-phone::after {
+            content: attr(data-text);
+            position: absolute; left: 0; top: 0; width: 100%;
+            background: linear-gradient(110deg, rgba(255,255,255,0) 44%, rgba(255,255,255,0.97) 50%, rgba(255,255,255,0) 56%);
+            background-repeat: no-repeat; background-size: 260% 100%; background-position: 190% 0;
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+            -webkit-text-stroke: 0;
+            opacity: 0; pointer-events: none;
+            animation: phone-text-shine 3.4s ease-in-out infinite;
+        }
+        @keyframes phone-text-shine {
+            0%   { background-position: 190% 0; opacity: 0; }
+            2%   { opacity: 1; }
+            14%  { background-position: -70% 0; opacity: 1; }
+            17%  { opacity: 0; }
+            100% { background-position: -70% 0; opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .ech-phone-shine { animation: none; opacity: 0; }
+            .ech-phone::after { animation: none; }
         }
 
         /* === FOOTER (final de la página) === */
@@ -1713,7 +1732,7 @@
 
         <!-- ÉCHAME UN GRITO (sección 6 — Contacto) -->
         <section id="contacto" class="reveal-init">
-            <img class="bg" src="assets/echame.webp?v=605fondo" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
+            <img class="bg" src="assets/echame-v2.webp?v=610" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">Échame un grito — Contacto del Huey Coyote</h2>
 
             <!-- 4 botones-sticker posicionados en la columna derecha (diseño original) + destello, clicables (misma pestaña) -->
@@ -1721,7 +1740,7 @@
             <a class="ech-btn ech-ig" href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" aria-label="Instagram"><img src="assets/ech-ig-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-ig-c.webp?v=1');mask-image:url('assets/ech-ig-c.webp?v=1')"></span></a>
             <a class="ech-btn ech-email" href="mailto:contacto@elhueycoyote.com" aria-label="Email contacto"><img src="assets/ech-email-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-email-c.webp?v=1');mask-image:url('assets/ech-email-c.webp?v=1')"></span></a>
             <a class="ech-btn ech-tt" href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" aria-label="TikTok"><img src="assets/ech-tt-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-tt-c.webp?v=1');mask-image:url('assets/ech-tt-c.webp?v=1')"></span></a>
-            <span class="ech-phone-shine" aria-hidden="true"></span>
+            <span class="ech-phone" data-text="2226740285">2226740285</span>
         </section>
 
         <!-- FOOTER (final de la página) -->
