@@ -1494,7 +1494,7 @@
 </head>
 <body>
     <!-- Si ya vio la cortina antes, entrar directo sin parpadeo (se evalúa antes de pintar) -->
-    <script>try{if(localStorage.getItem('huey_portada_vista')==='1'){document.documentElement.classList.add('portada-vista');document.body.classList.add('changarro-abierto');}}catch(e){}</script>
+    <script>try{var _forceIntro=/[?&](intro|inicio)=1/.test(location.search);if(!_forceIntro&&localStorage.getItem('huey_portada_vista')==='1'){document.documentElement.classList.add('portada-vista');document.body.classList.add('changarro-abierto');}}catch(e){}</script>
     <!-- HEADER fijo: siempre arriba al scrollear -->
     <header class="site-header" id="site-header">
         <a class="header-logo-link" href="#headliner" aria-label="Ir al inicio (Headliner)"><img src="assets/header-logo.webp?v=2" alt="El Huey Coyote"></a>
@@ -1803,8 +1803,10 @@
         const audioChangarro = document.getElementById('audio-changarro');
 
         // ¿El usuario ya vio la cortina antes? (se guarda en el navegador)
+        // Excepción: con ?intro=1 (o ?inicio=1) en la URL SIEMPRE se muestra la portada desde el
+        // inicio, para mandarle al cliente la experiencia completa (Ani).
         let portadaVista = false;
-        try { portadaVista = localStorage.getItem(PORTADA_KEY) === '1'; } catch (e) {}
+        try { portadaVista = localStorage.getItem(PORTADA_KEY) === '1' && !/[?&](intro|inicio)=1/.test(location.search); } catch (e) {}
 
         if (portadaVista) {
             // Visitante que regresa / hace refresh → entra directo, sin cortina
