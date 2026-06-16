@@ -42,7 +42,7 @@
 
   /* Aparición al hacer scroll */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease, transform .9s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
-  .reveal.shown{opacity:1;transform:none}
+  .reveal.shown{opacity:1;transform:none;will-change:auto}
 
   /* === Divisores: MARQUEE (metal fijo + texto deslizando) === */
   .dmarquee{width:100%;overflow:hidden;line-height:0;background:url('../sitio/assets/compu/divider-metal-compu.png?v=1') center/100% 100% no-repeat}
