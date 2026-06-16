@@ -263,7 +263,7 @@
       document.body.classList.remove('cortina-bajada');
       document.body.classList.add('changarro-abierto');
       if(audioChangarro){audioChangarro.currentTime=0;audioChangarro.play().catch(()=>{});}
-      setTimeout(()=>{portada.style.pointerEvents='none';document.body.classList.add('headliner-anim');},1600);
+      setTimeout(()=>{portada.style.pointerEvents='none';portada.style.display='none';portada.style.willChange='auto';document.body.classList.add('headliner-anim');},1700);
     });
     // Reveal on scroll
     const rev=document.querySelectorAll('.reveal');
