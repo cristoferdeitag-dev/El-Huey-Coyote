@@ -24,9 +24,9 @@
   .ct{position:absolute;white-space:nowrap;line-height:1}
   .dsec{scroll-margin-top:9vw}
   .menu-link{position:absolute;display:block;pointer-events:auto;cursor:pointer;text-decoration:none;line-height:1;white-space:nowrap;
-    transition:transform .22s ease, filter .22s ease;transform:translate(-50%,-50%);transform-origin:center}
-  .menu-link:hover{transform:translate(-50%,-50%) scale(1.08) translateY(-4px);filter:drop-shadow(0 5px 9px rgba(0,0,0,.4));z-index:10}
-  .menu-link:active{transform:translate(-50%,-50%) scale(.98)}
+    transition:transform .22s ease, filter .22s ease;transform:translateY(0) translate(-50%,-50%) scale(1);transform-origin:center}
+  /* Hover de TODOS los letreros = pequeño zoom hacia ARRIBA (nunca de lado); cada clase reañade su rotación/compresión base para no "saltar" */
+  .menu-link:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07);filter:drop-shadow(0 6px 10px rgba(0,0,0,.4));z-index:10}
   /* Anti-tirón: mientras se hace scroll, los menús no reaccionan al cursor (evita repintado de hover en el headliner) */
   body.is-scrolling .menu-link{pointer-events:none}
   /* El headliner trae los textos más pesados de la página (degradado-en-texto + drop-shadows + rotación).
@@ -35,19 +35,22 @@
   #headliner .ovl{transform:translateZ(0)}
   /* === Headliner: etiquetas-menú (nuevo acomodo según diseño de Anette, 2026-06-17) === */
   .ml-conoces{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#f2f2f2;-webkit-text-stroke:.5px #575759;paint-order:stroke fill;letter-spacing:.01em}
-  .ml-pallevar{font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#00381e;-webkit-text-stroke:1px #f2f3f5;paint-order:stroke fill;transform:translate(-50%,-50%) scaleX(.82)}
+  .ml-pallevar{font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#00381e;-webkit-text-stroke:1px #f2f3f5;paint-order:stroke fill;transform:translateY(0) translate(-50%,-50%) scale(1) scaleX(.82)}
+  .ml-pallevar:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) scaleX(.82)}
   .ml-conlaraza{font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#241a1a;-webkit-text-stroke:.4px #000;text-shadow:0 0 5px rgba(47,174,62,.95),0 0 11px rgba(47,174,62,.6)}
-  .ml-echame{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#f5c518;text-align:center;line-height:.92;white-space:normal;text-shadow:2.5px 2.5px 0 #14361f;transform:translate(-50%,-50%) rotate(-5deg)}
-  .ml-prox{display:flex;flex-direction:column;align-items:center;line-height:.9;transform:translate(-50%,-50%) rotate(-3deg);
+  .ml-echame{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#f5c518;text-align:center;line-height:.92;white-space:normal;text-shadow:2.5px 2.5px 0 #14361f;transform:translateY(0) translate(-50%,-50%) scale(1) rotate(-5deg)}
+  .ml-echame:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) rotate(-5deg)}
+  .ml-prox{display:flex;flex-direction:column;align-items:center;line-height:.9;transform:translateY(0) translate(-50%,-50%) scale(1) rotate(-3deg);
     font-family:'open-sans-condensed','Oswald',sans-serif;font-weight:800;font-style:italic;text-align:center;
-    background:linear-gradient(180deg,#ddfc0b 0%,#e06396 59%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-    -webkit-text-stroke:1px #2eae3e;paint-order:stroke fill;
-    filter:drop-shadow(1.5px 0 0 #2eae3e) drop-shadow(-1.5px 0 0 #2eae3e) drop-shadow(0 1.5px 0 #2eae3e) drop-shadow(0 -1.5px 0 #2eae3e)}
+    background:linear-gradient(180deg,#eef60a 0%,#ddfc0b 28%,#e06396 64%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    -webkit-text-stroke:1px #111;paint-order:stroke fill;
+    filter:drop-shadow(1.4px 0 0 #4eb32e) drop-shadow(-1.4px 0 0 #4eb32e) drop-shadow(0 1.4px 0 #4eb32e) drop-shadow(0 -1.4px 0 #4eb32e)}
+  .ml-prox:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) rotate(-3deg)}
   /* Logos-botón de streaming sobre los banquitos */
-  .stool-btn{position:absolute;transform:translate(-50%,-50%);display:block;pointer-events:auto;cursor:pointer;line-height:0;transition:transform .2s ease,filter .2s ease}
+  .stool-btn{position:absolute;transform:translateY(0) translate(-50%,-50%) scale(1);display:block;pointer-events:auto;cursor:pointer;line-height:0;transition:transform .2s ease,filter .2s ease}
   .stool-btn img{width:100%;height:auto;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
-  .stool-btn:hover{transform:translate(-50%,-50%) scale(1.08);z-index:11}
-  .stool-btn:active{transform:translate(-50%,-50%) scale(.95)}
+  .stool-btn:hover{transform:translateY(-6px) translate(-50%,-50%) scale(1.08);z-index:11}
+  .stool-btn:active{transform:translateY(0) translate(-50%,-50%) scale(.96)}
   body.is-scrolling .stool-btn{pointer-events:none}
 
   /* Brinco del headliner ELIMINADO a pedido de Anette (2026-06-07) — botones estáticos. */
@@ -107,7 +110,7 @@
   <a class="menu-link ml-echame"    href="#sec-echame"   style="left:70.0%;top:23.2%;font-size:2.0cqw">ÉCHAME UN<br>GRITO</a>
   <!-- Logos-botón de streaming sobre los banquitos (mismos links/imágenes que la móvil) -->
   <a class="stool-btn" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:11.1%;top:76.9%;width:3.9cqw"><img src="../sitio/assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
-  <a class="stool-btn" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:20.5%;top:80.5%;width:2.9cqw"><img src="../sitio/assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async"></a>
+  <a class="stool-btn" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:22.3%;top:80.5%;width:2.9cqw"><img src="../sitio/assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async"></a>
   <a class="stool-btn" href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music" style="left:37.9%;top:80.5%;width:4.3cqw"><img src="../sitio/assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
   <a class="stool-btn" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:56.3%;top:80.5%;width:4.7cqw"><img src="../sitio/assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
 </div></section>
