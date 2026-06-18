@@ -80,6 +80,12 @@
   @keyframes letrero-shine{0%{background-position:190% 0;opacity:0}3%{opacity:1}33%{background-position:-70% 0;opacity:1}36%{background-position:-70% 0;opacity:0}100%{background-position:-70% 0;opacity:0}}
   @media (prefers-reduced-motion:reduce){.ml-conoces::after,.ml-conlaraza::after,.ml-echame::after,.ml-pallevar::after,.ml-prox span::after{animation:none}}
 
+  /* Lista de shows: ÚNICO texto vivo de la sección Próximos Shows (lo demás es la imagen de fondo). MES negro + DÍA + CIUDAD en teal, alineados a la izquierda de los puntitos del fondo. */
+  .dl-row{display:flex;align-items:baseline;font-family:'Poppins',sans-serif;font-weight:800;font-size:2.0cqw;line-height:1;letter-spacing:.01em;transform:translateY(-78%)}
+  .dl-row .m{color:#15181e;width:2.7em}
+  .dl-row .d{color:#5fc9ad;width:1.9em}
+  .dl-row .c{color:#5fc9ad}
+
   /* Brinco del headliner ELIMINADO a pedido de Anette (2026-06-07) — botones estáticos. */
 
   /* Aparición al hacer scroll */
@@ -142,7 +148,14 @@
   <a class="stool-btn" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:56.3%;top:80.5%;width:4.7cqw"><img src="../sitio/assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.webp?v=9" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl"></div></section>
+<section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.webp?v=9" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl">
+<div class="ct dl-row" style="left:10.5%;top:28.96%"><span class="m">JUN</span><span class="d">07</span><span class="c">PUEBLA</span></div>
+<div class="ct dl-row" style="left:10.5%;top:33.46%"><span class="m">JUL</span><span class="d">14</span><span class="c">CDMX</span></div>
+<div class="ct dl-row" style="left:10.5%;top:39.55%"><span class="m">AGO</span><span class="d">22</span><span class="c">GUADALAJARA</span></div>
+<div class="ct dl-row" style="left:10.5%;top:44.79%"><span class="m">SEP</span><span class="d">02</span><span class="c">MONTERREY</span></div>
+<div class="ct dl-row" style="left:10.5%;top:50.09%"><span class="m">OCT</span><span class="d">25</span><span class="c">LEÓN</span></div>
+<div class="ct dl-row" style="left:10.5%;top:55.34%"><span class="m">NOV</span><span class="d">04</span><span class="c">TIJUANA</span></div>
+</div></section>
 <div class="dmarquee" role="img" aria-label="Échame un grito"><div class="dtrack"><img src="../sitio/assets/compu/divtext-echame.png?v=10" alt="Échame un grito"><img src="../sitio/assets/compu/divtext-echame.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-echame"><img class="bg" src="../sitio/assets/compu/bg-echame.webp?v=8" alt="echame" loading="lazy" decoding="async"><div class="ovl"><div class="ct" style="left:44.08%;top:52.70%;font-size:1.62cqw;color:#333333;font-family:'Permanent Marker',cursive;font-weight:400;">222</div>
 <div class="ct" style="left:46.88%;top:52.55%;font-size:1.62cqw;color:#333333;font-family:'Permanent Marker',cursive;font-weight:400;">6</div>
