@@ -44,11 +44,11 @@
   .ml-prox{display:flex;flex-direction:column;align-items:center;line-height:.9;transform:translateY(0) translate(-50%,-50%) scale(1) rotate(-3deg);
     font-family:'open-sans-condensed','Oswald',sans-serif;font-weight:800;font-style:italic;text-align:center}
   .ml-prox span{position:relative;
-    background:linear-gradient(180deg,#eef60a 0%,#ddfc0b 28%,#e06396 64%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-    /* line-height:.9 hace que el acento sobresalga por arriba de la caja; extiendo el degradado hacia arriba (anclado abajo) para que el acento se rellene sin perder el magenta del fondo */
-    background-size:100% 122%;background-position:50% 100%;background-repeat:no-repeat;
+    /* line-height:.9 hace que el acento sobresalga por arriba de la caja → quedaba hueco. Solución: tramo lima largo (0-18%) + degradado extendido hacia arriba anclado abajo (size 150% / pos bottom) para rellenar el acento, y halo verde delgado (.5px) para que no deje ver el fondo dentro del acento. Mismo look lima→magenta de la móvil en las letras. */
+    background:linear-gradient(180deg,#eef60a 0%,#eef60a 18%,#ddfc0b 40%,#e06396 70%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    background-size:100% 150%;background-position:50% 100%;background-repeat:no-repeat;
     -webkit-text-stroke:.8px #111;paint-order:stroke fill;
-    filter:drop-shadow(1px 0 0 #4eb32e) drop-shadow(-1px 0 0 #4eb32e) drop-shadow(0 1px 0 #4eb32e) drop-shadow(0 -1px 0 #4eb32e)}
+    filter:drop-shadow(.5px 0 0 #4eb32e) drop-shadow(-.5px 0 0 #4eb32e) drop-shadow(0 .5px 0 #4eb32e) drop-shadow(0 -.5px 0 #4eb32e)}
   .ml-prox:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) rotate(-3deg)}
   /* Logos-botón de streaming sobre los banquitos */
   .stool-btn{position:absolute;transform:translateY(0) translate(-50%,-50%) scale(1);display:block;pointer-events:auto;cursor:pointer;line-height:0;transition:transform .2s ease,filter .2s ease}
@@ -136,77 +136,13 @@
   <a class="menu-link ml-conlaraza" href="#sec-collabs"  style="left:70.4%;top:15.8%;font-size:2.05cqw" data-text="CON LA RAZA">CON LA RAZA</a>
   <a class="menu-link ml-echame"    href="#sec-echame"   style="left:70.0%;top:23.2%;font-size:2.0cqw" data-text="ÉCHAME UN&#10;GRITO">ÉCHAME UN<br>GRITO</a>
   <!-- Logos-botón de streaming sobre los banquitos (mismos links/imágenes que la móvil) -->
-  <a class="stool-btn" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:11.0%;top:76.9%;width:3.9cqw"><img src="../sitio/assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
+  <a class="stool-btn" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:11.5%;top:76.9%;width:3.9cqw"><img src="../sitio/assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
   <a class="stool-btn" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:21.1%;top:80.5%;width:2.9cqw"><img src="../sitio/assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async"></a>
-  <a class="stool-btn" href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music" style="left:37.4%;top:80.5%;width:4.3cqw"><img src="../sitio/assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
+  <a class="stool-btn" href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music" style="left:37.9%;top:80.5%;width:4.3cqw"><img src="../sitio/assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
   <a class="stool-btn" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:56.3%;top:80.5%;width:4.7cqw"><img src="../sitio/assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.webp?v=8" alt="proximos" loading="lazy" decoding="async"><div class="ovl"><div class="ct" style="left:3.73%;top:93.97%;font-size:2.46cqw;color:#f29501;font-family:'DK Drop Dead Gorgeous',cursive;font-weight:400;">Extras</div>
-<div class="ct" style="left:56.85%;top:16.24%;font-size:3.59cqw;color:#63ceb2;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">Especiales del mes</div>
-<div class="ct" style="left:55.61%;top:25.86%;font-size:3.10cqw;color:#f22b2a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">Niu jork</div>
-<div class="ct" style="left:55.61%;top:33.48%;font-size:3.10cqw;color:#f22b2a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">Chilanguita</div>
-<div class="ct" style="left:55.61%;top:41.09%;font-size:3.10cqw;color:#f22b2a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">Ostin</div>
-<div class="ct" style="left:55.61%;top:48.70%;font-size:3.10cqw;color:#f22b2a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">Mayami</div>
-<div class="ct" style="left:77.21%;top:36.85%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">-----------</div>
-<div class="ct" style="left:74.11%;top:27.16%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">-------------</div>
-<div class="ct" style="left:68.58%;top:50.28%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">----------------</div>
-<div class="ct" style="left:65.43%;top:42.82%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">------------------</div>
-<div class="ct" style="left:20.81%;top:59.52%;font-size:3.59cqw;color:#f22b2a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">Guarniciones</div>
-<div class="ct" style="left:55.71%;top:59.52%;font-size:3.59cqw;color:#f22b2a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">QuesadilLas</div>
-<div class="ct" style="left:54.81%;top:70.80%;font-size:2.36cqw;color:#00a99d;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">3 QUESOS</div>
-<div class="ct" style="left:54.81%;top:75.84%;font-size:2.36cqw;color:#00a99d;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">TRADICIONAL</div>
-<div class="ct" style="left:54.81%;top:80.88%;font-size:2.36cqw;color:#00a99d;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">VEGETARIANA</div>
-<div class="ct" style="left:54.81%;top:85.92%;font-size:2.36cqw;color:#00a99d;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">AL PASTOR</div>
-<div class="ct" style="left:67.14%;top:70.81%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">------------</div>
-<div class="ct" style="left:71.05%;top:75.84%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">----------</div>
-<div class="ct" style="left:71.23%;top:80.87%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">----------</div>
-<div class="ct" style="left:68.15%;top:85.91%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">-----------</div>
-<div class="ct" style="left:10.47%;top:72.62%;font-size:2.36cqw;color:#00a99d;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">GUACAMOLE</div>
-<div class="ct" style="left:10.47%;top:77.66%;font-size:2.36cqw;color:#00a99d;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">FRIJOLES</div>
-<div class="ct" style="left:10.47%;top:82.70%;font-size:2.36cqw;color:#00a99d;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">ARROZ C/ PAPAS</div>
-<div class="ct" style="left:26.07%;top:72.18%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">----------</div>
-<div class="ct" style="left:22.30%;top:77.21%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">------------</div>
-<div class="ct" style="left:30.16%;top:82.25%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">--------</div>
-<div class="ct" style="left:53.09%;top:4.05%;font-size:6.89cqw;color:#000000;font-family:'ciabatta',cursive;font-weight:700;font-style:italic;">Proximos Shows</div>
-<div class="ct" style="left:60.68%;top:2.06%;font-size:6.69cqw;color:#000000;font-family:'Poppins',sans-serif;font-weight:400;">´</div>
-<div class="ct" style="left:4.19%;top:14.31%;font-size:2.95cqw;color:#07111b;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">Recomendaciones de la casa</div>
-<div class="ct" style="left:28.62%;top:50.70%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">-----------</div>
-<div class="ct" style="left:90.77%;top:70.92%;font-size:2.66cqw;color:#b80d0e;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">25</div>
-<div class="ct" style="left:89.92%;top:87.15%;font-size:2.66cqw;color:#b80d0e;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">30</div>
-<div class="ct" style="left:90.24%;top:76.28%;font-size:2.66cqw;color:#b80d0e;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">20</div>
-<div class="ct" style="left:90.95%;top:81.66%;font-size:2.66cqw;color:#b80d0e;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">25</div>
-<div class="ct" style="left:89.82%;top:83.38%;font-size:1.52cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">$</div>
-<div class="ct" style="left:88.76%;top:89.14%;font-size:1.52cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">$</div>
-<div class="ct" style="left:89.69%;top:72.62%;font-size:1.52cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">$</div>
-<div class="ct" style="left:89.10%;top:78.03%;font-size:1.52cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">$</div>
-<div class="ct" style="left:45.76%;top:77.19%;font-size:2.66cqw;color:#b80d0e;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">20</div>
-<div class="ct" style="left:44.68%;top:84.30%;font-size:1.52cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">$</div>
-<div class="ct" style="left:44.68%;top:73.54%;font-size:1.52cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">$</div>
-<div class="ct" style="left:44.68%;top:78.95%;font-size:1.52cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">$</div>
-<div class="ct" style="left:45.76%;top:71.63%;font-size:2.66cqw;color:#b80d0e;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">30</div>
-<div class="ct" style="left:45.76%;top:82.59%;font-size:2.66cqw;color:#b80d0e;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">25</div>
-<div class="ct" style="left:26.91%;top:24.30%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">------------</div>
-<div class="ct" style="left:25.71%;top:28.81%;font-size:3.41cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">-------------</div>
-<div class="ct" style="left:25.20%;top:45.42%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">-------------</div>
-<div class="ct" style="left:35.45%;top:34.86%;font-size:3.45cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">-------</div>
-<div class="ct" style="left:32.25%;top:40.14%;font-size:3.42cqw;color:#b80d0e;font-family:'swiss-721-bt',sans-serif;font-weight:700;">---------</div>
-<div class="ct" style="left:12.53%;top:46.46%;font-size:2.49cqw;color:#63ceb2;font-family:'Poppins',sans-serif;font-weight:600;">25</div>
-<div class="ct" style="left:12.53%;top:51.97%;font-size:2.49cqw;color:#63ceb2;font-family:'Poppins',sans-serif;font-weight:600;">04</div>
-<div class="ct" style="left:15.59%;top:46.43%;font-size:2.36cqw;color:#63ceb2;font-family:'swiss-721-bt',sans-serif;font-weight:500;">  LEÓN</div>
-<div class="ct" style="left:15.59%;top:51.76%;font-size:2.54cqw;color:#63ceb2;font-family:'Poppins',sans-serif;font-weight:600;">  TIJUANA</div>
-<div class="ct" style="left:24.02%;top:94.59%;font-size:2.07cqw;color:#f2f2f2;font-family:'swiss-721-bt',sans-serif;font-weight:500;">Spotify</div>
-<div class="ct" style="left:41.42%;top:94.59%;font-size:2.07cqw;color:#f2f2f2;font-family:'swiss-721-bt',sans-serif;font-weight:500;">Youtube</div>
-<div class="ct" style="left:60.62%;top:94.59%;font-size:2.07cqw;color:#f2f2f2;font-family:'swiss-721-bt',sans-serif;font-weight:500;">Amazon Music</div>
-<div class="ct" style="left:85.32%;top:94.59%;font-size:2.07cqw;color:#f2f2f2;font-family:'swiss-721-bt',sans-serif;font-weight:500;">Apple Music</div>
-<div class="ct" style="left:12.53%;top:30.45%;font-size:2.49cqw;color:#63ceb2;font-family:'Poppins',sans-serif;font-weight:600;">14</div>
-<div class="ct" style="left:12.53%;top:35.73%;font-size:2.49cqw;color:#63ceb2;font-family:'Poppins',sans-serif;font-weight:600;">22</div>
-<div class="ct" style="left:12.53%;top:41.23%;font-size:2.49cqw;color:#63ceb2;font-family:'Poppins',sans-serif;font-weight:600;">02</div>
-<div class="ct" style="left:15.59%;top:30.33%;font-size:2.36cqw;color:#63ceb2;font-family:'swiss-721-bt',sans-serif;font-weight:500;">  CDMX</div>
-<div class="ct" style="left:15.59%;top:35.17%;font-size:2.36cqw;color:#63ceb2;font-family:'swiss-721-bt',sans-serif;font-weight:500;">  GUADALAJARA</div>
-<div class="ct" style="left:15.59%;top:40.67%;font-size:2.36cqw;color:#63ceb2;font-family:'swiss-721-bt',sans-serif;font-weight:500;">  MONTERREY</div>
-<div class="ct" style="left:12.65%;top:25.51%;font-size:2.49cqw;color:#63ceb2;font-family:'Poppins',sans-serif;font-weight:600;">07</div>
-<div class="ct" style="left:16.86%;top:25.39%;font-size:2.36cqw;color:#63ceb2;font-family:'swiss-721-bt',sans-serif;font-weight:500;">PUEBLA</div></div></section>
+<section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.webp?v=9" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl"></div></section>
 <div class="dmarquee" role="img" aria-label="Échame un grito"><div class="dtrack"><img src="../sitio/assets/compu/divtext-echame.png?v=10" alt="Échame un grito"><img src="../sitio/assets/compu/divtext-echame.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-echame"><img class="bg" src="../sitio/assets/compu/bg-echame.webp?v=8" alt="echame" loading="lazy" decoding="async"><div class="ovl"><div class="ct" style="left:44.08%;top:52.70%;font-size:1.62cqw;color:#333333;font-family:'Permanent Marker',cursive;font-weight:400;">222</div>
 <div class="ct" style="left:46.88%;top:52.55%;font-size:1.62cqw;color:#333333;font-family:'Permanent Marker',cursive;font-weight:400;">6</div>
