@@ -57,7 +57,7 @@
   .stool-btn:active{transform:translateY(0) translate(-50%,-50%) scale(.96)}
   body.is-scrolling .stool-btn{pointer-events:none}
   /* === Rayo de luz que barre las letras de cada botón (igual que la móvil) === */
-  .ml-conoces::after, .ml-conlaraza::after, .ml-echame::after, .ml-pallevar::after, .ml-prox span::after{
+  .ml-conoces::after, .ml-conlaraza::after, .ml-echame::after, .ml-pallevar::after, .ml-prox span::after, .dl-row .c::after{
     content:attr(data-text);position:absolute;left:0;top:0;width:100%;
     text-align:inherit;white-space:inherit;line-height:inherit;text-shadow:none;
     background:linear-gradient(112deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 58%);
@@ -68,7 +68,7 @@
   .ml-conoces::after{white-space:nowrap;background-image:linear-gradient(112deg,rgba(70,72,84,0) 48.7%,rgba(70,72,84,.5) 49.5%,#fff 50%,rgba(70,72,84,.5) 50.5%,rgba(70,72,84,0) 51.3%);background-size:200% 100%;mix-blend-mode:normal}
   /* ÉCHAME UN GRITO va en dos renglones: el destello respeta el salto */
   .ml-echame::after{white-space:pre;text-align:center}
-  body.headliner-anim .ml-conoces::after, body.headliner-anim .ml-conlaraza::after, body.headliner-anim .ml-echame::after, body.headliner-anim .ml-pallevar::after, body.headliner-anim .ml-prox span::after{animation:letrero-shine 3.9s ease-in-out infinite}
+  body.headliner-anim .ml-conoces::after, body.headliner-anim .ml-conlaraza::after, body.headliner-anim .ml-echame::after, body.headliner-anim .ml-pallevar::after, body.headliner-anim .ml-prox span::after, body.headliner-anim .dl-row .c::after{animation:letrero-shine 3.9s ease-in-out infinite}
   /* orden del rayo (Ani): PRÓXIMOS SHOWS → YA ME CONOCES → CON LA RAZA → ÉCHAME → PA' LLEVAR */
   body.headliner-anim .ml-prox span::after{animation-delay:0s}
   body.headliner-anim .ml-conoces::after{animation-delay:.5s}
@@ -76,8 +76,17 @@
   body.headliner-anim .ml-echame::after{animation-delay:1.5s}
   body.headliner-anim .ml-pallevar::after{animation-delay:2s}
   /* mientras se hace scroll, pausar el rayo (scroll fluido es prioridad) */
-  body.is-scrolling .ml-conoces::after, body.is-scrolling .ml-conlaraza::after, body.is-scrolling .ml-echame::after, body.is-scrolling .ml-pallevar::after, body.is-scrolling .ml-prox span::after{animation-play-state:paused}
+  body.is-scrolling .ml-conoces::after, body.is-scrolling .ml-conlaraza::after, body.is-scrolling .ml-echame::after, body.is-scrolling .ml-pallevar::after, body.is-scrolling .ml-prox span::after, body.is-scrolling .dl-row .c::after{animation-play-state:paused}
   @keyframes letrero-shine{0%{background-position:190% 0;opacity:0}3%{opacity:1}33%{background-position:-70% 0;opacity:1}36%{background-position:-70% 0;opacity:0}100%{background-position:-70% 0;opacity:0}}
+  /* Ciudades de la lista = botones clickeables (rayo arriba); stagger del destello */
+  .dl-row .c{position:relative;pointer-events:auto;cursor:pointer;text-decoration:none}
+  .dl-row .c:hover{color:#b80d0e}
+  body.headliner-anim .dl-row:nth-of-type(1) .c::after{animation-delay:0s}
+  body.headliner-anim .dl-row:nth-of-type(2) .c::after{animation-delay:.35s}
+  body.headliner-anim .dl-row:nth-of-type(3) .c::after{animation-delay:.7s}
+  body.headliner-anim .dl-row:nth-of-type(4) .c::after{animation-delay:1.05s}
+  body.headliner-anim .dl-row:nth-of-type(5) .c::after{animation-delay:1.4s}
+  body.headliner-anim .dl-row:nth-of-type(6) .c::after{animation-delay:1.75s}
   @media (prefers-reduced-motion:reduce){.ml-conoces::after,.ml-conlaraza::after,.ml-echame::after,.ml-pallevar::after,.ml-prox span::after{animation:none}}
 
   /* Lista de shows: ÚNICO texto vivo de la sección Próximos Shows (lo demás es la imagen de fondo). MES negro + DÍA + CIUDAD en teal, alineados a la izquierda de los puntitos del fondo. */
@@ -178,12 +187,12 @@
 </div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.webp?v=9" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl">
-<div class="ct dl-row" style="left:8.8%;top:28.96%"><span class="m">JUN</span><span class="d">07</span><span class="c">PUEBLA</span></div>
-<div class="ct dl-row" style="left:8.8%;top:33.46%"><span class="m">JUL</span><span class="d">14</span><span class="c">CDMX</span></div>
-<div class="ct dl-row" style="left:8.8%;top:39.55%"><span class="m">AGO</span><span class="d">22</span><span class="c">GUADALAJARA</span></div>
-<div class="ct dl-row" style="left:8.8%;top:44.79%"><span class="m">SEP</span><span class="d">02</span><span class="c">MONTERREY</span></div>
-<div class="ct dl-row" style="left:8.8%;top:50.09%"><span class="m">OCT</span><span class="d">25</span><span class="c">LEÓN</span></div>
-<div class="ct dl-row" style="left:8.8%;top:55.34%"><span class="m">NOV</span><span class="d">04</span><span class="c">TIJUANA</span></div>
+<div class="ct dl-row" style="left:6.8%;top:28.96%"><span class="m">JUN</span><span class="d">07</span><a class="c" href="#sec-proximos" data-text="PUEBLA">PUEBLA</a></div>
+<div class="ct dl-row" style="left:6.8%;top:33.46%"><span class="m">JUL</span><span class="d">14</span><a class="c" href="#sec-proximos" data-text="CDMX">CDMX</a></div>
+<div class="ct dl-row" style="left:6.8%;top:39.55%"><span class="m">AGO</span><span class="d">22</span><a class="c" href="#sec-proximos" data-text="GUADALAJARA">GUADALAJARA</a></div>
+<div class="ct dl-row" style="left:6.8%;top:44.79%"><span class="m">SEP</span><span class="d">02</span><a class="c" href="#sec-proximos" data-text="MONTERREY">MONTERREY</a></div>
+<div class="ct dl-row" style="left:6.8%;top:50.09%"><span class="m">OCT</span><span class="d">25</span><a class="c" href="#sec-proximos" data-text="LEÓN">LEÓN</a></div>
+<div class="ct dl-row" style="left:6.8%;top:55.34%"><span class="m">NOV</span><span class="d">04</span><a class="c" href="#sec-proximos" data-text="TIJUANA">TIJUANA</a></div>
 </div></section>
 <div class="dmarquee" role="img" aria-label="Échame un grito"><div class="dtrack"><img src="../sitio/assets/compu/divtext-echame.png?v=10" alt="Échame un grito"><img src="../sitio/assets/compu/divtext-echame.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-echame"><img class="bg" src="../sitio/assets/compu/bg-echame.webp?v=8" alt="echame" loading="lazy" decoding="async"><div class="ovl"><div class="ct" style="left:44.08%;top:52.70%;font-size:1.62cqw;color:#333333;font-family:'Permanent Marker',cursive;font-weight:400;">222</div>
