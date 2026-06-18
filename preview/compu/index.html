@@ -81,10 +81,11 @@
   @media (prefers-reduced-motion:reduce){.ml-conoces::after,.ml-conlaraza::after,.ml-echame::after,.ml-pallevar::after,.ml-prox span::after{animation:none}}
 
   /* Lista de shows: ÚNICO texto vivo de la sección Próximos Shows (lo demás es la imagen de fondo). MES negro + DÍA + CIUDAD en teal, alineados a la izquierda de los puntitos del fondo. */
-  .dl-row{display:flex;align-items:baseline;font-family:'Poppins',sans-serif;font-weight:800;font-size:2.0cqw;line-height:1;letter-spacing:.01em;transform:translateY(-78%)}
-  .dl-row .m{color:#15181e;width:2.7em}
-  .dl-row .d{color:#5fc9ad;width:1.9em}
-  .dl-row .c{color:#5fc9ad}
+  /* tipografía EXACTA de la móvil (.shows-list): swiss-721-bt 700 + grid mes/día/ciudad + colores/stroke iguales */
+  .dl-row{display:grid;grid-template-columns:2.5em 1.7em auto;column-gap:.7em;align-items:baseline;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:normal;font-size:2.0cqw;line-height:1;transform:translateY(-78%)}
+  .dl-row .m{color:#1a1a1a;-webkit-text-stroke:.45px #1a1a1a}
+  .dl-row .d{color:#00a99d;-webkit-text-stroke:.45px #00a99d}
+  .dl-row .c{color:#00bfb0;-webkit-text-stroke:.45px #00a99d}
 
   /* Brinco del headliner ELIMINADO a pedido de Anette (2026-06-07) — botones estáticos. */
 
@@ -118,6 +119,22 @@
     border:3px solid #ffd84a;border-radius:44px;padding:10px 20px 10px 10px;font-family:'DK Drop Dead Gorgeous','Permanent Marker',sans-serif;font-size:20px;cursor:pointer;
     box-shadow:0 6px 18px rgba(0,0,0,.4);animation:mpulse 1.9s ease-in-out infinite}
   body.changarro-abierto .music-fab{display:inline-flex}
+  /* === Header/nav portado de la MÓVIL (barra metálica + logo + menú hamburguesa), adaptado a compu. Aparece al abrir el changarro. === */
+  .site-header{position:fixed;top:0;left:0;width:100%;z-index:95;display:none;align-items:center;justify-content:center;height:clamp(60px,5vw,100px);overflow:hidden}
+  .site-header::before{content:'';position:absolute;inset:0;background:url('../sitio/assets/compu/divider-metal-compu.png') center center/100% 100% no-repeat;filter:brightness(.85);opacity:.5;pointer-events:none}
+  .site-header .header-logo-link{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;height:100%}
+  .site-header .header-logo-link img{height:72%;width:auto;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
+  body.changarro-abierto .site-header{display:flex}
+  .menu-toggle{position:absolute;top:50%;right:32px;transform:translateY(-50%);z-index:3;width:40px;height:32px;display:flex;flex-direction:column;justify-content:space-between;background:transparent;border:0;padding:4px 0;cursor:pointer}
+  .menu-toggle span{display:block;height:4px;width:100%;background:#fff;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.6);transition:transform .28s ease,opacity .2s ease}
+  body.menu-open .menu-toggle span:nth-child(1){transform:translateY(10px) rotate(45deg)}
+  body.menu-open .menu-toggle span:nth-child(2){opacity:0}
+  body.menu-open .menu-toggle span:nth-child(3){transform:translateY(-10px) rotate(-45deg)}
+  .nav-menu{position:fixed;top:clamp(60px,5vw,100px);right:0;z-index:94;min-width:320px;background:rgba(22,22,24,.97);border-bottom:3px solid #ffd84a;border-left:3px solid #ffd84a;box-shadow:0 12px 26px rgba(0,0,0,.45);display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .22s ease,transform .22s ease}
+  body.menu-open .nav-menu{opacity:1;pointer-events:auto;transform:translateY(0)}
+  .nav-menu a{color:#fff;text-decoration:none;font-family:'eds-market-bold-slant','Oswald',sans-serif;font-size:clamp(16px,1.35vw,22px);letter-spacing:.04em;text-transform:uppercase;padding:16px 34px;border-bottom:1px solid rgba(255,255,255,.08);transition:background .15s ease,color .15s ease}
+  .nav-menu a:last-child{border-bottom:0}
+  .nav-menu a:hover{background:rgba(255,216,74,.16);color:#ffd84a}
   .music-fab .disc{width:36px;height:36px;border-radius:50%;flex:0 0 auto;background:repeating-radial-gradient(circle,#1a1a1a 0 2px,#333 2px 3px);display:grid;place-items:center;box-shadow:inset 0 0 0 2px #000;animation:spin 3.2s linear infinite}
   .music-fab .disc::before{content:"";width:11px;height:11px;border-radius:50%;background:#ffd84a}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -134,6 +151,18 @@
 </style>
 </head>
 <body>
+  <!-- Header/nav (igual que la móvil) — aparece al abrir el changarro -->
+  <header class="site-header" id="site-header">
+    <a class="header-logo-link" href="#headliner" aria-label="Ir al inicio (Headliner)"><img src="../sitio/assets/header-logo.webp?v=2" alt="El Huey Coyote"></a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+  <nav class="nav-menu" id="nav-menu" aria-label="Menú principal">
+    <a href="#sec-conoces">Sobre El HueyCoyote</a>
+    <a href="#sec-proximos">Próximos Shows</a>
+    <a href="#sec-merch">Tienda online</a>
+    <a href="#sec-collabs">Galería</a>
+    <a href="#sec-echame">Contacto</a>
+  </nav>
   <div class="site">
 <section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner.webp?v=9" alt="El Huey Coyote" decoding="async"><div class="ovl">
   <a class="menu-link ml-conoces"   href="#sec-conoces"  style="left:30.7%;top:20.5%;font-size:1.72cqw" data-text="¿YA ME CONOCES?">¿YA ME CONOCES?</a>
@@ -149,12 +178,12 @@
 </div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.webp?v=9" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl">
-<div class="ct dl-row" style="left:10.5%;top:28.96%"><span class="m">JUN</span><span class="d">07</span><span class="c">PUEBLA</span></div>
-<div class="ct dl-row" style="left:10.5%;top:33.46%"><span class="m">JUL</span><span class="d">14</span><span class="c">CDMX</span></div>
-<div class="ct dl-row" style="left:10.5%;top:39.55%"><span class="m">AGO</span><span class="d">22</span><span class="c">GUADALAJARA</span></div>
-<div class="ct dl-row" style="left:10.5%;top:44.79%"><span class="m">SEP</span><span class="d">02</span><span class="c">MONTERREY</span></div>
-<div class="ct dl-row" style="left:10.5%;top:50.09%"><span class="m">OCT</span><span class="d">25</span><span class="c">LEÓN</span></div>
-<div class="ct dl-row" style="left:10.5%;top:55.34%"><span class="m">NOV</span><span class="d">04</span><span class="c">TIJUANA</span></div>
+<div class="ct dl-row" style="left:8.8%;top:28.96%"><span class="m">JUN</span><span class="d">07</span><span class="c">PUEBLA</span></div>
+<div class="ct dl-row" style="left:8.8%;top:33.46%"><span class="m">JUL</span><span class="d">14</span><span class="c">CDMX</span></div>
+<div class="ct dl-row" style="left:8.8%;top:39.55%"><span class="m">AGO</span><span class="d">22</span><span class="c">GUADALAJARA</span></div>
+<div class="ct dl-row" style="left:8.8%;top:44.79%"><span class="m">SEP</span><span class="d">02</span><span class="c">MONTERREY</span></div>
+<div class="ct dl-row" style="left:8.8%;top:50.09%"><span class="m">OCT</span><span class="d">25</span><span class="c">LEÓN</span></div>
+<div class="ct dl-row" style="left:8.8%;top:55.34%"><span class="m">NOV</span><span class="d">04</span><span class="c">TIJUANA</span></div>
 </div></section>
 <div class="dmarquee" role="img" aria-label="Échame un grito"><div class="dtrack"><img src="../sitio/assets/compu/divtext-echame.png?v=10" alt="Échame un grito"><img src="../sitio/assets/compu/divtext-echame.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-echame"><img class="bg" src="../sitio/assets/compu/bg-echame.webp?v=8" alt="echame" loading="lazy" decoding="async"><div class="ovl"><div class="ct" style="left:44.08%;top:52.70%;font-size:1.62cqw;color:#333333;font-family:'Permanent Marker',cursive;font-weight:400;">222</div>
@@ -265,6 +294,26 @@
       if(audioChangarro){audioChangarro.currentTime=0;audioChangarro.play().catch(()=>{});}
       setTimeout(()=>{portada.style.pointerEvents='none';portada.style.display='none';portada.style.willChange='auto';document.body.classList.add('headliner-anim');},1700);
     });
+    // Menú hamburguesa del header (igual que la móvil)
+    (function(){
+      const menuToggle=document.getElementById('menu-toggle');
+      const navMenu=document.getElementById('nav-menu');
+      if(menuToggle&&navMenu){
+        menuToggle.addEventListener('click',function(e){
+          e.stopPropagation();
+          const open=document.body.classList.toggle('menu-open');
+          menuToggle.setAttribute('aria-expanded',open?'true':'false');
+        });
+        navMenu.querySelectorAll('a').forEach(function(a){
+          a.addEventListener('click',function(){document.body.classList.remove('menu-open');menuToggle.setAttribute('aria-expanded','false');});
+        });
+        document.addEventListener('click',function(e){
+          if(document.body.classList.contains('menu-open')&&!navMenu.contains(e.target)&&!menuToggle.contains(e.target)){
+            document.body.classList.remove('menu-open');menuToggle.setAttribute('aria-expanded','false');
+          }
+        });
+      }
+    })();
     // Anti-tirón del headliner: desactiva el hover de los menús mientras se hace scroll
     let scrollTO;
     addEventListener('scroll',function(){
