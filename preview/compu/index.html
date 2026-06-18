@@ -40,11 +40,13 @@
   .ml-conlaraza{font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#241a1a;-webkit-text-stroke:.4px #000;text-shadow:0 0 5px rgba(47,174,62,.95),0 0 11px rgba(47,174,62,.6)}
   .ml-echame{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#f5c518;text-align:center;line-height:.92;white-space:normal;text-shadow:2.5px 2.5px 0 #14361f;transform:translateY(0) translate(-50%,-50%) scale(1) rotate(-5deg)}
   .ml-echame:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) rotate(-5deg)}
+  /* PRÓXIMOS SHOWS: degradado EXACTO de la móvil aplicado a CADA palabra (cada una va lima→magenta de arriba a abajo, no partido entre los dos renglones) */
   .ml-prox{display:flex;flex-direction:column;align-items:center;line-height:.9;transform:translateY(0) translate(-50%,-50%) scale(1) rotate(-3deg);
-    font-family:'open-sans-condensed','Oswald',sans-serif;font-weight:800;font-style:italic;text-align:center;
+    font-family:'open-sans-condensed','Oswald',sans-serif;font-weight:800;font-style:italic;text-align:center}
+  .ml-prox span{position:relative;
     background:linear-gradient(180deg,#eef60a 0%,#ddfc0b 28%,#e06396 64%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-    -webkit-text-stroke:1px #111;paint-order:stroke fill;
-    filter:drop-shadow(1.4px 0 0 #4eb32e) drop-shadow(-1.4px 0 0 #4eb32e) drop-shadow(0 1.4px 0 #4eb32e) drop-shadow(0 -1.4px 0 #4eb32e)}
+    -webkit-text-stroke:.8px #111;paint-order:stroke fill;
+    filter:drop-shadow(1px 0 0 #4eb32e) drop-shadow(-1px 0 0 #4eb32e) drop-shadow(0 1px 0 #4eb32e) drop-shadow(0 -1px 0 #4eb32e)}
   .ml-prox:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) rotate(-3deg)}
   /* Logos-botón de streaming sobre los banquitos */
   .stool-btn{position:absolute;transform:translateY(0) translate(-50%,-50%) scale(1);display:block;pointer-events:auto;cursor:pointer;line-height:0;transition:transform .2s ease,filter .2s ease}
@@ -52,6 +54,29 @@
   .stool-btn:hover{transform:translateY(-6px) translate(-50%,-50%) scale(1.08);z-index:11}
   .stool-btn:active{transform:translateY(0) translate(-50%,-50%) scale(.96)}
   body.is-scrolling .stool-btn{pointer-events:none}
+  /* === Rayo de luz que barre las letras de cada botón (igual que la móvil) === */
+  .ml-conoces::after, .ml-conlaraza::after, .ml-echame::after, .ml-pallevar::after, .ml-prox span::after{
+    content:attr(data-text);position:absolute;left:0;top:0;width:100%;
+    text-align:inherit;white-space:inherit;line-height:inherit;text-shadow:none;
+    background:linear-gradient(112deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 58%);
+    background-repeat:no-repeat;background-size:230% 100%;background-position:190% 0;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;-webkit-text-stroke:0;
+    mix-blend-mode:screen;opacity:0;pointer-events:none}
+  /* YA ME CONOCES es casi blanco → banda fina con filo oscuro para que contraste */
+  .ml-conoces::after{white-space:nowrap;background-image:linear-gradient(112deg,rgba(70,72,84,0) 48.7%,rgba(70,72,84,.5) 49.5%,#fff 50%,rgba(70,72,84,.5) 50.5%,rgba(70,72,84,0) 51.3%);background-size:200% 100%;mix-blend-mode:normal}
+  /* ÉCHAME UN GRITO va en dos renglones: el destello respeta el salto */
+  .ml-echame::after{white-space:pre;text-align:center}
+  body.headliner-anim .ml-conoces::after, body.headliner-anim .ml-conlaraza::after, body.headliner-anim .ml-echame::after, body.headliner-anim .ml-pallevar::after, body.headliner-anim .ml-prox span::after{animation:letrero-shine 3.9s ease-in-out infinite}
+  /* orden del rayo (Ani): PRÓXIMOS SHOWS → YA ME CONOCES → CON LA RAZA → ÉCHAME → PA' LLEVAR */
+  body.headliner-anim .ml-prox span::after{animation-delay:0s}
+  body.headliner-anim .ml-conoces::after{animation-delay:.5s}
+  body.headliner-anim .ml-conlaraza::after{animation-delay:1s}
+  body.headliner-anim .ml-echame::after{animation-delay:1.5s}
+  body.headliner-anim .ml-pallevar::after{animation-delay:2s}
+  /* mientras se hace scroll, pausar el rayo (scroll fluido es prioridad) */
+  body.is-scrolling .ml-conoces::after, body.is-scrolling .ml-conlaraza::after, body.is-scrolling .ml-echame::after, body.is-scrolling .ml-pallevar::after, body.is-scrolling .ml-prox span::after{animation-play-state:paused}
+  @keyframes letrero-shine{0%{background-position:190% 0;opacity:0}3%{opacity:1}33%{background-position:-70% 0;opacity:1}36%{background-position:-70% 0;opacity:0}100%{background-position:-70% 0;opacity:0}}
+  @media (prefers-reduced-motion:reduce){.ml-conoces::after,.ml-conlaraza::after,.ml-echame::after,.ml-pallevar::after,.ml-prox span::after{animation:none}}
 
   /* Brinco del headliner ELIMINADO a pedido de Anette (2026-06-07) — botones estáticos. */
 
@@ -103,13 +128,13 @@
 <body>
   <div class="site">
 <section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner.webp?v=9" alt="El Huey Coyote" decoding="async"><div class="ovl">
-  <a class="menu-link ml-conoces"   href="#sec-conoces"  style="left:30.7%;top:20.5%;font-size:1.72cqw">¿YA ME CONOCES?</a>
-  <a class="menu-link ml-prox"      href="#sec-proximos" style="left:12.3%;top:35.4%;font-size:3.4cqw"><span>PRÓXIMOS</span><span>SHOWS</span></a>
-  <span class="menu-link ml-pallevar"                    style="left:33.5%;top:39.0%;font-size:2.3cqw">PA’ LLEVAR</span>
-  <a class="menu-link ml-conlaraza" href="#sec-collabs"  style="left:70.4%;top:15.8%;font-size:2.05cqw">CON LA RAZA</a>
-  <a class="menu-link ml-echame"    href="#sec-echame"   style="left:70.0%;top:23.2%;font-size:2.0cqw">ÉCHAME UN<br>GRITO</a>
+  <a class="menu-link ml-conoces"   href="#sec-conoces"  style="left:30.7%;top:20.5%;font-size:1.72cqw" data-text="¿YA ME CONOCES?">¿YA ME CONOCES?</a>
+  <a class="menu-link ml-prox"      href="#sec-proximos" style="left:12.3%;top:35.4%;font-size:3.4cqw"><span data-text="PRÓXIMOS">PRÓXIMOS</span><span data-text="SHOWS">SHOWS</span></a>
+  <span class="menu-link ml-pallevar"                    style="left:33.5%;top:39.0%;font-size:2.3cqw" data-text="PA’ LLEVAR">PA’ LLEVAR</span>
+  <a class="menu-link ml-conlaraza" href="#sec-collabs"  style="left:70.4%;top:15.8%;font-size:2.05cqw" data-text="CON LA RAZA">CON LA RAZA</a>
+  <a class="menu-link ml-echame"    href="#sec-echame"   style="left:70.0%;top:23.2%;font-size:2.0cqw" data-text="ÉCHAME UN&#10;GRITO">ÉCHAME UN<br>GRITO</a>
   <!-- Logos-botón de streaming sobre los banquitos (mismos links/imágenes que la móvil) -->
-  <a class="stool-btn" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:11.1%;top:76.9%;width:3.9cqw"><img src="../sitio/assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
+  <a class="stool-btn" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:10.4%;top:76.9%;width:3.9cqw"><img src="../sitio/assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
   <a class="stool-btn" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:22.3%;top:80.5%;width:2.9cqw"><img src="../sitio/assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async"></a>
   <a class="stool-btn" href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music" style="left:37.9%;top:80.5%;width:4.3cqw"><img src="../sitio/assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
   <a class="stool-btn" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:56.3%;top:80.5%;width:4.7cqw"><img src="../sitio/assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
