@@ -94,7 +94,8 @@
   .extra-logo:hover{transform:translateY(-50%) scale(1.08)}
   /* === Galeria CON LA RAZA (galeria de la movil adaptada a compu: tira horizontal + lightbox) === */
   /* === ÉCHAME UN GRITO (compu) — botones de redes con destello, portado de la móvil === */
-  #sec-echame .ech-btn{position:absolute;display:block;z-index:3;cursor:pointer;transform-origin:0 0}
+  #sec-echame .ech-btn{position:absolute;display:block;z-index:3;cursor:pointer;pointer-events:auto;transform-origin:0 0}
+  body.is-scrolling #sec-echame .ech-btn{pointer-events:none}
   #sec-echame .ech-btn img{display:block;width:100%;height:100%;object-fit:fill;pointer-events:none;filter:drop-shadow(0 4px 7px rgba(0,0,0,.42))}
   #sec-echame .ech-shine{position:absolute;inset:0;pointer-events:none;background:linear-gradient(112deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 62%);background-repeat:no-repeat;background-size:230% 100%;background-position:190% 0;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;mix-blend-mode:screen;opacity:0;animation:ech-shine 8s ease-in-out infinite}
   @keyframes ech-shine{0%{background-position:190% 0;opacity:0}2%{opacity:1}13%{background-position:-70% 0;opacity:1}16%{background-position:-70% 0;opacity:0}100%{background-position:-70% 0;opacity:0}}
@@ -108,6 +109,22 @@
   #sec-echame .ech-email{left:58.852%;top:50.106%;width:7.047%;height:8.278%;transform:skewX(3.2793deg)}
   #sec-echame .ech-tt{left:61.042%;top:64.064%;width:5.143%;height:10.619%;transform:rotate(7.653deg)}
   @media (prefers-reduced-motion:reduce){#sec-echame .ech-shine{animation:none}}
+  /* === FOOTER (compu) — portado de la móvil, adaptado a escritorio === */
+  .site-footer{width:100%;background-color:#1a1f1c;background-image:linear-gradient(rgba(18,24,21,.66),rgba(18,24,21,.66)),url('../sitio/assets/footer-fondo.webp?v=1');background-size:auto,cover;background-position:center,center bottom;background-repeat:no-repeat,no-repeat;border-top:4px solid #ffd84a;color:#fff;padding:clamp(34px,3.5vw,60px) 24px clamp(38px,4vw,64px);text-align:center;font-family:'Quicksand',sans-serif}
+  .footer-inner{max-width:900px;margin:0 auto}
+  .footer-logo{display:block;margin:0 auto 12px;height:clamp(64px,7vw,112px);width:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.45))}
+  .footer-tag{font-size:clamp(15px,1.4vw,20px);font-weight:600;color:#ffe9a6;margin:0 0 20px}
+  .footer-social{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-bottom:16px}
+  .footer-social a{color:#fff;text-decoration:none;font-weight:700;font-size:clamp(15px,1.3vw,19px);transition:color .18s ease}
+  .footer-social a:hover,.footer-social a:focus{color:#ffd84a}
+  .footer-social .dot{color:#ffd84a;font-weight:700}
+  .footer-mail{display:block;width:fit-content;color:#fff;text-decoration:none;font-weight:600;font-size:clamp(14px,1.2vw,17px);border-bottom:2px solid rgba(255,216,74,.7);padding-bottom:1px;margin:0 auto 22px;transition:color .18s ease,border-color .18s ease}
+  .footer-mail:hover,.footer-mail:focus{color:#ffd84a;border-color:#ffd84a}
+  .footer-copy{font-size:clamp(11px,1vw,13px);color:rgba(255,255,255,.78);margin:0;letter-spacing:.02em}
+  .btn-cierra{display:block;width:fit-content;position:relative;margin:6px auto 24px;background:transparent;border:none;cursor:pointer;color:#fff;font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;font-size:clamp(26px,3vw,46px);letter-spacing:.02em;white-space:nowrap;text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45);transition:transform .18s ease,text-shadow .18s ease;animation:neon-flicker 5s linear infinite}
+  .btn-cierra:hover,.btn-cierra:focus{transform:scale(1.06);text-shadow:2px 5px 6px rgba(0,0,0,.6),0 2px 2px rgba(0,0,0,.5);outline:none}
+  @keyframes neon-flicker{0%,18%,22%,25%,53%,57%,83%,100%{opacity:1;text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45),0 0 7px rgba(190,255,240,.95),0 0 15px rgba(60,224,200,.85),0 0 28px rgba(0,171,171,.6)}20%,24%,55%,84%{opacity:.55;text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45)}}
+  @media (prefers-reduced-motion:reduce){.btn-cierra{animation:none}}
   #sec-collabs{background:#161618 url('../sitio/assets/compu/bg-conlaraza.webp?v=1') center center/cover no-repeat;min-height:56.25vw;display:flex;align-items:center}
   #sec-collabs .galeria-compu{width:100%}
   .galeria-compu{position:relative;width:100%}
@@ -353,6 +370,22 @@
 <div class="ct" style="left:72.14%;top:37.28%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$150</div>
 <div class="ct" style="left:29.28%;top:37.68%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">3X50</div>
 </div></section>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <img class="footer-logo" src="../sitio/assets/footer-logo-v3.webp?v=1" alt="El Huey Coyote">
+    <p class="footer-tag">Puro corrido, pura fiesta 🌮🎸</p>
+    <nav class="footer-social" aria-label="Redes sociales">
+      <a href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
+      <span class="dot">•</span>
+      <a href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <span class="dot">•</span>
+      <a href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" target="_blank" rel="noopener noreferrer">TikTok</a>
+    </nav>
+    <a class="footer-mail" href="mailto:contacto@elhueycoyote.com">contacto@elhueycoyote.com</a>
+    <button class="btn-cierra" id="btn-cierra" type="button" aria-label="Cierra el changarro">CIERRA EL CHANGARRO</button>
+    <p class="footer-copy">© 2026 El Huey Coyote · Todos los derechos reservados</p>
+  </div>
+</footer>
 </div>
 
   <!-- Portada (cortina) -->
@@ -378,6 +411,25 @@
       if(audioChangarro){audioChangarro.currentTime=0;audioChangarro.play().catch(()=>{});}
       setTimeout(()=>{portada.style.pointerEvents='none';portada.style.display='none';portada.style.willChange='auto';document.body.classList.add('headliner-anim');},1700);
     });
+    // "CIERRA EL CHANGARRO" (footer): vuelve a bajar la cortina y regresa al inicio
+    (function(){
+      const btnCierra=document.getElementById('btn-cierra');
+      if(btnCierra&&portada) btnCierra.addEventListener('click',function(){
+        window.scrollTo(0,0);
+        portada.style.transition='none';
+        portada.classList.add('subida');
+        portada.style.display='';
+        portada.style.pointerEvents='auto';
+        document.body.classList.add('cortina-bajada');
+        document.body.classList.remove('changarro-abierto');
+        document.body.classList.remove('headliner-anim');
+        document.body.classList.remove('menu-open');
+        requestAnimationFrame(function(){requestAnimationFrame(function(){
+          portada.style.transition='';
+          portada.classList.remove('subida');
+        });});
+      });
+    })();
     // Menú hamburguesa del header (igual que la móvil)
     (function(){
       const menuToggle=document.getElementById('menu-toggle');
