@@ -137,7 +137,7 @@
   .dtrack.mq-off{animation-play-state:paused}
 
   /* === Portada (cortina) === */
-  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain-clean.webp?v=3') center center/100% 100% no-repeat;
+  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain-clean.webp?v=4') center center/100% 100% no-repeat;
     transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
   .portada.subida{transform:translateY(-100%)}
   .portada-logo{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(84%,1720px);max-height:64vh;object-fit:contain;height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
@@ -197,7 +197,7 @@
     <a href="#sec-echame">Contacto</a>
   </nav>
   <div class="site">
-<section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner.webp?v=9" alt="El Huey Coyote" decoding="async"><div class="ovl">
+<section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner.webp?v=10" alt="El Huey Coyote" decoding="async"><div class="ovl">
   <a class="menu-link ml-conoces"   href="#sec-conoces"  style="left:30.7%;top:20.5%;font-size:1.72cqw" data-text="¿YA ME CONOCES?">¿YA ME CONOCES?</a>
   <a class="menu-link ml-prox"      href="#sec-proximos" style="left:12.3%;top:35.4%;font-size:3.4cqw"><span data-text="PRÓXIMOS">PRÓXIMOS</span><span data-text="SHOWS">SHOWS</span></a>
   <span class="menu-link ml-pallevar"                    style="left:33.5%;top:39.0%;font-size:2.3cqw" data-text="PA’ LLEVAR">PA’ LLEVAR</span>
@@ -340,7 +340,8 @@
 
   <!-- Portada (cortina) -->
   <div class="portada" id="portada">
-    <img class="portada-logo" src="../sitio/assets/compu/portada-logo-clean.webp?v=3" alt="El Huey Coyote">
+    <!-- Logo-overlay OCULTO: el nuevo fondo de portada (portada-curtain-clean v=4) ya trae el logo horneado. Conservado por si se quiere volver a layering. -->
+    <!-- <img class="portada-logo" src="../sitio/assets/compu/portada-logo-clean.webp?v=5" alt="El Huey Coyote"> -->
     <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
   </div>
   <audio id="audio-changarro" preload="auto" src="../sitio/assets/audio/changarro-open.mp3"></audio>
