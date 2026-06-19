@@ -92,6 +92,25 @@
   .extra-logo{position:absolute;height:1.8cqw;pointer-events:auto;line-height:0;transform:translateY(-50%);transition:transform .2s ease,filter .2s ease}
   .extra-logo img{height:100%;width:auto;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
   .extra-logo:hover{transform:translateY(-50%) scale(1.08)}
+  /* === Galeria CON LA RAZA (galeria de la movil adaptada a compu: tira horizontal + lightbox) === */
+  #sec-collabs{background:#161618}
+  .galeria-compu{position:relative;width:100%}
+  .galeria-strip{display:flex;align-items:center;gap:1.6vw;padding:3vw 4vw;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none}
+  .galeria-strip::-webkit-scrollbar{display:none}
+  .galeria-strip img.gp{height:22vw;max-height:400px;width:auto;flex:0 0 auto;display:block;cursor:pointer;background:#fff;box-shadow:0 12px 28px rgba(0,0,0,.55);scroll-snap-align:center;transition:filter .2s ease,box-shadow .2s ease}
+  .galeria-strip img.gp:hover{filter:brightness(1.06);box-shadow:0 16px 36px rgba(0,0,0,.7)}
+  .gp.b1{border:11px solid #fff}.gp.b2{border:10px solid #15110f}.gp.b3{border:10px solid #e23b2e}.gp.b4{border:11px solid #ffd84a}.gp.b5{border:10px solid #1f8a3b}.gp.b6{border:9px solid #fff;outline:5px solid #00abab}
+  .galeria-hint{position:absolute;right:18px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:1px;background:rgba(0,0,0,.35);padding:4px 14px;border-radius:20px;pointer-events:none;transition:opacity .4s ease;z-index:3}
+  .galeria-hint .ghint-arrow{color:rgba(255,255,255,.92);font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;line-height:1;text-shadow:0 2px 5px rgba(0,0,0,.6);animation:ghint-slide 1.3s ease-in-out infinite}
+  .galeria-hint .ghint-arrow:nth-child(2){animation-delay:.15s}
+  .galeria-hint .ghint-arrow:nth-child(3){animation-delay:.3s}
+  @keyframes ghint-slide{0%,100%{transform:translateX(0);opacity:.4}50%{transform:translateX(5px);opacity:1}}
+  .lightbox{position:fixed;inset:0;z-index:9998;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.93);padding:18px}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:92vw;max-height:88vh;border-radius:8px;box-shadow:0 10px 44px rgba(0,0,0,.7)}
+  .lightbox-close{position:absolute;top:20px;right:24px;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.92);color:#c4161c;border:2px solid #c4161c;font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
+  .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.85);color:#161618;border:0;font-size:32px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .lightbox-prev{left:18px}.lightbox-next{right:18px}
   @media (prefers-reduced-motion:reduce){.ml-conoces::after,.ml-conlaraza::after,.ml-echame::after,.ml-pallevar::after,.ml-prox span::after{animation:none}}
 
   /* Lista de shows: ÚNICO texto vivo de la sección Próximos Shows (lo demás es la imagen de fondo). MES negro + DÍA + CIUDAD en teal, alineados a la izquierda de los puntitos del fondo. */
@@ -192,12 +211,12 @@
 </div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.webp?v=9" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl">
-<div class="ct dl-row" style="left:5.0%;top:28.96%"><span class="m">JUN</span><span class="d">07</span><a class="c" href="#sec-proximos" data-text="PUEBLA">PUEBLA</a></div>
-<div class="ct dl-row" style="left:5.0%;top:33.46%"><span class="m">JUL</span><span class="d">14</span><a class="c" href="#sec-proximos" data-text="CDMX">CDMX</a></div>
-<div class="ct dl-row" style="left:5.0%;top:39.55%"><span class="m">AGO</span><span class="d">22</span><a class="c" href="#sec-proximos" data-text="GUADALAJARA">GUADALAJARA</a></div>
-<div class="ct dl-row" style="left:5.0%;top:44.79%"><span class="m">SEP</span><span class="d">02</span><a class="c" href="#sec-proximos" data-text="MONTERREY">MONTERREY</a></div>
-<div class="ct dl-row" style="left:5.0%;top:50.09%"><span class="m">OCT</span><span class="d">25</span><a class="c" href="#sec-proximos" data-text="LEÓN">LEÓN</a></div>
-<div class="ct dl-row" style="left:5.0%;top:55.34%"><span class="m">NOV</span><span class="d">04</span><a class="c" href="#sec-proximos" data-text="TIJUANA">TIJUANA</a></div>
+<div class="ct dl-row" style="left:3.5%;top:28.96%"><span class="m">JUN</span><span class="d">07</span><a class="c" href="#sec-proximos" data-text="PUEBLA">PUEBLA</a></div>
+<div class="ct dl-row" style="left:3.5%;top:33.46%"><span class="m">JUL</span><span class="d">14</span><a class="c" href="#sec-proximos" data-text="CDMX">CDMX</a></div>
+<div class="ct dl-row" style="left:3.5%;top:39.55%"><span class="m">AGO</span><span class="d">22</span><a class="c" href="#sec-proximos" data-text="GUADALAJARA">GUADALAJARA</a></div>
+<div class="ct dl-row" style="left:3.5%;top:44.79%"><span class="m">SEP</span><span class="d">02</span><a class="c" href="#sec-proximos" data-text="MONTERREY">MONTERREY</a></div>
+<div class="ct dl-row" style="left:3.5%;top:50.09%"><span class="m">OCT</span><span class="d">25</span><a class="c" href="#sec-proximos" data-text="LEÓN">LEÓN</a></div>
+<div class="ct dl-row" style="left:3.5%;top:55.34%"><span class="m">NOV</span><span class="d">04</span><a class="c" href="#sec-proximos" data-text="TIJUANA">TIJUANA</a></div>
 <!-- Logos de plataformas (blancos) tras cada punto naranja de la barra EXTRAS -->
 <a class="extra-logo" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:23.4%;top:96.8%"><img src="../sitio/assets/compu/logo-spotify-white.webp?v=2" alt="Spotify" decoding="async"></a>
 <a class="extra-logo" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:41.4%;top:96.8%;height:1.6cqw"><img src="../sitio/assets/compu/logo-apple-music-white.webp?v=2" alt="Apple Music" decoding="async"></a>
@@ -267,8 +286,36 @@
 <div class="ct" style="left:84.48%;top:7.06%;font-size:2.34cqw;color:#241a1a;font-family:'stratum-2-web',monospace;font-weight:400;">e</div>
 <div class="ct" style="left:85.87%;top:7.16%;font-size:2.46cqw;color:#241a1a;font-family:'stratum-2-web',monospace;font-weight:400;">R</div>
 <div class="ct" style="left:87.47%;top:7.08%;font-size:2.17cqw;color:#241a1a;font-family:'stratum-2-web',monospace;font-weight:400;">o</div></div></section>
-<div class="dmarquee" role="img" aria-label="Con la raza"><div class="dtrack"><img src="../sitio/assets/divider-con-la-raza-text.png?v=6" alt="Con la raza"><img src="../sitio/assets/divider-con-la-raza-text.png?v=6" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-collabs"><img class="bg" src="../sitio/assets/compu/bg-collabs.webp?v=8" alt="collabs" loading="lazy" decoding="async"></section>
+<div class="dmarquee" role="img" aria-label="Con la raza"><div class="dtrack"><img src="../sitio/assets/compu/divtext-conlaraza.png?v=1" alt="Con la raza"><img src="../sitio/assets/compu/divtext-conlaraza.png?v=1" alt="" aria-hidden="true"></div></div>
+<section class="reveal" id="sec-collabs">
+  <div class="galeria-compu">
+    <div class="galeria-strip" id="galeria-grid">
+      <img class="gp b1" style="transform:rotate(-5deg) translateY(-28px)" src="../sitio/assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
+      <img class="gp b3" style="transform:rotate(4deg) translateY(24px)" src="../sitio/assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
+      <img class="gp b2" style="transform:rotate(-3deg) translateY(-24px)" src="../sitio/assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
+      <img class="gp b4" style="transform:rotate(6deg) translateY(27px)" src="../sitio/assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
+      <img class="gp b5" style="transform:rotate(-7deg) translateY(-26px)" src="../sitio/assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
+      <img class="gp b1" style="transform:rotate(3deg) translateY(23px)" src="../sitio/assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
+      <img class="gp b6" style="transform:rotate(-4deg) translateY(-29px)" src="../sitio/assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
+      <img class="gp b3" style="transform:rotate(7deg) translateY(25px)" src="../sitio/assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
+      <img class="gp b2" style="transform:rotate(-6deg) translateY(-24px)" src="../sitio/assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
+      <img class="gp b4" style="transform:rotate(5deg) translateY(28px)" src="../sitio/assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
+      <img class="gp b5" style="transform:rotate(-2deg) translateY(-27px)" src="../sitio/assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
+      <img class="gp b1" style="transform:rotate(8deg) translateY(23px)" src="../sitio/assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
+      <img class="gp b6" style="transform:rotate(-5deg) translateY(-25px)" src="../sitio/assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
+      <img class="gp b2" style="transform:rotate(4deg) translateY(29px)" src="../sitio/assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
+      <img class="gp b3" style="transform:rotate(-8deg) translateY(-26px)" src="../sitio/assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
+      <img class="gp b4" style="transform:rotate(5deg) translateY(24px)" src="../sitio/assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
+    </div>
+    <div class="galeria-hint" id="galeria-hint"><span class="ghint-arrow">&#8250;</span><span class="ghint-arrow">&#8250;</span><span class="ghint-arrow">&#8250;</span></div>
+  </div>
+</section>
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lb-close" aria-label="Cerrar">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lb-prev" aria-label="Anterior">&#8249;</button>
+  <img id="lb-img" src="" alt="Foto El Huey Coyote">
+  <button class="lightbox-nav lightbox-next" id="lb-next" aria-label="Siguiente">&#8250;</button>
+</div>
 <div class="dmarquee" role="img" aria-label="La Merch"><div class="dtrack"><img src="../sitio/assets/compu/divtext-merch.png?v=10" alt="La Merch"><img src="../sitio/assets/compu/divtext-merch.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-merch"><img class="bg" src="../sitio/assets/compu/bg-merch.webp?v=8" alt="merch" loading="lazy" decoding="async"><div class="ovl"><div class="ct" style="left:80.47%;top:26.40%;font-size:2.46cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:700;">...........................</div>
 <div class="ct" style="left:81.51%;top:30.98%;font-size:2.46cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:700;">.........................</div>
@@ -346,6 +393,42 @@
       const ob=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('shown');ob.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
       rev.forEach(el=>ob.observe(el));
     } else rev.forEach(el=>el.classList.add('shown'));
+    // Galeria CON LA RAZA: lightbox + auto-pase horizontal (gated por visibilidad y scroll)
+    (function(){
+      const grid=document.getElementById('galeria-grid');
+      const lb=document.getElementById('lightbox');
+      const lbImg=document.getElementById('lb-img');
+      if(grid&&lb){
+        const fotos=Array.prototype.map.call(grid.querySelectorAll('img'),i=>i.getAttribute('src'));
+        let cur=0;
+        const show=i=>{cur=(i+fotos.length)%fotos.length;lbImg.src=fotos[cur];};
+        const abrir=i=>{show(i);lb.classList.add('open');};
+        const cerrar=()=>{lb.classList.remove('open');lbImg.src='';};
+        grid.querySelectorAll('img').forEach(img=>img.addEventListener('click',()=>abrir(parseInt(img.dataset.i,10))));
+        document.getElementById('lb-close').addEventListener('click',cerrar);
+        document.getElementById('lb-prev').addEventListener('click',e=>{e.stopPropagation();show(cur-1);});
+        document.getElementById('lb-next').addEventListener('click',e=>{e.stopPropagation();show(cur+1);});
+        lb.addEventListener('click',e=>{if(e.target===lb)cerrar();});
+        document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')cerrar();else if(e.key==='ArrowLeft')show(cur-1);else if(e.key==='ArrowRight')show(cur+1);});
+      }
+      const strip=document.getElementById('galeria-grid');
+      const hint=document.getElementById('galeria-hint');
+      if(strip){
+        let dir=1,paused=false,rt=null,inView=false;const SPEED=1.0;
+        strip.style.scrollSnapType='none';
+        if('IntersectionObserver' in window){new IntersectionObserver(es=>{es.forEach(e=>inView=e.isIntersecting);},{rootMargin:'120px 0px'}).observe(strip);} else {inView=true;}
+        function tick(){
+          if(!paused&&inView&&!document.body.classList.contains('is-scrolling')){
+            const max=strip.scrollWidth-strip.clientWidth;
+            if(max>4){strip.scrollLeft+=dir*SPEED;if(strip.scrollLeft>=max-1)dir=-1;else if(strip.scrollLeft<=0)dir=1;}
+          }
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        function userActivity(){paused=true;strip.style.scrollSnapType='x proximity';if(hint)hint.style.opacity='0';clearTimeout(rt);rt=setTimeout(()=>{paused=false;strip.style.scrollSnapType='none';},2800);}
+        ['pointerdown','wheel','touchstart'].forEach(ev=>strip.addEventListener(ev,userActivity,{passive:true}));
+      }
+    })();
     // Divisores: kick anti-freeze (siempre giran desde el inicio, igual que la móvil)
     (function(){
       function kick(t){if(!t)return;t.style.animation='none';void t.offsetWidth;t.style.animation='';}
