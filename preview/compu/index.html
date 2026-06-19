@@ -93,7 +93,8 @@
   .extra-logo img{height:100%;width:auto;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
   .extra-logo:hover{transform:translateY(-50%) scale(1.08)}
   /* === Galeria CON LA RAZA (galeria de la movil adaptada a compu: tira horizontal + lightbox) === */
-  #sec-collabs{background:#161618}
+  #sec-collabs{background:#161618 url('../sitio/assets/compu/bg-conlaraza.webp?v=1') center center/cover no-repeat;min-height:56.25vw;display:flex;align-items:center}
+  #sec-collabs .galeria-compu{width:100%}
   .galeria-compu{position:relative;width:100%}
   .galeria-strip{display:flex;align-items:center;gap:1.6vw;padding:3vw 4vw;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none}
   .galeria-strip::-webkit-scrollbar{display:none}
@@ -137,7 +138,7 @@
   .dtrack.mq-off{animation-play-state:paused}
 
   /* === Portada (cortina) === */
-  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain-clean.webp?v=4') center center/100% 100% no-repeat;
+  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../sitio/assets/compu/portada-curtain-clean.webp?v=5') center center/100% 100% no-repeat;
     transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
   .portada.subida{transform:translateY(-100%)}
   .portada-logo{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(84%,1720px);max-height:64vh;object-fit:contain;height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
