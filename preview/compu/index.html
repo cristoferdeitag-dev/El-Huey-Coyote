@@ -23,6 +23,14 @@
   .ovl{position:absolute;inset:0;z-index:2;pointer-events:none}
   .ct{position:absolute;white-space:nowrap;line-height:1}
   .dsec{scroll-margin-top:9vw}
+  /* ¿Ya me conoces? — pósters con ZOOM secuencial (mismo efecto que la móvil): cada lienzo completo transparente con un solo póster, hace zoom ~5s alrededor de SU centro, uno tras otro, loop 15s */
+  #sec-conoces .poster-ov{position:absolute;inset:0;width:100%;height:auto;pointer-events:none;z-index:2;animation:conoces-poster-zoom 15s ease-in-out infinite;will-change:transform}
+  @keyframes conoces-poster-zoom{0%{transform:scale(1)}16.6%{transform:scale(1.08)}33.3%{transform:scale(1)}100%{transform:scale(1)}}
+  #sec-conoces .poster-ov-1{transform-origin:16.5% 46.5%;animation-delay:0s}
+  #sec-conoces .poster-ov-2{transform-origin:46.5% 50.1%;animation-delay:5s}
+  #sec-conoces .poster-ov-3{transform-origin:85.5% 48.3%;animation-delay:10s}
+  body.is-scrolling #sec-conoces .poster-ov{animation-play-state:paused}
+  @media (prefers-reduced-motion:reduce){#sec-conoces .poster-ov{animation:none}}
   .menu-link{position:absolute;display:block;pointer-events:auto;cursor:pointer;text-decoration:none;line-height:1;white-space:nowrap;
     transition:transform .22s ease, filter .22s ease;transform:translateY(0) translate(-50%,-50%) scale(1);transform-origin:center}
   /* Hover de TODOS los letreros = pequeño zoom hacia ARRIBA (nunca de lado); cada clase reañade su rotación/compresión base para no "saltar" */
@@ -264,62 +272,7 @@
   <a class="ech-btn ech-tt" href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" target="_blank" rel="noopener" aria-label="TikTok"><img src="../sitio/assets/compu/ech-tt-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('../sitio/assets/compu/ech-tt-svg.webp?v=1');mask-image:url('../sitio/assets/compu/ech-tt-svg.webp?v=1')"></span></a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="¿Ya me conoces?"><div class="dtrack"><img src="../sitio/assets/compu/divtext-conoces.png?v=10" alt="¿Ya me conoces?"><img src="../sitio/assets/compu/divtext-conoces.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-conoces"><img class="bg" src="../sitio/assets/compu/bg-conoces.webp?v=8" alt="conoces" loading="lazy" decoding="async"><div class="ovl"><div class="ct" style="left:39.12%;top:11.38%;font-size:2.89cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">P</div>
-<div class="ct" style="left:38.66%;top:18.61%;font-size:2.89cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">A</div>
-<div class="ct" style="left:38.38%;top:25.84%;font-size:2.89cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">R</div>
-<div class="ct" style="left:37.97%;top:33.07%;font-size:2.89cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">A</div>
-<div class="ct" style="left:37.48%;top:47.73%;font-size:3.16cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">L</div>
-<div class="ct" style="left:37.18%;top:54.95%;font-size:3.16cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">A</div>
-<div class="ct" style="left:37.33%;top:62.17%;font-size:3.16cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">T</div>
-<div class="ct" style="left:37.10%;top:69.39%;font-size:3.16cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">A</div>
-<div class="ct" style="left:36.28%;top:76.60%;font-size:3.16cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">M </div>
-<div class="ct" style="left:4.28%;top:16.32%;font-size:2.88cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:900;">UN  TÍTULO  COOL</div>
-<div class="ct" style="left:5.00%;top:30.12%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">COSAS SOBRE SU HJIWO </div>
-<div class="ct" style="left:5.18%;top:33.10%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">HISTORIA, MÚSICA, JDDD </div>
-<div class="ct" style="left:5.37%;top:36.12%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">INSTRUMENTOS, HOBBIES</div>
-<div class="ct" style="left:5.55%;top:39.28%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">TAMBIÉN PODEMOS POD</div>
-<div class="ct" style="left:18.69%;top:45.86%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">COSAS SOBRE SU HJIWO </div>
-<div class="ct" style="left:18.65%;top:48.89%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">HISTORIA, MÚSICA, JDDD </div>
-<div class="ct" style="left:18.74%;top:51.92%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">INSTRUMENTOS, HOBBIES</div>
-<div class="ct" style="left:19.56%;top:54.95%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">TAMBIÉN PODEMOS POD</div>
-<div class="ct" style="left:19.77%;top:58.48%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">COSAS SOBRE SU HJIWO </div>
-<div class="ct" style="left:19.72%;top:61.51%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">HISTORIA, MÚSICA, JDDD </div>
-<div class="ct" style="left:7.92%;top:65.04%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">COSAS SOBRE SU HJIWOHFEHIHIHIHI HISTORIARI</div>
-<div class="ct" style="left:13.66%;top:70.84%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">COSAS SOBRE SU HJIWO </div>
-<div class="ct" style="left:13.74%;top:73.84%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">HISTORIA, MÚSICA, JDDD </div>
-<div class="ct" style="left:13.89%;top:76.86%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">INSTRUMENTOS, HOBBIES</div>
-<div class="ct" style="left:14.40%;top:79.95%;font-size:1.11cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">TAMBIÉN PODEMOS POD</div>
-<div class="ct" style="left:4.60%;top:24.60%;font-size:1.63cqw;color:#000000;font-family:'swiss-721-bt',sans-serif;font-weight:900;">AQUÍ UN SUBTÍTULO</div>
-<div class="ct" style="left:41.51%;top:76.08%;font-size:1.37cqw;color:#f2f2f2;font-family:'swiss-721-bt',sans-serif;font-weight:400;">AQUÍ VA UN PEQUEÑO RESUMEN</div>
-<div class="ct" style="left:41.37%;top:80.32%;font-size:1.37cqw;color:#f2f2f2;font-family:'swiss-721-bt',sans-serif;font-weight:400;">DE ÉL O INFORMACIÓN MUY MUY </div>
-<div class="ct" style="left:41.22%;top:84.55%;font-size:1.37cqw;color:#f2f2f2;font-family:'swiss-721-bt',sans-serif;font-weight:400;">IMPORTANTE</div>
-<div class="ct" style="left:41.52%;top:76.19%;font-size:1.37cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">AQUÍ VA UN PEQUEÑO RESUMEN</div>
-<div class="ct" style="left:41.38%;top:80.42%;font-size:1.37cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">DE ÉL O INFORMACIÓN MUY MUY </div>
-<div class="ct" style="left:41.24%;top:84.66%;font-size:1.37cqw;color:#f22b2a;font-family:'swiss-721-bt',sans-serif;font-weight:400;">IMPORTANTE</div>
-<div class="ct" style="left:75.88%;top:21.58%;font-size:1.77cqw;color:#333333;font-family:'swiss-721-bt',sans-serif;font-weight:900;">TEXTO MÁS TEXTO</div>
-<div class="ct" style="left:73.74%;top:61.11%;font-size:1.76cqw;color:#241a1a;font-family:'swiss-721-bt',sans-serif;font-weight:700;">Palabra</div>
-<div class="ct" style="left:72.28%;top:63.89%;font-size:1.76cqw;color:#241a1a;font-family:'swiss-721-bt',sans-serif;font-weight:700;">súper cool</div>
-<div class="ct" style="left:84.83%;top:63.08%;font-size:1.76cqw;color:#241a1a;font-family:'swiss-721-bt',sans-serif;font-weight:700;">Palabra</div>
-<div class="ct" style="left:83.38%;top:65.86%;font-size:1.76cqw;color:#241a1a;font-family:'swiss-721-bt',sans-serif;font-weight:700;">súper cool</div>
-<div class="ct" style="left:72.59%;top:69.22%;font-size:1.69cqw;color:#cccccc;font-family:'swiss-721-bt',sans-serif;font-weight:900;">ALGO PARA RESALTAR</div>
-<div class="ct" style="left:75.70%;top:31.67%;font-size:0.72cqw;color:#333333;font-family:'swiss-721-bt',sans-serif;font-weight:700;">HISTORIE TIME, AVENTURAS, MÁS COSAS PARA </div>
-<div class="ct" style="left:74.83%;top:33.49%;font-size:0.72cqw;color:#333333;font-family:'swiss-721-bt',sans-serif;font-weight:700;">COMPARTIR CON FANS. FUN FACTS, RECONOCIMIEN</div>
-<div class="ct" style="left:74.89%;top:35.43%;font-size:0.72cqw;color:#333333;font-family:'swiss-721-bt',sans-serif;font-weight:700;">TOS, COSAS DIVERTIDAS, EVENTOS IMPORTANTES. </div>
-<div class="ct" style="left:78.07%;top:37.76%;font-size:0.72cqw;color:#333333;font-family:'swiss-721-bt',sans-serif;font-weight:700;">VIAJES Y MIL COSAS MÁSVFVFFV </div>
-<div class="ct" style="left:76.46%;top:26.60%;font-size:1.28cqw;color:#333333;font-family:'swiss-721-bt',sans-serif;font-weight:700;font-style:italic;">SUBTÍTULO LINDO Y NICE</div>
-<div class="ct" style="left:74.08%;top:74.01%;font-size:0.72cqw;color:#333333;font-family:'swiss-721-bt',sans-serif;font-weight:700;">HISTORIE TIME, AVENTURAS, MÁS COSAS PARA </div>
-<div class="ct" style="left:73.17%;top:75.78%;font-size:0.72cqw;color:#333333;font-family:'swiss-721-bt',sans-serif;font-weight:700;">COMPARTIR CON FANS. FUN FACTS, RECONOCIMIEN</div>
-<div class="ct" style="left:73.20%;top:77.72%;font-size:0.72cqw;color:#333333;font-family:'swiss-721-bt',sans-serif;font-weight:700;">TOS, COSAS DIVERTIDAS, EVENTOS IMPORTANTES. </div>
-<div class="ct" style="left:76.05%;top:80.19%;font-size:0.72cqw;color:#333333;font-family:'swiss-721-bt',sans-serif;font-weight:700;">VIAJES Y MIL COSAS MÁSVFVFFV.   </div>
-<div class="ct" style="left:73.72%;top:81.69%;font-size:0.72cqw;color:#333333;font-family:'swiss-721-bt',sans-serif;font-weight:700;">VEVEVDVVQ COSITAS U MAS COSITAS VWVDYJ. </div>
-<div class="ct" style="left:71.23%;top:7.49%;font-size:2.46cqw;color:#241a1a;font-family:'stratum-2-web',monospace;font-weight:400;">El m</div>
-<div class="ct" style="left:76.69%;top:7.86%;font-size:2.46cqw;color:#241a1a;font-family:'stratum-2-web',monospace;font-weight:400;">E</div>
-<div class="ct" style="left:78.42%;top:8.67%;font-size:2.07cqw;color:#241a1a;font-family:'stratum-2-web',monospace;font-weight:400;">r</div>
-<div class="ct" style="left:79.77%;top:7.80%;font-size:2.35cqw;color:#241a1a;font-family:'stratum-2-web',monospace;font-weight:400;">o</div>
-<div class="ct" style="left:81.28%;top:7.34%;font-size:2.46cqw;color:#241a1a;font-family:'stratum-2-web',monospace;font-weight:400;"> M</div>
-<div class="ct" style="left:84.48%;top:7.06%;font-size:2.34cqw;color:#241a1a;font-family:'stratum-2-web',monospace;font-weight:400;">e</div>
-<div class="ct" style="left:85.87%;top:7.16%;font-size:2.46cqw;color:#241a1a;font-family:'stratum-2-web',monospace;font-weight:400;">R</div>
-<div class="ct" style="left:87.47%;top:7.08%;font-size:2.17cqw;color:#241a1a;font-family:'stratum-2-web',monospace;font-weight:400;">o</div></div></section>
+<section class="dsec reveal" id="sec-conoces"><img class="bg" src="../sitio/assets/compu/bg-conoces-full.webp?v=1" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async"><img class="poster-ov poster-ov-1" src="../sitio/assets/compu/conoces-poster1.webp?v=1" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-2" src="../sitio/assets/compu/conoces-poster2.webp?v=1" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-3" src="../sitio/assets/compu/conoces-poster3.webp?v=1" alt="" aria-hidden="true" loading="lazy"></section>
 <div class="dmarquee" role="img" aria-label="Con la raza"><div class="dtrack"><img src="../sitio/assets/compu/divtext-conlaraza.png?v=1" alt="Con la raza"><img src="../sitio/assets/compu/divtext-conlaraza.png?v=1" alt="" aria-hidden="true"></div></div>
 <section class="reveal" id="sec-collabs">
   <div class="galeria-compu">
