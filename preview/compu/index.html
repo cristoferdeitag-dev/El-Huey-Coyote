@@ -100,6 +100,27 @@
   body.headliner-anim .dl-row:nth-of-type(4) .c::after{animation-delay:1.05s}
   body.headliner-anim .dl-row:nth-of-type(5) .c::after{animation-delay:1.4s}
   body.headliner-anim .dl-row:nth-of-type(6) .c::after{animation-delay:1.75s}
+  /* LA MERCH — nombres de prendas = botones (simulación Shopify; la tienda aún no existe). Mismo trato que la móvil: clic + zoom pulsante + destello blanco. */
+  #sec-merch .merch-item{pointer-events:auto;cursor:pointer;text-decoration:none;display:inline-block;transform-origin:left center;will-change:transform}
+  #sec-merch .merch-item:hover{animation:none;transform:scale(1.13)}
+  @keyframes merch-zoom{0%,14%,100%{transform:scale(1)}7%{transform:scale(1.09)}}
+  body.headliner-anim #sec-merch .merch-item{animation:merch-zoom 3s ease-in-out infinite}
+  body.headliner-anim #sec-merch .merch-item.pos-pirat-playeras{animation-delay:0s}
+  body.headliner-anim #sec-merch .merch-item.pos-pirat-chamarra{animation-delay:.5s}
+  body.headliner-anim #sec-merch .merch-item.pos-pirat-calcetas{animation-delay:1s}
+  body.headliner-anim #sec-merch .merch-item.pos-orig-playeras{animation-delay:1.5s}
+  body.headliner-anim #sec-merch .merch-item.pos-orig-chamarra{animation-delay:2s}
+  body.headliner-anim #sec-merch .merch-item.pos-orig-calcetas{animation-delay:2.5s}
+  #sec-merch .merch-item::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;white-space:nowrap;background-image:linear-gradient(112deg,rgba(70,72,84,0) 48.7%,rgba(70,72,84,.5) 49.5%,#fff 50%,rgba(70,72,84,.5) 50.5%,rgba(70,72,84,0) 51.3%);background-repeat:no-repeat;background-size:200% 100%;background-position:190% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;opacity:0;pointer-events:none}
+  body.headliner-anim #sec-merch .merch-item::after{animation:letrero-shine 3.9s ease-in-out infinite}
+  body.headliner-anim #sec-merch .merch-item.pos-pirat-playeras::after{animation-delay:0s}
+  body.headliner-anim #sec-merch .merch-item.pos-pirat-chamarra::after{animation-delay:.5s}
+  body.headliner-anim #sec-merch .merch-item.pos-pirat-calcetas::after{animation-delay:1s}
+  body.headliner-anim #sec-merch .merch-item.pos-orig-playeras::after{animation-delay:1.5s}
+  body.headliner-anim #sec-merch .merch-item.pos-orig-chamarra::after{animation-delay:2s}
+  body.headliner-anim #sec-merch .merch-item.pos-orig-calcetas::after{animation-delay:2.5s}
+  body.is-scrolling #sec-merch .merch-item,body.is-scrolling #sec-merch .merch-item::after{animation-play-state:paused}
+  @media (prefers-reduced-motion:reduce){#sec-merch .merch-item,#sec-merch .merch-item::after{animation:none}}
   /* Logos de plataformas (blancos) en la barra EXTRAS, después de cada punto naranja. Versiones blancas hechas desde los logos a color (con transparencia). */
   /* altura uniforme = todos del mismo tamaño; centrados verticalmente en la mitad de cada punto (top 97.3%) */
   .extra-logo{position:absolute;height:1.8cqw;pointer-events:auto;line-height:0;transform:translateY(-50%);transition:transform .2s ease,filter .2s ease}
@@ -315,12 +336,12 @@
 <div class="ct" style="left:37.67%;top:27.74%;font-size:2.46cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:700;">...........................</div>
 <div class="ct" style="left:37.67%;top:32.32%;font-size:2.46cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:700;">...........................</div>
 <div class="ct" style="left:37.54%;top:36.45%;font-size:2.46cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:700;">...........................</div>
-<div class="ct" style="left:15.10%;top:28.71%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">PLAYERAS :</div>
-<div class="ct" style="left:15.10%;top:33.44%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CHAMARRA :</div>
-<div class="ct" style="left:15.10%;top:38.16%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CALCETAS :</div>
-<div class="ct" style="left:58.20%;top:28.71%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">PLAYERAS :</div>
-<div class="ct" style="left:58.20%;top:33.44%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CHAMARRA :</div>
-<div class="ct" style="left:58.20%;top:38.16%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CALCETAS:</div>
+<a class="ct merch-item pos-pirat-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="PLAYERAS :" style="left:15.10%;top:28.71%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">PLAYERAS :</a>
+<a class="ct merch-item pos-pirat-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CHAMARRA :" style="left:15.10%;top:33.44%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CHAMARRA :</a>
+<a class="ct merch-item pos-pirat-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CALCETAS :" style="left:15.10%;top:38.16%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CALCETAS :</a>
+<a class="ct merch-item pos-orig-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="PLAYERAS :" style="left:58.20%;top:28.71%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">PLAYERAS :</a>
+<a class="ct merch-item pos-orig-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CHAMARRA :" style="left:58.20%;top:33.44%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CHAMARRA :</a>
+<a class="ct merch-item pos-orig-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CALCETAS:" style="left:58.20%;top:38.16%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CALCETAS:</a>
 <div class="ct" style="left:30.72%;top:27.49%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$250</div>
 <div class="ct" style="left:30.16%;top:32.57%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$350</div>
 <div class="ct" style="left:72.73%;top:27.49%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$800</div>
