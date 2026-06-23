@@ -128,8 +128,8 @@
   #sec-echame .ech-tt{left:61.042%;top:64.064%;width:5.143%;height:10.619%;transform:rotate(7.653deg)}
   /* NÚMERO telefónico como TEXTO VIVO (brush-up, igual que la versión móvil) sobre la placa metálica,
      para que el rayo de luz recorte las letras. Secuencia del rayo: Teléfono(0s)→FB(1.6s)→IG(3.2s)→Email(4.8s)→TikTok(6.4s). */
-  #sec-echame .ech-phone{position:absolute;left:48.6%;top:54.25%;transform:translate(-50%,-50%) rotate(-0.6deg) scaleY(1.1);
-    font-family:'brush-up','swiss-721-bt',cursive;font-size:2.02cqw;line-height:1;white-space:nowrap;color:#2b2b2b;
+  #sec-echame .ech-phone{position:absolute;left:48.8%;top:54.25%;transform:translate(-50%,-50%) rotate(-0.6deg) scaleY(1.1);
+    font-family:'brush-up','swiss-721-bt',cursive;font-size:1.85cqw;line-height:1;white-space:nowrap;color:#2b2b2b;
     -webkit-text-stroke:0;letter-spacing:0.08em;pointer-events:none;z-index:3}
   #sec-echame .ech-phone::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;
     background:linear-gradient(110deg,rgba(255,255,255,0) 44%,rgba(255,255,255,0.97) 50%,rgba(255,255,255,0) 56%);
@@ -396,6 +396,7 @@
       const btnCierra=document.getElementById('btn-cierra');
       if(btnCierra&&portada) btnCierra.addEventListener('click',function(){
         window.scrollTo(0,0);
+        if(audioChangarro){audioChangarro.currentTime=0;audioChangarro.play().catch(()=>{});}
         portada.style.transition='none';
         portada.classList.add('subida');
         portada.style.display='';
