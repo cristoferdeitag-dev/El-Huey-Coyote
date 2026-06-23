@@ -126,7 +126,18 @@
   #sec-echame .ech-ig{left:59.068%;top:35.705%;width:6.014%;height:7.841%;transform:rotate(-1.4514deg)}
   #sec-echame .ech-email{left:58.852%;top:50.106%;width:7.047%;height:8.278%;transform:skewX(3.2793deg)}
   #sec-echame .ech-tt{left:61.042%;top:64.064%;width:5.143%;height:10.619%;transform:rotate(7.653deg)}
-  @media (prefers-reduced-motion:reduce){#sec-echame .ech-shine{animation:none}}
+  /* NÚMERO telefónico como TEXTO VIVO (brush-up, igual que la versión móvil) sobre la placa metálica,
+     para que el rayo de luz recorte las letras. Secuencia del rayo: Teléfono(0s)→FB(1.6s)→IG(3.2s)→Email(4.8s)→TikTok(6.4s). */
+  #sec-echame .ech-phone{position:absolute;left:47.86%;top:54.25%;transform:translate(-50%,-50%) rotate(-0.6deg);
+    font-family:'brush-up','swiss-721-bt',cursive;font-size:2.6cqw;line-height:1;white-space:nowrap;color:#2b2b2b;
+    -webkit-text-stroke:0.3px rgba(43,43,43,0.4);letter-spacing:0.01em;pointer-events:none;z-index:3}
+  #sec-echame .ech-phone::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;
+    background:linear-gradient(110deg,rgba(255,255,255,0) 44%,rgba(255,255,255,0.97) 50%,rgba(255,255,255,0) 56%);
+    background-repeat:no-repeat;background-size:260% 100%;background-position:190% 0;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;-webkit-text-stroke:0;
+    opacity:0;pointer-events:none;animation:phone-text-shine 8s ease-in-out infinite;animation-delay:0s}
+  @keyframes phone-text-shine{0%{background-position:190% 0;opacity:0}1%{opacity:1}20%{background-position:-70% 0;opacity:1}22%{opacity:0}100%{background-position:-70% 0;opacity:0}}
+  @media (prefers-reduced-motion:reduce){#sec-echame .ech-shine{animation:none}#sec-echame .ech-phone::after{animation:none}}
   /* === FOOTER (compu) — portado de la móvil, adaptado a escritorio === */
   .site-footer{width:100%;background-color:#1a1f1c;background-image:linear-gradient(rgba(18,24,21,.66),rgba(18,24,21,.66)),url('../sitio/assets/footer-fondo.webp?v=1');background-size:auto,cover;background-position:center,center bottom;background-repeat:no-repeat,no-repeat;border-top:4px solid #ffd84a;color:#fff;padding:clamp(34px,3.5vw,60px) 24px clamp(38px,4vw,64px);text-align:center;font-family:'Quicksand',sans-serif}
   .footer-inner{max-width:900px;margin:0 auto}
@@ -227,6 +238,14 @@
   body.music-open .music-panel{display:block}
   .music-panel .mclose{position:absolute;top:6px;right:10px;background:none;border:0;color:#fff;font-size:20px;cursor:pointer}
   .music-panel iframe{display:block;border:0;border-radius:10px}
+  .music-panel .panel-title{font-family:'eds-market-bold-slant','Oswald',sans-serif;color:#ffd84a;font-size:17px;text-align:center;margin:0 0 11px;letter-spacing:.03em}
+  .song-list{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-direction:column;gap:7px}
+  .song-item{display:flex;align-items:center;gap:9px;width:100%;text-align:left;font-family:'eds-market-bold-slant','Oswald',sans-serif;font-size:15px;letter-spacing:.02em;line-height:1.15;color:#fff;background:#c4161c;border:2px solid #ffd84a;border-radius:24px;padding:10px 14px;cursor:pointer;transition:transform .15s ease,background .15s ease;-webkit-tap-highlight-color:transparent}
+  .song-item:hover{transform:translateX(3px)}
+  .song-item.active{background:#1a7a32}
+  .song-item .num{flex:0 0 auto;color:#ffd84a;font-size:14px;width:20px;text-align:center}
+  #membed{margin-top:8px}
+  #membed:empty{display:none}
 
   @media (prefers-reduced-motion:reduce){
     .dtrack,.music-fab,.music-fab .disc{animation:none}
@@ -275,7 +294,8 @@
 <a class="extra-logo" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:85.0%;top:96.8%"><img src="../sitio/assets/compu/logo-amazon-music-white.webp?v=2" alt="Amazon Music" decoding="async"></a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="Échame un grito"><div class="dtrack"><img src="../sitio/assets/compu/divtext-echame.png?v=10" alt="Échame un grito"><img src="../sitio/assets/compu/divtext-echame.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-echame"><img class="bg" src="../sitio/assets/compu/bg-echame.webp?v=9" alt="echame" loading="lazy" decoding="async"><div class="ovl">
+<section class="dsec reveal" id="sec-echame"><img class="bg" src="../sitio/assets/compu/bg-echame.webp?v=10" alt="echame" loading="lazy" decoding="async"><div class="ovl">
+  <span class="ech-phone" data-text="2226740285">2226740285</span>
   <a class="ech-btn ech-fb" href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" target="_blank" rel="noopener" aria-label="Facebook"><img src="../sitio/assets/compu/ech-fb-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('../sitio/assets/compu/ech-fb-svg.webp?v=1');mask-image:url('../sitio/assets/compu/ech-fb-svg.webp?v=1')"></span></a>
   <a class="ech-btn ech-ig" href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" target="_blank" rel="noopener" aria-label="Instagram"><img src="../sitio/assets/compu/ech-ig-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('../sitio/assets/compu/ech-ig-svg.webp?v=1');mask-image:url('../sitio/assets/compu/ech-ig-svg.webp?v=1')"></span></a>
   <a class="ech-btn ech-email" href="mailto:contacto@elhueycoyote.com" aria-label="Email contacto"><img src="../sitio/assets/compu/ech-email-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('../sitio/assets/compu/ech-email-svg.webp?v=1');mask-image:url('../sitio/assets/compu/ech-email-svg.webp?v=1')"></span></a>
@@ -315,12 +335,12 @@
 </div>
 <div class="dmarquee" role="img" aria-label="La Merch"><div class="dtrack"><img src="../sitio/assets/compu/divtext-merch.png?v=10" alt="La Merch"><img src="../sitio/assets/compu/divtext-merch.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-merch"><img class="bg" src="../sitio/assets/compu/bg-merch.webp?v=9" alt="merch" loading="lazy" decoding="async"><div class="ovl">
-<a class="ct merch-item pos-pirat-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="PLAYERAS :" style="left:15.10%;top:28.71%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">PLAYERAS :</a>
-<a class="ct merch-item pos-pirat-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CHAMARRA :" style="left:15.10%;top:33.44%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CHAMARRA :</a>
-<a class="ct merch-item pos-pirat-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CALCETAS :" style="left:15.10%;top:38.16%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CALCETAS :</a>
-<a class="ct merch-item pos-orig-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="PLAYERAS :" style="left:58.20%;top:28.71%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">PLAYERAS :</a>
-<a class="ct merch-item pos-orig-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CHAMARRA :" style="left:58.20%;top:33.44%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CHAMARRA :</a>
-<a class="ct merch-item pos-orig-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CALCETAS:" style="left:58.20%;top:38.16%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt',sans-serif;font-weight:500;font-style:italic;">CALCETAS:</a>
+<a class="ct merch-item pos-pirat-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="PLAYERAS :" style="left:15.10%;top:28.71%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">PLAYERAS :</a>
+<a class="ct merch-item pos-pirat-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CHAMARRA :" style="left:15.10%;top:33.44%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">CHAMARRA :</a>
+<a class="ct merch-item pos-pirat-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CALCETAS :" style="left:15.10%;top:38.16%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">CALCETAS :</a>
+<a class="ct merch-item pos-orig-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="PLAYERAS :" style="left:58.20%;top:28.71%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">PLAYERAS :</a>
+<a class="ct merch-item pos-orig-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CHAMARRA :" style="left:58.20%;top:33.44%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">CHAMARRA :</a>
+<a class="ct merch-item pos-orig-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CALCETAS:" style="left:58.20%;top:38.16%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">CALCETAS:</a>
 <div class="ct" style="left:30.72%;top:28.71%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$250</div>
 <div class="ct" style="left:30.16%;top:33.44%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$350</div>
 <div class="ct" style="left:72.73%;top:28.71%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$800</div>
@@ -356,7 +376,7 @@
 
   <!-- Botón de música -->
   <button class="music-fab" id="music-fab" aria-label="Pon una rolita"><span class="disc" aria-hidden="true"></span> Pon una rolita</button>
-  <div class="music-panel" id="music-panel"><button class="mclose" id="mclose" aria-label="Cerrar">✕</button><div id="membed"></div></div>
+  <div class="music-panel" id="music-panel"><button class="mclose" id="mclose" aria-label="Cerrar">✕</button><p class="panel-title">Las rolitas del HueyCoyote</p><ul class="song-list" id="song-list"></ul><div id="membed"></div></div>
 
   <script>
     document.body.classList.add('cortina-bajada');
@@ -469,11 +489,34 @@
       const mqob=new IntersectionObserver((es)=>{es.forEach(e=>{const t=e.target.querySelector('.dtrack');if(t)t.classList.toggle('mq-off',!e.isIntersecting);});},{rootMargin:'150px 0px'});
       document.querySelectorAll('.dmarquee').forEach(m=>mqob.observe(m));
     }
-    // Música (Spotify Tirando Flow Sesh #10)
+    // Música: lista de rolitas del Huey Coyote en Spotify (mismas que la versión móvil, orden pedido por Anette)
     const fab=document.getElementById('music-fab'),mp=document.getElementById('music-panel'),me=document.getElementById('membed');
-    const EMBED='<iframe style="border-radius:10px" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src="https://open.spotify.com/embed/track/6WmCmQuse2SjjSVab5EHxg?utm_source=generator"></iframe>';
-    fab.addEventListener('click',()=>{const o=document.body.classList.toggle('music-open');if(o&&!me.innerHTML)me.innerHTML=EMBED;});
-    document.getElementById('mclose').addEventListener('click',()=>{document.body.classList.remove('music-open');me.innerHTML='';});
+    const songListEl=document.getElementById('song-list');
+    const SONGS=[
+      {t:'Tirando Flow · Sesh #10',    id:'6WmCmQuse2SjjSVab5EHxg'},
+      {t:'Fantasías',                  id:'5eHegIfGPku1Jo70rRzv6k'},
+      {t:'Domingo Sin Bajón',          id:'3CsC05AC1I7KGaE2CyyGVf'},
+      {t:'El Corrido de Harry Potter', id:'5ttVu9xFETiJjKx0OmBKMz'},
+      {t:'Como un Ladrón',             id:'5HYLD6LFmwssarqIfYCrZe'},
+    ];
+    function spotifyEmbed(id){return '<iframe style="border-radius:10px" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src="https://open.spotify.com/embed/track/'+id+'?utm_source=generator"></iframe>';}
+    if(songListEl){
+      SONGS.forEach((s,i)=>{
+        const li=document.createElement('li');
+        const b=document.createElement('button');
+        b.type='button';b.className='song-item';
+        b.innerHTML='<span class="num">'+(i+1)+'</span><span>'+s.t+'</span>';
+        b.addEventListener('click',()=>{
+          document.querySelectorAll('.song-item').forEach(el=>el.classList.remove('active'));
+          b.classList.add('active');
+          me.innerHTML=spotifyEmbed(s.id);
+          fab.classList.add('playing');
+        });
+        li.appendChild(b);songListEl.appendChild(li);
+      });
+    }
+    fab.addEventListener('click',()=>{document.body.classList.toggle('music-open');});
+    document.getElementById('mclose').addEventListener('click',()=>{document.body.classList.remove('music-open');me.innerHTML='';document.querySelectorAll('.song-item').forEach(el=>el.classList.remove('active'));fab.classList.remove('playing');});
   </script>
 </body>
 </html>
