@@ -36,6 +36,16 @@
   #sec-conoces .poster-hit-2:hover ~ .poster-ov-2{transform:scale(1.08)}
   #sec-conoces .poster-hit-3:hover ~ .poster-ov-3{transform:scale(1.08)}
   body.is-scrolling #sec-conoces .poster-hit{pointer-events:none}
+  /* "El mero mero" rayado en la pared metálica — se ESCRIBE de izq→der al entrar (igual que la móvil) */
+  #sec-conoces .mero-mero{position:absolute;top:8.2%;left:73.6%;z-index:4;white-space:nowrap;pointer-events:none;
+    font-family:'stratum-2-web','bc-barell-condensed-thin',sans-serif;font-size:2.55cqw;letter-spacing:.02em;
+    color:#2c2d2f;-webkit-text-fill-color:#2c2d2f;-webkit-text-stroke:.3px rgba(206,210,214,.5);
+    text-shadow:-.6px -.6px .3px rgba(230,234,238,.6),.7px .9px 1.2px rgba(0,0,0,.55);
+    transform:rotate(-6deg);clip-path:inset(0 100% 0 0)}
+  #sec-conoces .mero-mero span{display:inline-block;line-height:1}
+  #sec-conoces.mero-scratched .mero-mero{animation:scratch-loop 7s steps(46,end) infinite}
+  @keyframes scratch-loop{0%{clip-path:inset(0 100% 0 0)}20%{clip-path:inset(0 0 0 0)}80%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 100%)}}
+  @media (prefers-reduced-motion:reduce){#sec-conoces .mero-mero{clip-path:inset(0 0 0 0);animation:none}}
   .menu-link{position:absolute;display:block;pointer-events:auto;cursor:pointer;text-decoration:none;line-height:1;white-space:nowrap;
     transition:transform .22s ease, filter .22s ease;transform:translateY(0) translate(-50%,-50%) scale(1);transform-origin:center}
   /* Hover de TODOS los letreros = pequeño zoom hacia ARRIBA (nunca de lado); cada clase reañade su rotación/compresión base para no "saltar" */
@@ -282,7 +292,7 @@
   <a class="stool-btn" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:56.3%;top:80.5%;width:4.7cqw"><img src="../sitio/assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="¿Ya me conoces?"><div class="dtrack"><img src="../sitio/assets/compu/divtext-conoces.png?v=10" alt="¿Ya me conoces?"><img src="../sitio/assets/compu/divtext-conoces.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-conoces"><img class="bg" src="../sitio/assets/compu/bg-conoces-full.webp?v=3" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async"><div class="poster-hit poster-hit-1" aria-hidden="true"></div><div class="poster-hit poster-hit-2" aria-hidden="true"></div><div class="poster-hit poster-hit-3" aria-hidden="true"></div><img class="poster-ov poster-ov-1" src="../sitio/assets/compu/conoces-poster1.webp?v=3" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-2" src="../sitio/assets/compu/conoces-poster2.webp?v=4" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-3" src="../sitio/assets/compu/conoces-poster3.webp?v=3" alt="" aria-hidden="true" loading="lazy"></section>
+<section class="dsec reveal" id="sec-conoces"><img class="bg" src="../sitio/assets/compu/bg-conoces-full.webp?v=3" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async"><div class="poster-hit poster-hit-1" aria-hidden="true"></div><div class="poster-hit poster-hit-2" aria-hidden="true"></div><div class="poster-hit poster-hit-3" aria-hidden="true"></div><img class="poster-ov poster-ov-1" src="../sitio/assets/compu/conoces-poster1.webp?v=3" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-2" src="../sitio/assets/compu/conoces-poster2.webp?v=4" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-3" src="../sitio/assets/compu/conoces-poster3.webp?v=3" alt="" aria-hidden="true" loading="lazy"><div class="mero-mero" aria-hidden="true"><span style="transform:translateY(2px) rotate(-5deg)">E</span><span style="transform:translateY(-2px) rotate(3deg)">l</span> <span style="transform:translateY(1px) rotate(-6deg)">m</span><span style="transform:translateY(-3px) rotate(2deg)">E</span><span style="transform:translateY(2px) rotate(-3deg)">R</span><span style="transform:translateY(-1px) rotate(4deg)">o</span> <span style="transform:translateY(-2px) rotate(-4deg)">m</span><span style="transform:translateY(2px) rotate(5deg)">E</span><span style="transform:translateY(-2px) rotate(-5deg)">R</span><span style="transform:translateY(1px) rotate(2deg)">o</span></div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.webp?v=10" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl">
 <div class="ct dl-row" style="left:3.5%;top:28.96%"><span class="m">JUN</span><span class="d">07</span><a class="c" href="#sec-proximos" data-text="PUEBLA">PUEBLA</a></div>
@@ -441,7 +451,7 @@
     // Reveal on scroll
     const rev=document.querySelectorAll('.reveal');
     if('IntersectionObserver' in window){
-      const ob=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('shown');ob.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
+      const ob=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('shown');if(e.target.id==='sec-conoces')e.target.classList.add('mero-scratched');ob.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
       rev.forEach(el=>ob.observe(el));
     } else rev.forEach(el=>el.classList.add('shown'));
     // Galeria CON LA RAZA: lightbox + auto-pase horizontal (gated por visibilidad y scroll)
