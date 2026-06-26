@@ -32,15 +32,11 @@
   #sec-conoces .poster-hit-1{left:1.8%;top:11.6%;width:33.7%;height:85.1%}
   #sec-conoces .poster-hit-2{left:35.6%;top:3.1%;width:36.1%;height:95.8%}
   #sec-conoces .poster-hit-3{left:68%;top:17.9%;width:30.6%;height:71.4%}
-  /* Zoom de pósters ELIMINADO a pedido de Ani (2026-06-26). Animación elegida = OPCIÓN 5: los 3 pósters CAEN en cascada/secuencia cuando la sección entra a cuadro (clase .shown del IntersectionObserver); al hover solo se resalta el texto (brillo, sin moverse). */
-  #sec-conoces .poster-ov{opacity:0;transform:translateY(-52px);transition:opacity .6s ease, transform .75s cubic-bezier(.34,1.32,.5,1), filter .25s ease}
-  #sec-conoces.shown .poster-ov-1{opacity:1;transform:translateY(0);transition-delay:.15s}
-  #sec-conoces.shown .poster-ov-2{opacity:1;transform:translateY(0);transition-delay:.34s}
-  #sec-conoces.shown .poster-ov-3{opacity:1;transform:translateY(0);transition-delay:.53s}
+  /* Zoom de pósters ELIMINADO a pedido de Ani (2026-06-26). Animación elegida = OPCIÓN 2: levantar tipo polaroid — al pasar el cursor el póster se alza un poco con sombra, SIN zoom. */
+  #sec-conoces .poster-ov{transition:transform .26s cubic-bezier(.34,1.3,.5,1), filter .26s ease}
   #sec-conoces .poster-hit-1:hover ~ .poster-ov-1,
   #sec-conoces .poster-hit-2:hover ~ .poster-ov-2,
-  #sec-conoces .poster-hit-3:hover ~ .poster-ov-3{filter:brightness(1.14) contrast(1.06) drop-shadow(0 4px 10px rgba(0,0,0,.35))}
-  @media (prefers-reduced-motion:reduce){#sec-conoces .poster-ov{opacity:1;transform:none;transition:none}}
+  #sec-conoces .poster-hit-3:hover ~ .poster-ov-3{transform:translateY(-15px);filter:drop-shadow(0 16px 20px rgba(0,0,0,.45))}
   body.is-scrolling #sec-conoces .poster-hit{pointer-events:none}
   /* "El mero mero" rayado en la pared metálica — se ESCRIBE de izq→der al entrar (igual que la móvil) */
   #sec-conoces .mero-mero{position:absolute;top:8.2%;left:73.6%;z-index:4;white-space:nowrap;pointer-events:none;
