@@ -32,9 +32,7 @@
   #sec-conoces .poster-hit-1{left:1.8%;top:11.6%;width:33.7%;height:85.1%}
   #sec-conoces .poster-hit-2{left:35.6%;top:3.1%;width:36.1%;height:95.8%}
   #sec-conoces .poster-hit-3{left:68%;top:17.9%;width:30.6%;height:71.4%}
-  #sec-conoces .poster-hit-1:hover ~ .poster-ov-1{transform:scale(1.08)}
-  #sec-conoces .poster-hit-2:hover ~ .poster-ov-2{transform:scale(1.08)}
-  #sec-conoces .poster-hit-3:hover ~ .poster-ov-3{transform:scale(1.08)}
+  /* Zoom de pósters ELIMINADO a pedido de Ani (2026-06-26). Pendiente: elegir nueva animación + pasar texto de pósters a texto vivo. */
   body.is-scrolling #sec-conoces .poster-hit{pointer-events:none}
   /* "El mero mero" rayado en la pared metálica — se ESCRIBE de izq→der al entrar (igual que la móvil) */
   #sec-conoces .mero-mero{position:absolute;top:8.2%;left:73.6%;z-index:4;white-space:nowrap;pointer-events:none;
@@ -136,12 +134,12 @@
   #sec-echame .ech-ig{left:59.068%;top:35.705%;width:6.014%;height:7.841%;transform:rotate(-1.4514deg)}
   #sec-echame .ech-email{left:58.852%;top:50.106%;width:7.047%;height:8.278%;transform:skewX(3.2793deg)}
   #sec-echame .ech-tt{left:61.042%;top:64.064%;width:5.143%;height:10.619%;transform:rotate(7.653deg)}
-  /* Peel "se desprende de lado": al acercar el cursor el sticker se levanta de su orilla izquierda (rotateY) — preserva el rotate/skew base de cada uno */
-  #sec-echame .ech-fb:hover{transform:perspective(820px) rotateY(-26deg) scale(1.06);z-index:6}
-  #sec-echame .ech-ig:hover{transform:rotate(-1.4514deg) perspective(820px) rotateY(-26deg) scale(1.06);z-index:6}
-  #sec-echame .ech-email:hover{transform:skewX(3.2793deg) perspective(820px) rotateY(-26deg) scale(1.06);z-index:6}
-  #sec-echame .ech-tt:hover{transform:rotate(7.653deg) perspective(820px) rotateY(-26deg) scale(1.06);z-index:6}
-  #sec-echame .ech-btn:hover img{filter:drop-shadow(9px 11px 15px rgba(0,0,0,.5))}
+  /* Peel "colgado de esquina": al acercar el cursor el sticker se despega y queda colgando de su esquina superior-izquierda (pivote en transform-origin 0 0) — preserva el rotate/skew base de cada uno */
+  #sec-echame .ech-fb:hover{transform:rotate(11deg) scale(1.03);z-index:6}
+  #sec-echame .ech-ig:hover{transform:rotate(-1.4514deg) rotate(11deg) scale(1.03);z-index:6}
+  #sec-echame .ech-email:hover{transform:skewX(3.2793deg) rotate(11deg) scale(1.03);z-index:6}
+  #sec-echame .ech-tt:hover{transform:rotate(7.653deg) rotate(11deg) scale(1.03);z-index:6}
+  #sec-echame .ech-btn:hover img{filter:drop-shadow(7px 12px 13px rgba(0,0,0,.5))}
   /* NÚMERO telefónico como TEXTO VIVO (brush-up, igual que la versión móvil) sobre la placa metálica,
      para que el rayo de luz recorte las letras. Secuencia del rayo: Teléfono(0s)→FB(1.6s)→IG(3.2s)→Email(4.8s)→TikTok(6.4s). */
   #sec-echame .ech-phone{position:absolute;left:48.8%;top:54.25%;transform:translate(-50%,-50%) rotate(-0.6deg) scaleY(1.1);
@@ -290,7 +288,7 @@
 <section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner.webp?v=10" alt="El Huey Coyote" decoding="async"><div class="ovl">
   <a class="menu-link ml-conoces"   href="#sec-conoces"  style="left:30.7%;top:20.5%;font-size:1.72cqw" data-text="¿YA ME CONOCES?">¿YA ME CONOCES?</a>
   <a class="menu-link ml-prox"      href="#sec-proximos" style="left:12.3%;top:35.4%;font-size:3.4cqw"><span data-text="PRÓXIMOS">PRÓXIMOS</span><span data-text="SHOWS">SHOWS</span></a>
-  <span class="menu-link ml-pallevar"                    style="left:33.5%;top:39.0%;font-size:2.3cqw" data-text="PA’ LLEVAR">PA’ LLEVAR</span>
+  <a class="menu-link ml-pallevar" href="#sec-merch"     style="left:33.5%;top:39.0%;font-size:2.3cqw" data-text="PA’ LLEVAR">PA’ LLEVAR</a>
   <a class="menu-link ml-conlaraza" href="#sec-collabs"  style="left:70.4%;top:15.8%;font-size:2.05cqw" data-text="CON LA RAZA">CON LA RAZA</a>
   <a class="menu-link ml-echame"    href="#sec-echame"   style="left:70.0%;top:23.2%;font-size:2.0cqw" data-text="ÉCHAME UN&#10;GRITO">ÉCHAME UN<br>GRITO</a>
   <!-- Logos-botón de streaming sobre los banquitos (mismos links/imágenes que la móvil) -->
