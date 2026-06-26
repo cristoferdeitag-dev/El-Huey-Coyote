@@ -122,7 +122,7 @@
   .extra-logo:hover{transform:translateY(-50%) scale(1.08)}
   /* === Galeria CON LA RAZA (galeria de la movil adaptada a compu: tira horizontal + lightbox) === */
   /* === ÉCHAME UN GRITO (compu) — botones de redes con destello, portado de la móvil === */
-  #sec-echame .ech-btn{position:absolute;display:block;z-index:3;cursor:pointer;pointer-events:auto;transform-origin:0 0}
+  #sec-echame .ech-btn{position:absolute;display:block;z-index:3;cursor:pointer;pointer-events:auto;transform-origin:0 0;transition:transform .3s cubic-bezier(.34,1.45,.5,1)}
   body.is-scrolling #sec-echame .ech-btn{pointer-events:none}
   #sec-echame .ech-btn img{display:block;width:100%;height:100%;object-fit:fill;pointer-events:none;filter:drop-shadow(0 4px 7px rgba(0,0,0,.42))}
   #sec-echame .ech-shine{position:absolute;inset:0;pointer-events:none;background:linear-gradient(112deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 62%);background-repeat:no-repeat;background-size:230% 100%;background-position:190% 0;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;mix-blend-mode:screen;opacity:0;animation:ech-shine 8s ease-in-out infinite}
@@ -136,11 +136,19 @@
   #sec-echame .ech-ig{left:59.068%;top:35.705%;width:6.014%;height:7.841%;transform:rotate(-1.4514deg)}
   #sec-echame .ech-email{left:58.852%;top:50.106%;width:7.047%;height:8.278%;transform:skewX(3.2793deg)}
   #sec-echame .ech-tt{left:61.042%;top:64.064%;width:5.143%;height:10.619%;transform:rotate(7.653deg)}
+  /* Peel "se desprende de lado": al acercar el cursor el sticker se levanta de su orilla izquierda (rotateY) — preserva el rotate/skew base de cada uno */
+  #sec-echame .ech-fb:hover{transform:perspective(820px) rotateY(-26deg) scale(1.06);z-index:6}
+  #sec-echame .ech-ig:hover{transform:rotate(-1.4514deg) perspective(820px) rotateY(-26deg) scale(1.06);z-index:6}
+  #sec-echame .ech-email:hover{transform:skewX(3.2793deg) perspective(820px) rotateY(-26deg) scale(1.06);z-index:6}
+  #sec-echame .ech-tt:hover{transform:rotate(7.653deg) perspective(820px) rotateY(-26deg) scale(1.06);z-index:6}
+  #sec-echame .ech-btn:hover img{filter:drop-shadow(9px 11px 15px rgba(0,0,0,.5))}
   /* NÚMERO telefónico como TEXTO VIVO (brush-up, igual que la versión móvil) sobre la placa metálica,
      para que el rayo de luz recorte las letras. Secuencia del rayo: Teléfono(0s)→FB(1.6s)→IG(3.2s)→Email(4.8s)→TikTok(6.4s). */
   #sec-echame .ech-phone{position:absolute;left:48.8%;top:54.25%;transform:translate(-50%,-50%) rotate(-0.6deg) scaleY(1.1);
     font-family:'brush-up','swiss-721-bt',cursive;font-size:1.85cqw;line-height:1;white-space:nowrap;color:#2b2b2b;
-    -webkit-text-stroke:0;letter-spacing:0.08em;pointer-events:none;z-index:3}
+    -webkit-text-stroke:0;letter-spacing:0.08em;pointer-events:auto;cursor:pointer;z-index:3;transition:transform .25s cubic-bezier(.34,1.45,.5,1)}
+  body.is-scrolling #sec-echame .ech-phone{pointer-events:none}
+  #sec-echame .ech-phone:hover{transform:translate(-50%,-50%) translateY(-9px) rotate(-0.6deg) scaleY(1.1) scale(1.06)}
   #sec-echame .ech-phone::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;
     background:linear-gradient(110deg,rgba(255,255,255,0) 44%,rgba(255,255,255,0.97) 50%,rgba(255,255,255,0) 56%);
     background-repeat:no-repeat;background-size:260% 100%;background-position:190% 0;
@@ -164,7 +172,7 @@
   .btn-cierra:hover,.btn-cierra:focus{transform:scale(1.06);text-shadow:2px 5px 6px rgba(0,0,0,.6),0 2px 2px rgba(0,0,0,.5);outline:none}
   @keyframes neon-flicker{0%,18%,22%,25%,53%,57%,83%,100%{opacity:1;text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45),0 0 7px rgba(190,255,240,.95),0 0 15px rgba(60,224,200,.85),0 0 28px rgba(0,171,171,.6)}20%,24%,55%,84%{opacity:.55;text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45)}}
   @media (prefers-reduced-motion:reduce){.btn-cierra{animation:none}}
-  #sec-collabs{background:#9e9899 url('../sitio/assets/compu/bg-conlaraza.webp?v=3') center center/contain no-repeat;min-height:56.25vw;display:flex;align-items:center}
+  #sec-collabs{background:#9e9899 url('../sitio/assets/compu/bg-conlaraza.webp?v=3') center center/cover no-repeat;min-height:56.25vw;display:flex;align-items:center}
   #sec-collabs .galeria-compu{width:100%}
   .galeria-compu{position:relative;width:100%}
   .galeria-strip{display:flex;align-items:center;gap:1.6vw;padding:3vw 4vw;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none}
