@@ -32,21 +32,15 @@
   #sec-conoces .poster-hit-1{left:1.8%;top:11.6%;width:33.7%;height:85.1%}
   #sec-conoces .poster-hit-2{left:35.6%;top:3.1%;width:36.1%;height:95.8%}
   #sec-conoces .poster-hit-3{left:68%;top:17.9%;width:30.6%;height:71.4%}
-  /* Zoom de pósters ELIMINADO a pedido de Ani (2026-06-26). Animación elegida = OPCIÓN 3: destello/shine que recorre el póster al hover, recortado a la forma de cada póster con máscara. */
-  #sec-conoces .poster-shine{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:3;
-    background:linear-gradient(112deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.92) 50%,rgba(255,255,255,0) 60%);
-    background-repeat:no-repeat;background-size:230% 100%;background-position:190% 0;
-    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:100% 100%;mask-size:100% 100%;
-    mix-blend-mode:screen;opacity:0}
-  #sec-conoces .poster-shine-1{-webkit-mask-image:url('../sitio/assets/compu/conoces-poster1.webp?v=3');mask-image:url('../sitio/assets/compu/conoces-poster1.webp?v=3')}
-  #sec-conoces .poster-shine-2{-webkit-mask-image:url('../sitio/assets/compu/conoces-poster2.webp?v=4');mask-image:url('../sitio/assets/compu/conoces-poster2.webp?v=4')}
-  #sec-conoces .poster-shine-3{-webkit-mask-image:url('../sitio/assets/compu/conoces-poster3.webp?v=3');mask-image:url('../sitio/assets/compu/conoces-poster3.webp?v=3')}
-  #sec-conoces .poster-hit-1:hover ~ .poster-shine-1{animation:poster-shine .9s ease-out}
-  #sec-conoces .poster-hit-2:hover ~ .poster-shine-2{animation:poster-shine .9s ease-out}
-  #sec-conoces .poster-hit-3:hover ~ .poster-shine-3{animation:poster-shine .9s ease-out}
-  body.is-scrolling #sec-conoces .poster-shine{animation:none!important}
-  @keyframes poster-shine{0%{background-position:190% 0;opacity:0}8%{opacity:1}92%{opacity:1}100%{background-position:-70% 0;opacity:0}}
-  @media (prefers-reduced-motion:reduce){#sec-conoces .poster-shine{animation:none!important}}
+  /* Zoom de pósters ELIMINADO a pedido de Ani (2026-06-26). Animación elegida = OPCIÓN 5: los 3 pósters CAEN en cascada/secuencia cuando la sección entra a cuadro (clase .shown del IntersectionObserver); al hover solo se resalta el texto (brillo, sin moverse). */
+  #sec-conoces .poster-ov{opacity:0;transform:translateY(-52px);transition:opacity .6s ease, transform .75s cubic-bezier(.34,1.32,.5,1), filter .25s ease}
+  #sec-conoces.shown .poster-ov-1{opacity:1;transform:translateY(0);transition-delay:.15s}
+  #sec-conoces.shown .poster-ov-2{opacity:1;transform:translateY(0);transition-delay:.34s}
+  #sec-conoces.shown .poster-ov-3{opacity:1;transform:translateY(0);transition-delay:.53s}
+  #sec-conoces .poster-hit-1:hover ~ .poster-ov-1,
+  #sec-conoces .poster-hit-2:hover ~ .poster-ov-2,
+  #sec-conoces .poster-hit-3:hover ~ .poster-ov-3{filter:brightness(1.14) contrast(1.06) drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+  @media (prefers-reduced-motion:reduce){#sec-conoces .poster-ov{opacity:1;transform:none;transition:none}}
   body.is-scrolling #sec-conoces .poster-hit{pointer-events:none}
   /* "El mero mero" rayado en la pared metálica — se ESCRIBE de izq→der al entrar (igual que la móvil) */
   #sec-conoces .mero-mero{position:absolute;top:8.2%;left:73.6%;z-index:4;white-space:nowrap;pointer-events:none;
@@ -312,7 +306,7 @@
   <a class="stool-btn" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:56.3%;top:80.5%;width:4.7cqw"><img src="../sitio/assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="¿Ya me conoces?"><div class="dtrack"><img src="../sitio/assets/compu/divtext-conoces.png?v=10" alt="¿Ya me conoces?"><img src="../sitio/assets/compu/divtext-conoces.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-conoces"><img class="bg" src="../sitio/assets/compu/bg-conoces-full.webp?v=4" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async"><div class="poster-hit poster-hit-1" aria-hidden="true"></div><div class="poster-hit poster-hit-2" aria-hidden="true"></div><div class="poster-hit poster-hit-3" aria-hidden="true"></div><img class="poster-ov poster-ov-1" src="../sitio/assets/compu/conoces-poster1.webp?v=3" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-2" src="../sitio/assets/compu/conoces-poster2.webp?v=4" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-3" src="../sitio/assets/compu/conoces-poster3.webp?v=3" alt="" aria-hidden="true" loading="lazy"><span class="poster-shine poster-shine-1" aria-hidden="true"></span><span class="poster-shine poster-shine-2" aria-hidden="true"></span><span class="poster-shine poster-shine-3" aria-hidden="true"></span><div class="mero-mero" aria-hidden="true"><span style="transform:translateY(2px) rotate(-5deg)">E</span><span style="transform:translateY(-2px) rotate(3deg)">l</span> <span style="transform:translateY(1px) rotate(-6deg)">m</span><span style="transform:translateY(-3px) rotate(2deg)">E</span><span style="transform:translateY(2px) rotate(-3deg)">R</span><span style="transform:translateY(-1px) rotate(4deg)">o</span> <span style="transform:translateY(-2px) rotate(-4deg)">m</span><span style="transform:translateY(2px) rotate(5deg)">E</span><span style="transform:translateY(-2px) rotate(-5deg)">R</span><span style="transform:translateY(1px) rotate(2deg)">o</span></div></section>
+<section class="dsec reveal" id="sec-conoces"><img class="bg" src="../sitio/assets/compu/bg-conoces-full.webp?v=4" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async"><div class="poster-hit poster-hit-1" aria-hidden="true"></div><div class="poster-hit poster-hit-2" aria-hidden="true"></div><div class="poster-hit poster-hit-3" aria-hidden="true"></div><img class="poster-ov poster-ov-1" src="../sitio/assets/compu/conoces-poster1.webp?v=3" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-2" src="../sitio/assets/compu/conoces-poster2.webp?v=4" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-3" src="../sitio/assets/compu/conoces-poster3.webp?v=3" alt="" aria-hidden="true" loading="lazy"><div class="mero-mero" aria-hidden="true"><span style="transform:translateY(2px) rotate(-5deg)">E</span><span style="transform:translateY(-2px) rotate(3deg)">l</span> <span style="transform:translateY(1px) rotate(-6deg)">m</span><span style="transform:translateY(-3px) rotate(2deg)">E</span><span style="transform:translateY(2px) rotate(-3deg)">R</span><span style="transform:translateY(-1px) rotate(4deg)">o</span> <span style="transform:translateY(-2px) rotate(-4deg)">m</span><span style="transform:translateY(2px) rotate(5deg)">E</span><span style="transform:translateY(-2px) rotate(-5deg)">R</span><span style="transform:translateY(1px) rotate(2deg)">o</span></div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.webp?v=10" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl">
 <div class="ct dl-row" style="left:3.5%;top:28.96%"><span class="m">JUN</span><span class="d">07</span><a class="c" href="#sec-proximos" data-text="PUEBLA">PUEBLA</a></div>
