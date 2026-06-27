@@ -10,6 +10,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@400;600;700;800&family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.typekit.net/yzd3dtz.css">
 <style>
+  /* Fuentes AUTO-HOSPEDADAS de los textos vivos del headliner (Eds Market Bold Slant + Ciabatta).
+     Adobe Typekit no carga en el navegador in-app de Telegram (request a use.typekit.net bloqueado),
+     por eso Ani veía la tipografía de respaldo. Servirlas desde el propio dominio garantiza que SIEMPRE
+     se vea Eds Market Bold Slant / Ciabatta sin importar el navegador. */
+  @font-face{font-family:'eds-market-bold-slant';src:url('../sitio/assets/fonts/eds-market-bold-slant.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'ciabatta';src:url('../sitio/assets/fonts/ciabatta-bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
   *{margin:0;padding:0;box-sizing:border-box}
   @font-face{font-family:'DK Drop Dead Gorgeous';src:url('../sitio/assets/fonts/DKDropDeadGorgeous.otf') format('opentype');font-display:swap}
   html{scroll-behavior:auto}
