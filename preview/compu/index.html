@@ -178,7 +178,7 @@
   /* === FOOTER (compu) — portado de la móvil, adaptado a escritorio === */
   .site-footer{width:100%;background-color:#1a1f1c;background-image:linear-gradient(rgba(18,24,21,.66),rgba(18,24,21,.66)),url('../sitio/assets/footer-fondo.webp?v=1');background-size:auto,cover;background-position:center,center bottom;background-repeat:no-repeat,no-repeat;border-top:4px solid #ffd84a;color:#fff;padding:clamp(34px,3.5vw,60px) 24px clamp(38px,4vw,64px);text-align:center;font-family:'Quicksand',sans-serif}
   .footer-inner{max-width:900px;margin:0 auto}
-  .footer-logo{display:block;margin:0 auto 12px;height:clamp(64px,7vw,112px);width:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.45))}
+  .footer-logo{display:block;margin:0 auto 14px;height:clamp(90px,10vw,156px);width:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.45))}
   .footer-tag{font-size:clamp(15px,1.4vw,20px);font-weight:600;color:#ffe9a6;margin:0 0 20px}
   .footer-social{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-bottom:16px}
   .footer-social a{color:#fff;text-decoration:none;font-weight:700;font-size:clamp(15px,1.3vw,19px);transition:color .18s ease}
@@ -250,7 +250,7 @@
 
   /* === Botón de música === */
   .music-fab{position:fixed;right:20px;bottom:20px;z-index:90;display:none;align-items:center;gap:10px;background:#c4161c;color:#fff;
-    border:3px solid #ffd84a;border-radius:44px;padding:10px 22px 10px 12px;font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;font-size:20px;letter-spacing:.03em;cursor:pointer;
+    border:3px solid #ffd84a;border-radius:56px;padding:14px 32px 14px 18px;font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;font-size:27px;letter-spacing:.03em;cursor:pointer;
     box-shadow:0 6px 18px rgba(0,0,0,.4);animation:mpulse 1.9s ease-in-out infinite}
   body.changarro-abierto .music-fab{display:inline-flex}
   /* === Header/nav portado de la MÓVIL (barra metálica + logo + menú hamburguesa), adaptado a compu. Aparece al abrir el changarro. === */
@@ -269,7 +269,7 @@
   .nav-menu a{color:#fff;text-decoration:none;font-family:'eds-market-bold-slant','Oswald',sans-serif;font-size:clamp(16px,1.35vw,22px);letter-spacing:.04em;text-transform:uppercase;padding:16px 34px;border-bottom:1px solid rgba(255,255,255,.08);transition:background .15s ease,color .15s ease}
   .nav-menu a:last-child{border-bottom:0}
   .nav-menu a:hover{background:rgba(255,216,74,.16);color:#ffd84a}
-  .music-fab .disc{width:34px;height:34px;flex:0 0 auto;background:url('../sitio/assets/spotify-white.png?v=1') center/contain no-repeat}
+  .music-fab .disc{width:44px;height:44px;flex:0 0 auto;background:url('../sitio/assets/spotify-white.png?v=1') center/contain no-repeat}
   @keyframes spin{to{transform:rotate(360deg)}}
   @keyframes mpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
   .music-fab.playing{background:#1a7a32}
@@ -393,7 +393,8 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <img class="footer-logo" src="../sitio/assets/footer-logo-v3.webp?v=1" alt="El Huey Coyote">
-    <p class="footer-tag">Puro corrido, pura fiesta 🌮🎸</p>
+    <p class="footer-tag">Puro corrido, pura fiesta</p>
+    <button class="btn-cierra" id="btn-cierra" type="button" aria-label="Cierra el changarro">CIERRA EL CHANGARRO</button>
     <nav class="footer-social" aria-label="Redes sociales">
       <a href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
       <span class="dot">•</span>
@@ -402,7 +403,6 @@
       <a href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" target="_blank" rel="noopener noreferrer">TikTok</a>
     </nav>
     <a class="footer-mail" href="mailto:contacto@elhueycoyote.com">contacto@elhueycoyote.com</a>
-    <button class="btn-cierra" id="btn-cierra" type="button" aria-label="Cierra el changarro">CIERRA EL CHANGARRO</button>
     <p class="footer-copy">© 2026 El Huey Coyote · Todos los derechos reservados</p>
   </div>
 </footer>
