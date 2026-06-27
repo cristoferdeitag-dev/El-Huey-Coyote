@@ -23,21 +23,18 @@
   .ovl{position:absolute;inset:0;z-index:2;pointer-events:none}
   .ct{position:absolute;white-space:nowrap;line-height:1}
   .dsec{scroll-margin-top:9vw}
-  /* ¿Ya me conoces? — pósters con ZOOM al pasar el CURSOR (hover). Cada póster = lienzo completo transparente; un área-sensor (.poster-hit) sobre la forma de cada póster dispara el zoom de SU overlay. El sensor NO escala (queda fijo) para que el hover no parpadee. */
-  #sec-conoces .poster-ov{position:absolute;inset:0;width:100%;height:auto;pointer-events:none;z-index:2;transition:transform .3s ease;will-change:transform}
-  #sec-conoces .poster-ov-1{transform-origin:18.7% 54.2%}
-  #sec-conoces .poster-ov-2{transform-origin:53.6% 51%}
-  #sec-conoces .poster-ov-3{transform-origin:83.3% 53.6%}
-  #sec-conoces .poster-hit{position:absolute;z-index:3;cursor:pointer;background:transparent}
+  /* ¿Ya me conoces? — los pósters CAEN uno por uno al llegar a la sección (Ani 2026-06-27). Empiezan invisibles y alzados; cuando la sección entra en vista (.shown) caen en cascada: izquierda → centro → derecha. El hover anterior fue eliminado. */
+  #sec-conoces .poster-ov{position:absolute;inset:0;width:100%;height:auto;pointer-events:none;z-index:2;opacity:0;transform:translateY(-90px);will-change:transform,opacity}
+  #sec-conoces .poster-hit{display:none}
   #sec-conoces .poster-hit-1{left:1.8%;top:11.6%;width:33.7%;height:85.1%}
   #sec-conoces .poster-hit-2{left:35.6%;top:3.1%;width:36.1%;height:95.8%}
   #sec-conoces .poster-hit-3{left:68%;top:17.9%;width:30.6%;height:71.4%}
-  /* Zoom de pósters ELIMINADO a pedido de Ani (2026-06-26). Animación elegida = OPCIÓN 2: levantar tipo polaroid — al pasar el cursor el póster se alza un poco con sombra, SIN zoom. */
-  #sec-conoces .poster-ov{transition:transform .26s cubic-bezier(.34,1.3,.5,1), filter .26s ease}
-  #sec-conoces .poster-hit-1:hover ~ .poster-ov-1,
-  #sec-conoces .poster-hit-2:hover ~ .poster-ov-2,
-  #sec-conoces .poster-hit-3:hover ~ .poster-ov-3{transform:translateY(-15px);filter:drop-shadow(0 16px 20px rgba(0,0,0,.45))}
-  body.is-scrolling #sec-conoces .poster-hit{pointer-events:none}
+  /* Entrada en cascada: cada póster cae con un pequeño rebote y un escalonado distinto */
+  #sec-conoces .poster-ov{transition:transform .72s cubic-bezier(.2,.85,.3,1.18), opacity .42s ease}
+  #sec-conoces.shown .poster-ov-1{opacity:1;transform:translateY(0);transition-delay:.15s,.15s}
+  #sec-conoces.shown .poster-ov-2{opacity:1;transform:translateY(0);transition-delay:.6s,.6s}
+  #sec-conoces.shown .poster-ov-3{opacity:1;transform:translateY(0);transition-delay:1.05s,1.05s}
+  @media (prefers-reduced-motion:reduce){#sec-conoces .poster-ov{opacity:1;transform:none;transition:none}}
   /* "El mero mero" rayado en la pared metálica — se ESCRIBE de izq→der al entrar (igual que la móvil) */
   #sec-conoces .mero-mero{position:absolute;top:8.2%;left:73.6%;z-index:4;white-space:nowrap;pointer-events:none;
     font-family:'stratum-2-web','bc-barell-condensed-thin',sans-serif;font-size:2.55cqw;letter-spacing:.02em;
