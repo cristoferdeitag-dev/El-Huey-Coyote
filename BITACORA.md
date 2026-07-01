@@ -2,6 +2,21 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-01 · anette (cont. 11)
+- **Qué:** FOOTER (compu) reacomodado a 2 columnas según collage de Ani + cambio de tagline.
+- **Layout:** `.footer-top` (flex row, space-between, align center, wrap) con: **izq** `.footer-left` (columna: logo grande + botón neón `.btn-cierra` CIERRA EL CHANGARRO, ahora dentro de caja oscura rgba(9,13,11,.5) redondeada) · **der** `.footer-right` (panel oscuro rgba(9,13,11,.5) redondeado 16px, shadow: tagline + redes + correo, centrado). El `© ... Todos los derechos reservados` (`.footer-copy`) va CENTRADO debajo del `.footer-top`.
+- **Tagline:** "Puro corrido, pura fiesta" → **"Música, Sudor y Cumbia"** (color #ffe08a).
+- **Cambios CSS clave:** footer-inner max-width 900→1120px; logo margin auto→0 y height subió (clamp 120-200px); btn-cierra ya no transparent/centrado, ahora caja oscura margin 0; conserva neon-flicker.
+- **Sin tocar:** links redes (FB/IG/TikTok), correo contacto@elhueycoyote.com, fondo footer-fondo.webp, JS de btn-cierra (baja cortina).
+- **Flujo:** edit → screenshot footer Playwright (coincide con collage) → deploy.
+- **En vivo:** https://elhueycoyote.com/preview/compu/
+- **Pendiente:** OK de Ani. ÉCHAME UN GRITO: aún falta su SVG para coords del texto vivo.
+
+## 2026-07-01 · anette (cont. 10)
+- **Qué:** Cartel SHOWS AGOTADOS (sello) — Ani: quitar el temblor final + reducir sombra. Aprobado ("Así está súper").
+- **Cómo:** `@keyframes cartel-sello` simplificado a 3 pasos (0% scale 1.75 → 60% scale .97 → 100% scale 1), rotación fija -3° (sin wobble), sin overshoot de escala; duración .5→.42s. Sombra `drop-shadow(0 12px 24px .5)` → `drop-shadow(0 5px 10px .28)`.
+- **En vivo:** https://elhueycoyote.com/preview/compu/
+
 ## 2026-07-01 · anette (cont. 9)
 - **Qué:** Cartel "SHOWS AGOTADOS" (PRÓXIMOS SHOWS, compu) — Ani PIDIÓ QUITAR el desenrollado (cont.8) y cambiarlo por efecto **SELLO/estampado**.
 - **Cómo:** `@keyframes cartel-sello` (.5s, cubic-bezier(.2,.7,.3,1)): 0% opacity 0 + `scale(1.75)` (grande, cayendo desde arriba) → 55% opacity 1 + `scale(.93)` (golpe de impacto, aplasta) → 72% `rotate(-4.4deg) scale(1.05)` + 86% `rotate(-2.2deg) scale(.99)` (wobble del "thump") → 100% `rotate(-3deg) scale(1)`. `transform-origin:50% 50%`. Conserva el tilt base -3°. Reduced-motion: sin animación, cae a rotate(-3deg) scale(1).
