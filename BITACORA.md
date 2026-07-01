@@ -2,6 +2,14 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-01 · anette (cont. 9)
+- **Qué:** Cartel "SHOWS AGOTADOS" (PRÓXIMOS SHOWS, compu) — Ani PIDIÓ QUITAR el desenrollado (cont.8) y cambiarlo por efecto **SELLO/estampado**.
+- **Cómo:** `@keyframes cartel-sello` (.5s, cubic-bezier(.2,.7,.3,1)): 0% opacity 0 + `scale(1.75)` (grande, cayendo desde arriba) → 55% opacity 1 + `scale(.93)` (golpe de impacto, aplasta) → 72% `rotate(-4.4deg) scale(1.05)` + 86% `rotate(-2.2deg) scale(.99)` (wobble del "thump") → 100% `rotate(-3deg) scale(1)`. `transform-origin:50% 50%`. Conserva el tilt base -3°. Reduced-motion: sin animación, cae a rotate(-3deg) scale(1).
+- **Removido:** todo lo de `cartel-unroll` (perspective/rotateY/scaleX/origin izquierdo) de cont.8.
+- **Flujo:** edit → frame de impacto congelado Playwright → deploy a preview (animación no se ve en foto).
+- **En vivo:** https://elhueycoyote.com/preview/compu/
+- **Pendiente:** OK de Ani sobre el sello. ÉCHAME UN GRITO: aún falta su SVG para coords del texto vivo.
+
 ## 2026-07-01 · anette (cont. 8)
 - **Qué:** Cartel "SHOWS AGOTADOS" (PRÓXIMOS SHOWS, compu) — animación de ENTRADA tipo "desenrollar de lado / pegar etiqueta" al hacer click en los shows.
 - **Cómo:** `@keyframes cartel-unroll` (.85s, cubic-bezier(.16,.84,.3,1.02)) con `perspective(1100px)` + `rotateY(-92deg→0)` + `scaleX(.12→1)` + `transform-origin:0% 50%` (desde el borde izquierdo) + `translateX(-4%→0)`, conservando el tilt base `rotate(-3deg)`. Rebotecito de "pegado" en 72% (rotateY 9deg, scaleX 1.03). `backface-visibility:hidden`. Reduced-motion: sin animación, cae directo a rotate(-3deg).
