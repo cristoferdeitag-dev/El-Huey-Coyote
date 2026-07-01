@@ -2,6 +2,14 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-01 · anette (cont. 15)
+- **Qué:** (a) Footer copy (compu) → de "© 2026 El Huey Coyote · Todos los derechos reservados" a **"© 2026 · Todos los derechos a HTM"**. (b) Fix efecto ¿YA ME CONOCES?: el póster central arrastraba un cacho del cartel izquierdo durante la caída.
+- **Causa raíz (b):** `conoces-poster2-full.webp` es un PNG de canvas completo (2032×1143) que se anima como bloque (translateY). Tenía una **veta diagonal fantasma** (resto del póster izq) en x 678–722 (rows 51%–93%), fuera del cartel real. Al caer el póster central, esa veta bajaba con él → parecía que "agarraba" un pedazo del izquierdo.
+- **Fix (b):** con PIL borré el alpha de todo x<723 (el cuerpo real del cartel empieza exacto en x=723 = borde de la banda "PARA LATAM"). Guardé como **`conoces-poster2-full-v2.webp`** (nombre nuevo para bustar hcdn que ignora ?query) y actualicé el src del `.poster-ov-2`. Verificado congelando la caída en Playwright (currentTime 720ms, translateY -32px): ya no hay cacho.
+- **Flujo:** análisis columna-por-columna del alpha → limpieza PIL → edit HTML (src + copy) → frame congelado Playwright → deploy.
+- **En vivo:** https://elhueycoyote.com/preview/compu/
+- **Pendiente:** OK de Ani. ÉCHAME UN GRITO: aún falta su SVG para coords del texto vivo.
+
 ## 2026-07-01 · anette (cont. 14)
 - **Qué:** FOOTER (compu) — Ani: logo un chirris más grande + subirlo un poco. Logo `clamp(108px,11.5vw,182px)` → **`clamp(120px,12.8vw,200px)`** (~184px en 1440); margen `0 auto 14px` → **`-14px auto 10px`** (sube 14px con margin-top negativo, sin chocar con el borde amarillo). Deploy falló 1ª vez (rate-limit SSH), rerun OK.
 - **En vivo:** https://elhueycoyote.com/preview/compu/
