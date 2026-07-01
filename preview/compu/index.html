@@ -47,30 +47,30 @@
   #sec-conoces .poster-hit-1{left:1.8%;top:11.6%;width:33.7%;height:85.1%}
   #sec-conoces .poster-hit-2{left:35.6%;top:3.1%;width:36.1%;height:95.8%}
   #sec-conoces .poster-hit-3{left:68%;top:17.9%;width:30.6%;height:71.4%}
-  /* Bucle: ciclo de 8s = cascada (~1.6s) + hold visible (6s) + salida rápida (0.5s), luego repite */
-  #sec-conoces.shown .poster-ov-1{animation:conoces-drop-1 8s infinite both}
-  #sec-conoces.shown .poster-ov-2{animation:conoces-drop-2 8s infinite both}
-  #sec-conoces.shown .poster-ov-3{animation:conoces-drop-3 8s infinite both}
+  /* Bucle: ciclo de 6s = cascada (~1.6s) + hold visible (~4s espera) + salida rápida (0.5s), luego repite (Ani 2026-07-01: espera 4s) */
+  #sec-conoces.shown .poster-ov-1{animation:conoces-drop-1 6s infinite both}
+  #sec-conoces.shown .poster-ov-2{animation:conoces-drop-2 6s infinite both}
+  #sec-conoces.shown .poster-ov-3{animation:conoces-drop-3 6s infinite both}
   /* Pausa del efecto cuando el cursor está sobre CUALQUIER póster; al salir, retoma */
   #sec-conoces .poster-hit:hover ~ .poster-ov{animation-play-state:paused}
   @keyframes conoces-drop-1{
     0%{opacity:0;transform:translateY(-90px);animation-timing-function:cubic-bezier(.2,.85,.3,1.18)}
-    9%{opacity:1;transform:translateY(0)}
-    93.75%{opacity:1;transform:translateY(0);animation-timing-function:ease}
+    12%{opacity:1;transform:translateY(0)}
+    91.667%{opacity:1;transform:translateY(0);animation-timing-function:ease}
     100%{opacity:0;transform:translateY(-90px)}
   }
   @keyframes conoces-drop-2{
-    0%,5.625%{opacity:0;transform:translateY(-90px)}
-    5.625%{animation-timing-function:cubic-bezier(.2,.85,.3,1.18)}
-    14.625%{opacity:1;transform:translateY(0)}
-    93.75%{opacity:1;transform:translateY(0);animation-timing-function:ease}
+    0%,7.5%{opacity:0;transform:translateY(-90px)}
+    7.5%{animation-timing-function:cubic-bezier(.2,.85,.3,1.18)}
+    19.5%{opacity:1;transform:translateY(0)}
+    91.667%{opacity:1;transform:translateY(0);animation-timing-function:ease}
     100%{opacity:0;transform:translateY(-90px)}
   }
   @keyframes conoces-drop-3{
-    0%,11.25%{opacity:0;transform:translateY(-90px)}
-    11.25%{animation-timing-function:cubic-bezier(.2,.85,.3,1.18)}
-    20.25%{opacity:1;transform:translateY(0)}
-    93.75%{opacity:1;transform:translateY(0);animation-timing-function:ease}
+    0%,15%{opacity:0;transform:translateY(-90px)}
+    15%{animation-timing-function:cubic-bezier(.2,.85,.3,1.18)}
+    27%{opacity:1;transform:translateY(0)}
+    91.667%{opacity:1;transform:translateY(0);animation-timing-function:ease}
     100%{opacity:0;transform:translateY(-90px)}
   }
   @media (prefers-reduced-motion:reduce){#sec-conoces .poster-ov{opacity:1;transform:none;animation:none}}
@@ -218,9 +218,26 @@
   .galeria-compu{position:relative;width:100%}
   .galeria-strip{display:flex;align-items:center;gap:1.6vw;padding:3vw 4vw;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none}
   .galeria-strip::-webkit-scrollbar{display:none}
-  .galeria-strip img.gp{height:22vw;max-height:400px;width:auto;flex:0 0 auto;display:block;cursor:pointer;background:#fff;box-shadow:0 12px 28px rgba(0,0,0,.55);scroll-snap-align:center;transition:filter .2s ease,box-shadow .2s ease}
+  /* Galería con TAMAÑOS y MARCOS variados (Ani 2026-07-01): la altura la da .sz-*, la forma del marco la da .fr-* (aspect-ratio + object-fit:cover) */
+  .galeria-strip img.gp{width:auto;flex:0 0 auto;display:block;cursor:pointer;background:#fff;object-fit:cover;object-position:center;box-shadow:0 12px 28px rgba(0,0,0,.55);scroll-snap-align:center;transition:filter .2s ease,box-shadow .2s ease;transform:translateY(var(--ty,0px)) rotate(var(--rot,0deg));will-change:transform,opacity}
   .galeria-strip img.gp:hover{filter:brightness(1.06);box-shadow:0 16px 36px rgba(0,0,0,.7)}
+  /* Tamaños (altura) */
+  .gp.sz-lg{height:30vw;max-height:520px}
+  .gp.sz-md{height:23vw;max-height:400px}
+  .gp.sz-sm{height:17vw;max-height:300px}
+  /* Marcos (forma) */
+  .gp.fr-sq{aspect-ratio:1/1}
+  .gp.fr-wide{aspect-ratio:4/3}
+  .gp.fr-tall{aspect-ratio:3/4}
   .gp.b1{border:11px solid #fff}.gp.b2{border:10px solid #15110f}.gp.b3{border:10px solid #e23b2e}.gp.b4{border:11px solid #ffd84a}.gp.b5{border:10px solid #1f8a3b}.gp.b6{border:9px solid #fff;outline:5px solid #00abab}
+  /* Aparición por TANDAS de 3-4 al entrar la sección (el animation-delay de cada foto va inline) */
+  #sec-collabs .gp{opacity:0}
+  #sec-collabs.shown .gp{animation:gp-reveal .62s cubic-bezier(.2,.7,.3,1.12) both}
+  @keyframes gp-reveal{
+    from{opacity:0;transform:translateY(calc(var(--ty,0px) + 46px)) rotate(var(--rot,0deg)) scale(.8)}
+    to{opacity:1;transform:translateY(var(--ty,0px)) rotate(var(--rot,0deg)) scale(1)}
+  }
+  @media (prefers-reduced-motion:reduce){#sec-collabs .gp{opacity:1;animation:none}}
   .galeria-hint{display:none}
   .galeria-hint .ghint-arrow{color:rgba(255,255,255,.92);font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;line-height:1;text-shadow:0 2px 5px rgba(0,0,0,.6);animation:ghint-slide 1.3s ease-in-out infinite}
   .galeria-hint .ghint-arrow:nth-child(2){animation-delay:.15s}
@@ -379,22 +396,22 @@
 <section class="reveal" id="sec-collabs">
   <div class="galeria-compu">
     <div class="galeria-strip" id="galeria-grid">
-      <img class="gp b1" style="transform:rotate(-5deg) translateY(-28px)" src="../sitio/assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
-      <img class="gp b3" style="transform:rotate(4deg) translateY(24px)" src="../sitio/assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
-      <img class="gp b2" style="transform:rotate(-3deg) translateY(-24px)" src="../sitio/assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
-      <img class="gp b4" style="transform:rotate(6deg) translateY(27px)" src="../sitio/assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
-      <img class="gp b5" style="transform:rotate(-7deg) translateY(-26px)" src="../sitio/assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
-      <img class="gp b1" style="transform:rotate(3deg) translateY(23px)" src="../sitio/assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
-      <img class="gp b6" style="transform:rotate(-4deg) translateY(-29px)" src="../sitio/assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
-      <img class="gp b3" style="transform:rotate(7deg) translateY(25px)" src="../sitio/assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
-      <img class="gp b2" style="transform:rotate(-6deg) translateY(-24px)" src="../sitio/assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
-      <img class="gp b4" style="transform:rotate(5deg) translateY(28px)" src="../sitio/assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
-      <img class="gp b5" style="transform:rotate(-2deg) translateY(-27px)" src="../sitio/assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
-      <img class="gp b1" style="transform:rotate(8deg) translateY(23px)" src="../sitio/assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
-      <img class="gp b6" style="transform:rotate(-5deg) translateY(-25px)" src="../sitio/assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
-      <img class="gp b2" style="transform:rotate(4deg) translateY(29px)" src="../sitio/assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
-      <img class="gp b3" style="transform:rotate(-8deg) translateY(-26px)" src="../sitio/assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
-      <img class="gp b4" style="transform:rotate(5deg) translateY(24px)" src="../sitio/assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
+      <img class="gp b1 sz-md fr-tall" style="--rot:-5deg;--ty:-28px;animation-delay:0s"    src="../sitio/assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
+      <img class="gp b3 sz-lg fr-sq"   style="--rot:4deg;--ty:24px;animation-delay:.09s"   src="../sitio/assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
+      <img class="gp b2 sz-sm fr-wide" style="--rot:-3deg;--ty:-24px;animation-delay:.18s"  src="../sitio/assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
+      <img class="gp b4 sz-md fr-sq"   style="--rot:6deg;--ty:27px;animation-delay:.6s"    src="../sitio/assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
+      <img class="gp b5 sz-lg fr-tall" style="--rot:-7deg;--ty:-26px;animation-delay:.69s"  src="../sitio/assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
+      <img class="gp b1 sz-sm fr-sq"   style="--rot:3deg;--ty:23px;animation-delay:.78s"   src="../sitio/assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
+      <img class="gp b6 sz-md fr-wide" style="--rot:-4deg;--ty:-29px;animation-delay:.87s"  src="../sitio/assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
+      <img class="gp b3 sz-lg fr-sq"   style="--rot:7deg;--ty:25px;animation-delay:1.15s"  src="../sitio/assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
+      <img class="gp b2 sz-sm fr-tall" style="--rot:-6deg;--ty:-24px;animation-delay:1.24s" src="../sitio/assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
+      <img class="gp b4 sz-md fr-wide" style="--rot:5deg;--ty:28px;animation-delay:1.33s"  src="../sitio/assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
+      <img class="gp b5 sz-lg fr-sq"   style="--rot:-2deg;--ty:-27px;animation-delay:1.65s" src="../sitio/assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
+      <img class="gp b1 sz-sm fr-wide" style="--rot:8deg;--ty:23px;animation-delay:1.74s"  src="../sitio/assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
+      <img class="gp b6 sz-md fr-tall" style="--rot:-5deg;--ty:-25px;animation-delay:1.83s" src="../sitio/assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
+      <img class="gp b2 sz-lg fr-wide" style="--rot:4deg;--ty:29px;animation-delay:2.15s"  src="../sitio/assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
+      <img class="gp b3 sz-sm fr-sq"   style="--rot:-8deg;--ty:-26px;animation-delay:2.24s" src="../sitio/assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
+      <img class="gp b4 sz-md fr-tall" style="--rot:5deg;--ty:24px;animation-delay:2.33s"  src="../sitio/assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
     </div>
     <div class="galeria-hint" id="galeria-hint"><span class="ghint-arrow">&#8250;</span><span class="ghint-arrow">&#8250;</span><span class="ghint-arrow">&#8250;</span></div>
   </div>
