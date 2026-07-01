@@ -2,6 +2,11 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-01 · anette (cont. 12)
+- **Qué:** FOOTER (compu) — Ani: quitar los rectángulos oscuros que puse detrás de CIERRA y del panel derecho (venían del recorte de su screenshot, no los quería).
+- **Cómo:** `.footer-right` → background transparent, sin border/shadow/radius, padding 0 (sigue flex column centrado). `.btn-cierra` → revertido a transparent, sin border, padding 0 (vuelve al neón flotante, font-size clamp 26-46px). Layout 2 columnas y contenido intactos.
+- **En vivo:** https://elhueycoyote.com/preview/compu/
+
 ## 2026-07-01 · anette (cont. 11)
 - **Qué:** FOOTER (compu) reacomodado a 2 columnas según collage de Ani + cambio de tagline.
 - **Layout:** `.footer-top` (flex row, space-between, align center, wrap) con: **izq** `.footer-left` (columna: logo grande + botón neón `.btn-cierra` CIERRA EL CHANGARRO, ahora dentro de caja oscura rgba(9,13,11,.5) redondeada) · **der** `.footer-right` (panel oscuro rgba(9,13,11,.5) redondeado 16px, shadow: tagline + redes + correo, centrado). El `© ... Todos los derechos reservados` (`.footer-copy`) va CENTRADO debajo del `.footer-top`.
