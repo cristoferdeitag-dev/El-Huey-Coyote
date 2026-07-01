@@ -2,6 +2,10 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-01 · anette (cont. 14)
+- **Qué:** FOOTER (compu) — Ani: logo un chirris más grande + subirlo un poco. Logo `clamp(108px,11.5vw,182px)` → **`clamp(120px,12.8vw,200px)`** (~184px en 1440); margen `0 auto 14px` → **`-14px auto 10px`** (sube 14px con margin-top negativo, sin chocar con el borde amarillo). Deploy falló 1ª vez (rate-limit SSH), rerun OK.
+- **En vivo:** https://elhueycoyote.com/preview/compu/
+
 ## 2026-07-01 · anette (cont. 13)
 - **Qué:** FOOTER (compu) — Ani pidió REGRESAR al orden original (columna única centrada, como antes del reacomodo de 2 columnas) y hacer el logo un poco más grande. CONSERVA el tagline "Música, Sudor y Cumbia".
 - **Cómo:** Eliminé `.footer-top/.footer-left/.footer-right` y los wrappers HTML → HTML vuelve a: logo → tag → btn CIERRA → social → mail → copy (todo `margin auto`, centrado). CSS restaurado a valores originales (footer-inner max-width 900px, tag #ffe9a6 600, social 19px, mail margin auto 22px, btn-cierra margin 6px auto 24px). Logo subido de clamp(90,10vw,156) a **clamp(108px,11.5vw,182px)** (~165px en viewport 1440).
