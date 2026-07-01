@@ -257,6 +257,21 @@
   .dl-row .m{color:#1a1a1a;-webkit-text-stroke:.45px #1a1a1a}
   .dl-row .d{color:#00a99d;-webkit-text-stroke:.45px #00a99d}
   .dl-row .c{color:#00bfb0;-webkit-text-stroke:.45px #00a99d}
+  /* Cartel SHOWS AGOTADOS: cubre la lista de shows al hacer click (Ani 2026-07-01) */
+  #sec-proximos .agotados-cartel{position:absolute;left:9%;top:20.5%;width:38%;height:auto;z-index:7;pointer-events:none;cursor:pointer;
+    opacity:0;visibility:hidden;transform:perspective(1100px) rotate(-3deg) rotateY(-92deg) scaleX(.12);transform-origin:0% 50%;backface-visibility:hidden;
+    transition:opacity .25s ease;filter:drop-shadow(0 12px 24px rgba(0,0,0,.5))}
+  #sec-proximos.agotados-on .agotados-cartel{opacity:1;visibility:visible;pointer-events:auto;
+    animation:cartel-unroll .85s cubic-bezier(.16,.84,.3,1.02) both}
+  @keyframes cartel-unroll{
+    0%{opacity:0;transform:perspective(1100px) translateX(-4%) rotate(-3deg) rotateY(-92deg) scaleX(.12)}
+    30%{opacity:1}
+    72%{transform:perspective(1100px) translateX(0) rotate(-3deg) rotateY(9deg) scaleX(1.03)}
+    100%{opacity:1;transform:perspective(1100px) translateX(0) rotate(-3deg) rotateY(0deg) scaleX(1)}
+  }
+  #sec-proximos.agotados-on .dl-row{pointer-events:none}
+  @media (prefers-reduced-motion:reduce){#sec-proximos .agotados-cartel{transition:none}
+    #sec-proximos.agotados-on .agotados-cartel{animation:none;transform:rotate(-3deg)}}
 
   /* Brinco del headliner ELIMINADO a pedido de Anette (2026-06-07) — botones estáticos. */
 
@@ -370,6 +385,8 @@
 <div class="ct dl-row" style="left:3.5%;top:44.79%"><span class="m">SEP</span><span class="d">02</span><a class="c" href="#sec-proximos" data-text="MONTERREY">MONTERREY</a></div>
 <div class="ct dl-row" style="left:3.5%;top:50.09%"><span class="m">OCT</span><span class="d">25</span><a class="c" href="#sec-proximos" data-text="LEÓN">LEÓN</a></div>
 <div class="ct dl-row" style="left:3.5%;top:55.34%"><span class="m">NOV</span><span class="d">04</span><a class="c" href="#sec-proximos" data-text="TIJUANA">TIJUANA</a></div>
+<!-- Cartel "SHOWS AGOTADOS": aparece al hacer click en un show y cubre la lista (Ani 2026-07-01); click en el cartel lo cierra -->
+<img class="agotados-cartel" src="../sitio/assets/compu/agotados-cartel.png?v=1" alt="Shows agotados — vuelve pronto mi güerit@" loading="lazy" decoding="async">
 <!-- Logos de plataformas (blancos) tras cada punto naranja de la barra EXTRAS -->
 <a class="extra-logo" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:23.4%;top:96.8%"><img src="../sitio/assets/compu/logo-spotify-white.webp?v=2" alt="Spotify" decoding="async"></a>
 <a class="extra-logo" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:41.4%;top:96.8%;height:1.6cqw"><img src="../sitio/assets/compu/logo-apple-music-white.webp?v=2" alt="Apple Music" decoding="async"></a>
@@ -545,6 +562,14 @@
       const ob=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('shown');if(e.target.id==='sec-conoces')e.target.classList.add('mero-scratched');ob.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
       rev.forEach(el=>ob.observe(el));
     } else rev.forEach(el=>el.classList.add('shown'));
+    // PRÓXIMOS SHOWS: click en un show -> aparece el cartel "SHOWS AGOTADOS" cubriendo la lista; click en el cartel lo cierra (Ani 2026-07-01)
+    (function(){
+      const sec=document.getElementById('sec-proximos');
+      if(!sec) return;
+      const cartel=sec.querySelector('.agotados-cartel');
+      sec.querySelectorAll('.dl-row .c').forEach(c=>c.addEventListener('click',function(e){e.preventDefault();sec.classList.add('agotados-on');}));
+      if(cartel) cartel.addEventListener('click',function(){sec.classList.remove('agotados-on');});
+    })();
     // Galeria CON LA RAZA: lightbox + auto-pase horizontal (gated por visibilidad y scroll)
     (function(){
       const grid=document.getElementById('galeria-grid');
