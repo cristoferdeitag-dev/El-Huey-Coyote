@@ -128,8 +128,8 @@
     background-repeat:no-repeat;background-size:230% 100%;background-position:190% 0;
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;-webkit-text-stroke:0;
     mix-blend-mode:screen;opacity:0;pointer-events:none}
-  /* YA ME CONOCES es casi blanco → banda fina con filo oscuro para que contraste */
-  .ml-conoces::after{white-space:nowrap;background-image:linear-gradient(112deg,rgba(70,72,84,0) 48.7%,rgba(70,72,84,.5) 49.5%,#fff 50%,rgba(70,72,84,.5) 50.5%,rgba(70,72,84,0) 51.3%);background-size:200% 100%;mix-blend-mode:normal}
+  /* YA ME CONOCES ahora es texto ROJO (#b8323f): usa el MISMO destello blanco con mix-blend screen que los demás botones para que el rayo se note igual (Ani 2026-07-01) */
+  .ml-conoces::after{white-space:nowrap}
   /* ÉCHAME UN GRITO va en dos renglones: el destello respeta el salto */
   .ml-echame::after{white-space:pre;text-align:center}
   body.headliner-anim .ml-conoces::after, body.headliner-anim .ml-conlaraza::after, body.headliner-anim .ml-echame::after, body.headliner-anim .ml-pallevar::after, body.headliner-anim .ml-prox span::after, body.headliner-anim .dl-row .c::after{animation:letrero-shine 3.9s ease-in-out infinite}
