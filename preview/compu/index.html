@@ -40,18 +40,40 @@
   .ovl{position:absolute;inset:0;z-index:2;pointer-events:none}
   .ct{position:absolute;white-space:nowrap;line-height:1}
   .dsec{scroll-margin-top:9vw}
-  /* ¿Ya me conoces? — los pósters CAEN uno por uno al llegar a la sección (Ani 2026-06-27). Empiezan invisibles y alzados; cuando la sección entra en vista (.shown) caen en cascada: izquierda → centro → derecha. El hover anterior fue eliminado. */
+  /* ¿Ya me conoces? — los pósters CAEN en cascada al entrar la sección y el efecto se REPITE EN BUCLE (Ani 2026-07-01): cascada (izq→centro→der) → 6s de espera → cae otra vez. Al pasar el cursor sobre un póster el efecto se PAUSA; al quitarlo, retoma la dinámica normal. */
   #sec-conoces .poster-ov{position:absolute;inset:0;width:100%;height:auto;pointer-events:none;z-index:2;opacity:0;transform:translateY(-90px);will-change:transform,opacity}
-  #sec-conoces .poster-hit{display:none}
+  /* Hit-areas: capturan el hover sobre cada póster para pausar el efecto */
+  #sec-conoces .poster-hit{display:block;position:absolute;z-index:5;pointer-events:auto}
   #sec-conoces .poster-hit-1{left:1.8%;top:11.6%;width:33.7%;height:85.1%}
   #sec-conoces .poster-hit-2{left:35.6%;top:3.1%;width:36.1%;height:95.8%}
   #sec-conoces .poster-hit-3{left:68%;top:17.9%;width:30.6%;height:71.4%}
-  /* Entrada en cascada: cada póster cae con un pequeño rebote y un escalonado distinto */
-  #sec-conoces .poster-ov{transition:transform .72s cubic-bezier(.2,.85,.3,1.18), opacity .42s ease}
-  #sec-conoces.shown .poster-ov-1{opacity:1;transform:translateY(0);transition-delay:.15s,.15s}
-  #sec-conoces.shown .poster-ov-2{opacity:1;transform:translateY(0);transition-delay:.6s,.6s}
-  #sec-conoces.shown .poster-ov-3{opacity:1;transform:translateY(0);transition-delay:1.05s,1.05s}
-  @media (prefers-reduced-motion:reduce){#sec-conoces .poster-ov{opacity:1;transform:none;transition:none}}
+  /* Bucle: ciclo de 8s = cascada (~1.6s) + hold visible (6s) + salida rápida (0.5s), luego repite */
+  #sec-conoces.shown .poster-ov-1{animation:conoces-drop-1 8s infinite both}
+  #sec-conoces.shown .poster-ov-2{animation:conoces-drop-2 8s infinite both}
+  #sec-conoces.shown .poster-ov-3{animation:conoces-drop-3 8s infinite both}
+  /* Pausa del efecto cuando el cursor está sobre CUALQUIER póster; al salir, retoma */
+  #sec-conoces .poster-hit:hover ~ .poster-ov{animation-play-state:paused}
+  @keyframes conoces-drop-1{
+    0%{opacity:0;transform:translateY(-90px);animation-timing-function:cubic-bezier(.2,.85,.3,1.18)}
+    9%{opacity:1;transform:translateY(0)}
+    93.75%{opacity:1;transform:translateY(0);animation-timing-function:ease}
+    100%{opacity:0;transform:translateY(-90px)}
+  }
+  @keyframes conoces-drop-2{
+    0%,5.625%{opacity:0;transform:translateY(-90px)}
+    5.625%{animation-timing-function:cubic-bezier(.2,.85,.3,1.18)}
+    14.625%{opacity:1;transform:translateY(0)}
+    93.75%{opacity:1;transform:translateY(0);animation-timing-function:ease}
+    100%{opacity:0;transform:translateY(-90px)}
+  }
+  @keyframes conoces-drop-3{
+    0%,11.25%{opacity:0;transform:translateY(-90px)}
+    11.25%{animation-timing-function:cubic-bezier(.2,.85,.3,1.18)}
+    20.25%{opacity:1;transform:translateY(0)}
+    93.75%{opacity:1;transform:translateY(0);animation-timing-function:ease}
+    100%{opacity:0;transform:translateY(-90px)}
+  }
+  @media (prefers-reduced-motion:reduce){#sec-conoces .poster-ov{opacity:1;transform:none;animation:none}}
   /* "El mero mero" rayado en la pared metálica — se ESCRIBE de izq→der al entrar (igual que la móvil) */
   #sec-conoces .mero-mero{position:absolute;top:8.2%;left:73.6%;z-index:4;white-space:nowrap;pointer-events:none;
     font-family:'stratum-2-web','bc-barell-condensed-thin',sans-serif;font-size:2.55cqw;letter-spacing:.02em;
@@ -338,7 +360,7 @@
 <a class="extra-logo" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:85.0%;top:96.8%"><img src="../sitio/assets/compu/logo-amazon-music-white.webp?v=2" alt="Amazon Music" decoding="async"></a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="La Merch"><div class="dtrack"><img src="../sitio/assets/compu/divtext-merch.png?v=10" alt="La Merch"><img src="../sitio/assets/compu/divtext-merch.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-merch"><img class="bg" src="../sitio/assets/compu/bg-merch-llevele-0701.webp" alt="merch — Llévele, llévele" loading="lazy" decoding="async"><div class="ovl">
+<section class="dsec reveal" id="sec-merch"><img class="bg" src="../sitio/assets/compu/bg-merch-llevele-0701b.webp" alt="merch — Llévele, llévele" loading="lazy" decoding="async"><div class="ovl">
 <!-- Coordenadas del texto vivo actualizadas al SVG de Ani (NuevoLaMerch-compu, viewBox 2031.9x1095.3) 2026-07-01 -->
 <a class="ct merch-item pos-pirat-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="PLAYERAS :" style="left:9.37%;top:28.54%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">PLAYERAS :</a>
 <a class="ct merch-item pos-pirat-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CHAMARRA :" style="left:9.37%;top:33.47%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">CHAMARRA :</a>
