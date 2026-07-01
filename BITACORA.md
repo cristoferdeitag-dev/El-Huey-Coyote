@@ -2,6 +2,14 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-01 · anette (cont. 13)
+- **Qué:** FOOTER (compu) — Ani pidió REGRESAR al orden original (columna única centrada, como antes del reacomodo de 2 columnas) y hacer el logo un poco más grande. CONSERVA el tagline "Música, Sudor y Cumbia".
+- **Cómo:** Eliminé `.footer-top/.footer-left/.footer-right` y los wrappers HTML → HTML vuelve a: logo → tag → btn CIERRA → social → mail → copy (todo `margin auto`, centrado). CSS restaurado a valores originales (footer-inner max-width 900px, tag #ffe9a6 600, social 19px, mail margin auto 22px, btn-cierra margin 6px auto 24px). Logo subido de clamp(90,10vw,156) a **clamp(108px,11.5vw,182px)** (~165px en viewport 1440).
+- **Nota:** el reacomodo de 2 columnas (cont.11/12) quedó descartado; solo sobrevive el cambio de tagline.
+- **Flujo:** edit → screenshot footer Playwright → deploy.
+- **En vivo:** https://elhueycoyote.com/preview/compu/
+- **Pendiente:** OK de Ani. ÉCHAME UN GRITO: aún falta su SVG para coords del texto vivo.
+
 ## 2026-07-01 · anette (cont. 12)
 - **Qué:** FOOTER (compu) — Ani: quitar los rectángulos oscuros que puse detrás de CIERRA y del panel derecho (venían del recorte de su screenshot, no los quería).
 - **Cómo:** `.footer-right` → background transparent, sin border/shadow/radius, padding 0 (sigue flex column centrado). `.btn-cierra` → revertido a transparent, sin border, padding 0 (vuelve al neón flotante, font-size clamp 26-46px). Layout 2 columnas y contenido intactos.
