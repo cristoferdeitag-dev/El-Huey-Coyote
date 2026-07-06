@@ -95,7 +95,7 @@
   #headliner{transform:translateZ(0);backface-visibility:hidden}
   #headliner .ovl{transform:translateZ(0)}
   /* === Headliner: etiquetas-menú (nuevo acomodo según diseño de Anette, 2026-06-17) === */
-  .ml-conoces{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#b8323f;-webkit-text-stroke:.8px #d8e7e6;letter-spacing:.01em}
+  .ml-conoces{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#e6a804;-webkit-text-stroke:.9px #3a120e;paint-order:stroke fill;letter-spacing:.01em}
   /* Bandera USB's del headliner — textos vivos crema/contorno-café (Ani 2026-06-27) */
   .hl-flag{position:absolute;pointer-events:none;line-height:1;white-space:nowrap;font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#fcee94;-webkit-text-stroke:1.3px #603813;z-index:3}
   .hl-slogan{white-space:normal;line-height:1.08}
@@ -109,10 +109,11 @@
     font-family:'open-sans-condensed','Oswald',sans-serif;font-weight:800;font-style:italic;text-align:center}
   .ml-prox span{position:relative;
     /* line-height:.9 hace que el acento sobresalga por arriba de la caja → quedaba hueco. Solución: tramo lima largo (0-18%) + degradado extendido hacia arriba anclado abajo (size 150% / pos bottom) para rellenar el acento, y halo verde delgado (.5px) para que no deje ver el fondo dentro del acento. Mismo look lima→magenta de la móvil en las letras. */
-    background:linear-gradient(180deg,#eef60a 0%,#eef60a 18%,#ddfc0b 40%,#e06396 70%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-    background-size:100% 150%;background-position:50% 100%;background-repeat:no-repeat;
+    background:linear-gradient(180deg,#eef60a 0%,#eef60a 50%,#ddfc0b 62%,#e06396 82%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    background-size:100% 200%;background-position:50% 100%;background-repeat:no-repeat;
     -webkit-text-stroke:.8px #111;paint-order:stroke fill;
-    filter:drop-shadow(.5px 0 0 #4eb32e) drop-shadow(-.5px 0 0 #4eb32e) drop-shadow(0 .5px 0 #4eb32e) drop-shadow(0 -.5px 0 #4eb32e)}
+    /* Contorno verde EXACTO de la móvil: 4 direcciones a 1px. Visible en las letras pero sin ahogar el relleno lima del acento de la Ó (Ani 2026-07-06) */
+    filter:drop-shadow(1px 0 0 #4eb32e) drop-shadow(-1px 0 0 #4eb32e) drop-shadow(0 1px 0 #4eb32e) drop-shadow(0 -1px 0 #4eb32e)}
   .ml-prox:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) rotate(-3deg)}
   /* Logos-botón de streaming sobre los banquitos */
   .stool-btn{position:absolute;transform:translateY(0) translate(-50%,-50%) scale(1);display:block;pointer-events:auto;cursor:pointer;line-height:0;transition:transform .2s ease,filter .2s ease}
@@ -128,7 +129,7 @@
     background-repeat:no-repeat;background-size:230% 100%;background-position:190% 0;
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;-webkit-text-stroke:0;
     mix-blend-mode:screen;opacity:0;pointer-events:none}
-  /* YA ME CONOCES ahora es texto ROJO (#b8323f): usa el MISMO destello blanco con mix-blend screen que los demás botones para que el rayo se note igual (Ani 2026-07-01) */
+  /* YA ME CONOCES ahora es texto AMARILLO mostaza (#e6a804) con contorno oscuro fino, según el diseño nuevo de Ani (2026-07-06). Usa el MISMO destello blanco con mix-blend screen que los demás botones para que el rayo se note igual */
   .ml-conoces::after{white-space:nowrap}
   /* ÉCHAME UN GRITO va en dos renglones: el destello respeta el salto */
   .ml-echame::after{white-space:pre;text-align:center}

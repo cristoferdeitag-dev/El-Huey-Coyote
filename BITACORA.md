@@ -2,6 +2,17 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-06 · anette (cont. 16) — HERO compu: YA ME CONOCES amarillo + PRÓXIMOS SHOWS (fuente/verde/acento)
+- **Contexto:** Ani mandó el empaquetado del Headliner (Drive → `/tmp/.../huey-headliner/`, `.ai` + `WP HeyCoyote (60).png`). Cambios pedidos: (1) YA ME CONOCES pasó a amarillo; (2) PRÓXIMOS SHOWS "colorearlo exactamente igual".
+- **YA ME CONOCES** (`.ml-conoces`): rojo `#b8323f` → **amarillo `#e6a804`** + contorno oscuro `.9px #3a120e` (antes gris claro) + `paint-order:stroke fill`. Fuente = Eds Market Bold Slant (ya la tenía; Ani la aprobó tal cual). Muestreado del .ai.
+- **PRÓXIMOS SHOWS** — largo camino (varios "no" de Ani hasta dar con lo correcto):
+  - La fuente del .ai estaba **TRAZADA** (curvas) → el archivo no guarda el nombre. Probé open-sans→swiss-721 (mal). **Ani aclaró: la fuente es la MISMA que la versión MÓVIL** = `open-sans-condensed` 800 italic. Revertido a esa (la que compu ya tenía de origen).
+  - **Contorno verde:** al revertir quedó .5px (casi invisible). Subido al **verde EXACTO de la móvil: 4 direcciones a 1px** (`drop-shadow ±1px`). Visible sin ahogar el acento (el de 8-dir/1.1px sí lo ahogaba).
+  - **Acento de la Ó a mitad:** con `line-height:.9` la caja es corta y el acento sobresale; el degradado recortado al texto solo llenaba la mitad baja. **Fix: extender la zona lima del degradado** → `background:linear-gradient(180deg,#eef60a 0%,#eef60a 50%,#ddfc0b 62%,#e06396 82%,#e8388d 100%)` + `background-size:100% 200%` (bottom-anchored). Ahora el acento queda 100% lima y las letras conservan lima→magenta.
+- **GOTCHA / método:** el compu es HTML/CSS puro; los letreros son TEXTO VIVO sobre el bg del headliner. Fuentes **self-hosted** en `preview/sitio/assets/fonts/*.woff2` → cargan en `file://`, así que se puede renderizar/verificar local con `google-chrome --headless` saltando la cortina (`#portada{display:none}` + quitar `cortina-bajada` + `scrollIntoView('#headliner')`). El navegador MCP Playwright suele estar ocupado por otra instancia; usar chrome headless directo.
+- **Archivo:** solo `preview/compu/index.html`. Deploy: push a `main` → GH Actions FTP a Hostinger.
+- **En vivo:** https://elhueycoyote.com/preview/compu/
+
 ## 2026-07-01 · anette (cont. 15)
 - **Qué:** (a) Footer copy (compu) → de "© 2026 El Huey Coyote · Todos los derechos reservados" a **"© 2026 · Todos los derechos a HTM"**. (b) Fix efecto ¿YA ME CONOCES?: el póster central arrastraba un cacho del cartel izquierdo durante la caída.
 - **Causa raíz (b):** `conoces-poster2-full.webp` es un PNG de canvas completo (2032×1143) que se anima como bloque (translateY). Tenía una **veta diagonal fantasma** (resto del póster izq) en x 678–722 (rows 51%–93%), fuera del cartel real. Al caer el póster central, esa veta bajaba con él → parecía que "agarraba" un pedazo del izquierdo.
