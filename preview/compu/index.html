@@ -99,6 +99,13 @@
   /* Bandera USB's del headliner — textos vivos crema/contorno-café (Ani 2026-06-27) */
   .hl-flag{position:absolute;pointer-events:none;line-height:1;white-space:nowrap;font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#fcee94;-webkit-text-stroke:1.3px #603813;z-index:3}
   .hl-slogan{white-space:normal;line-height:1.08}
+  /* USB del headliner = botón (jukebox). El translate(-50%,-50%) centra el botón; el tembloreo va en el <img> interno para no pelearse con el centrado. (Ani 2026-07-07) */
+  .hl-usb-btn{position:absolute;transform:translate(-50%,-50%);display:block;border:0;padding:0;background:none;pointer-events:auto;cursor:pointer;line-height:0;z-index:4}
+  .hl-usb-btn img{width:100%;height:auto;display:block;transform-origin:50% 50%;filter:drop-shadow(0 4px 7px rgba(0,0,0,.35));will-change:transform}
+  .hl-usb-btn:hover img,.hl-usb-btn:focus-visible img{animation:usb-tiembla .13s linear infinite}
+  .hl-usb-btn:active img{transform:scale(.95)}
+  @keyframes usb-tiembla{0%{transform:translateX(0) rotate(0)}20%{transform:translateX(-3px) rotate(-4deg)}40%{transform:translateX(3px) rotate(3.5deg)}60%{transform:translateX(-2.5px) rotate(-3deg)}80%{transform:translateX(2.5px) rotate(2.5deg)}100%{transform:translateX(0) rotate(0)}}
+  @media (prefers-reduced-motion:reduce){.hl-usb-btn:hover img,.hl-usb-btn:focus-visible img{animation:none}}
   .ml-pallevar{font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#00381e;-webkit-text-stroke:1px #f2f3f5;paint-order:stroke fill;transform:translateY(0) translate(-50%,-50%) scale(1) scaleX(.82)}
   .ml-pallevar:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) scaleX(.82)}
   .ml-conlaraza{font-family:'ciabatta','Permanent Marker',cursive;font-weight:700;font-style:italic;color:#241a1a;-webkit-text-stroke:.4px #000;text-shadow:0 0 5px rgba(47,174,62,.95),0 0 11px rgba(47,174,62,.6)}
@@ -363,10 +370,12 @@
     <a href="#sec-echame">Contacto</a>
   </nav>
   <div class="site">
-<section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner-changarro-0701.webp?v=1" alt="El Huey Coyote" decoding="async"><div class="ovl">
+<section class="dsec" id="headliner"><img class="bg" src="../sitio/assets/compu/bg-headliner-changarro-0707.webp?v=1" alt="El Huey Coyote" decoding="async"><div class="ovl">
   <!-- Textos vivos sobre la bandera naranja de USB's (Ani 2026-06-27): mismo estilo del SVG (Ciabatta Bold Italic, relleno crema #fcee94, contorno café #603813) -->
   <span class="hl-flag hl-usb" style="left:85.2%;top:25.6%;font-size:3.56cqw">USB'S</span>
   <span class="hl-flag hl-slogan" style="left:83.45%;top:47.4%;font-size:1.92cqw">CON CUMBIAS<br>PA' ENAMORAR</span>
+  <!-- USB clickeable: al hover tiembla; al click abre el panel de rolitas (2º botón de "Pon una rolita"). Ani 2026-07-07 -->
+  <button type="button" class="hl-usb-btn" id="usb-jukebox" aria-label="Pon una rolita" style="left:89.813%;top:38.889%;width:10.335cqw"><img src="../sitio/assets/compu/usb-boton.webp?v=1" alt="USB — Pon una rolita" decoding="async"></button>
   <a class="menu-link ml-conoces"   href="#sec-conoces"  style="left:30.7%;top:20.5%;font-size:1.72cqw" data-text="¿YA ME CONOCES?">¿YA ME CONOCES?</a>
   <a class="menu-link ml-prox"      href="#sec-proximos" style="left:11.93%;top:35.4%;font-size:3.4cqw"><span class="w">PRÓXIMOS<span class="f" data-text="PRÓXIMOS">PRÓXIMOS</span></span><span class="w">SHOWS<span class="f" data-text="SHOWS">SHOWS</span></span></a>
   <a class="menu-link ml-pallevar" href="#sec-merch"     style="left:33.5%;top:39.0%;font-size:2.3cqw" data-text="PA’ LLEVAR">PA’ LLEVAR</a>
@@ -649,6 +658,9 @@
       });
     }
     fab.addEventListener('click',()=>{document.body.classList.toggle('music-open');});
+    // La USB del headliner es un 2º disparador del mismo panel de rolitas (Ani 2026-07-07)
+    const usbBtn=document.getElementById('usb-jukebox');
+    if(usbBtn) usbBtn.addEventListener('click',()=>{document.body.classList.toggle('music-open');});
     document.getElementById('mclose').addEventListener('click',()=>{document.body.classList.remove('music-open');me.innerHTML='';document.querySelectorAll('.song-item').forEach(el=>el.classList.remove('active'));fab.classList.remove('playing');});
   </script>
 </body>
