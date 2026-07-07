@@ -105,15 +105,16 @@
   .ml-echame{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;color:#f5c518;text-align:center;line-height:.92;white-space:normal;text-shadow:2.5px 2.5px 0 #14361f;transform:translateY(0) translate(-50%,-50%) scale(1) rotate(-5deg)}
   .ml-echame:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) rotate(-5deg)}
   /* PRÓXIMOS SHOWS: degradado EXACTO de la móvil aplicado a CADA palabra (cada una va lima→magenta de arriba a abajo, no partido entre los dos renglones) */
-  .ml-prox{display:flex;flex-direction:column;align-items:center;line-height:.9;transform:translateY(0) translate(-50%,-50%) scale(1) rotate(-3deg);
+  .ml-prox{display:flex;flex-direction:column;align-items:center;line-height:1.1;transform:translateY(0) translate(-50%,-50%) scale(1) rotate(-3deg);
     font-family:'open-sans-condensed','Oswald',sans-serif;font-weight:800;font-style:italic;text-align:center}
   .ml-prox span{position:relative;
-    /* line-height:.9 hace que el acento sobresalga por arriba de la caja → quedaba hueco. Solución: tramo lima largo (0-18%) + degradado extendido hacia arriba anclado abajo (size 150% / pos bottom) para rellenar el acento, y halo verde delgado (.5px) para que no deje ver el fondo dentro del acento. Mismo look lima→magenta de la móvil en las letras. */
-    background:linear-gradient(180deg,#eef60a 0%,#eef60a 50%,#ddfc0b 62%,#e06396 82%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-    background-size:100% 200%;background-position:50% 100%;background-repeat:no-repeat;
+    /* Método robusto (como la móvil): line-height natural (1.1) hace que la caja incluya el acento completo, y el degradado simple lo rellena en TODOS los navegadores. (El truco background-size fallaba en Safari/móvil → acento a mitad.) */
+    background:linear-gradient(180deg,#eef60a 0%,#ddfc0b 28%,#e06396 64%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
     -webkit-text-stroke:.8px #111;paint-order:stroke fill;
-    /* Contorno verde EXACTO de la móvil: 4 direcciones a 1px. Visible en las letras pero sin ahogar el relleno lima del acento de la Ó (Ani 2026-07-06) */
-    filter:drop-shadow(1px 0 0 #4eb32e) drop-shadow(-1px 0 0 #4eb32e) drop-shadow(0 1px 0 #4eb32e) drop-shadow(0 -1px 0 #4eb32e)}
+    /* Contorno verde GRUESO (8 dir ~1.1px) — visible como lo quiere Ani; con el acento ya relleno el verde no lo tapa (2026-07-07) */
+    filter:drop-shadow(1.1px 0 0 #4eb32e) drop-shadow(-1.1px 0 0 #4eb32e) drop-shadow(0 1.1px 0 #4eb32e) drop-shadow(0 -1.1px 0 #4eb32e) drop-shadow(.8px .8px 0 #4eb32e) drop-shadow(-.8px .8px 0 #4eb32e) drop-shadow(.8px -.8px 0 #4eb32e) drop-shadow(-.8px -.8px 0 #4eb32e)}
+  /* juntar PRÓXIMOS y SHOWS (el line-height natural los separa un poco) */
+  .ml-prox span+span{margin-top:-.26em}
   .ml-prox:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) rotate(-3deg)}
   /* Logos-botón de streaming sobre los banquitos */
   .stool-btn{position:absolute;transform:translateY(0) translate(-50%,-50%) scale(1);display:block;pointer-events:auto;cursor:pointer;line-height:0;transition:transform .2s ease,filter .2s ease}
