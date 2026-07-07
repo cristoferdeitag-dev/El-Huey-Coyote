@@ -107,14 +107,15 @@
   /* PRÓXIMOS SHOWS: degradado EXACTO de la móvil aplicado a CADA palabra (cada una va lima→magenta de arriba a abajo, no partido entre los dos renglones) */
   .ml-prox{display:flex;flex-direction:column;align-items:center;line-height:1.1;transform:translateY(0) translate(-50%,-50%) scale(1) rotate(-3deg);
     font-family:'open-sans-condensed','Oswald',sans-serif;font-weight:800;font-style:italic;text-align:center}
-  .ml-prox span{position:relative;
-    /* Método robusto (como la móvil): line-height natural (1.1) hace que la caja incluya el acento completo, y el degradado simple lo rellena en TODOS los navegadores. (El truco background-size fallaba en Safari/móvil → acento a mitad.) */
+  /* Capa .w = contorno verde UNIFORME y perfectamente centrado via -webkit-text-stroke (los drop-shadows encadenados quedaban corridos ~5px arriba-izq, Ani 2026-07-07). El relleno + linea oscura fina van ENCIMA en .f, alineados pixel a pixel. */
+  .ml-prox .w{position:relative;display:block;
+    -webkit-text-stroke:.045em #4eb32e;-webkit-text-fill-color:transparent;color:transparent;paint-order:stroke}
+  .ml-prox .f{position:absolute;left:0;top:0;width:100%;
+    /* line-height natural (1.1) hace que la caja incluya el acento completo, y el degradado simple lo rellena en TODOS los navegadores (el truco background-size fallaba en Safari) */
     background:linear-gradient(180deg,#eef60a 0%,#ddfc0b 28%,#e06396 64%,#e8388d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-    -webkit-text-stroke:.8px #111;paint-order:stroke fill;
-    /* Contorno verde GRUESO (8 dir ~1.1px) — visible como lo quiere Ani; con el acento ya relleno el verde no lo tapa (2026-07-07) */
-    filter:drop-shadow(1.1px 0 0 #4eb32e) drop-shadow(-1.1px 0 0 #4eb32e) drop-shadow(0 1.1px 0 #4eb32e) drop-shadow(0 -1.1px 0 #4eb32e) drop-shadow(.8px .8px 0 #4eb32e) drop-shadow(-.8px .8px 0 #4eb32e) drop-shadow(.8px -.8px 0 #4eb32e) drop-shadow(-.8px -.8px 0 #4eb32e)}
+    -webkit-text-stroke:.012em #111;paint-order:stroke fill}
   /* juntar PRÓXIMOS y SHOWS (el line-height natural los separa un poco) */
-  .ml-prox span+span{margin-top:-.26em}
+  .ml-prox>.w+.w{margin-top:-.26em}
   .ml-prox:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) rotate(-3deg)}
   /* Logos-botón de streaming sobre los banquitos */
   .stool-btn{position:absolute;transform:translateY(0) translate(-50%,-50%) scale(1);display:block;pointer-events:auto;cursor:pointer;line-height:0;transition:transform .2s ease,filter .2s ease}
@@ -123,7 +124,7 @@
   .stool-btn:active{transform:translateY(0) translate(-50%,-50%) scale(.96)}
   body.is-scrolling .stool-btn{pointer-events:none}
   /* === Rayo de luz que barre las letras de cada botón (igual que la móvil) === */
-  .ml-conoces::after, .ml-conlaraza::after, .ml-echame::after, .ml-pallevar::after, .ml-prox span::after, .dl-row .c::after{
+  .ml-conoces::after, .ml-conlaraza::after, .ml-echame::after, .ml-pallevar::after, .ml-prox .f::after, .dl-row .c::after{
     content:attr(data-text);position:absolute;left:0;top:0;width:100%;
     text-align:inherit;white-space:inherit;line-height:inherit;text-shadow:none;
     background:linear-gradient(112deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 58%);
@@ -134,15 +135,15 @@
   .ml-conoces::after{white-space:nowrap}
   /* ÉCHAME UN GRITO va en dos renglones: el destello respeta el salto */
   .ml-echame::after{white-space:pre;text-align:center}
-  body.headliner-anim .ml-conoces::after, body.headliner-anim .ml-conlaraza::after, body.headliner-anim .ml-echame::after, body.headliner-anim .ml-pallevar::after, body.headliner-anim .ml-prox span::after, body.headliner-anim .dl-row .c::after{animation:letrero-shine 3.9s ease-in-out infinite}
+  body.headliner-anim .ml-conoces::after, body.headliner-anim .ml-conlaraza::after, body.headliner-anim .ml-echame::after, body.headliner-anim .ml-pallevar::after, body.headliner-anim .ml-prox .f::after, body.headliner-anim .dl-row .c::after{animation:letrero-shine 3.9s ease-in-out infinite}
   /* orden del rayo (Ani): PRÓXIMOS SHOWS → YA ME CONOCES → CON LA RAZA → ÉCHAME → PA' LLEVAR */
-  body.headliner-anim .ml-prox span::after{animation-delay:0s}
+  body.headliner-anim .ml-prox .f::after{animation-delay:0s}
   body.headliner-anim .ml-conoces::after{animation-delay:.5s}
   body.headliner-anim .ml-conlaraza::after{animation-delay:1s}
   body.headliner-anim .ml-echame::after{animation-delay:1.5s}
   body.headliner-anim .ml-pallevar::after{animation-delay:2s}
   /* mientras se hace scroll, pausar el rayo (scroll fluido es prioridad) */
-  body.is-scrolling .ml-conoces::after, body.is-scrolling .ml-conlaraza::after, body.is-scrolling .ml-echame::after, body.is-scrolling .ml-pallevar::after, body.is-scrolling .ml-prox span::after, body.is-scrolling .dl-row .c::after{animation-play-state:paused}
+  body.is-scrolling .ml-conoces::after, body.is-scrolling .ml-conlaraza::after, body.is-scrolling .ml-echame::after, body.is-scrolling .ml-pallevar::after, body.is-scrolling .ml-prox .f::after, body.is-scrolling .dl-row .c::after{animation-play-state:paused}
   @keyframes letrero-shine{0%{background-position:190% 0;opacity:0}3%{opacity:1}33%{background-position:-70% 0;opacity:1}36%{background-position:-70% 0;opacity:0}100%{background-position:-70% 0;opacity:0}}
   /* Ciudades de la lista = botones clickeables (rayo arriba); stagger del destello */
   .dl-row .c{position:relative;pointer-events:auto;cursor:pointer;text-decoration:none}
@@ -252,7 +253,7 @@
   .lightbox-close{position:absolute;top:20px;right:24px;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.92);color:#c4161c;border:2px solid #c4161c;font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
   .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.85);color:#161618;border:0;font-size:32px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
   .lightbox-prev{left:18px}.lightbox-next{right:18px}
-  @media (prefers-reduced-motion:reduce){.ml-conoces::after,.ml-conlaraza::after,.ml-echame::after,.ml-pallevar::after,.ml-prox span::after{animation:none}}
+  @media (prefers-reduced-motion:reduce){.ml-conoces::after,.ml-conlaraza::after,.ml-echame::after,.ml-pallevar::after,.ml-prox .f::after{animation:none}}
 
   /* Lista de shows: ÚNICO texto vivo de la sección Próximos Shows (lo demás es la imagen de fondo). MES negro + DÍA + CIUDAD en teal, alineados a la izquierda de los puntitos del fondo. */
   /* tipografía EXACTA de la móvil (.shows-list): swiss-721-bt 700 + grid mes/día/ciudad + colores/stroke iguales */
@@ -367,7 +368,7 @@
   <span class="hl-flag hl-usb" style="left:85.2%;top:25.6%;font-size:3.56cqw">USB'S</span>
   <span class="hl-flag hl-slogan" style="left:83.45%;top:47.4%;font-size:1.92cqw">CON CUMBIAS<br>PA' ENAMORAR</span>
   <a class="menu-link ml-conoces"   href="#sec-conoces"  style="left:30.7%;top:20.5%;font-size:1.72cqw" data-text="¿YA ME CONOCES?">¿YA ME CONOCES?</a>
-  <a class="menu-link ml-prox"      href="#sec-proximos" style="left:11.93%;top:35.4%;font-size:3.4cqw"><span data-text="PRÓXIMOS">PRÓXIMOS</span><span data-text="SHOWS">SHOWS</span></a>
+  <a class="menu-link ml-prox"      href="#sec-proximos" style="left:11.93%;top:35.4%;font-size:3.4cqw"><span class="w">PRÓXIMOS<span class="f" data-text="PRÓXIMOS">PRÓXIMOS</span></span><span class="w">SHOWS<span class="f" data-text="SHOWS">SHOWS</span></span></a>
   <a class="menu-link ml-pallevar" href="#sec-merch"     style="left:33.5%;top:39.0%;font-size:2.3cqw" data-text="PA’ LLEVAR">PA’ LLEVAR</a>
   <a class="menu-link ml-conlaraza" href="#sec-collabs"  style="left:70.4%;top:15.8%;font-size:2.05cqw" data-text="CON LA RAZA">CON LA RAZA</a>
   <a class="menu-link ml-echame"    href="#sec-echame"   style="left:70.0%;top:23.2%;font-size:2.0cqw" data-text="ÉCHAME UN&#10;GRITO">ÉCHAME UN<br>GRITO</a>
