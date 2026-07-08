@@ -18,6 +18,13 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 - **Archivos:** `preview/sitio/index.html` (sección #sobre-mi reescrita + CSS `.conoce-live`) + `preview/sitio/assets/conoces/conoces-fondo-notext.webp` (nuevo). Quedaron sin uso (no borrados): `poster1/2/3.webp`, `conoces-fondo-limpio.webp`.
 - **Fuente SVG guardada:** `/root/.claude/channels/telegram-anette/inbox/1783543043971-AgAD8AgAAnmtcEY.svg` (embebido, 9.3MB).
 
+## 2026-07-08 · anette (cont. 24) — MÓVIL "Sobre mí": aclaración clave de Ani (PARA LATAM/logo = imagen)
+- **Ani aclaró:** "PARA LATAM y el logo El Huey Coyote SÍ son parte de la imagen del póster, no son texto." ⇒ el DOBLADO/estilo raro de PARA LATAM era porque yo tenía un `<text>` vivo (Poppins) ENCIMA del "PARA LATAM" que YA viene impreso en la foto del póster. Verifiqué en bg5 (sin texto): la banda negra ya trae "PARA LATAM" en letras blancas con contorno, y el logo "El" también → son parte de la imagen. FIX: quité PARA LATAM del overlay (clases cv41/cv42). El tema **Cocogoose queda RESUELTO/MOOT** — nunca debió ser texto mío.
+- **Rectángulo azul → contorno en las letras:** Ani: "quítame ese rectángulo azul y ponle un contorno azul AL TEXTO." FIX: eliminé el `<rect>`; cambié la capa de contorno del resumen (cv16, era blanca #fff) a **azul #0477c3** → el texto del resumen queda rojo con contorno azul. ✅
+- **Qué es texto vivo vs imagen (confirmado por render de bg5 sin texto):** IMAGEN (baked en pósters): PARA LATAM, logo El Huey Coyote, bloques "COSAS SOBRE…" (póster2), "HISTORIE TIME…" (póster3), instrumentos. TEXTO VIVO (overlay): EL VATO DE LAS ROLITAS RANDOM, resumen (AQUÍ VA…), UN TÍTULO COOL + AQUÍ UN SUBTÍTULO (póster2), TEXTO MÁS TEXTO + SUBTÍTULO LINDO Y NICE + Palabra súper cool + ALGO PARA RESALTAR (póster3). Mero-mero = imagen (se quitó el div de la página).
+- **Deploy:** falló 1ª vez (FTP flaky) → `gh run rerun --failed` OK. En vivo: https://elhueycoyote.com/preview/sitio/?v=liv6
+- **Archivos:** solo `preview/sitio/index.html` (overlay). bg5 sin cambios respecto a cont.23.
+
 ## 2026-07-08 · anette (cont. 23) — MÓVIL "Sobre mí": 3ª ronda (Ani revisa EN VIVO desde su iPhone)
 - Ani mandó captura de la página EN VIVO (barra Telegram + elhueycoyote.com) anotada. Puntos:
 - **Turquesa (resumen):** quería que el contorno azul contornee TODO el texto rojo/blanco ("una línea azul que contornea todo ese texto"). FIX: quité las 3 cajas onduladas baked (clase st35 #0477c3) del bg; dibujé un **rect redondeado azul** (stroke #0477c3, `vector-effect:non-scaling-stroke`, mismo transform que el texto) que envuelve todo el bloque del resumen. Bbox medido con getBBox en Playwright (local x=-2.9 y=-32 w=563.9 h=132.8 → rect x=-12 y=-42 w=586 h=154 rx16). ✅
