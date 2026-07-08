@@ -2,6 +2,12 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-08 · anette (cont. 19) — MÓVIL: teléfono ÉCHAME UN GRITO igualado al compu
+- **Contexto:** arrancamos sesión en la versión **MÓVIL** (`preview/sitio/`, en vivo https://elhueycoyote.com/preview/sitio/). Ojo: todo el trabajo reciente (cont.13–18) fue en el **compu** (`preview/compu/`); el móvil traía cambios desde el 10-jun.
+- **Cambio:** teléfono de la sección ÉCHAME UN GRITO `2226740285` → **`2224440001`** (igual que el compu, cont.18). Editado texto visible + `data-text` del destello en `.ech-phone` (línea ~1752). Formato plano sin espacios (como estaba).
+- **Verificado:** grep local (0 rastros del viejo) + deploy GH Actions **success al 1er intento** (esta vez el FTP no fue flaky) + curl en vivo confirma número nuevo y 0 ocurrencias del viejo.
+- **Archivo:** solo `preview/sitio/index.html`.
+
 ## 2026-07-07 · anette (cont. 18) — Teléfono ÉCHAME UN GRITO + cartel SHOWS AGOTADOS auto-cierre + USB del headliner como botón jukebox + pósters YA ME CONOCES + fondo nuevo ÉCHAME
 - **Teléfono ÉCHAME UN GRITO:** cambiado `2226740285` → **`2224440001`** (texto visible + `data-text` del destello). `.ech-phone` línea ~447.
 - **Cartel SHOWS AGOTADOS (Próximos Shows):** al click en una ciudad aparece; ahora **se auto-cierra a los 5s** (`setTimeout` con `clearTimeout` para reiniciar el contador al re-click y no dejar timers colgados). Se conserva el cierre manual al click sobre el cartel. JS en el IIFE de `#sec-proximos`.
