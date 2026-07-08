@@ -2,6 +2,22 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-08 · anette (cont. 20) — MÓVIL: sección "Ya me conoces/Sobre mí" pasada a TEXTO VIVO (no horneado)
+- **Pedido de Ani:** que el texto de esa sección NO sea parte de la imagen de los pósters (regla dura de Cris: texto vivo, no horneado). Ani mandó el SVG de la sección.
+- **Gotcha export 1:** el 1er SVG (177KB) traía las imágenes ENLAZADAS (Link), no incrustadas → al renderizar salía el texto pero el fondo blanco. Le pedí re-exportar con **"Incorporar/Embed"**. El 2º SVG (9.3MB) ya trajo 21 imágenes embebidas. LECCIÓN: siempre pedir SVG con imágenes **Embed**, no Link.
+- **Estructura del SVG (muy limpia, Ani la armó en 2 capas):** grupo `#Fondo` (metal + 3 pósters + títulos de marca "PARA LATAM"/"EL VATO DE LAS ROLITAS RANDOM" horneados como arte del póster) y grupo `#Texto` (todo el texto bio + filler + "El mero mero"). Lienzo 1086.3×1936.5 (el estándar móvil).
+- **Método (fiel al playbook fondo+texto vivo):**
+  - **bg** = render de `#Fondo` solo → `assets/conoces/conoces-fondo-notext.webp` (rsvg-convert -w 2172, 765KB). Pósters LIMPIOS, sin texto ni mero-mero.
+  - **overlay** = `#Texto` completo como **SVG inline vivo** (`<svg class="conoce-live" viewBox="0 0 1086.3 1936.5">`), 161KB. Los títulos/subtítulos/resumen son `<text>` VIVOS y editables; el filler "COSAS SOBRE…" y párrafos venían **outlined (paths)** desde Illustrator (no editables — así los exportó Ani).
+  - **Fuentes:** swap de las trial del SVG a las self-hosted del sitio: Swiss721BT-*→`"swiss-721-bt"` (Black=900/Bold=700/BoldItalic=700i), OpenSansCondensed-ExtraBold→`"open-sans-condensed"`. Todas ya viven en `assets/fonts/`.
+  - **Namespacing:** renombré todas las clases `stN`→`cvN` en el overlay para que NO choquen con futuros SVG de Ani (dos SVG inline con `.st2` distinto se pisarían).
+- **Mero mero:** venía en `#Texto` como paths (versión Monotxt de Ani). Se **quitó el `<div class="mero-mero">` de la página** (animado) porque duplicaba/encimaba con el del SVG. Ahora sale sencillo, el de Ani (estático, look grabado). Si Ani quiere de vuelta la animación → follow-up.
+- **Pósters ahora ESTÁTICOS:** se perdió el zoom secuencial (`poster-zoom`) porque los 3 pósters quedaron horneados en un solo bg. Para re-animar habría que separar los 3 pósters sin texto (Ani exportaría cada uno) o aplicar movimiento por póster. Avisado a Ani como opción.
+- **Texto = PLACEHOLDER todavía** ("UN TÍTULO COOL", "AQUÍ UN SUBTÍTULO", "Palabra súper cool", etc.). Cuando llegue el copy real de "Sobre mí" → cambiar palabras en los `<text>` del overlay = edición directa al instante (sin re-exportar).
+- **Verificado:** render headless local + EN VIVO (fuentes cargan por HTTP, posiciones exactas, mero-mero sencillo). Deploy GH Actions success al 1er intento. Cache-buster `?v=0708liv2`.
+- **Archivos:** `preview/sitio/index.html` (sección #sobre-mi reescrita + CSS `.conoce-live`) + `preview/sitio/assets/conoces/conoces-fondo-notext.webp` (nuevo). Quedaron sin uso (no borrados): `poster1/2/3.webp`, `conoces-fondo-limpio.webp`.
+- **Fuente SVG guardada:** `/root/.claude/channels/telegram-anette/inbox/1783543043971-AgAD8AgAAnmtcEY.svg` (embebido, 9.3MB).
+
 ## 2026-07-08 · anette (cont. 19) — MÓVIL: teléfono ÉCHAME UN GRITO igualado al compu
 - **Contexto:** arrancamos sesión en la versión **MÓVIL** (`preview/sitio/`, en vivo https://elhueycoyote.com/preview/sitio/). Ojo: todo el trabajo reciente (cont.13–18) fue en el **compu** (`preview/compu/`); el móvil traía cambios desde el 10-jun.
 - **Cambio:** teléfono de la sección ÉCHAME UN GRITO `2226740285` → **`2224440001`** (igual que el compu, cont.18). Editado texto visible + `data-text` del destello en `.ech-phone` (línea ~1752). Formato plano sin espacios (como estaba).
