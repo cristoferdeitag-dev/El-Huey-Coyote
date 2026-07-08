@@ -18,6 +18,13 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 - **Archivos:** `preview/sitio/index.html` (sección #sobre-mi reescrita + CSS `.conoce-live`) + `preview/sitio/assets/conoces/conoces-fondo-notext.webp` (nuevo). Quedaron sin uso (no borrados): `poster1/2/3.webp`, `conoces-fondo-limpio.webp`.
 - **Fuente SVG guardada:** `/root/.claude/channels/telegram-anette/inbox/1783543043971-AgAD8AgAAnmtcEY.svg` (embebido, 9.3MB).
 
+## 2026-07-08 · anette (cont. 22) — MÓVIL "Sobre mí": afinado 2ª ronda de Ani
+- **PARA LATAM (blanco):** Cocogoose no está self-hosted (fuente comercial). Sustituto = **Poppins 900** (el lookalike libre más citado de Cocogoose), ya cargado vía Google Fonts (agregué `;900` a la URL de la línea 14). Overlay: clase cv41/cv42 (ex Cocogoose) → `font-family:'Poppins'; font-weight:900`. Si Ani quiere el look EXACTO, mandar el .otf/.ttf de Cocogoose y self-hostear.
+- **Resumen (morado):** el texto tenía `scale(.7 1)` (comprimido) → quedaba más corto que el recuadro azul (3 paths ondulados baked, clase st35 #0477c3). Subí a `scale(.8 1)` → el texto ahora coincide en largo con el recuadro en las 3 líneas.
+- **Póster 2 (rojo):** título (cv18) y subtítulo (cv17) recorridos ~12u a la izquierda; los 3 bloques "COSAS SOBRE" indentados (grupos st26 con minX>150) recorridos `translate(-42 0)` para alinearlos con el bloque de arriba.
+- **Verificado en vivo** (Poppins 900 carga por HTTP): https://elhueycoyote.com/preview/sitio/?v=liv4 — deploy success.
+- **Archivos:** `index.html` (URL Google Fonts +900, sección) + `assets/conoces/conoces-fondo-notext.webp` (bg con COSAS recorridos).
+
 ## 2026-07-08 · anette (cont. 21) — MÓVIL "Sobre mí": correcciones de Ani (todo el texto a vivo)
 - **Feedback de Ani (imagen anotada):** póster 3 OK. Póster 2: mover texto marcado un chirris a la izquierda. Póster 1: (turquesa) "EL VATO DE LAS ROLITAS RANDOM" más grande que el original y se sale del recuadro; (morado) el recuadro azul y el texto del resumen deben coincidir en largo; (blanco) "PARA LATAM" con estilo distinto al original.
 - **Causa raíz:** en cont.20 rasterizé el `#Fondo` con rsvg, que NO tiene las fuentes trial (Cocogoose, OpenSansCondensed) → "PARA LATAM" y "EL VATO…" quedaron horneados con **fuente fallback** (más ancha/grande, estilo equivocado). LECCIÓN: rsvg no rendea las @font-face del sitio; NO hornear texto con rsvg.
