@@ -18,6 +18,14 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 - **Archivos:** `preview/sitio/index.html` (sección #sobre-mi reescrita + CSS `.conoce-live`) + `preview/sitio/assets/conoces/conoces-fondo-notext.webp` (nuevo). Quedaron sin uso (no borrados): `poster1/2/3.webp`, `conoces-fondo-limpio.webp`.
 - **Fuente SVG guardada:** `/root/.claude/channels/telegram-anette/inbox/1783543043971-AgAD8AgAAnmtcEY.svg` (embebido, 9.3MB).
 
+## 2026-07-08 · anette (cont. 21) — MÓVIL "Sobre mí": correcciones de Ani (todo el texto a vivo)
+- **Feedback de Ani (imagen anotada):** póster 3 OK. Póster 2: mover texto marcado un chirris a la izquierda. Póster 1: (turquesa) "EL VATO DE LAS ROLITAS RANDOM" más grande que el original y se sale del recuadro; (morado) el recuadro azul y el texto del resumen deben coincidir en largo; (blanco) "PARA LATAM" con estilo distinto al original.
+- **Causa raíz:** en cont.20 rasterizé el `#Fondo` con rsvg, que NO tiene las fuentes trial (Cocogoose, OpenSansCondensed) → "PARA LATAM" y "EL VATO…" quedaron horneados con **fuente fallback** (más ancha/grande, estilo equivocado). LECCIÓN: rsvg no rendea las @font-face del sitio; NO hornear texto con rsvg.
+- **Fix:** ahora **TODO el texto es vivo** (overlay SVG). bg = SVG sin NINGÚN `<text>` (solo gráficos: pósters + recuadro azul + filler outline + mero mero) → rsvg ya no depende de fuentes. overlay = 16 `<text>` con fuentes self-hosted CORRECTAS: EL VATO/ROLITAS→`open-sans-condensed`, bio/resumen→`swiss-721-bt`. Resultado: EL VATO ya cabe (turquesa ✓), resumen dentro del recuadro (morado ~✓).
+- **Pendientes con Ani (no resueltos solo):** (1) PARA LATAM usaba **Cocogoose** — NO está self-hosted; puse swiss-721-bt (cercano) provisional. Para el look exacto: Ani manda el archivo de Cocogoose y se self-hostea. (2) Póster 2 "mover a la izquierda": el título ya está en x≈7 (pegado al borde izq), moverlo más lo recorta — pedí a Ani precisar cuál texto/cuánto sobre la versión en vivo (no metí un cambio que veía mal). (3) recuadro azul línea "IMPORTANTE" la caja queda un pelín más ancha que la palabra (cajas horneadas).
+- **En vivo:** https://elhueycoyote.com/preview/sitio/?v=liv3 — deploy success 1er intento.
+- **Archivos:** `preview/sitio/index.html` + `assets/conoces/conoces-fondo-notext.webp` (regenerado sin texto).
+
 ## 2026-07-08 · anette (cont. 19) — MÓVIL: teléfono ÉCHAME UN GRITO igualado al compu
 - **Contexto:** arrancamos sesión en la versión **MÓVIL** (`preview/sitio/`, en vivo https://elhueycoyote.com/preview/sitio/). Ojo: todo el trabajo reciente (cont.13–18) fue en el **compu** (`preview/compu/`); el móvil traía cambios desde el 10-jun.
 - **Cambio:** teléfono de la sección ÉCHAME UN GRITO `2226740285` → **`2224440001`** (igual que el compu, cont.18). Editado texto visible + `data-text` del destello en `.ech-phone` (línea ~1752). Formato plano sin espacios (como estaba).
