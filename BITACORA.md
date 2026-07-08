@@ -18,6 +18,15 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 - **Archivos:** `preview/sitio/index.html` (sección #sobre-mi reescrita + CSS `.conoce-live`) + `preview/sitio/assets/conoces/conoces-fondo-notext.webp` (nuevo). Quedaron sin uso (no borrados): `poster1/2/3.webp`, `conoces-fondo-limpio.webp`.
 - **Fuente SVG guardada:** `/root/.claude/channels/telegram-anette/inbox/1783543043971-AgAD8AgAAnmtcEY.svg` (embebido, 9.3MB).
 
+## 2026-07-08 · anette (cont. 23) — MÓVIL "Sobre mí": 3ª ronda (Ani revisa EN VIVO desde su iPhone)
+- Ani mandó captura de la página EN VIVO (barra Telegram + elhueycoyote.com) anotada. Puntos:
+- **Turquesa (resumen):** quería que el contorno azul contornee TODO el texto rojo/blanco ("una línea azul que contornea todo ese texto"). FIX: quité las 3 cajas onduladas baked (clase st35 #0477c3) del bg; dibujé un **rect redondeado azul** (stroke #0477c3, `vector-effect:non-scaling-stroke`, mismo transform que el texto) que envuelve todo el bloque del resumen. Bbox medido con getBBox en Playwright (local x=-2.9 y=-32 w=563.9 h=132.8 → rect x=-12 y=-42 w=586 h=154 rx16). ✅
+- **Morado (póster 2):** los bloques COSAS indentados los había recorrido -42 (mucho); Ani pidió "un poco a la derecha" → cambié a **-12**. ✅
+- **PENDIENTE — PARA LATAM (azul):** Poppins 900 NO le convence, quiere el estilo exacto de **Cocogoose** (comercial, no self-hosted, sin @font-face embebida en su SVG). BLOQUEADO: pedí a Ani el archivo .otf/.ttf de Cocogoose (lo tiene en su Illustrator). Sin eso no se puede clavar.
+- **PENDIENTE — logo póster 1:** el logo "El Huey Coyote" está impreso sobre la **esquina doblada/rasgada** de la foto del póster (efecto póster viejo), por eso solo se lee "El" y "...oyote" queda sobre el doblez. Probé ensanchar viewBox (-40..1200): revela más póster pero el logo sigue sobre el doblez (es propiedad de la IMAGEN del póster). Pedí a Ani decidir: dejarlo (look callejero) / mandar la imagen del póster con el logo despejado / que reposicione.
+- **En vivo:** https://elhueycoyote.com/preview/sitio/?v=liv5 — deploy success.
+- **Archivos:** `index.html` + `assets/conoces/conoces-fondo-notext.webp`.
+
 ## 2026-07-08 · anette (cont. 22) — MÓVIL "Sobre mí": afinado 2ª ronda de Ani
 - **PARA LATAM (blanco):** Cocogoose no está self-hosted (fuente comercial). Sustituto = **Poppins 900** (el lookalike libre más citado de Cocogoose), ya cargado vía Google Fonts (agregué `;900` a la URL de la línea 14). Overlay: clase cv41/cv42 (ex Cocogoose) → `font-family:'Poppins'; font-weight:900`. Si Ani quiere el look EXACTO, mandar el .otf/.ttf de Cocogoose y self-hostear.
 - **Resumen (morado):** el texto tenía `scale(.7 1)` (comprimido) → quedaba más corto que el recuadro azul (3 paths ondulados baked, clase st35 #0477c3). Subí a `scale(.8 1)` → el texto ahora coincide en largo con el recuadro en las 3 líneas.
