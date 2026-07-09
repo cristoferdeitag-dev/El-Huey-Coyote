@@ -2,6 +2,15 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 35) — MÓVIL "Sobre mí": pósters a posiciones EXACTAS del SVG (arregla recorte + texto movido)
+- **Ani (2171):** pósters 2 y 3 "recortados" y "se movió UN TÍTULO COOL / AQUÍ UN SUBTÍTULO". Pidió revisar el SVG original para ver dónde va el texto.
+- **Diagnóstico:** mi rebuild limpio (cont.34) NO tiene doble PERO puse pósters 2/3 en posiciones % aproximadas que NO coinciden con el SVG → recortados + texto (que sí está en posiciones del SVG: título 6.8, subtítulo 12.7) desalineado. Renderé el SVG original (`rsvg-convert` → svg-original.png) = fuente de verdad del layout.
+- **Datos del SVG (útiles a futuro):** image1=778×1080 (foto póster1). Título cv18 `translate(6.8 904.9)`, subtítulo cv17 `translate(12.7 938.1)`, resumen p1 `translate(514.2 797) scale(.7 1)`. El filler denso "COSAS SOBRE.../HISTORIE TIME..." NO es texto en el SVG → son PATHS outlined (grep: "COSAS" aparece 1 vez=cv25 editable; "HISTORIE"/"PODEMOS" 0 veces). Por eso no se puede quitar como texto; hay que cubrirlo.
+- **FIX:** base = `conoces-fondo-p1ok` (= render SVG #Fondo + póster1 Ani = posiciones EXACTAS del SVG, ya aprobado). Cubrí el filler del póster 2 con `poster2-tight` **escala 1.12** (poster2-tight es ~12% más chico que el póster del SVG; escala hallada por búsqueda de correlación de bordes) en pos (-35,706) → cubre el filler sin doble, en la posición del SVG. Verificado visual (p2cover-test) + sección completa (full7) vs svg-original: cuadra. Resultado `conoces-fondo-p2fix.webp` (341KB). Pósters 1 y 3 sin tocar. Título/subtítulo ya estaban en 6.8/12.7.
+- **Deploy c6a4ab6 success.** En vivo: p2fix.webp (349KB).
+- **LECCIÓN:** para el layout, la fuente de verdad es el SVG original (`inbox/1783543043971-AgAD8AgAAnmtcEY.svg`) / su render. p1ok = ese layout con póster1 corregido. NO usar posiciones % inventadas.
+- **PENDIENTE:** título/subtítulo p2 reales; texto real póster 3 (sigue filler baked HISTORIE TIME, mismo reto de paths). Sin uso: conoces-fondo-clean, p2clean, conoces-wall, poster2/3.webp.
+
 ## 2026-07-09 · anette (cont. 34) — MÓVIL "Sobre mí": ELIMINA doble cartel (rebuild limpio) + 2 fixes
 - **Ani (2164, con captura):** confirmó el DOBLE CARTEL (circuló en morado el borde superior del póster 2 duplicado). + "regresa UN TÍTULO COOL / AQUÍ UN SUBTÍTULO a su lugar (los moviste, se ven mal)" + "magnífico con ingenioso, divertido con juguetón (líneas completas)".
 - **Causa del doble:** mi re-horneado (cont.33) pegó `poster2-tight` DESALINEADO sobre el póster 2 horneado → sus orillas (franjas del borde) se asomaban. Correlación de fase daba shift ~(29,-25) pero el chase era frágil.
