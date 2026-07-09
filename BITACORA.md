@@ -2,6 +2,13 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 39) — MÓVIL "Sobre mí": +tamaño ambos textos + SEGUNDO texto p2 (Su nombre significa…)
+- **Ani (2198, captura marca morada):** "está súper bien el acomodo". (a) aumentar un poco el tamaño de ambos textos. (b) agregar el SEGUNDO texto del póster 2 en la zona MORADA (área vacía central, debajo del saxofón): "Su nombre significa… / Huey = grande, ingenioso, magnífico. / Coyote = curioso, juguetón y divertido." (= el texto viejo que se quitó en cont.37, ahora regresa como bloque aparte).
+- **Tamaños:** resumen p1 `.cv16,.cv20` **17→18px** (a 18 "MEZCLA/DEMUESTRA" quedan al filo del doblez, legibles; si toca, bajar). Párrafo p2 `.cv70` **15→16px** (libra guitarra y estrellitas).
+- **Segundo texto (NUEVO `.cv71`):** swiss-721-bt 700, 14px, #241a1a. `<text class="cv71" transform="translate(80 1240) rotate(-12.4) scale(.8 1)">` 3 líneas gap 30. Colocado en el hueco limpio central (debajo del sax, arriba de guitarra eléctrica/violín, a la izq del violín). Iteré posición 1190→1240 (a 1190 encimaba el saxofón). Insertado en el SVG después de cv70.
+- **Caso:** cv71 lo dejé en MAYÚSCULAS (consistente con el 1er párrafo y con la petición de cont.36); Ani lo escribió en minúsculas → avisado, cambio fácil si lo quiere así.
+- **PENDIENTE:** título/subtítulo p2 reales (placeholder); texto real póster 3 (baked HISTORIE TIME).
+
 ## 2026-07-09 · anette (cont. 38) — MÓVIL "Sobre mí": ajustes de salto de línea (MEZCLA up p1, NACIÓ solo p2)
 - **Ani (2194):** (a) Póster 1: subir "MEZCLA" al mismo renglón que "CANCIÓN," y reacomodar. (b) Póster 2: "Nació en Guadalajara." en su PROPIO renglón y "Hace de todo:…" en renglón aparte (deshacer la unión de cont.37-seguimiento).
 - **Póster 1:** reflow con MEZCLA arriba → renglón 2 "CUALQUIER IDEA EN UNA CANCIÓN, MEZCLA" (37 chars) se estiraba hasta la esquina DOBLADA del póster a 20px. Bajé `.cv16,.cv20` **20→17px** (37 chars@17 ≈ ancho de 31 chars@20 = zona limpia), contornos `.cv60` 10→9, `.cv16` 6→5. 5 líneas (y 0/34/68/102/136): CANTADOR…CONVIERTE / …CANCIÓN, MEZCLA / GÉNEROS…DEMUESTRA / QUE LA MÚSICA…SER / HUMOR PURO. Cabe sin tocar el doblez.
