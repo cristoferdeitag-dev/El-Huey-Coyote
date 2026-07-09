@@ -2,6 +2,14 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 41) — MÓVIL "Sobre mí": textos p2 todos a 17px + MAYÚSCULAS confirmado
+- **Ani (2206):** póster 1 "ya quedó perfecto, no le muevas" (20px se queda). Póster 2: texto1 (NACIÓ) bajar un chirris; texto2 (SU NOMBRE) y texto3 (UN MÚSICO) al MISMO tamaño que texto1 (**17px**); texto2 que no salga del póster; texto3 centrado ENTRE las 2 estrellitas. **Confirmó: TODO el póster 2 en MAYÚSCULAS** (ya estaba así — buena decisión de consistencia).
+- **cv70 (texto1):** translate y 930→940 (bajado un chirris). Sigue 17px.
+- **cv71 (texto2 SU NOMBRE) 14→17px:** a 17px las 3 líneas largas NO caben a la derecha del sax (se salían del póster) ni arriba-izq (teclado+sax bloquean; la inclinación -12.4 sube la línea 1 al saxofón). Probé text-anchor:end (der.) → la inclinación BAJA el extremo izq de las líneas largas y chocaban con texto3. Solución: left-align en la banda LIMPIA debajo del sax/teclado: `translate(35 1216)` gap 30. Línea 1 apenas libra el sax; líneas 2-3 limpias; dentro del póster. Las 2 estrellitas rojas: izq ~(153,1332), der ~(417,1281).
+- **cv72 (texto3 UN MÚSICO) 14→17px + text-anchor:middle:** `translate(285 1302)` (=punto medio X de las 2 estrellitas) centrado. 2 líneas gap 32. Queda centrado entre las estrellitas, sin chocar guitarra/violín.
+- **NOTA a Ani:** texto2 a 17px no cabía a la derecha del sax sin salirse → lo puse en la banda limpia justo debajo del sax. Si lo quiere en otro lado, avisar.
+- **PENDIENTE:** título/subtítulo p2 reales; texto real póster 3.
+
 ## 2026-07-09 · anette (cont. 40) — MÓVIL "Sobre mí": +tamaño p1, reubicar cv71 (morado) + TERCER texto cv72 (verde)
 - **Ani (2202, captura marcas morado+verde):** (a) póster 1 aún MÁS grande. (b) párrafo p2 "Nació en Guadalajara" un chirris más grande + subirlo un chirris. (c) el 2º texto (SU NOMBRE) va en la marca MORADA (der. del sax, bajo la guitarra acústica) — lo reubiqué ahí. (d) TERCER texto NUEVO en la marca VERDE (entre guitarra eléctrica y violín): "Un músico que siempre busca sacarte una sonrisa."
 - **Póster 1:** `.cv16,.cv20` **18→20px**. OJO: a 20px "MEZCLA" (renglón 2) toca la esquina DOBLADA del póster. Avisado a Ani; si no le gusta, bajar a 19 o re-wrap. Abajo no se desborda ("HUMOR PURO." cabe).
