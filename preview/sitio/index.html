@@ -1064,13 +1064,21 @@
         #sobre-mi { overflow: hidden; scroll-margin-top: clamp(64px, 18vw, 100px); }
         #sobre-mi .poster img { width: 100%; display: block; }
 
-        /* Póster 1 como imagen de Ani (PARA LATAM/logo/EL VATO con sus fuentes) — lienzo completo 1086×1937, encaja solo; tapa el póster 1 mal-horneado del fondo */
+        /* Póster 1 como imagen de Ani (PARA LATAM/logo/EL VATO con sus fuentes) — lienzo completo 1086×1937, encaja solo. z-index 3 = DETRÁS del póster 2 (Ani lo pidió). */
         #sobre-mi .poster1-img {
             position: absolute; inset: 0;
             width: 100%; height: auto;
-            z-index: 5; pointer-events: none;
+            z-index: 3; pointer-events: none;
             display: block; filter: brightness(0.85);
         }
+        /* Pósters 2 y 3 como imágenes transparentes en su posición del diseño (mesa 1086×1937). z-index 4 = ENCIMA del póster 1. */
+        #sobre-mi .poster2-img, #sobre-mi .poster3-img {
+            position: absolute; z-index: 4; pointer-events: none;
+            transform: translate(-50%, -50%);
+            filter: brightness(0.85);
+        }
+        #sobre-mi .poster2-img { top: 57.87%; left: 24.54%; width: 49.08%; }
+        #sobre-mi .poster3-img { top: 78.83%; left: 70.26%; width: 52.67%; }
 
         /* === Capa de TEXTO VIVO (SVG) del "Sobre mí" — encima del fondo, ya no horneado === */
         #sobre-mi .conoce-live {
@@ -1580,9 +1588,12 @@
 
         <!-- ¿YA ME CONOCES? (sección 2 — Sobre mí) -->
         <section id="sobre-mi">
-            <img class="bg" src="assets/conoces/conoces-fondo-notext.webp?v=0708liv6" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
-            <!-- Póster 1 (PARA LATAM + logo + EL VATO + foto) = imagen tal cual de Ani (fuentes correctas), encima del fondo, debajo del texto vivo -->
+            <img class="bg" src="assets/conoces/conoces-wall.webp?v=0709w1" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
+            <!-- Pósters en CAPAS separadas (arreglo del doble y del orden): pared (bg) → póster 1 (z3) → póster 2 (z4, encima del 1) → póster 3 (z4) → texto vivo (z6) -->
+            <!-- Póster 1 (PARA LATAM + logo + EL VATO + foto) = imagen tal cual de Ani, lienzo completo -->
             <img class="poster1-img" src="assets/conoces/poster1-latam-logo.webp?v=0709p1b" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <img class="poster2-img" src="assets/conoces/poster2.webp?v=0709" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <img class="poster3-img" src="assets/conoces/poster3.webp?v=0709" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
 
             <!-- Capa de TEXTO VIVO (SVG). PARA LATAM y logo son parte de la imagen del póster (no aquí). -->
