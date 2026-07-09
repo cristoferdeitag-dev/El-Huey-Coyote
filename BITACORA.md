@@ -2,6 +2,13 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 36) — MÓVIL "Sobre mí": 3 afinados (título p2 izq, párrafo mayúsculas, quitar picos p1)
+- **Ani (2175, con captura marcada):** (a) turquesa sobre "UN TÍTULO COOL" (p2) → moverlo un poco a la IZQUIERDA (COOL invadía el póster 1). (b) el párrafo que ella pasó → TODO MAYÚSCULAS + un poquito más grande, cuidando NO chocar con la guitarra (der.) ni pasar de las estrellitas (abajo). (c) morado sobre el contorno azul del resumen p1 ("NACIDO EN GUADALAJARA.") → quitar los PICOS.
+- **FIX (c) picos:** eran los vértices en `miter` del stroke grueso. Añadido `.cv16,.cv20,.cv60 { stroke-linejoin: round; stroke-linecap: round; }` → contorno azul liso. Verificado (crop_resumen).
+- **FIX (a) título:** cv18 `translate(6.8 → -12)`. En mi chromium la fuente cae en fallback (más angosta que la Typekit del iPhone de Ani) → no puedo medir el ancho real; -12 es margen intermedio: COOL libra el póster 1 y "UN" se lee (queda al borde izq, como ya estaba en el original .ai, que Ani no objetó). Si en su pantalla COOL aún toca o "UN" se corta, ajustar X.
+- **FIX (b) párrafo cv70:** tspans a MAYÚSCULAS ("SU NOMBRE SIGNIFICA… / HUEY = GRANDE, INGENIOSO, MAGNÍFICO. / COYOTE = CURIOSO, JUGUETÓN Y DIVERTIDO."). Mayúsculas = ya se ve con más cuerpo/grande que el original en minúsculas. font-size 17px, **letter-spacing -0.4px** (acorta líneas ~7px), **translate x 12.7→1** (despega las puntas derechas de la guitarra). Interlineado 46/76/106 (no pasa de estrellitas). swiss-721-bt es self-hosted → el render local es fiel. "MAGNÍFICO." y "DIVERTIDO." dejan huequito antes de la guitarra. Iteré 19→17→16→17px: 19 chocaba, 16 rozaba, 17+(-0.4 ls)+(x1) es el punto que libra guitarra Y mantiene tamaño.
+- **PENDIENTE:** título/subtítulo p2 reales (siguen placeholder); texto real póster 3 (baked HISTORIE TIME). GitHub deploys lentos hoy.
+
 ## 2026-07-09 · anette (cont. 35) — MÓVIL "Sobre mí": pósters a posiciones EXACTAS del SVG (arregla recorte + texto movido)
 - **Ani (2171):** pósters 2 y 3 "recortados" y "se movió UN TÍTULO COOL / AQUÍ UN SUBTÍTULO". Pidió revisar el SVG original para ver dónde va el texto.
 - **Diagnóstico:** mi rebuild limpio (cont.34) NO tiene doble PERO puse pósters 2/3 en posiciones % aproximadas que NO coinciden con el SVG → recortados + texto (que sí está en posiciones del SVG: título 6.8, subtítulo 12.7) desalineado. Renderé el SVG original (`rsvg-convert` → svg-original.png) = fuente de verdad del layout.
