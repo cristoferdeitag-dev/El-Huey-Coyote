@@ -2,6 +2,14 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 28) — MÓVIL "Sobre mí": pósters en CAPAS (arregla doble póster 1 + z-order)
+- **Ani reportó 2 bugs:** (1) veía el póster 1 DOBLE, (2) el póster 1 debía ir DETRÁS del póster 2. Causa raíz: el fondo `conoces-fondo-notext.webp` traía los 3 pósters horneados (poster 1 en fuente mala) Y encima yo ponía el overlay de Ani → doble; y el overlay estaba en z5 (encima de todo) → poster 1 tapaba al 2.
+- **FIX = arquitectura en CAPAS (la correcta):** encontré los assets limpios de la versión previa: `fondo-sin-posters.png` (pared 1086×1937 con "El mero mero", SIN pósters) y `poster2-tight.png`/`poster3-tight.png` (pósters 2 y 3 individuales, transparentes, SIN texto horneado). Los convertí a webp: `conoces-wall.webp` (268KB), `poster2.webp` (52KB), `poster3.webp` (70KB).
+- **Nuevo stack de la sección:** bg = pared limpia → `poster1-img` (imagen de Ani, z3) → `poster2-img`/`poster3-img` (z4, ENCIMA del 1) → texto vivo SVG (z6). Pósters 2/3 posicionados con las %s calibradas del .ai (poster-2 top57.87/left24.54/w49.08; poster-3 top78.83/left70.26/w52.67). Verificado con preview3.cjs (intercept webp→PNG + oculta splash): póster 1 único, póster 2 tapando al 1, sin texto doble en 2/3. ✅
+- **Bonus:** al usar pósters limpios + texto vivo, se quitó el texto doble que también tenían pósters 2/3 (baked + live).
+- **Deploy:** efe0bee success. Assets en vivo (wall 274KB, p2 53KB, p3 71KB). En vivo: https://elhueycoyote.com/preview/sitio/?v=0709w1
+- **PENDIENTE:** Ani dijo que tiene el TEXTO FINAL de cada póster → se lo pedí desglosado (p1 resumen; p2 título/subtítulo/medio; p3 título/subtítulo/2 palabras/resaltar). Cuando llegue → editar los `<text>` vivos del overlay. Queda sin uso (no borrado) `conoces-fondo-notext.webp`.
+
 ## 2026-07-09 · anette (cont. 27) — MÓVIL "Sobre mí": corrección de imagen del póster 1
 - Ani avisó que la 1ª imagen que mandó era equivocada; mandó la CORRECTA (`inbox/1783579756515-AQADxwtrG3mteEZ8.jpg`, también 1086×1937, blanco de fondo). Mismo flood-fill → reemplacé `poster1-latam-logo.webp` (mismo bbox x396-1085/y0-1062, 148KB). Cache-bust `?v=0709p1b`. Deploy 04e85d6 success (GitHub tardó ~6 min en cola, no falló). En vivo verificado: index referencia v0709p1b, 0 texto vivo EL VATO. Esperando review de Ani (PARA LATAM/logo idénticos? grosor del doble contorno del resumen?).
 
