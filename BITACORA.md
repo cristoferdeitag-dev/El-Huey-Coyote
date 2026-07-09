@@ -2,6 +2,15 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 29) — MÓVIL "Sobre mí": revert pósters 2/3 + póster 1 detrás del 2 (fondo horneado correcto)
+- **Ani (msg 2140):** "El póster 1 ya quedó bien PERO ahora veo raro los otros dos. Déjalos como estaban antes. El único cambio era que el póster 1 estuviera detrás del póster 2." → mi cont.28 (capas con pósters 2/3 LIMPIOS + texto vivo) los dejó sparse/raros; ella quiere el look DENSO de antes (texto baked del fondo).
+- **Insight clave:** en el fondo horneado `conoces-fondo-notext.webp`, el póster 2 YA está delante del póster 1 (su orilla crema tapa la banda PARA LATAM). El bug del z-order lo causaba MI overlay `poster1-img` (z5) que tapaba al 2, no el fondo.
+- **FIX (PIL composite):** horneé la imagen CORRECTA del póster 1 de Ani DENTRO del fondo, en su capa, protegiendo al póster 2. Máscara de pegado = `alpha(p1) - alpha(p2)` (poster2-tight como máscara del 2, escalado/posicionado con las %s del .ai a 2x). Así el póster 1 correcto cubre al mal-horneado PERO no invade al póster 2 → 2 sigue delante. Resultado `conoces-fondo-p1ok.webp` (887KB).
+- **HTML:** bg = `conoces-fondo-p1ok.webp?v=0709fix`; QUITADOS los 3 overlays poster1/2/3-img (ya no hacen falta, todo baked en el fondo). CSS de esas clases quedó muerto (inocuo). Texto vivo (resumen doble-contorno + títulos placeholder) intacto.
+- **Verificado** (preview4.cjs): pósters 2/3 idénticos a antes (texto denso), póster 1 correcto detrás del 2, sin doble. Deploy c8d5c70 success. En vivo: 0 elementos poster1-img, bg=conoces-fondo-p1ok. https://elhueycoyote.com/preview/sitio/?v=0709fix
+- **Sin uso** (no borrados): conoces-wall.webp, poster2.webp, poster3.webp (de cont.28), conoces-fondo-notext.webp, poster1-latam-logo.webp.
+- **PENDIENTE:** texto final de cada póster (Ani lo tiene) → editar `<text>` vivos.
+
 ## 2026-07-09 · anette (cont. 28) — MÓVIL "Sobre mí": pósters en CAPAS (arregla doble póster 1 + z-order)
 - **Ani reportó 2 bugs:** (1) veía el póster 1 DOBLE, (2) el póster 1 debía ir DETRÁS del póster 2. Causa raíz: el fondo `conoces-fondo-notext.webp` traía los 3 pósters horneados (poster 1 en fuente mala) Y encima yo ponía el overlay de Ani → doble; y el overlay estaba en z5 (encima de todo) → poster 1 tapaba al 2.
 - **FIX = arquitectura en CAPAS (la correcta):** encontré los assets limpios de la versión previa: `fondo-sin-posters.png` (pared 1086×1937 con "El mero mero", SIN pósters) y `poster2-tight.png`/`poster3-tight.png` (pósters 2 y 3 individuales, transparentes, SIN texto horneado). Los convertí a webp: `conoces-wall.webp` (268KB), `poster2.webp` (52KB), `poster3.webp` (70KB).
