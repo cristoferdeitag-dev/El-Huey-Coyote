@@ -8,6 +8,9 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 - **Póster 2 (párrafo cv70):** copy nuevo = 4 líneas (más largo). Para no pasar de las estrellitas reduje font **17→14px**, letter-spacing -0.2, interlineado apretado (tspans y 38/60/82/104), transform x -8→2 (margen izq). Libra guitarra (der.) y estrellitas (abajo). swiss-721-bt self-hosted → render fiel.
 - **DECISIÓN de caso:** ambos textos los dejé en MAYÚSCULAS (póster 2 = mismo estilo que Ani aprobó en cont.36; póster 1 = estilo display doble-contorno siempre fue mayúsculas). Ani escribió el copy en minúsculas → si lo quiere tal cual (minúsculas), cambio en 1 seg. Avisado en el mensaje.
 - **TRADEOFF avisado:** el párrafo del póster 2 quedó más chico que antes (14px) porque el copy nuevo es más largo y debe caber sobre las estrellitas.
+- **Ani (2190):** rebalancear ambos para que no quede hueco a la derecha; póster 2 además un poquito más grande, sin pasar de estrellitas.
+  - **Póster 1:** reparto de 6→**5 renglones más llenos** (tspans y 0/34/68/102/136, ~30-31 chars c/u, solo el último corto). Llena bien el ancho. 20px sin cambio.
+  - **Póster 2:** el hueco era sobre todo el renglón 1 ("NACIÓ EN GUADALAJARA." quedaba corto). Probé 3 renglones muy llenos pero "COMPONE," chocaba con el cuerpo de la guitarra (los renglones de en medio topan con ella). Solución: **4 renglones** con el renglón 1 ya lleno ("NACIÓ EN GUADALAJARA. HACE DE TODO:"), font **14→15px** (más grande), tspans y 40/63/86/109. Iteré 16→15px: a 16 "TODO:" rozaba el mástil; 15 lo despega y da margen a estrellitas. Libra guitarra (mástil arriba, cuerpo en medio) y estrellitas.
 - **PENDIENTE:** título/subtítulo p2 reales (siguen placeholder UN TÍTULO COOL / AQUÍ UN SUBTÍTULO); texto real póster 3 (baked HISTORIE TIME).
 
 ## 2026-07-09 · anette (cont. 36) — MÓVIL "Sobre mí": 3 afinados (título p2 izq, párrafo mayúsculas, quitar picos p1)
