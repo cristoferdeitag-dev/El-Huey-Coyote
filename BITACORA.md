@@ -2,6 +2,14 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 25) — MÓVIL "Sobre mí": doble contorno + DIAGNÓSTICO de fondo (fuentes rsvg)
+- **Ani (msg 2129):** póster 1 sigue mal — (1) logo El Huey Coyote no se ve bien, (2) PARA LATAM no se ve igual a su diseño ("esos 2 NO SON TEXTO, deberían verse IGUALITOS"), (3) le quité el contorno blanco al texto de abajo de EL VATO — ese texto lleva **DOS contornos: blanco (adentro) y luego azul (afuera)**.
+- **FIX doble contorno (✅ desplegado, commit 9f5c483):** revertí cont.24 (había puesto cv16 azul, matando el blanco). Ahora resumen = 3 capas: `cv60` azul stroke 15px (afuera) → `cv16` blanco stroke 9px (medio) → `cv20` rojo (relleno). `paint-order: stroke fill` en las 3. Texto rojo, contorno blanco, contorno azul externo.
+- **DIAGNÓSTICO CLAVE (raíz de PARA LATAM/logo):** el fondo `conoces-fondo-notext.webp` **SÍ tiene texto horneado** (a pesar del nombre) — decodifiqué el webp (PIL) y trae PARA LATAM, COSAS SOBRE, HISTORIE TIME, logo, TODO baked por **rsvg-convert en fuentes fallback** (rsvg NO tiene las trial de Adobe: Cocogoose de PARA LATAM, la script del logo). Por eso PARA LATAM/logo NO se ven como su diseño y ningún ajuste de overlay lo corrige. `seccion-diseno-anette.png` (1086×1937) SÍ es su diseño perfecto (fuentes correctas) — está en assets/conoces/.
+- **Bug adicional detectado:** en mi render headless (local Y en vivo liv6) la sección muestra una **cortina verde con el logo cubriéndolo todo** (el `<use #image1>` del overlay se agranda a scale(1) tapando el collage de pósters). Ani SÍ ve los pósters en su device (¿cache/versión previa?) → hay divergencia render-mío vs lo-que-ella-ve. PENDIENTE resolver la oclusión del #image1.
+- **PLAN propuesto a Ani (mensaje enviado):** como rsvg no puede pintar sus fuentes, PARA LATAM + logo necesitan venir como IMAGEN de ella. Opción A (recomendada): exportar la sección/póster como PNG plano desde Illustrator (queda IDÉNTICO, es su render) y yo dejo solo el copy editable como texto vivo encima. Opción B: mandarme PARA LATAM + logo como PNG transparente aparte y sigo con el resto vivo. Esperando su elección.
+- **Archivos:** `preview/sitio/index.html` (capas resumen cv60/cv16/cv20). Sin cambios al webp.
+
 ## 2026-07-08 · anette (cont. 20) — MÓVIL: sección "Ya me conoces/Sobre mí" pasada a TEXTO VIVO (no horneado)
 - **Pedido de Ani:** que el texto de esa sección NO sea parte de la imagen de los pósters (regla dura de Cris: texto vivo, no horneado). Ani mandó el SVG de la sección.
 - **Gotcha export 1:** el 1er SVG (177KB) traía las imágenes ENLAZADAS (Link), no incrustadas → al renderizar salía el texto pero el fondo blanco. Le pedí re-exportar con **"Incorporar/Embed"**. El 2º SVG (9.3MB) ya trajo 21 imágenes embebidas. LECCIÓN: siempre pedir SVG con imágenes **Embed**, no Link.
