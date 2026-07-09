@@ -1589,7 +1589,7 @@
         <!-- ¿YA ME CONOCES? (sección 2 — Sobre mí) -->
         <section id="sobre-mi">
             <!-- Fondo horneado con la imagen CORRECTA del póster 1 de Ani metida en su capa (detrás del póster 2). Pósters 2 y 3 quedan idénticos a antes; póster 1 correcto y sin doble. -->
-            <img class="bg" src="assets/conoces/conoces-fondo-p1ok.webp?v=0709fix" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
+            <img class="bg" src="assets/conoces/conoces-fondo-p2clean.webp?v=0709p2" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
 
             <!-- Capa de TEXTO VIVO (SVG). PARA LATAM y logo son parte de la imagen del póster (no aquí). -->
@@ -1903,6 +1903,8 @@
       /* Resumen póster 1 = doble contorno: cv60 azul (afuera) → cv16 blanco → cv20 rojo (texto). paint-order stroke fill para que cada contorno quede detrás de su relleno. */
       .cv16, .cv20 { paint-order: stroke fill; }
       .cv60 { fill: #0477c3; stroke: #0477c3; stroke-width: 14px; paint-order: stroke fill; }
+      /* Párrafo real del póster 2 (Su nombre significa…) — oscuro sobre el póster crema */
+      .cv70 { font-family: "swiss-721-bt"; font-weight: 700; font-size: 24px; fill: #241a1a; letter-spacing: 0; }
 </style>
     <clipPath id="clippath">
       </clipPath>
@@ -1960,7 +1962,9 @@
         </g>
       <g class="cv26">
         </g>
-      <text class="cv25" transform="translate(103.9152 1302.5701) rotate(-12.7542) scale(.7593 1)"><tspan x="0" y="0">COSAS SOBRE SU HJIWOHFEHIHIHIHI HISTORIARI</tspan></text>
+      <!-- Párrafo viejo (cv25 placeholder) eliminado. El texto denso baked del póster 2 se limpió en el fondo (conoces-fondo-p2clean.webp). -->
+      <!-- Párrafo REAL del póster 2 (Ani), debajo de "AQUÍ UN SUBTÍTULO" -->
+      <text class="cv70" transform="translate(0.7 938.1) rotate(-12.4) scale(.8 1)"><tspan x="0" y="48">Su nombre significa&#8230;</tspan><tspan x="0" y="82">Huey = grande, ingenioso,</tspan><tspan x="0" y="110">magn&#237;fico.</tspan><tspan x="0" y="138">Coyote = curioso, juguet&#243;n</tspan><tspan x="0" y="166">y divertido.</tspan></text>
       <g class="cv26">
         </g>
       <text class="cv17" transform="translate(0.7 938.1) rotate(-12.4) scale(.8 1)"><tspan x="0" y="0">AQU&#205; UN SUBT&#205;TULO</tspan></text>
