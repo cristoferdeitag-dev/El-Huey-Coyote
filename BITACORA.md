@@ -2,6 +2,14 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 31) — MÓVIL "Sobre mí": texto póster 1 afinado (2 vueltas)
+- **Ani (2146):** cambió el texto a "Nacido en Guadalajara. Hace de todo: Canta, toca 21 instrumentos, compone, baila y tiene un estilo ameizing para la moda". Lo puse en 6 líneas mixtas.
+- **Ani (2149):** "acomoda para que no quede tanto espacio vacío a la derecha y escribe todo en MAYÚSCULAS". → reescribí en CAPS y rebalanceé a 5 líneas más largas que llenan el ancho del póster (líneas ~22-25 chars). Menos gap a la derecha.
+- **"ameizing" SE MANTIENE** tal cual — es Spanglish intencional del estilo cotorro de la marca (amazing→ameizing), NO errata. (Nota: regla `feedback_ani_autocorregir_ortografia` es para typos reales, no para flavor de marca.)
+- Edición vía `replace_all` en los tspans internos (mismo texto en las 3 capas cv60/cv16/cv20 del doble contorno). y = 0/46/92/138/184.
+- **Verificado** (preview4.cjs) + en vivo. Deploy 8093d6f success (GitHub tardó ~5 min en cola). Texto CAPS confirmado en vivo x3 capas.
+- **PENDIENTE:** texto final pósters 2 y 3 (títulos vivos: p2 cv18/cv17/cv25; p3 cv19/cv30/cv7x2/cv15). OJO texto denso baked en fondo.
+
 ## 2026-07-09 · anette (cont. 30) — MÓVIL "Sobre mí": Ani APRUEBA sección + texto final PÓSTER 1
 - **Ani (msg 2143):** "Ahora sí quedó muy bien" ✅ (aprobó la sección: pósters 2/3 como antes + póster 1 detrás del 2). Mandó el TEXTO FINAL del póster 1.
 - **Texto póster 1 (resumen/bio):** reemplacé el placeholder por 6 líneas: "Nació en: Guadalajara / Hace de todo: / Canta / Toca 21 instrumentos / Compone / Baila". Editado con `replace_all` en el bloque interno de tspans (mismo contenido en las 3 capas cv60 azul / cv16 blanco / cv20 rojo → doble contorno). y = 0/46/92/138/184/230.
