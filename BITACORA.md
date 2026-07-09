@@ -2,6 +2,13 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 43) — MÓVIL: texto2 cabe en póster, texto3 más grande, + TÍTULO póster 3
+- **Ani (2214):** (a) texto2 (SU NOMBRE): que no se salga del póster 2 SIN moverlo de lugar. (b) texto3 (UN MÚSICO): aún MÁS grande, centrado entre las 2 estrellitas. (c) Póster 3: donde dice "TEXTO MÁS TEXTO" poner "Hace canciones sobre absolutamente TODO." (resto del póster 3 NO tocar aún).
+- **cv71 (texto2):** 17→**15px** (letter-spacing -0.3), MISMA posición translate(215 1095). A 15px las 3 líneas caben dentro del póster con margen.
+- **cv72 (texto3):** 18→**20px** (más grande). Estrellas localizadas por análisis de color (rojo oscuro): SVG (221,1325) y (447,1326), punto medio **x=334**; el hueco limpio entre guitarra (der. x~250) y violín (izq x~414) es angosto (~164). Reescrito en **4 renglones cortos** (UN MÚSICO QUE / SIEMPRE BUSCA / SACARTE UNA / SONRISA.) para caber centrado sin tocar instrumentos. text-anchor middle, translate(334 1286).
+- **cv19 (título póster 3):** era texto vivo. "TEXTO MÁS TEXTO" → "Hace canciones sobre / absolutamente TODO." (2 renglones, `.cv19` 33.8→**20px**, subido translate y 1215.9→1188 para caber arriba del subtítulo sin tocarlo). Casing tal cual la escribió Ani (TODO en mayúsculas). NOTA: el título quedó más chico que el subtítulo placeholder (SUBTÍTULO LINDO Y NICE) — temporal, el subtítulo se cambiará después.
+- **PENDIENTE:** subtítulo + filler + "Palabra súper cool" + "ALGO PARA RESALTAR" del póster 3 (Ani los dará después). Título/subtítulo p2 (UN TÍTULO COOL / AQUÍ UN SUBTÍTULO) siguen placeholder.
+
 ## 2026-07-09 · anette (cont. 42) — MÓVIL "Sobre mí": texto2 al CUADRADO morado + texto3 más grande
 - **Ani (2210, captura cuadrado morado):** texto2 (SU NOMBRE) DEBE ir en el cuadrado morado (área cream a la DER. del sax, bajo la guitarra acústica, arriba del violín) y NO salirse de él. Texto3 (UN MÚSICO): un poco MÁS grande que los otros dos (17px).
 - **cv71 (texto2):** movido a `translate(215 1095)` (dentro del cuadrado, der. del sax), sigue 17px. Las 3 líneas caben: línea1 libra el sax, líneas 2-3 (largas) llegan casi al borde der. del póster pero DENTRO. Left-align desde x215 (borde izq del cuadrado).
