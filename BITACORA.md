@@ -2,6 +2,9 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 27) — MÓVIL "Sobre mí": corrección de imagen del póster 1
+- Ani avisó que la 1ª imagen que mandó era equivocada; mandó la CORRECTA (`inbox/1783579756515-AQADxwtrG3mteEZ8.jpg`, también 1086×1937, blanco de fondo). Mismo flood-fill → reemplacé `poster1-latam-logo.webp` (mismo bbox x396-1085/y0-1062, 148KB). Cache-bust `?v=0709p1b`. Deploy 04e85d6 success (GitHub tardó ~6 min en cola, no falló). En vivo verificado: index referencia v0709p1b, 0 texto vivo EL VATO. Esperando review de Ani (PARA LATAM/logo idénticos? grosor del doble contorno del resumen?).
+
 ## 2026-07-09 · anette (cont. 26) — MÓVIL "Sobre mí": póster 1 = imagen de Ani (opción 2) + 2 gotchas resueltos
 - **Ani eligió opción 2** y mandó el póster 1 completo con TODOS los elementos-imagen (PARA LATAM, logo, EL VATO, foto, estrellas) en fuentes correctas. Instrucción extra: "EL VATO DE LAS ROLITAS RANDOM también es parte del póster, quita el texto vivo para que no se vea doble."
 - **GOTCHA 1 (Telegram mata transparencia):** la imagen llegó como `.jpg` con fondo BLANCO (Telegram comprime fotos → pierde alpha). Pero medía **1086×1937 = el lienzo exacto**, así que recorté el blanco con **flood-fill desde los bordes** (PIL ImageDraw.floodfill, thresh 55, 12 semillas en bordes) → preserva blancos internos (franjas de PARA LATAM, estrellas). Quedó limpio, sin halo. Guardado `assets/conoces/poster1-latam-logo.webp` (148KB, RGBA). LECCIÓN: si Ani manda PNG transparente, pedir que lo mande como ARCHIVO/documento, no como foto (igual que el SVG Embed). El flood-fill es el plan B si llega como foto.
