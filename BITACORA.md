@@ -2,6 +2,12 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 30) — MÓVIL "Sobre mí": Ani APRUEBA sección + texto final PÓSTER 1
+- **Ani (msg 2143):** "Ahora sí quedó muy bien" ✅ (aprobó la sección: pósters 2/3 como antes + póster 1 detrás del 2). Mandó el TEXTO FINAL del póster 1.
+- **Texto póster 1 (resumen/bio):** reemplacé el placeholder por 6 líneas: "Nació en: Guadalajara / Hace de todo: / Canta / Toca 21 instrumentos / Compone / Baila". Editado con `replace_all` en el bloque interno de tspans (mismo contenido en las 3 capas cv60 azul / cv16 blanco / cv20 rojo → doble contorno). y = 0/46/92/138/184/230.
+- **Verificado** (preview4.cjs): 6 líneas caben sobre el póster 1, legibles con doble contorno. Deploy 4f7a18a success, en vivo (texto aparece x3 = las 3 capas). https://elhueycoyote.com/preview/sitio/?v=0709fix
+- **PENDIENTE:** texto final de póster 2 (instrumentos) y póster 3 (verde) — se lo pedí. Cuando llegue → editar los `<text>` vivos (póster 2: cv18 UN TÍTULO COOL, cv17 subtítulo, cv25 COSAS SOBRE; póster 3: cv19 TEXTO MÁS TEXTO, cv30 subtítulo, cv7 Palabra súper cool x2, cv15 ALGO PARA RESALTAR). OJO: el texto denso "COSAS SOBRE/HISTORIE TIME" está BAKED en el fondo (conoces-fondo-p1ok.webp) — si Ani quiere cambiarlo, hay que re-hornear el fondo o taparlo; los títulos sí son vivos.
+
 ## 2026-07-09 · anette (cont. 29) — MÓVIL "Sobre mí": revert pósters 2/3 + póster 1 detrás del 2 (fondo horneado correcto)
 - **Ani (msg 2140):** "El póster 1 ya quedó bien PERO ahora veo raro los otros dos. Déjalos como estaban antes. El único cambio era que el póster 1 estuviera detrás del póster 2." → mi cont.28 (capas con pósters 2/3 LIMPIOS + texto vivo) los dejó sparse/raros; ella quiere el look DENSO de antes (texto baked del fondo).
 - **Insight clave:** en el fondo horneado `conoces-fondo-notext.webp`, el póster 2 YA está delante del póster 1 (su orilla crema tapa la banda PARA LATAM). El bug del z-order lo causaba MI overlay `poster1-img` (z5) que tapaba al 2, no el fondo.
