@@ -2,6 +2,14 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 33) — MÓVIL "Sobre mí": texto real PÓSTER 2 (párrafo) + fondo re-horneado limpio
+- **Ani (2157):** poner el texto real en el párrafo debajo de "AQUÍ UN SUBTÍTULO" del póster 2: "Su nombre significa… / Huey = grande, ingenioso, magnífico. / Coyote = curioso, juguetón y divertido."
+- **Reto:** el párrafo denso viejo ("COSAS SOBRE...") estaba BAKED en el fondo. FIX: re-horneé el fondo pegando `poster2-tight.png` (póster 2 LIMPIO, sin texto) sobre el póster 2 del fondo `conoces-fondo-p1ok` → `conoces-fondo-p2clean.webp` (alineado con las %s del .ai, verificado que cubre todo el texto viejo sin asomar). Pósters 1 y 3 intactos.
+- **Párrafo vivo:** nuevo `<text class="cv70">` (swiss-721-bt 700, oscuro #241a1a) debajo del subtítulo (mismo transform que cv17 + tspans con offset y, siguiendo el tilt -12.4). Quitado el placeholder cv25.
+- **Ani (2160):** "PORQUE VEO DOBLE CARTEL? No muevas los otros textos. Reduce el párrafo para que no pase de las estrellitas." → (a) revisé mis 2 fondos (p1ok live + p2clean nuevo): pósters INDIVIDUALES, sin doble → el doble que veía es artefacto de caché/deploy-a-medias (deploy tardó ~9 min en cola). Le pedí refresh fuerte + captura si persiste. (b) reduje cv70 24→19px + tspans más juntos (44/69/94/119/144) → ya no pasa de las estrellitas. NO moví otros textos.
+- **Deploy:** 5db276f success. En vivo: bg=conoces-fondo-p2clean?v=0709p2, font 19px, párrafo presente.
+- **PENDIENTE:** título/subtítulo póster 2 siguen placeholder (UN TÍTULO COOL / AQUÍ UN SUBTÍTULO) — pedí a Ani los reales. Falta texto póster 3 (sigue baked "HISTORIE TIME"; mismo método: re-hornear con poster3-tight + texto vivo). GitHub deploys MUY lentos hoy (~5-9 min en cola).
+
 ## 2026-07-09 · anette (cont. 32) — MÓVIL "Sobre mí": micro-ajuste tamaño/posición texto póster 1
 - **Ani (2153):** "reduce un chirris el tamaño y sube todo el texto un poquito". FIX: fuente `.cv16,.cv20` 30→28px; contornos proporcionales cv60 15→14px, cv16 9→8px; posición `translate(514.2 797)`→`(514.2 776)` (sube ~21u ≈ 7-8px en pantalla) en las 3 capas. Deploy ca4386c success, en vivo. Verificado local (resumen-check4) + curl (font-size 28px + translate 776 confirmados).
 - **PENDIENTE:** sigue el texto final de pósters 2 y 3.
