@@ -2,6 +2,15 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 34) — MÓVIL "Sobre mí": ELIMINA doble cartel (rebuild limpio) + 2 fixes
+- **Ani (2164, con captura):** confirmó el DOBLE CARTEL (circuló en morado el borde superior del póster 2 duplicado). + "regresa UN TÍTULO COOL / AQUÍ UN SUBTÍTULO a su lugar (los moviste, se ven mal)" + "magnífico con ingenioso, divertido con juguetón (líneas completas)".
+- **Causa del doble:** mi re-horneado (cont.33) pegó `poster2-tight` DESALINEADO sobre el póster 2 horneado → sus orillas (franjas del borde) se asomaban. Correlación de fase daba shift ~(29,-25) pero el chase era frágil.
+- **FIX definitivo = REBUILD TOTAL del fondo (`conoces-fondo-clean.webp`):** pared limpia (fondo-sin-posters) → póster 1 Ani → póster 2 LIMPIO (poster2-tight) → póster 3 CON su texto (extraído del horneado notext por MÁSCARA poster3-tight; las paredes de fondo-sin-posters y notext coinciden, diff ~10). CERO pósters baked que se asomen → imposible el doble. Verificado póster 3 sin rim. Todo a 1086×1937.
+- **Título/subtítulo:** cv18 X -5.2→6.8, cv17 X 0.7→12.7 (valores originales del .ai; en cont.24 los había movido a la izq).
+- **Párrafo cv70:** 3 líneas completas "Su nombre significa… / Huey = grande, ingenioso, magnífico. / Coyote = curioso, juguetón y divertido." (17px, alineado bajo subtítulo en 12.7). Ya no orphans.
+- **Deploy b5bdd90 success.** En vivo: clean.webp (403KB), párrafo en 1 renglón c/u. Pósters 1 y 3 sin tocar.
+- **PENDIENTE:** título/subtítulo p2 siguen placeholder (UN TÍTULO COOL / AQUÍ UN SUBTÍTULO) — "UN" queda al borde izq del póster (posición original .ai); si Ani lo quiere más adentro, mover X. Texto real de p2 título/subtítulo y de póster 3 (sigue baked HISTORIE TIME) pendientes. Sin uso: p1ok, p2clean, conoces-fondo-notext, conoces-wall, poster2/3.webp.
+
 ## 2026-07-09 · anette (cont. 33) — MÓVIL "Sobre mí": texto real PÓSTER 2 (párrafo) + fondo re-horneado limpio
 - **Ani (2157):** poner el texto real en el párrafo debajo de "AQUÍ UN SUBTÍTULO" del póster 2: "Su nombre significa… / Huey = grande, ingenioso, magnífico. / Coyote = curioso, juguetón y divertido."
 - **Reto:** el párrafo denso viejo ("COSAS SOBRE...") estaba BAKED en el fondo. FIX: re-horneé el fondo pegando `poster2-tight.png` (póster 2 LIMPIO, sin texto) sobre el póster 2 del fondo `conoces-fondo-p1ok` → `conoces-fondo-p2clean.webp` (alineado con las %s del .ai, verificado que cubre todo el texto viejo sin asomar). Pósters 1 y 3 intactos.
