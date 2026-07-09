@@ -2,6 +2,10 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 32) — MÓVIL "Sobre mí": micro-ajuste tamaño/posición texto póster 1
+- **Ani (2153):** "reduce un chirris el tamaño y sube todo el texto un poquito". FIX: fuente `.cv16,.cv20` 30→28px; contornos proporcionales cv60 15→14px, cv16 9→8px; posición `translate(514.2 797)`→`(514.2 776)` (sube ~21u ≈ 7-8px en pantalla) en las 3 capas. Deploy ca4386c success, en vivo. Verificado local (resumen-check4) + curl (font-size 28px + translate 776 confirmados).
+- **PENDIENTE:** sigue el texto final de pósters 2 y 3.
+
 ## 2026-07-09 · anette (cont. 31) — MÓVIL "Sobre mí": texto póster 1 afinado (2 vueltas)
 - **Ani (2146):** cambió el texto a "Nacido en Guadalajara. Hace de todo: Canta, toca 21 instrumentos, compone, baila y tiene un estilo ameizing para la moda". Lo puse en 6 líneas mixtas.
 - **Ani (2149):** "acomoda para que no quede tanto espacio vacío a la derecha y escribe todo en MAYÚSCULAS". → reescribí en CAPS y rebalanceé a 5 líneas más largas que llenan el ancho del póster (líneas ~22-25 chars). Menos gap a la derecha.
