@@ -2,6 +2,14 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 37) — MÓVIL "Sobre mí": TEXTO NUEVO pósters 1 y 2 (copy real)
+- **Ani (2185/2186):** cambiar copy. Aclaró: la imagen que mandó es la versión ESCRITORIO (referencia), los cambios van en MÓVIL. (a) Póster 2 párrafo: quitar "Su nombre significa…" → "Nació en Guadalajara. / Hace de todo: Canta, toca 21 instrumentos, compone, baila y tiene un ameizing estilo." (b) Póster 1 resumen (abajo de EL VATO): quitar "Nacido en Guadalajara…" → "Cantador mexicano que convierte cualquier idea en una canción, mezcla géneros, rompe reglas y demuestra que la música también puede ser humor puro."
+- **Póster 1 (resumen, 3 capas cv16/cv60 azul, cv16 blanco, cv20 rojo):** copy nuevo es ~3× más largo y hay poco espacio bajo EL VATO. Reduje `.cv16,.cv20` font-size **28→20px**, contornos proporcionales `.cv60` stroke 14→10, `.cv16` stroke 8→6 (mantiene el look del doble contorno sin blobbing). 6 líneas, gap 32 (tspans y 0/32/64/96/128/160), mismo transform `translate(514.2 776) scale(.8 1)`. Cabe en el área verde del póster sin salirse. cv16/cv20/cv60 se usan SOLO aquí (verificado) → reescalar no rompe nada.
+- **Póster 2 (párrafo cv70):** copy nuevo = 4 líneas (más largo). Para no pasar de las estrellitas reduje font **17→14px**, letter-spacing -0.2, interlineado apretado (tspans y 38/60/82/104), transform x -8→2 (margen izq). Libra guitarra (der.) y estrellitas (abajo). swiss-721-bt self-hosted → render fiel.
+- **DECISIÓN de caso:** ambos textos los dejé en MAYÚSCULAS (póster 2 = mismo estilo que Ani aprobó en cont.36; póster 1 = estilo display doble-contorno siempre fue mayúsculas). Ani escribió el copy en minúsculas → si lo quiere tal cual (minúsculas), cambio en 1 seg. Avisado en el mensaje.
+- **TRADEOFF avisado:** el párrafo del póster 2 quedó más chico que antes (14px) porque el copy nuevo es más largo y debe caber sobre las estrellitas.
+- **PENDIENTE:** título/subtítulo p2 reales (siguen placeholder UN TÍTULO COOL / AQUÍ UN SUBTÍTULO); texto real póster 3 (baked HISTORIE TIME).
+
 ## 2026-07-09 · anette (cont. 36) — MÓVIL "Sobre mí": 3 afinados (título p2 izq, párrafo mayúsculas, quitar picos p1)
 - **Ani (2175, con captura marcada):** (a) turquesa sobre "UN TÍTULO COOL" (p2) → moverlo un poco a la IZQUIERDA (COOL invadía el póster 1). (b) el párrafo que ella pasó → TODO MAYÚSCULAS + un poquito más grande, cuidando NO chocar con la guitarra (der.) ni pasar de las estrellitas (abajo). (c) morado sobre el contorno azul del resumen p1 ("NACIDO EN GUADALAJARA.") → quitar los PICOS.
 - **FIX (c) picos:** eran los vértices en `miter` del stroke grueso. Añadido `.cv16,.cv20,.cv60 { stroke-linejoin: round; stroke-linecap: round; }` → contorno azul liso. Verificado (crop_resumen).
