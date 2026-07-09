@@ -2,6 +2,15 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 40) — MÓVIL "Sobre mí": +tamaño p1, reubicar cv71 (morado) + TERCER texto cv72 (verde)
+- **Ani (2202, captura marcas morado+verde):** (a) póster 1 aún MÁS grande. (b) párrafo p2 "Nació en Guadalajara" un chirris más grande + subirlo un chirris. (c) el 2º texto (SU NOMBRE) va en la marca MORADA (der. del sax, bajo la guitarra acústica) — lo reubiqué ahí. (d) TERCER texto NUEVO en la marca VERDE (entre guitarra eléctrica y violín): "Un músico que siempre busca sacarte una sonrisa."
+- **Póster 1:** `.cv16,.cv20` **18→20px**. OJO: a 20px "MEZCLA" (renglón 2) toca la esquina DOBLADA del póster. Avisado a Ani; si no le gusta, bajar a 19 o re-wrap. Abajo no se desborda ("HUMOR PURO." cabe).
+- **Párrafo p2 cv70:** **16→17px** + subido (translate y 938.1→930). Libra guitarra/estrellitas.
+- **cv71 (SU NOMBRE):** movido translate (80 1240)→**(255 1140)** = área morada, der. del sax, bajo guitarra acústica. Libra sax (izq) y violín (abajo-der).
+- **cv72 (NUEVO, verde):** `.cv72` swiss-721-bt 700 14px. `<text class="cv72" transform="translate(230 1330) rotate(-12.4) scale(.8 1)">` 2 líneas: "UN MÚSICO QUE SIEMPRE BUSCA / SACARTE UNA SONRISA." en el hueco entre guitarra eléctrica (izq) y violín (der). Insertado tras cv71.
+- **Caso:** cv72 y cv71 en MAYÚSCULAS (consistencia). Ani los escribe en minúsculas → avisado.
+- **PENDIENTE:** título/subtítulo p2 reales; texto real póster 3 (baked HISTORIE TIME).
+
 ## 2026-07-09 · anette (cont. 39) — MÓVIL "Sobre mí": +tamaño ambos textos + SEGUNDO texto p2 (Su nombre significa…)
 - **Ani (2198, captura marca morada):** "está súper bien el acomodo". (a) aumentar un poco el tamaño de ambos textos. (b) agregar el SEGUNDO texto del póster 2 en la zona MORADA (área vacía central, debajo del saxofón): "Su nombre significa… / Huey = grande, ingenioso, magnífico. / Coyote = curioso, juguetón y divertido." (= el texto viejo que se quitó en cont.37, ahora regresa como bloque aparte).
 - **Tamaños:** resumen p1 `.cv16,.cv20` **17→18px** (a 18 "MEZCLA/DEMUESTRA" quedan al filo del doblez, legibles; si toca, bajar). Párrafo p2 `.cv70` **15→16px** (libra guitarra y estrellitas).
