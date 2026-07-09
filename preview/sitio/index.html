@@ -1064,6 +1064,14 @@
         #sobre-mi { overflow: hidden; scroll-margin-top: clamp(64px, 18vw, 100px); }
         #sobre-mi .poster img { width: 100%; display: block; }
 
+        /* Póster 1 como imagen de Ani (PARA LATAM/logo/EL VATO con sus fuentes) — lienzo completo 1086×1937, encaja solo; tapa el póster 1 mal-horneado del fondo */
+        #sobre-mi .poster1-img {
+            position: absolute; inset: 0;
+            width: 100%; height: auto;
+            z-index: 5; pointer-events: none;
+            display: block; filter: brightness(0.85);
+        }
+
         /* === Capa de TEXTO VIVO (SVG) del "Sobre mí" — encima del fondo, ya no horneado === */
         #sobre-mi .conoce-live {
             position: absolute; inset: 0;
@@ -1573,6 +1581,8 @@
         <!-- ¿YA ME CONOCES? (sección 2 — Sobre mí) -->
         <section id="sobre-mi">
             <img class="bg" src="assets/conoces/conoces-fondo-notext.webp?v=0708liv6" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
+            <!-- Póster 1 (PARA LATAM + logo + EL VATO + foto) = imagen tal cual de Ani (fuentes correctas), encima del fondo, debajo del texto vivo -->
+            <img class="poster1-img" src="assets/conoces/poster1-latam-logo.webp?v=0709p1" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
 
             <!-- Capa de TEXTO VIVO (SVG). PARA LATAM y logo son parte de la imagen del póster (no aquí). -->
@@ -1933,42 +1943,7 @@
     </defs>
   <g class="cv47">
     <g id="Fondo">
-      <use transform="translate(399.2 -26.2) rotate(2.5) scale(1)" xlink:href="#image1"/>
-      <g class="cv58">
-        <use transform="translate(399.9 -27.2) rotate(2.5) scale(1)" xlink:href="#image1"/>
-      </g>
-      <g class="cv40">
-        <use transform="translate(394.5 -56.2) rotate(2.1) scale(1)" xlink:href="#image1"/>
-      </g>
-      <g class="cv1">
-        </g>
-      <g>
-        <g>
-          </g>
-      </g>
-      <g>
-        <g>
-          </g>
-      </g>
-      <use transform="translate(144.308 1328.5657) rotate(-3.0135) scale(.3071)" xlink:href="#image"/>
-      <use transform="translate(403.2134 1269.872) rotate(-3.0135) scale(.3071)" xlink:href="#image"/>
-      <g>
-        <text class="cv28" transform="translate(506.7 712.1) rotate(6)"><tspan x="0" y="0">ROLITAS RANDOM</tspan></text>
-        <text class="cv29" transform="translate(506.7 712.1) rotate(6)"><tspan x="0" y="0">ROLITAS RANDOM</tspan></text>
-      </g>
-      <g>
-        <text class="cv31" transform="translate(542.1 650.1) rotate(6)"><tspan x="0" y="0">EL VATO DE LAS </tspan></text>
-        <text class="cv27" transform="translate(542.1 650.1) rotate(6)"><tspan x="0" y="0">EL VATO DE LAS </tspan></text>
-      </g>
-      <g class="cv33">
-        <g class="cv53">
-          <use transform="translate(400.7 -26.5) rotate(2.5) scale(1)" xlink:href="#image1"/>
-        </g>
-      </g>
-      <g class="cv21">
-        <g class="cv50">
-          </g>
-      </g>
+      <!-- Fotos de pósters (image/image1) ELIMINADAS del overlay: ya vienen en el fondo webp + el póster 1 corregido (poster1-latam-logo.webp). Uno de estos <use #image1> a scale(1) se agrandaba y tapaba todo (cortina verde). EL VATO también movido a la imagen del póster. -->
     </g>
     <g id="Texto">
       <text class="cv18" transform="translate(-5.2 904.9) rotate(-12.8) scale(.8 1)"><tspan x="0" y="0" xml:space="preserve">UN  T&#205;TULO  COOL</tspan></text>
