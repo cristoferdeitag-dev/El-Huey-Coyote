@@ -2,6 +2,12 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 38) — MÓVIL "Sobre mí": ajustes de salto de línea (MEZCLA up p1, NACIÓ solo p2)
+- **Ani (2194):** (a) Póster 1: subir "MEZCLA" al mismo renglón que "CANCIÓN," y reacomodar. (b) Póster 2: "Nació en Guadalajara." en su PROPIO renglón y "Hace de todo:…" en renglón aparte (deshacer la unión de cont.37-seguimiento).
+- **Póster 1:** reflow con MEZCLA arriba → renglón 2 "CUALQUIER IDEA EN UNA CANCIÓN, MEZCLA" (37 chars) se estiraba hasta la esquina DOBLADA del póster a 20px. Bajé `.cv16,.cv20` **20→17px** (37 chars@17 ≈ ancho de 31 chars@20 = zona limpia), contornos `.cv60` 10→9, `.cv16` 6→5. 5 líneas (y 0/34/68/102/136): CANTADOR…CONVIERTE / …CANCIÓN, MEZCLA / GÉNEROS…DEMUESTRA / QUE LA MÚSICA…SER / HUMOR PURO. Cabe sin tocar el doblez.
+- **Póster 2:** revertido a 4 renglones con "NACIÓ EN GUADALAJARA." solo (tspans y 40/63/86/109), mantengo **15px** (más grande que los 14 orig). Libra guitarra y estrellitas. Ani ACEPTA que el renglón 1 quede corto (lo quiere como frase aparte).
+- **PENDIENTE:** título/subtítulo p2 reales; texto real póster 3 (baked HISTORIE TIME).
+
 ## 2026-07-09 · anette (cont. 37) — MÓVIL "Sobre mí": TEXTO NUEVO pósters 1 y 2 (copy real)
 - **Ani (2185/2186):** cambiar copy. Aclaró: la imagen que mandó es la versión ESCRITORIO (referencia), los cambios van en MÓVIL. (a) Póster 2 párrafo: quitar "Su nombre significa…" → "Nació en Guadalajara. / Hace de todo: Canta, toca 21 instrumentos, compone, baila y tiene un ameizing estilo." (b) Póster 1 resumen (abajo de EL VATO): quitar "Nacido en Guadalajara…" → "Cantador mexicano que convierte cualquier idea en una canción, mezcla géneros, rompe reglas y demuestra que la música también puede ser humor puro."
 - **Póster 1 (resumen, 3 capas cv16/cv60 azul, cv16 blanco, cv20 rojo):** copy nuevo es ~3× más largo y hay poco espacio bajo EL VATO. Reduje `.cv16,.cv20` font-size **28→20px**, contornos proporcionales `.cv60` stroke 14→10, `.cv16` stroke 8→6 (mantiene el look del doble contorno sin blobbing). 6 líneas, gap 32 (tspans y 0/32/64/96/128/160), mismo transform `translate(514.2 776) scale(.8 1)`. Cabe en el área verde del póster sin salirse. cv16/cv20/cv60 se usan SOLO aquí (verificado) → reescalar no rompe nada.
