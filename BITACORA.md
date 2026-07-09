@@ -2,6 +2,12 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-09 · anette (cont. 42) — MÓVIL "Sobre mí": texto2 al CUADRADO morado + texto3 más grande
+- **Ani (2210, captura cuadrado morado):** texto2 (SU NOMBRE) DEBE ir en el cuadrado morado (área cream a la DER. del sax, bajo la guitarra acústica, arriba del violín) y NO salirse de él. Texto3 (UN MÚSICO): un poco MÁS grande que los otros dos (17px).
+- **cv71 (texto2):** movido a `translate(215 1095)` (dentro del cuadrado, der. del sax), sigue 17px. Las 3 líneas caben: línea1 libra el sax, líneas 2-3 (largas) llegan casi al borde der. del póster pero DENTRO. Left-align desde x215 (borde izq del cuadrado).
+- **cv72 (texto3):** subido 17→**18px** (más grande que texto1/2). Las 2 estrellitas rojas están MUY juntas (~SVG 163 y 334, gap ~171) y el renglón1 es largo (~225 a 18px > gap) → no cabe ENTRE ellas sin tocar; lo recentré en `translate(255 1300)` sobre el punto medio de las estrellas (text-anchor middle). Queda balanceado entre las 2 (izq abajo, der arriba), diagonal. "BUSCA" queda cerca de la estrella der. (la inclinación lo pasa apenas por arriba) — 18px es ~lo más grande que cabe entre estrellas.
+- **PENDIENTE:** título/subtítulo p2 reales; texto real póster 3.
+
 ## 2026-07-09 · anette (cont. 41) — MÓVIL "Sobre mí": textos p2 todos a 17px + MAYÚSCULAS confirmado
 - **Ani (2206):** póster 1 "ya quedó perfecto, no le muevas" (20px se queda). Póster 2: texto1 (NACIÓ) bajar un chirris; texto2 (SU NOMBRE) y texto3 (UN MÚSICO) al MISMO tamaño que texto1 (**17px**); texto2 que no salga del póster; texto3 centrado ENTRE las 2 estrellitas. **Confirmó: TODO el póster 2 en MAYÚSCULAS** (ya estaba así — buena decisión de consistencia).
 - **cv70 (texto1):** translate y 930→940 (bajado un chirris). Sigue 17px.
