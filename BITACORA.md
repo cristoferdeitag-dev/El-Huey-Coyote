@@ -2,6 +2,8 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+> **🔒 REGLA DE PROPIEDAD (Ani, 2026-07-10):** El diseño en vivo de la compu (`compu/index.html`) y la móvil (`movil/index.html`) es de **Ani (Anette)**. **Si quien pide un cambio NO es Ani, NO edites esos archivos: haz el cambio en un diseño NUEVO aparte** (copia en su propia carpeta) y deja el de Ani intacto. Solo Ani autoriza cambios al diseño canónico. Cris conserva su override de dueño (regla 4 de candados), pero el default —aun para él si no lo pide explícito— es copia nueva. Detalle: memoria `feedback_hueycoyote_diseno_de_ani_no_editar`.
+
 ## 2026-07-10 · anette (cont. 57) — MÓVIL: "El mero mero" no existía · restaurado con la animación de compu
 - **Ani (2287):** SOLO móvil. "No me sale lo de EL MERO MERO, checa eso y colócale la animación que también tiene la versión compu."
 - **🔴 CAUSA RAÍZ (regresión del 8-jul).** El commit **`b65a56c`** ("sección con TEXTO VIVO (no horneado)", instancia *cris2/Laso*) **borró el `<div class="mero-mero">`** de la móvil. Su mensaje decía: *"Mero mero ahora viene del SVG (se quitó el div duplicado)"*. **La capa SVG nunca lo trajo:** `conoce-live` tiene **43 `<tspan>` y ninguno dice "El mero mero"**.
