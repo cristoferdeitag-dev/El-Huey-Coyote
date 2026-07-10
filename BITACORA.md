@@ -2,6 +2,17 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 48) — COMPU: título p1 encaja entre estrellas + contorno AZUL del resumen p2
+- **Ani (2245 + captura):** (a) p1: mover "TÍTULO" un chirris a la izq y "COOL" un poco a la izq (la "O" de TÍTULO chocaba con la estrella roja). (b) p2: falta el **contorno azul** del resumen (lleva blanco + azul) y que **no se vea con picos**.
+- **(a) Diagnóstico — NO era un simple nudge.** Medí con `getExtentOfChar()` en el navegador (métricas reales, no mi copia de la fuente): con `scale(.8 1)` el título ocupa global x 94.6→629.0 y "TÍTULO" mide **212.7px**. Las 2 estrellas del arte (detectadas por color en `conoces-poster1-clean.webp`: **verde 183..200, roja 413..432**) dejan un hueco de **213.0px**. Cero holgura → NINGÚN desplazamiento lateral podía dar aire en ambos lados; moverlo a la izq sólo cambiaba de estrella el choque.
+- **Causa raíz:** nuestro webfont `swiss-721-bt` 900 es **~7.4% más ancho** que el `Swiss721BT-Black` que Ani usó en Illustrator. Se comprueba con las estrellas: están puestas para que caigan en los dobles espacios, y con nuestra fuente los dobles espacios quedan corridos (la roja cae DENTRO de la "O").
+- **Fix:** `scale(.8 1)` → **`scale(.745 1)`** en `.hx-st42` (= 0.8 ÷ 1.074, el factor de ancho de más). Esto reproduce el ancho real del diseño de Ani, y como "UN" ancla en x=0, TÍTULO y COOL se recorren solos a la izquierda — exactamente lo que pidió (COOL se mueve más: 25.4px vs 8.4px de TÍTULO). Verificado en navegador: huecos **7.2 / 8.3 / 6.6 / 6.8 px** alrededor de las 2 estrellas. NO se tocó font-size (la altura no cambia).
+- **(b) Contorno azul:** el SVG de Ani sólo traía 3 capas (st35 blanco stroke 9 + st46 blanco + st29 rojo). Añadí una 4ª capa `.hx-blue` **antes** de st35, calcada de `.nvblue` del móvil: `fill/stroke #0477c3`, `stroke-width:15px`, `paint-order:stroke fill`, `stroke-linejoin/linecap:round`. Orden de pintado: azul (abajo, 15) → blanco (9) → blanco fill → rojo.
+- **Picos:** los causaba el `stroke-linejoin` por defecto (**miter**) en las capas con contorno. Añadí `paint-order:stroke fill` + `stroke-linejoin:round` + `stroke-linecap:round` a `.hx-st35` y `.hx-st29`. Verificado en render: sin picos.
+- **Gotcha de captura:** el `getBoundingClientRect()` del svg CAMBIA entre el `evaluate` y el screenshot (imágenes lazy que terminan de cargar y recorren el layout). Para recortar, anclar el crop al `getBoundingClientRect()` del **elemento de texto** justo antes, no a coords calculadas desde la sección.
+- **Deploy:** commit `438538a` → GH Actions → elhueycoyote.com/preview/compu/
+- **PENDIENTE:** nada. Títulos placeholder = intencionales (Ani 2243).
+
 ## 2026-07-10 · anette (cont. 47) — COMPU "¿Ya me conoces?": pósters limpios + TEXTO VIVO reconstruido
 - **Ani (2233→2243):** pasamos a la versión compu. Mandó 3 pósters limpios (sin filler) + `Yameconoces-compu_YA ME CONOCES.svg`. Confirmó (2243) que los títulos "UN TÍTULO COOL", "TEXTO MÁS TEXTO" y "SUBTÍTULO LINDO Y NICE" **son intencionales, se quedan tal cual**.
 - **Problema de entrada:** Telegram mandó los pósters como *foto* → JPEG RGB, sin alfa, aplanados sobre blanco. NO le pedí reenvío.
