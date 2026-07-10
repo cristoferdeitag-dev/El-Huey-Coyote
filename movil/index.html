@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- evita que iOS Safari auto-detecte el número y lo pinte azul como liga tel: -->
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>El Huey Coyote | Música, Sudor y Cumbia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&family=Quicksand:ital,wght@0,500;0,600;1,500;1,600&family=Permanent+Marker&family=Rock+Salt&family=Shadows+Into+Light+Two&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/yzd3dtz.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @font-face {
+            font-family: 'Inlanders Demo';
+            src: url('assets/fonts/InlandersDemo.otf') format('opentype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'DK Drop Dead Gorgeous';
+            src: url('assets/fonts/DKDropDeadGorgeous.otf') format('opentype');
+            font-display: swap;
+        }
+
+        html, body {
+            background: #1a1a1a;
+            overflow-x: clip;   /* clip (no 'hidden') evita crear un contenedor de scroll que traba el deslizamiento en móvil */
+            font-family: 'Quicksand', system-ui, sans-serif;
+        }
+
+        /* Bloquea scroll mientras la cortina está bajada */
+        body.cortina-bajada {
+            overflow: hidden;
+            height: 100vh;
+            touch-action: none;
+        }
+
+        .site-wrap {
+            position: relative;
+            width: 100vw;
+            max-width: 540px;
+            margin: 0 auto;
+            background: #1a1a1a;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            container-type: inline-size;
+        }
+
+        section > img.bg {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1086 / 1937;   /* reserva la altura desde el inicio → el scroll no salta al cargar imágenes */
+            filter: brightness(0.85);    /* oscurece un poquito el fondo → los botones/textos resaltan */
+        }
+        /* PRÓXIMOS SHOWS: fondo nuevo con proporción propia (Ani lo quiere tal cual, sin forzar) */
+        #proximos-shows > img.bg { aspect-ratio: 1126 / 1700; }
+
+        /* El navegador salta el render de lo que está fuera de pantalla → scroll mucho más fluido
+           (la sección "¿Ya me conoces?" tiene decenas de textos con filtros = muy pesada de pintar) */
+        section:not(#headliner) {
+            content-visibility: auto;
+            contain-intrinsic-size: auto 760px;
+        }
+        /* OJO: a los divisores (.divider-marquee) NO se les pone content-visibility:
+           apagaría su render en los bordes de pantalla y la animación de giro se estancaría.
+           Son chiquitos, no necesitan esa optimización → siempre renderizados = siempre girando. */
+        /* Overlay SVG del headliner — encima del bg, mismas dimensiones */
+        #headliner {
+            position: relative;
+        }
+        #headliner img.overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* === PORTADA (cortina overlay) === */
+        .portada-overlay {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 540px;
+            height: 100vh;
+            height: 100dvh;       /* iOS Safari: dvh sigue la barra del navegador y cierra el hueco de abajo */
+            min-height: 100dvh;
+            z-index: 100;
+            overflow: hidden;
+            background: #2dbf86;
+            transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        .portada-overlay img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            pointer-events: none;
+        }
+        .portada-overlay.subida {
+            transform: translateX(-50%) translateY(-100%);
+        }
+        /* Si el usuario ya vio la cortina antes, no se vuelve a mostrar (ni un parpadeo) */
+        html.portada-vista .portada-overlay { display: none !important; }
+        /* Botón "Abre el changarro" — texto blanco = el botón (sin marco, área clicable invisible) */
+        .btn-changarro {
+            position: absolute;
+            top: 81.96%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: transparent;
+            border: none;
+            padding: 2.5% 4%;
+            cursor: pointer;
+            z-index: 2;
+            color: #fff;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(20px, 5.8vw, 34px);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            /* trazo + sombra paralela del diseño de Ani: trazo 1pt #49838f, sombra X7 Y7 blur0 #156d45 75% */
+            -webkit-text-stroke: 0.7px #49838f;
+            paint-order: stroke fill;
+            text-shadow: none;
+            filter: drop-shadow(0.12em 0.12em 0 rgba(21,109,69,0.78));
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0.15);
+            touch-action: manipulation;
+            transition: transform 0.18s ease, text-shadow 0.18s ease;
+            /* glow de neón BLANCO/plateado (Ani: que se note más sobre la cortina verde) */
+            animation: neon-flicker-white 5s linear infinite;
+        }
+        .btn-changarro:hover,
+        .btn-changarro:active,
+        .btn-changarro:focus {
+            transform: translateX(-50%) scale(1.05);
+            text-shadow: 0 0 12px rgba(255,255,255,0.55), 0 2px 4px rgba(0,0,0,0.35);
+            outline: none;
+        }
+
+        /* === HEADLINER áreas clicables — el LETRERO mismo se alza + ilumina === */
+        .menu-link {
+            position: absolute;
+            display: block;
+            cursor: pointer;
+            border: 0;
+            background: transparent;
+            padding: 0;
+            z-index: 2;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.25s ease, filter 0.25s ease;
+            touch-action: pan-y;   /* deja que el dedo baje de inmediato aunque empiece sobre un enlace */
+        }
+        .menu-link .letrero-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            text-align: center;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            -webkit-text-stroke: 1.3px #000;
+            paint-order: stroke fill;
+            /* contorno de brillo + sombra para que los letreros sobresalgan del fondo */
+            text-shadow: 0 0 4px rgba(255,255,255,0.9), 0 0 8px rgba(255,255,255,0.55), 0 2px 4px rgba(0,0,0,0.45);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        /* Efecto: el texto se alza un poquito (sin iluminación) */
+        .menu-link:hover {
+            transform: scale(1.08);
+            z-index: 10;
+        }
+        .menu-link:active {
+            transform: scale(0.96);
+        }
+
+        /* === Mini-brinco suave en secuencia, en bucle ===
+           Orden: PRÓXIMOS SHOWS → PIDE PARA LLEVAR → ¿YA ME CONOCES? → ÉCHAME UN GRITO,
+           pausa, y se repite. */
+        @keyframes letrero-hop {
+            0%   { transform: translateY(0); }
+            9%   { transform: translateY(-9px); }
+            20%  { transform: translateY(0); }
+            100% { transform: translateY(0); }
+        }
+        /* Headliner: estrictamente UNO A LA VEZ — un letrero brinca (~0.6s, un pelín
+           más rápido), corta espera, y hasta entonces brinca el siguiente.
+           Ciclo = 5 × 1.4s = 7s. */
+        /* En vez del brinco: un DESTELLO de luz cruza las letras de cada letrero, por turnos
+           (mismo efecto que los botones de la sección ÉCHAME UN GRITO). Ciclo = 5 × 1.4s = 7s. */
+        .menu-link .letrero-text { position: relative; }
+        .menu-link .letrero-text::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0; top: 0;
+            width: 100%;
+            text-align: inherit;
+            white-space: inherit;
+            line-height: inherit;
+            background: linear-gradient(112deg, rgba(255,255,255,0) 42%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0) 58%);
+            background-repeat: no-repeat;
+            background-size: 230% 100%;
+            background-position: 190% 0;
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+            -webkit-text-stroke: 0;
+            mix-blend-mode: screen;
+            opacity: 0;
+            pointer-events: none;
+        }
+        /* ÉCHAME UN GRITO va en dos renglones: el destello respeta el salto */
+        .area-echame .letrero-text::after { white-space: pre; text-align: left; }
+        /* el destello sólo corre cuando el changarro ya abrió del todo */
+        body.headliner-anim .menu-link .letrero-text::after {
+            /* 3.9s: con delays 0/0.5/1/1.5/2, el último termina ~3.4s y la secuencia reinicia a 3.9s = ~0.5s de pausa */
+            animation: letrero-shine 3.9s ease-in-out infinite;
+        }
+        @keyframes letrero-shine {
+            0%   { background-position: 190% 0; opacity: 0; }
+            3%   { opacity: 1; }
+            33%  { background-position: -70% 0; opacity: 1; }
+            36%  { background-position: -70% 0; opacity: 0; }
+            100% { background-position: -70% 0; opacity: 0; }
+        }
+        /* orden del rayo (Ani): PRÓXIMOS SHOWS → YA ME CONOCES → LA RAZA → ÉCHAME → PA' LLEVAR, 0.5s entre c/u */
+        body.headliner-anim .area-proximos .letrero-text::after,
+        body.headliner-anim .area-shows   .letrero-text::after { animation-delay: 0s;   }
+        body.headliner-anim .area-conoces  .letrero-text::after { animation-delay: 0.5s; }
+        body.headliner-anim .area-fotitos  .letrero-text::after { animation-delay: 1s;   }
+        body.headliner-anim .area-echame   .letrero-text::after { animation-delay: 1.5s; }
+        body.headliner-anim .area-pide     .letrero-text::after { animation-delay: 2s;   }
+
+        @media (prefers-reduced-motion: reduce) {
+            .area-pide, .area-proximos, .area-shows,
+            .area-conoces, .area-echame, .area-fotitos,
+            .menu-link .letrero-text::after,
+            .ech-shine { animation: none; }
+        }
+
+        /* 4 áreas — coords exactas Photoshop de Anette (canvas 1086×1937, X/Y = centro bbox) */
+        /* PA' LLEVAR (antes PIDE) — Ciabatta verde, va al centro (slot bolsa). Link → Merch. Coords SVG Ani 1086×1936 */
+        .area-pide {
+            top: 49.06%;
+            left: 23%;
+            width: 19.91%;
+            height: 3.26%;
+            text-align: center;
+            overflow: visible;
+        }
+        .area-pide .letrero-text {
+            font-family: "ciabatta", 'Permanent Marker', cursive;
+            font-weight: 700;
+            font-style: italic;
+            font-size: clamp(15px, 5.42vw, 30px);
+            color: #00381e;
+            letter-spacing: 0.01em;
+            -webkit-text-stroke: 0.8px #f2f3f5;
+            paint-order: stroke fill;
+            text-shadow: none;
+            display: inline-block;
+            transform: scaleX(0.82);
+            transform-origin: left center;
+            white-space: nowrap;
+            overflow: visible;
+        }
+        /* PRÓXIMOS y SHOWS son 2 áreas separadas con coords individuales de Illustrator */
+        .area-proximos {
+            top: 27.13%;
+            left: 2.98%;
+            width: 20.48%;
+            height: 3.77%;
+            overflow: visible;
+        }
+        .area-proximos .letrero-text {
+            font-family: "open-sans-condensed", 'Oswald', sans-serif;
+            font-weight: 800;
+            font-style: italic;
+            font-stretch: normal;
+            font-size: clamp(13px, 4.7vw, 24px);
+            background: linear-gradient(180deg, #eef60a 0%, #ddfc0b 28%, #e06396 64%, #e8388d 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            -webkit-text-stroke: 0.8px #111;
+            paint-order: stroke fill;
+            filter: drop-shadow(1px 0 0 #4eb32e) drop-shadow(-1px 0 0 #4eb32e) drop-shadow(0 1px 0 #4eb32e) drop-shadow(0 -1px 0 #4eb32e);
+            text-shadow: none;
+            position: relative;
+            transform: rotate(-8deg);
+            transform-origin: center center;
+            overflow: visible;
+        }
+        .area-shows {
+            top: 29.09%;
+            left: 15.22%;
+            width: 14.54%;
+            height: 3.45%;
+            overflow: visible;
+        }
+        .area-shows .letrero-text {
+            font-family: "open-sans-condensed", 'Oswald', sans-serif;
+            font-weight: 800;
+            font-style: italic;
+            font-stretch: normal;
+            font-size: clamp(12px, 4.3vw, 22px);
+            background: linear-gradient(180deg, #eef60a 0%, #ddfc0b 28%, #e06396 64%, #e8388d 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            -webkit-text-stroke: 0.8px #111;
+            paint-order: stroke fill;
+            filter: drop-shadow(1px 0 0 #4eb32e) drop-shadow(-1px 0 0 #4eb32e) drop-shadow(0 1px 0 #4eb32e) drop-shadow(0 -1px 0 #4eb32e);
+            text-shadow: none;
+            position: relative;
+            transform: rotate(-8deg);
+            transform-origin: center center;
+            overflow: visible;
+        }
+        /* ¿Ya me conoces? (nueva tipografía/lugar) — EdsMarket hueso, va ARRIBA. Link → Sobre mí. Coords SVG Ani */
+        /* ¿ / YA ME CONOCES / ? = 3 piezas con coords propias (centro bbox, lienzo 1086×1936):
+           ¿ x272.93, texto x542.89, ? x813.30 → simétrico ~25%/50%/75%. Flex space-between. */
+        .area-conoces {
+            top: 16.37%;
+            left: 23.57%;
+            width: 52.85%;
+            height: 5%;
+            overflow: visible;
+        }
+        .area-conoces span {
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(18px, 6.07vw, 34px);
+            color: #f2f2f2;
+            -webkit-text-stroke: 1.2px #575759;
+            paint-order: stroke fill;
+            text-shadow: none;
+            white-space: nowrap;
+            line-height: 1;
+            position: absolute;
+            top: 0;
+        }
+        /* override del glow/stroke base (.menu-link .letrero-text) — Ani NO quiere contorno de luz */
+        .area-conoces .letrero-text {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #f2f2f2;
+            -webkit-text-fill-color: #f2f2f2;
+            -webkit-text-stroke: 1.2px #575759;
+            text-shadow: none;
+            display: block;
+            width: auto;
+            height: auto;
+        }
+        .area-conoces .q-open  { left: 0;  top: 50%; transform: translateY(-50%); }
+        .area-conoces .q-close { right: 0; top: 50%; transform: translateY(-50%); }
+        /* YA ME CONOCES es casi blanco → un rayo blanco no contrasta. Banda FINA y nítida:
+           línea brillante con un filo oscuro delgado a los lados (glint limpio, sin borrón). */
+        .area-conoces .letrero-text::after {
+            display: block;
+            background-image: linear-gradient(112deg, rgba(70,72,84,0) 48.7%, rgba(70,72,84,0.5) 49.5%, #ffffff 50%, rgba(70,72,84,0.5) 50.5%, rgba(70,72,84,0) 51.3%);
+            background-repeat: no-repeat;
+            /* bg-size más chico = barrido más lento (Ani pidió bajarle un poquito la velocidad) */
+            background-size: 200% 100%;
+            background-position: 190% 0;
+            mix-blend-mode: normal;
+        }
+        .area-echame {
+            top: 30.2%;
+            left: 74.20%;
+            width: 19.93%;
+            height: 5.91%;
+            overflow: visible;
+            transform-origin: center center;
+        }
+        .area-echame .letrero-text {
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(12px, 3.35vw, 18px);
+            color: #fcca0f;
+            -webkit-text-stroke: 0.3px #4d4d4d;
+            paint-order: stroke fill;
+            text-shadow: none;
+            /* sombra paralela de Ani: X-5.67 Y1.42 blur0 #000704 71% — filter:drop-shadow = silueta SÓLIDA rellena */
+            filter: drop-shadow(-0.155em 0.039em 0 rgba(0,7,4,0.82));
+            white-space: normal;
+            line-height: 1;
+            transform: rotate(-6deg);
+            transform-origin: center center;
+            display: block;
+        }
+        /* LA RAZA (antes FOTITOS) — EdsMarket negro, va en el letrero verde arriba de ÉCHAME. Link → Galería. Coords SVG Ani */
+        .area-fotitos {
+            top: 26.04%;
+            left: 75.8%;
+            width: 16.17%;
+            height: 2.56%;
+            text-align: center;
+            overflow: visible;
+        }
+        .area-fotitos .letrero-text {
+            font-family: "ciabatta", 'Permanent Marker', cursive;
+            font-weight: 700;
+            font-style: italic;
+            font-size: clamp(13px, 4.26vw, 24px);
+            color: #111;
+            -webkit-text-stroke: 0.3px #111;
+            paint-order: stroke fill;
+            text-shadow: none;
+            /* sombra paralela verde de Ani: X3 Y2 blur1 #72b293 75% — filter:drop-shadow = silueta SÓLIDA rellena */
+            filter: drop-shadow(0.085em 0.057em 0.025em rgba(114,178,147,0.85));
+            white-space: nowrap;
+            overflow: visible;
+        }
+
+        /* === 3 logos-botón sobre los bancos rojos del headliner === */
+        .stool-btn {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            z-index: 4;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.2s ease, filter 0.2s ease;
+            touch-action: pan-y;
+        }
+        .stool-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.45));
+            pointer-events: none;
+        }
+        .stool-btn:hover { transform: scale(1.08); z-index: 12; }
+        .stool-btn:active { transform: scale(0.94); }
+        /* Apple (izquierda) — confinado al asiento (marca morada de Anette); bajado un chirris */
+        .stool-apple   { top: 82.85%; left: 4.6%;  width: 11.3%; height: 3.15%; }
+        /* YouTube (centro) — achicado un chirris */
+        .stool-youtube { top: 83.13%; left: 34.1%; width: 10.3%; height: 3.15%; }
+        /* Amazon (derecha) — reducido aún más (re-centrado) */
+        .stool-amazon  { top: 83.19%; left: 74.45%; width: 6.3%;  height: 2.15%; }
+
+        /* "PARA LOS MÁS FRESAS" — PANTALLA COMPLETA al tocar el logo de Apple Music */
+        .apple-ad-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            background: #000;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .apple-ad-overlay.abierto { display: block; animation: adFade 0.28s ease; }
+        @keyframes adFade { from { opacity: 0; } to { opacity: 1; } }
+        /* La imagen abarca TODA la pantalla (no marco, no caja de anuncio) */
+        .apple-ad-overlay .ad-img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(0.72);
+            cursor: pointer;
+        }
+        /* Capa-recorte solo de la manzanita + "El HueyCoyote", con contorno de
+           iluminación (igual que los textos de las secciones) para que sobresalga. */
+        .apple-ad-overlay .ad-glow {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            filter: drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 3px #fff) drop-shadow(0 0 7px rgba(255,255,255,0.95)) drop-shadow(0 0 14px rgba(255,255,255,0.75));
+            animation: cta-glow-pulse 1.9s ease-in-out infinite;
+        }
+        @keyframes cta-glow-pulse { 0%,100% { opacity: 0.8; } 50% { opacity: 1; } }
+        /* Zona clicable sobre la manzanita + nombre → cuenta de Apple Music */
+        .apple-ad-overlay .ad-cta {
+            position: absolute;
+            left: 30%; right: 6%;
+            bottom: 3.5%; height: 5.5%;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .apple-ad-overlay .ad-cerrar {
+            position: absolute;
+            top: 16px; right: 16px;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.92);
+            color: #c4161c;
+            border: 2px solid #c4161c;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 2;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* === PRÓXIMOS SHOWS plataformas === */
+        .platform-link {
+            position: absolute;
+            display: inline-block;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 3.1cqw;
+            line-height: 1;
+            color: #F2F2F2;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.18s ease;
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
+            letter-spacing: -0.005em;
+        }
+        .platform-link:hover,
+        .platform-link:active,
+        .platform-link:focus { color: #F29501; }
+        /* EXTRAS: logos en vez de texto (blancos sobre la barra roja) */
+        .platform-logo { display: flex; align-items: center; padding: 0; }
+        .platform-logo img {
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 1px 1.5px rgba(0,0,0,0.35));
+            transition: transform 0.18s ease;
+        }
+        .platform-logo:hover img,
+        .platform-logo:active img { transform: scale(1.06); }
+        .platform-logo .logo-apple   { height: 3.4cqw; }
+        .platform-logo .logo-youtube { height: 3.6cqw; }
+        .platform-logo .logo-amazon  { height: 4.6cqw; }
+        .platform-logo .logo-spotify { height: 4.0cqw; }
+
+        /* === PRÓXIMOS SHOWS — lista de presentaciones (texto variable sobre el fondo) === */
+        .shows-list {
+            position: absolute;
+            /* coords Ani (panel Transformar, centro bbox, lienzo PRÓXIMOS 1126×1700):
+               X464.46 Y405.87 An671.57 Al239.21 → left/top borde, width */
+            top: 16.84%;
+            left: 11.43%;
+            width: 59.64%;
+            display: grid;
+            grid-template-columns: 2.5em 1.7em auto;
+            row-gap: 0.36em;
+            column-gap: 0.7em;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 4.1cqw;
+            line-height: 1;
+            align-items: baseline;
+        }
+        .shows-list .mes { color: #1a1a1a; -webkit-text-stroke: 0.45px #1a1a1a; }
+        .shows-list .dia { color: #00a99d; -webkit-text-stroke: 0.45px #00a99d; }
+        .shows-list .ciudad {
+            color: #00bfb0;
+            -webkit-text-stroke: 0.45px #00a99d;
+            white-space: nowrap;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.18s ease, transform 0.18s ease;
+            /* sin contorno brilloso (Ani) — solo el rayo ::after */
+            text-shadow: none;
+        }
+        .shows-list .ciudad:hover,
+        .shows-list .ciudad:focus { color: #b80d0e; }
+        /* ESPECIALES DEL MES — ciudades (rojo, itálica) */
+        .especial-ciudad {
+            position: absolute;
+            left: 8%;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 4.4cqw;
+            line-height: 1;
+            color: #b80d0e;
+            white-space: nowrap;
+            transform: translateY(-50%);
+            letter-spacing: 0.01em;
+        }
+        .pos-niujork { top: 60%; }
+        .pos-ostin   { top: 66%; }
+        .pos-mayami  { top: 74%; }
+
+        /* fondo nuevo: 4 logos en cuadrícula 2×2 dentro del banner EXTRAS (reemplazan los nombres) */
+        .pos-spotify { top: 94.3%; left: 44%;  transform: translateY(-50%); }
+        .pos-youtube { top: 94.3%; left: 73%;  transform: translateY(-50%); }
+        .pos-amazon  { top: 97.5%; left: 46.5%; transform: translateY(-50%); } /* centrado con Spotify (Ani) */
+        .pos-apple   { top: 97.5%; left: 73%;  transform: translateY(-50%); }
+
+        /* === MERCH — items como texto real (clicables, deslizan al hover) + precios texto editable === */
+        .merch-item {
+            position: absolute;
+            display: inline-block;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 4.15cqw;
+            letter-spacing: -0.01em;
+            line-height: 1;
+            color: #111;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.2s ease;
+            transform: translateY(-50%);
+            /* sin contorno brilloso (Ani) — solo el rayo ::after */
+            text-shadow: none;
+        }
+        .merch-item:hover,
+        .merch-item:active,
+        .merch-item:focus {
+            transform: translateY(-50%) translateX(-12px);
+        }
+
+        .merch-price {
+            position: absolute;
+            display: inline-block;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 4.3cqw;
+            line-height: 1;
+            color: #1A1A1A;
+            white-space: nowrap;
+            pointer-events: none;
+            transform: translateY(-50%);
+        }
+
+        /* Rayo brillante IGUAL al de los botones de ÉCHAME UN GRITO, sobre los textos de
+           PRÓXIMOS SHOWS y LA MERCH: un destello blanco cruza las letras SIN cambiar su color
+           (overlay ::after clip-text + mezcla screen). data-text se llena por JS abajo. */
+        /* Solo las CIUDADES llevan rayo en PRÓXIMOS (no mes/dia, Ani). LA MERCH igual.
+           Ambas secciones: el destello va UNO POR UNO (no todos a la vez) y se repite en bucle. */
+        .shows-list .ciudad { position: relative; }
+        .shows-list .ciudad::after,
+        .merch-item::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0; top: 0;
+            width: 100%;
+            background: linear-gradient(112deg, rgba(255,255,255,0) 47%, rgba(255,255,255,0.98) 50%, rgba(255,255,255,0) 53%);
+            background-repeat: no-repeat;
+            background-size: 260% 100%;
+            background-position: 190% 0;
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+            -webkit-text-stroke: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+        @keyframes text-shine {
+            0%   { background-position: 190% 0; opacity: 0; }
+            1%   { opacity: 1; }
+            10%  { background-position: -70% 0; opacity: 1; }
+            12%  { opacity: 0; }
+            100% { background-position: -70% 0; opacity: 0; }
+        }
+        /* sweep MUCHO más lento y visible para las ciudades (Ani: iban muy rápido y ni se veían) */
+        @keyframes ciudad-shine {
+            0%   { background-position: 190% 0; opacity: 0; }
+            1%   { opacity: 1; }
+            16%  { background-position: -70% 0; opacity: 1; }
+            18%  { opacity: 0; }
+            100% { background-position: -70% 0; opacity: 0; }
+        }
+        /* PRÓXIMOS: 4 ciudades una por una (CDMX→GDL→MONTERREY→TIJUANA), lento (sweep ~1.3s), separadas 1.4s, bucle 8s */
+        .shows-list .ciudad::after { animation: ciudad-shine 8s ease-in-out infinite; }
+        .shows-list .ciudad:nth-of-type(1)::after { animation-delay: 0s;   }
+        .shows-list .ciudad:nth-of-type(2)::after { animation-delay: 1.4s; }
+        .shows-list .ciudad:nth-of-type(3)::after { animation-delay: 2.8s; }
+        .shows-list .ciudad:nth-of-type(4)::after { animation-delay: 4.2s; }
+        /* LA MERCH: mismo efecto de ZOOM que el botón PON UNA ROLITA (music-pulse): cada botón
+           late de escala en bucle. Conserva translateY(-50%) para no perder el centrado.
+           Stagger leve para que sea una ola suave, no todos a la vez. */
+        /* zoom UNO POR UNO: cada botón late ~0.4s y arranca 0.5s después del anterior (Ani).
+           Ciclo 3s = 6 botones × 0.5s. */
+        @keyframes merch-zoom {
+            0%   { transform: translateY(-50%) scale(1);    }
+            7%   { transform: translateY(-50%) scale(1.09); }
+            14%  { transform: translateY(-50%) scale(1);    }
+            100% { transform: translateY(-50%) scale(1);    }
+        }
+        .merch-item { animation: merch-zoom 3s ease-in-out infinite; }
+        .merch-item.pos-pirat-playeras { animation-delay: 0s;   }
+        .merch-item.pos-pirat-chamarra { animation-delay: 0.5s; }
+        .merch-item.pos-pirat-calcetas { animation-delay: 1s;   }
+        .merch-item.pos-orig-playeras  { animation-delay: 1.5s; }
+        .merch-item.pos-orig-chamarra  { animation-delay: 2s;   }
+        .merch-item.pos-orig-calcetas  { animation-delay: 2.5s; }
+        @media (prefers-reduced-motion: reduce) {
+            .shows-list .ciudad::after { animation: none; }
+            .merch-item { animation: none; }
+        }
+
+        /* Posiciones de NOMBRES — Cocogoose 45pt → top = baseline approx */
+        .pos-pirat-playeras { top: 20.8%; left: 8.91%; }
+        .pos-pirat-chamarra { top: 23.5%; left: 8.91%; }
+        .pos-pirat-calcetas { top: 26.3%; left: 8.91%; }
+        .pos-orig-playeras  { top: 35.2%; left: 8.91%; }
+        .pos-orig-chamarra  { top: 38.4%; left: 8.91%; }
+        .pos-orig-calcetas  { top: 41.4%; left: 8.91%; }
+
+        /* Posiciones de PRECIOS */
+        .pos-price-pirat-pl { top: 20.8%; left: 80.4%; }
+        .pos-price-pirat-ch { top: 23.5%; left: 80.0%; }
+        .pos-price-pirat-ca { top: 26.3%; left: 80.5%; }
+        .pos-price-orig-pl  { top: 35.2%; left: 80.5%; }
+        .pos-price-orig-ch  { top: 38.4%; left: 79.0%; }
+        .pos-price-orig-ca  { top: 41.4%; left: 80.6%; }
+
+        /* === CONTACTO (Échame un grito) — botones sticker posicionados (diseño original) + destello secuencial === */
+        /* Cada botón es un enlace posicionado en la columna derecha, a su tamaño real */
+        .ech-btn {
+            position: absolute;
+            display: block;
+            z-index: 3;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ech-btn img {
+            display: block; width: 100%; height: auto;
+            pointer-events: none;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.38));
+        }
+        /* Destello tipo sticker: una franja de luz cruza la FORMA del botón (mask) */
+        .ech-shine {
+            position: absolute; inset: 0;
+            pointer-events: none;
+            background: linear-gradient(112deg, rgba(255,255,255,0) 38%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0) 62%);
+            background-repeat: no-repeat;
+            background-size: 230% 100%;
+            background-position: 190% 0;
+            -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            mix-blend-mode: screen;
+            opacity: 0;
+            animation: ech-shine 8s ease-in-out infinite;
+        }
+        /* el destello entra, cruza y sale; el resto del ciclo está apagado (para que sea por turnos) */
+        @keyframes ech-shine {
+            0%   { background-position: 190% 0; opacity: 0; }
+            2%   { opacity: 1; }
+            13%  { background-position: -70% 0; opacity: 1; }
+            16%  { background-position: -70% 0; opacity: 0; }
+            100% { background-position: -70% 0; opacity: 0; }
+        }
+        /* Orden del destello: Facebook → Instagram → contacto@ → TikTok, y se repite */
+        /* Orden del rayo (Ani): Teléfono(0s) → Facebook(1.6s) → Instagram(3.2s) → Email(4.8s) → TikTok(6.4s), bucle */
+        .ech-fb    .ech-shine { animation-delay: 1.6s; }
+        .ech-ig    .ech-shine { animation-delay: 3.2s; }
+        .ech-email .ech-shine { animation-delay: 4.8s; }
+        .ech-tt    .ech-shine { animation-delay: 6.4s; }
+        /* Posiciones columna derecha; FB, IG y TikTok alineados al MISMO centro (≈83.8%) y movidos a la izquierda; email más chico */
+        .ech-fb    { left: 77.2%; top: 30.7%; width: 13.2%; }
+        .ech-ig    { left: 77.5%; top: 43.2%; width: 12.6%; }
+        .ech-email { left: 73.7%; top: 54%;   width: 18%;   }
+        .ech-tt    { left: 76.8%; top: 67.5%; width: 14%;   }
+        /* NÚMERO telefónico como TEXTO VIVO (fuente Spray Letters) para que el rayo de luz
+           recorte a las letras (Ani). Coords del panel Transformar de Ani (centro del bbox,
+           lienzo 1086×1937): X540.55 Y1153.27 → centro 49.77%/59.54%; trazo 0.5pt. */
+        .ech-phone {
+            position: absolute;
+            left: 49.77%; top: 59.54%;
+            transform: translate(-50%, -50%) rotate(-0.24deg);
+            font-family: 'brush-up', 'swiss-721-bt', cursive;
+            font-size: 5.2cqw;
+            line-height: 1;
+            white-space: nowrap;
+            color: #333333;
+            -webkit-text-stroke: 0.2px rgba(51,51,51,0.35);
+            letter-spacing: 0.005em;
+            pointer-events: none;
+            z-index: 3;
+        }
+        .ech-phone::after {
+            content: attr(data-text);
+            position: absolute; left: 0; top: 0; width: 100%;
+            background: linear-gradient(110deg, rgba(255,255,255,0) 44%, rgba(255,255,255,0.97) 50%, rgba(255,255,255,0) 56%);
+            background-repeat: no-repeat; background-size: 260% 100%; background-position: 190% 0;
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+            -webkit-text-stroke: 0;
+            opacity: 0; pointer-events: none;
+            /* mismo ciclo (8s) que los botones para que el rayo vaya en secuencia:
+               TELÉFONO (0s) → FB (1.6s) → IG (3.2s) → Email (4.8s) → TikTok (6.4s). El barrido
+               del teléfono es más lento (0-20% = 1.6s) porque pasaba muy rápido (Ani). */
+            animation: phone-text-shine 8s ease-in-out infinite;
+            animation-delay: 0s;
+        }
+        @keyframes phone-text-shine {
+            0%   { background-position: 190% 0; opacity: 0; }
+            1%   { opacity: 1; }
+            20%  { background-position: -70% 0; opacity: 1; }
+            22%  { opacity: 0; }
+            100% { background-position: -70% 0; opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .ech-phone::after { animation: none; }
+        }
+
+        /* === FOOTER (final de la página) === */
+        .site-footer {
+            width: 100%;
+            background-color: #1a1f1c;
+            /* Fondo: lámina de metal (parte de abajo de la imagen de Ani), atenuada con una
+               capa oscura encima para que resalte el texto — igual que las demás secciones. */
+            background-image:
+                linear-gradient(rgba(18,24,21,0.66), rgba(18,24,21,0.66)),
+                url("assets/footer-fondo.webp?v=1");
+            background-size: auto, cover;
+            background-position: center, center bottom;
+            background-repeat: no-repeat, no-repeat;
+            border-top: 4px solid #ffd84a;
+            color: #fff;
+            padding: 26px 18px 30px;
+            text-align: center;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .footer-inner { max-width: 540px; margin: 0 auto; }
+        .footer-brand {
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-size: clamp(24px, 8vw, 38px);
+            letter-spacing: 0.04em;
+            color: #ffd84a;
+            margin: 0 0 6px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+        /* Logo "El Huey Coyote" en el footer (reemplaza el texto de la marca) */
+        .footer-logo {
+            display: block;
+            margin: 0 auto 8px;
+            height: clamp(40px, 13vw, 64px);
+            width: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.45));
+        }
+        .footer-tag {
+            font-size: clamp(12px, 3.6vw, 15px);
+            font-weight: 600;
+            color: #ffe9a6;
+            margin: 0 0 16px;
+        }
+        .footer-social {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .footer-social a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: clamp(13px, 3.8vw, 16px);
+            transition: color 0.18s ease;
+        }
+        .footer-social a:hover,
+        .footer-social a:active { color: #ffd84a; }
+        .footer-social .dot { color: #ffd84a; font-weight: 700; }
+        .footer-mail {
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: clamp(13px, 3.8vw, 15px);
+            border-bottom: 2px solid rgba(255,216,74,0.7);
+            padding-bottom: 1px;
+            margin-bottom: 16px;
+            transition: color 0.18s ease, border-color 0.18s ease;
+        }
+        .footer-mail:hover,
+        .footer-mail:active { color: #ffd84a; border-color: #ffd84a; }
+        .footer-copy {
+            font-size: clamp(10px, 3vw, 12px);
+            color: rgba(255,255,255,0.78);
+            margin: 0;
+            letter-spacing: 0.02em;
+        }
+        /* Botón "CIERRA EL CHANGARRO" — mismas letras/estilo que "ABRE EL CHANGARRO" de la portada */
+        .btn-cierra {
+            display: inline-block;
+            position: relative;          /* ancla el rayo dorado ::after */
+            margin: 4px auto 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(20px, 5.8vw, 32px);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            text-shadow: 2px 4px 4px rgba(0,0,0,0.55), 0 2px 2px rgba(0,0,0,0.45);
+            -webkit-tap-highlight-color: rgba(255,255,255,0.15);
+            touch-action: manipulation;
+            transition: transform 0.18s ease, text-shadow 0.18s ease;
+        }
+        .btn-cierra:hover,
+        .btn-cierra:active,
+        .btn-cierra:focus {
+            transform: scale(1.06);
+            text-shadow: 2px 5px 6px rgba(0,0,0,0.6), 0 2px 2px rgba(0,0,0,0.5);
+            outline: none;
+        }
+        /* PARPADEO DE NEÓN sobre CIERRA EL CHANGARRO (Ani: el dorado no se notaba).
+           El texto blanco "prende" con un halo cálido tipo letrero de cantina y titila un
+           par de veces por ciclo, como tubo de neón. La sombra oscura base se mantiene para
+           que siempre se lea. */
+        @keyframes neon-flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 83%, 100% {
+                opacity: 1;
+                text-shadow: 2px 4px 4px rgba(0,0,0,0.55), 0 2px 2px rgba(0,0,0,0.45),
+                             0 0 7px rgba(190,255,240,0.95), 0 0 15px rgba(60,224,200,0.85), 0 0 28px rgba(0,171,171,0.6);
+            }
+            20%, 24%, 55%, 84% {
+                opacity: 0.55;
+                text-shadow: 2px 4px 4px rgba(0,0,0,0.55), 0 2px 2px rgba(0,0,0,0.45);
+            }
+        }
+        .btn-cierra { animation: neon-flicker 5s linear infinite; }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-cierra { animation: none; }
+        }
+        /* ABRE EL CHANGARRO: mismo parpadeo pero glow BLANCO/plateado — sobre la cortina verde
+           el verde agua casi no se veía; el blanco resalta mucho más (Ani). */
+        @keyframes neon-flicker-white {
+            0%, 18%, 22%, 25%, 53%, 57%, 83%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 6px rgba(255,255,255,0.98), 0 0 14px rgba(240,245,250,0.92), 0 0 26px rgba(205,220,230,0.78);
+            }
+            20%, 24%, 55%, 84% {
+                opacity: 0.62;
+                text-shadow: none;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-changarro { animation: none; }
+        }
+
+        /* === DIVISORES ENTRE SECCIONES === */
+        .divider {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* === Divisores: MARQUEE (metal FIJO + solo el texto se desliza → imposible que haya costura) === */
+        .divider-marquee {
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            background: url('assets/divider-metal-bg.png?v=3') center center / 100% 100% no-repeat;
+            filter: brightness(0.85);    /* mismo oscurecido suave que las secciones, para que toda la página sea uniforme */
+            /* Al navegar desde el headliner/menú, el divisor aterriza justo DEBAJO del header fijo
+               (offset = alto del header). Así la sección queda en su lugar y no tapada.
+               +1px: pegado al header sin encimarse (Ani: cerrar el espacio). */
+            scroll-margin-top: calc(min(100vw, 540px) * 0.16435 + 1px);
+        }
+        .divider-track {
+            display: flex;
+            width: max-content;
+            animation: divider-scroll 22s linear infinite;
+        }
+        .divider-track img {
+            height: calc(min(100vw, 540px) * 0.16435); /* = ancho × 496/3018, igual al tamaño original */
+            width: auto;
+            display: block;
+            flex: 0 0 auto;
+        }
+        @keyframes divider-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+
+        /* === Opción 1: aparición al hacer scroll (fade + sube) === */
+        .reveal-init {
+            opacity: 0;
+            transform: translateY(42px);
+            transition: opacity 0.85s ease, transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-init.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Pósters individuales de ¿Ya me conoces? — cada imagen es lienzo completo, encimada sobre el fondo */
+        #sobre-mi .poster-ov {
+            position: absolute; inset: 0;
+            width: 100%; height: auto;
+            pointer-events: none;
+            z-index: 2;
+            animation: poster-zoom 15s ease-in-out infinite;
+        }
+        /* Zoom secuencial: cada póster hace zoom suave (~5s) alrededor de SU centro, uno tras otro, en bucle */
+        @keyframes poster-zoom {
+            0%     { transform: scale(1); }
+            16.6%  { transform: scale(1.08); }
+            33.3%  { transform: scale(1); }
+            100%   { transform: scale(1); }
+        }
+        #sobre-mi .poster-ov-1 { transform-origin: 68.2% 27.4%; animation-delay: 0s;  }
+        #sobre-mi .poster-ov-2 { transform-origin: 29.9% 58.1%; animation-delay: 5s;  }
+        #sobre-mi .poster-ov-3 { transform-origin: 70.1% 78.6%; animation-delay: 10s; }
+
+        /* === MERCH siempre visible — animación removida + altura garantizada por CSS (aspect-ratio)
+              para que NUNCA colapse a 0 en Android aunque container-type/imagen tarden o fallen === */
+        #merch { aspect-ratio: 1086 / 1937; min-height: 60vw; }
+        #merch > img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        @media (prefers-reduced-motion: reduce) {
+            #sobre-mi .poster, #sobre-mi .poster img, #sobre-mi .poster-ov { animation: none; }
+            #sobre-mi .conoce-text { transition: none; }
+            .divider-track { animation: none; }
+            .reveal-init { opacity: 1; transform: none; transition: none; }
+        }
+
+        /* === ¿YA ME CONOCES? — 3 pósters fijos que se mecen suave === */
+        #sobre-mi .poster {
+            position: absolute;
+            display: block;
+            pointer-events: none;
+            opacity: 1;
+            transform-origin: center center;
+            transform: translate(-50%,-50%);
+            animation: poster-sway 5s ease-in-out infinite;
+        }
+        /* Posiciones FINALES — calibradas contra 2do mockup que mandó Anette
+           top/left = centro del poster; uso translate(-50%,-50%) en el transform */
+        /* Posiciones EXACTAS extraídas del .ai (mesa 1086×1937) — centros/anchos del archivo de Anette */
+        .poster-1 { top: 27.21%; left: 67.31%; width: 65.38%; }
+        .poster-2 { top: 57.87%; left: 24.54%; width: 49.08%; }
+        .poster-3 { top: 78.83%; left: 70.26%; width: 52.67%; }
+
+        /* Texto encima de los pósters (rota/vuela junto con cada póster) */
+        /* Recorta el sangrado de los pósters como la mesa de Illustrator */
+        #sobre-mi { overflow: hidden; scroll-margin-top: clamp(64px, 18vw, 100px); }
+        #sobre-mi .poster img { width: 100%; display: block; }
+
+        /* Póster 1 como imagen de Ani (PARA LATAM/logo/EL VATO con sus fuentes) — lienzo completo 1086×1937, encaja solo. z-index 3 = DETRÁS del póster 2 (Ani lo pidió). */
+        #sobre-mi .poster1-img {
+            position: absolute; inset: 0;
+            width: 100%; height: auto;
+            z-index: 3; pointer-events: none;
+            display: block; filter: brightness(0.85);
+        }
+        /* Pósters 2 y 3 como imágenes transparentes en su posición del diseño (mesa 1086×1937). z-index 4 = ENCIMA del póster 1. */
+        #sobre-mi .poster2-img, #sobre-mi .poster3-img {
+            position: absolute; z-index: 4; pointer-events: none;
+            transform: translate(-50%, -50%);
+            filter: brightness(0.85);
+        }
+        #sobre-mi .poster2-img { top: 57.87%; left: 24.54%; width: 49.08%; }
+        #sobre-mi .poster3-img { top: 78.83%; left: 70.26%; width: 52.67%; }
+
+        /* === Capa de TEXTO VIVO (SVG) del "Sobre mí" — encima del fondo, ya no horneado === */
+        #sobre-mi .conoce-live {
+            position: absolute; inset: 0;
+            width: 100%; height: auto;
+            z-index: 6; pointer-events: none;
+            display: block;
+        }
+        /* === Capa de textos en coordenadas ABSOLUTAS exactas del .ai (legacy, sin uso) === */
+        .conoce-text { position: absolute; inset: 0; z-index: 6; pointer-events: none; opacity: 1; }
+        .conoce-text .ct {
+            position: absolute; transform-origin: center center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            line-height: 1.06; text-align: center; white-space: nowrap;
+        }
+        .poster-txt { position: absolute; inset: 0; color: #5b3a23; pointer-events: none; }
+        .poster-txt .p-title {
+            position: absolute; left: 8%; width: 84%; top: 8%;
+            text-align: center; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-style: normal;
+            font-size: 7cqw; line-height: 0.9; letter-spacing: 0.01em;
+        }
+        .poster-txt .p-sub {
+            position: absolute; left: 8%; width: 84%; top: 14.5%;
+            text-align: center; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-style: italic; font-size: 4.4cqw;
+        }
+        .poster-txt .p-body {
+            position: absolute; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-size: 3.0cqw; line-height: 1.05; text-transform: uppercase;
+        }
+        .p2-b1 { top: 20%; left: 40%; width: 54%; }
+        .p2-b2 { top: 38%; left: 40%; width: 54%; }
+        .p2-b3 { top: 56%; left: 10%; width: 54%; }
+
+        /* Póster 1 (Huey): EL VATO + resumen, en la parte baja */
+        .poster-txt.c1 .vato {
+            position: absolute; left: 22%; width: 74%; top: 63%;
+            text-align: center; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-size: 5.4cqw; line-height: 0.95; color: #c4161c;
+        }
+        .poster-txt.c1 .res {
+            position: absolute; left: 22%; width: 74%; top: 76%;
+            text-align: center; font-family: "swiss-721-bt", 'Oswald', sans-serif;
+            font-weight: 700; font-size: 2.8cqw; line-height: 1.05; color: #f5c400;
+        }
+        /* Póster 3 (verde): TEXTO MÁS TEXTO + bloques + Palabra súper cool + resaltar */
+        .poster-txt.c3 { color: #16361f; }
+        .poster-txt.c3 .t3 {
+            position: absolute; left: 6%; width: 88%; top: 8%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700;
+            font-size: 6.4cqw; line-height: 0.95;
+        }
+        .poster-txt.c3 .s3 {
+            position: absolute; left: 6%; width: 88%; top: 15.5%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700;
+            font-style: italic; font-size: 3.4cqw;
+        }
+        .poster-txt.c3 .bd3 {
+            position: absolute; left: 10%; width: 80%; top: 20%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 400;
+            font-size: 2.5cqw; line-height: 1.1; text-transform: uppercase;
+        }
+        .poster-txt.c3 .pc {
+            position: absolute; top: 62%; width: 30%; text-align: center;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700;
+            font-style: italic; font-size: 3cqw;
+        }
+        .poster-txt.c3 .pc1 { left: 8%; }
+        .poster-txt.c3 .pc2 { left: 50%; }
+        .poster-txt.c3 .res3 {
+            position: absolute; left: 8%; top: 70%;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 700; font-size: 3.4cqw;
+        }
+        .poster-txt.c3 .bd3b {
+            position: absolute; left: 8%; width: 84%; top: 75%;
+            font-family: "swiss-721-bt", 'Oswald', sans-serif; font-weight: 400;
+            font-size: 2.3cqw; line-height: 1.1; text-transform: uppercase;
+        }
+
+        /* Mecer suave (sway), escalonado para que cada póster tenga su ritmo */
+        @keyframes poster-sway {
+            0%, 100% { transform: translate(-50%,-50%) rotate(-1.1deg) translateY(0); }
+            50%      { transform: translate(-50%,-50%) rotate(1.1deg) translateY(-7px); }
+        }
+        #sobre-mi .poster-2 { animation-duration: 6s;   animation-delay: -1.6s; }
+        #sobre-mi .poster-3 { animation-duration: 5.4s; animation-delay: -3.1s; }
+
+        /* Tapa de metal estática que oculta el "El mero mero" horneado del fondo
+           (para que solo se vea el animado, sin duplicar). */
+        .mero-cover {
+            position: absolute;
+            top: 20.8%;
+            left: 0;
+            width: 35%;
+            height: 5%;
+            z-index: 4;
+            pointer-events: none;
+            background: url('assets/conoces/mero-cover.png') center center / 100% 100% no-repeat;
+        }
+        /* "El mero mero" — texto blanco (como el original) con filo fino oscuro
+           para que se lea; se RAYA de izq→der al entrar (grabado en el momento). */
+        .mero-mero {
+            position: absolute;
+            top: 20.5%;
+            left: 3%;
+            font-family: 'stratum-2-web', 'bc-barell-condensed-thin', sans-serif;
+            font-size: 5cqw;
+            letter-spacing: 0.02em;
+            /* gris clarito GRABADO en la lámina: filo oscuro fino + emboss (luz abajo / sombra arriba)
+               para que parezca rayado en el metal y aun así se lea (Ani). */
+            /* gris plateado con vetas brillantes (gradiente clip-text) = parece metal con
+               partes plateadas; trazo más DELGADO (0.25 vs 0.5) por pedido de Ani. */
+            /* OSCURO con contornos plateados en partes (Ani): relleno gris oscuro + filo plata
+               fino + emboss (brillo plata arriba-izq / sombra abajo-der) = metal oscuro cuyos
+               bordes brillan plateado en algunas partes. */
+            color: #2c2d2f;
+            -webkit-text-fill-color: #2c2d2f;
+            background: none; -webkit-background-clip: border-box; background-clip: border-box;
+            -webkit-text-stroke: 0.3px rgba(206,210,214,0.5);
+            text-shadow: -0.6px -0.6px 0.3px rgba(230,234,238,0.6), 0.7px 0.9px 1.2px rgba(0,0,0,0.55);
+            transform: rotate(-6deg);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 5;
+            clip-path: inset(0 100% 0 0);
+        }
+        .mero-mero span {
+            display: inline-block;
+            line-height: 1;
+        }
+        /* Se raya al entrar a la sección y se REPITE en bucle (Ani): raya de izq→der,
+           se queda un rato, se borra de izq→der y vuelve a empezar (sin costura porque
+           ambos extremos del ciclo están "en nada"). */
+        #sobre-mi.mero-scratched .mero-mero {
+            animation: scratch-loop 7s steps(46, end) infinite;
+        }
+        @keyframes scratch-loop {
+            0%   { clip-path: inset(0 100% 0 0); }  /* nada (recortado desde la derecha) */
+            20%  { clip-path: inset(0 0 0 0);    }  /* rayado completo, visible */
+            80%  { clip-path: inset(0 0 0 0);    }  /* se queda visible */
+            100% { clip-path: inset(0 0 0 100%); }  /* se borra de izq→der → queda en nada */
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .mero-mero { clip-path: inset(0 0 0 0); animation: none; }
+        }
+
+        /* === Botón de música (aparece al abrir el changarro) === */
+        .music-fab {
+            position: fixed;
+            right: 14px;
+            bottom: 16px;
+            z-index: 90;
+            display: none;
+            align-items: center;
+            gap: 9px;
+            background: #c4161c;
+            color: #fff;
+            border: 2px solid #ffd84a;
+            border-radius: 40px;
+            padding: 8px 16px 8px 8px;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-size: 15px;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+            -webkit-tap-highlight-color: transparent;
+            animation: music-pulse 1.9s ease-in-out infinite;
+        }
+        body.changarro-abierto .music-fab { display: inline-flex; }
+        .music-fab .disc {
+            width: 30px; height: 30px; flex: 0 0 auto;
+            background: url('assets/spotify-white.png?v=1') center/contain no-repeat;
+        }
+        .music-fab.playing { background: #1a7a32; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes music-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+        /* === HEADER fijo: divisor "El Huey Coyote" — alto como los otros divisores,
+              fondo metálico más transparente, logo a tono = botón al inicio === */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 540px;
+            z-index: 95;
+            display: none;            /* aparece al abrir el changarro */
+            align-items: center;
+            justify-content: center;
+            height: calc(min(100vw, 540px) * 0.16435);   /* mismo alto que los divisores */
+            overflow: hidden;
+        }
+        /* fondo metálico (igual que los divisores) pero más transparente */
+        .site-header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url('assets/divider-metal-bg.png?v=3') center center / 100% 100% no-repeat;
+            filter: brightness(0.85);
+            opacity: 0.42;
+            pointer-events: none;
+        }
+        /* el logo es un botón que lleva al inicio (headliner); queda a tono full */
+        .site-header .header-logo-link {
+            position: relative; z-index: 1;
+            display: flex; align-items: center; justify-content: center;
+            height: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .site-header .header-logo-link img {
+            height: 74%; width: auto; display: block;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.45));
+        }
+        body.changarro-abierto .site-header { display: flex; }
+
+        /* === Menú hamburguesa (esquina del header) === */
+        .menu-toggle {
+            position: absolute;
+            top: 50%; right: 14px;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: 32px; height: 26px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            background: transparent; border: 0; padding: 3px 0; cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .menu-toggle span {
+            display: block; height: 3px; width: 100%;
+            background: #fff; border-radius: 3px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+            transition: transform 0.28s ease, opacity 0.2s ease;
+        }
+        body.menu-open .menu-toggle span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+        body.menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+        body.menu-open .menu-toggle span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+
+        .nav-menu {
+            position: fixed;
+            top: calc(min(100vw, 540px) * 0.16435);   /* justo debajo del header */
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            width: 100%; max-width: 540px;
+            z-index: 94;
+            background: rgba(22,22,24,0.97);
+            border-bottom: 3px solid #ffd84a;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+            display: flex; flex-direction: column;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.22s ease, transform 0.22s ease;
+        }
+        body.menu-open .nav-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+        .nav-menu a {
+            color: #fff; text-decoration: none;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-size: clamp(16px, 4.6vw, 21px);
+            letter-spacing: 0.04em; text-transform: uppercase;
+            padding: 14px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .nav-menu a:last-child { border-bottom: 0; }
+        .nav-menu a:hover, .nav-menu a:active { background: rgba(255,216,74,0.16); color: #ffd84a; }
+        /* las secciones se alinean bajo el header fijo al saltar desde el menú */
+        #merch, #proximos-shows, #sobre-mi, #contacto {
+            scroll-margin-top: calc(min(100vw, 540px) * 0.16435 + 6px);
+        }
+
+        .music-panel {
+            position: fixed;
+            right: 14px;
+            bottom: 70px;
+            z-index: 91;
+            width: min(340px, 92vw);
+            display: none;
+            background: #161616;
+            border: 2px solid #ffd84a;
+            border-radius: 12px;
+            padding: 30px 8px 8px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+            max-height: calc(100vh - 90px);
+            overflow-y: auto;
+        }
+        body.music-open .music-panel { display: block; }
+        .music-panel .music-close {
+            position: absolute; top: 5px; right: 8px;
+            background: none; border: 0; color: #fff; font-size: 18px;
+            cursor: pointer; line-height: 1; padding: 2px 6px;
+        }
+        .music-panel iframe { display: block; border: 0; border-radius: 6px; }
+        /* Lista de rolitas — mismo estilo de letra/colores que el botón */
+        .music-panel .panel-title {
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            color: #ffd84a; font-size: 16px; text-align: center;
+            margin: 0 0 9px; letter-spacing: 0.03em;
+        }
+        .song-list { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+        .song-item {
+            display: flex; align-items: center; gap: 8px; width: 100%; text-align: left;
+            font-family: "eds-market-bold-slant", 'Oswald', sans-serif;
+            font-size: 14px; letter-spacing: 0.02em; line-height: 1.15;
+            color: #fff; background: #c4161c; border: 2px solid #ffd84a;
+            border-radius: 24px; padding: 9px 12px; cursor: pointer;
+            transition: transform .15s ease, background .15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .song-item:hover { transform: translateX(3px); }
+        .song-item.active { background: #1a7a32; }
+        .song-item .num {
+            flex: 0 0 auto; color: #ffd84a; font-size: 13px;
+            width: 18px; text-align: center;
+        }
+        #music-embed { margin-top: 8px; }
+        #music-embed:empty { display: none; }
+        @media (prefers-reduced-motion: reduce) {
+            .music-fab { animation: none; }
+            .music-fab .disc { animation: none; }
+        }
+
+        /* === SEO oculto === */
+        .seo-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .preview-tag {
+            position: fixed;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.75);
+            color: #ffd84a;
+            font-family: monospace;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 3px;
+            z-index: 200;
+            pointer-events: none;
+        }
+
+        @media (min-width: 540px) {
+            body { display: flex; justify-content: center; background: #0d0d0d; }
+            .portada-overlay { max-width: 540px; }
+        }
+
+        /* === GALERÍA DE FOTOS === */
+        /* === FOTITOS: galería horizontal tipo carteles sobre fondo de metal === */
+        #galeria { background: #161618; scroll-margin-top: 0; }
+        .galeria-scroll { position: relative; }
+        /* Galería = scroll HORIZONTAL (swipe derecha); el scroll vertical sigue bajando por la página */
+        .galeria-sticky {
+            /* aspect-ratio = tamaño real de la imagen (1086×1937) → se ve COMPLETA, sin cortar (Ani) */
+            position: relative; aspect-ratio: 1086 / 1937; overflow: hidden;
+            background: url('assets/galeria/galeria-fondo-v2.webp?v=609') center center / 100% 100% no-repeat;
+        }
+        .galeria-strip {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; gap: 4vw;
+            padding: 0 6vw;
+            overflow-x: auto; overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x proximity;
+            scrollbar-width: none;
+        }
+        .galeria-strip::-webkit-scrollbar { display: none; }
+        .galeria-strip img.gp { scroll-snap-align: center; }
+        /* marco = forma natural de la foto (sin recortar). Más grandes (Ani) → ~2.5 por pantalla */
+        .galeria-strip img.gp {
+            width: 36vw; max-width: 200px; height: auto;
+            flex: 0 0 auto; display: block; cursor: pointer; background: #fff;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.55);
+            transition: filter 0.2s ease;
+        }
+        .galeria-strip img.gp:active { filter: brightness(1.07); }
+        /* bordes variados, tipo carteles (se repiten algunos a propósito) — un poco más gruesos por el tamaño */
+        .gp.b1 { border: 11px solid #ffffff; }
+        .gp.b2 { border: 10px solid #15110f; }
+        .gp.b3 { border: 10px solid #e23b2e; }
+        .gp.b4 { border: 11px solid #ffd84a; }
+        .gp.b5 { border: 10px solid #1f8a3b; }
+        .gp.b6 { border: 9px solid #ffffff; outline: 5px solid #00abab; outline-offset: 0; }
+        /* Indicador de scroll: flechitas pequeñas hacia la derecha (hacia donde hay más fotos).
+           Se ocultan solo al empezar a deslizar (JS). */
+        .galeria-hint {
+            /* a la altura de las fotos (centro vertical), no abajo donde no se veían (Ani) */
+            position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+            display: flex; align-items: center; gap: 1px;
+            background: rgba(0,0,0,0.35); padding: 3px 11px; border-radius: 20px;
+            pointer-events: none; transition: opacity 0.4s ease;
+        }
+        .galeria-hint .ghint-arrow {
+            color: rgba(255,255,255,0.92);
+            font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 22px; line-height: 1;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+            animation: ghint-slide 1.3s ease-in-out infinite;
+        }
+        .galeria-hint .ghint-arrow:nth-child(2) { animation-delay: 0.15s; }
+        .galeria-hint .ghint-arrow:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes ghint-slide {
+            0%, 100% { transform: translateX(0);   opacity: 0.4; }
+            50%      { transform: translateX(4px); opacity: 1;   }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .galeria-hint .ghint-arrow { animation: none; opacity: 0.85; }
+        }
+        /* Lightbox (ver foto grande) */
+        .lightbox {
+            position: fixed; inset: 0; z-index: 9998;
+            display: none; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.93); padding: 18px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 96vw; max-height: 86vh; border-radius: 8px; box-shadow: 0 10px 44px rgba(0,0,0,0.7); }
+        .lightbox-close {
+            position: absolute; top: 16px; right: 16px;
+            width: 42px; height: 42px; border-radius: 50%;
+            background: rgba(255,255,255,0.92); color: #c4161c; border: 2px solid #c4161c;
+            font-size: 24px; line-height: 1; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; z-index: 2;
+        }
+        .lightbox-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 46px; height: 46px; border-radius: 50%;
+            background: rgba(255,255,255,0.85); color: #161618; border: 0;
+            font-size: 28px; line-height: 1; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .lightbox-prev { left: 8px; } .lightbox-next { right: 8px; }
+    </style>
+</head>
+<body>
+    <!-- Si ya vio la cortina antes, entrar directo sin parpadeo (se evalúa antes de pintar) -->
+    <script>try{var _forceIntro=/[?&](intro|inicio)=1/.test(location.search);if(!_forceIntro&&localStorage.getItem('huey_portada_vista')==='1'){document.documentElement.classList.add('portada-vista');document.body.classList.add('changarro-abierto');}}catch(e){}</script>
+    <!-- HEADER fijo: siempre arriba al scrollear -->
+    <header class="site-header" id="site-header">
+        <a class="header-logo-link" href="#headliner" aria-label="Ir al inicio (Headliner)"><img src="assets/header-logo.webp?v=2" alt="El Huey Coyote"></a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    </header>
+    <nav class="nav-menu" id="nav-menu" aria-label="Menú principal">
+        <a href="#d-sobre-mi">Sobre El HueyCoyote</a>
+        <a href="#d-proximos-shows">Próximos Shows</a>
+        <a href="#d-merch">Tienda online</a>
+        <a href="#d-galeria">Galería</a>
+        <a href="#d-contacto">Contacto</a>
+    </nav>
+    <div class="site-wrap">
+
+        <!-- HEADLINER (sección 2) -->
+        <section id="headliner">
+            <!-- Fondo v2: estrellas, trompeta y hamburguesa ya integradas; recuadros vacíos. Todos los textos van en HTML. -->
+            <img class="bg" src="assets/headliner-bg-v5.webp?v=603nuevo" alt="El Huey Coyote — bienvenida al puesto" decoding="async" fetchpriority="high">
+            <h1 class="seo-only">El Huey Coyote</h1>
+
+            <!-- 4 letreros como texto HTML (control total de color/tamaño/posición) -->
+            <a class="menu-link area-pide" href="#d-merch" aria-label="Pa' llevar — Merch">
+                <span class="letrero-text" data-text="PA’ LLEVAR">PA’ LLEVAR</span>
+            </a>
+            <a class="menu-link area-proximos" href="#d-proximos-shows" aria-label="Próximos shows">
+                <span class="letrero-text" data-text="PRÓXIMOS">PRÓXIMOS</span>
+            </a>
+            <a class="menu-link area-shows" href="#d-proximos-shows" aria-label="Próximos shows">
+                <span class="letrero-text" data-text="SHOWS">SHOWS</span>
+            </a>
+            <a class="menu-link area-conoces" href="#d-sobre-mi" aria-label="¿Ya me conoces? — Sobre mí">
+                <span class="q-open" aria-hidden="true">¿</span><span class="letrero-text" data-text="YA ME CONOCES">YA ME CONOCES</span><span class="q-close" aria-hidden="true">?</span>
+            </a>
+            <a class="menu-link area-echame" href="#d-contacto" aria-label="Échame un grito — Contacto">
+                <span class="letrero-text" data-text="ÉCHAME UN&#10;GRITO">ÉCHAME UN<br>GRITO</span>
+            </a>
+            <a class="menu-link area-fotitos" href="#d-galeria" aria-label="La Raza — Galería de fotos">
+                <span class="letrero-text" data-text="LA RAZA">LA RAZA</span>
+            </a>
+
+            <!-- 3 logos-botón sobre los bancos rojos -->
+            <a class="stool-btn stool-apple" id="btn-apple" href="#" data-url="https://music.apple.com/mx/artist/hueycoyote/1088136173" aria-label="Apple Music del Huey Coyote">
+                <img src="assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async">
+            </a>
+            <a class="stool-btn stool-youtube" href="#" data-url="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music del Huey Coyote">
+                <img src="assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async">
+            </a>
+            <a class="stool-btn stool-amazon" href="#" data-url="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music del Huey Coyote">
+                <img src="assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async">
+            </a>
+        </section>
+
+        <!-- Apple Music: "PARA LOS MÁS FRESAS" a pantalla completa -->
+        <div class="apple-ad-overlay" id="apple-ad">
+            <button class="ad-cerrar" id="apple-ad-cerrar" aria-label="Cerrar">&times;</button>
+            <img class="ad-img" src="assets/apple-fresas-ad.webp?v=606" alt="Para los más fresas — El Huey Coyote" loading="lazy" decoding="async">
+            <img class="ad-glow" src="assets/apple-cta-glow.png?v=2" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <a class="ad-cta" id="apple-ad-go" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" aria-label="Ir a Apple Music del Huey Coyote"></a>
+        </div>
+
+        <!-- Divisor: anuncia Próximos Shows -->
+        <div class="divider-marquee" id="d-sobre-mi" role="img" aria-label="¿Ya me conoces?">
+            <div class="divider-track">
+                <img src="assets/divider-ya-me-conoces-text.png?v=neg" alt="¿Ya me conoces?">
+                <img src="assets/divider-ya-me-conoces-text.png?v=neg" alt="" aria-hidden="true">
+            </div>
+        </div>
+
+        <!-- ¿YA ME CONOCES? (sección 2 — Sobre mí) -->
+        <section id="sobre-mi">
+            <!-- Fondo horneado con la imagen CORRECTA del póster 1 de Ani metida en su capa (detrás del póster 2). Pósters 2 y 3 quedan idénticos a antes; póster 1 correcto y sin doble. -->
+            <img class="bg" src="assets/conoces/conoces-fondo-v2.webp?v=0710v2" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
+            <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
+
+            <!-- Capa de TEXTO VIVO (SVG). PARA LATAM y logo son parte de la imagen del póster (no aquí). -->
+            <svg class="conoce-live" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1086.3 1936.5">
+  
+  <defs>
+    <style>
+      .cv0, .cv1 {
+        opacity: .9;
+      }
+
+      .cv2 {
+        letter-spacing: 0em;
+      }
+
+      .cv2, .cv3, .cv4, .cv5, .cv6, .cv7, .cv8, .cv9, .cv10, .cv11 {
+        fill: #241a1a;
+      }
+
+      .cv2, .cv5, .cv6, .cv12, .cv8, .cv9, .cv10, .cv11 {
+        stroke-width: .2px;
+      }
+
+      .cv2, .cv5, .cv6, .cv8, .cv9, .cv10, .cv11 {
+        font-family: 'Monotxt_IV25', Monotxt;
+        font-size: 58.3px;
+        stroke: #999;
+      }
+
+      .cv13 {
+        letter-spacing: 0em;
+      }
+
+      .cv4 {
+        opacity: .7;
+      }
+
+      .cv5 {
+        letter-spacing: 0em;
+      }
+
+      .cv14 {
+        filter: url(#drop-shadow-2);
+      }
+
+      .cv1 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .cv15 {
+        fill: #ccc;
+        letter-spacing: 0em;
+      }
+
+      .cv15, .cv16, .cv17, .cv18, .cv19, .cv20 {
+        font-family: "swiss-721-bt";
+        font-weight: 900;
+      }
+
+      .cv15, .cv19 {
+        font-size: 33.8px;
+      }
+      /* Título póster 3 (texto nuevo largo) — reducido y en 2 renglones */
+      .cv19 { font-size: 20px; }
+
+      .cv21 {
+        filter: url(#drop-shadow-6);
+      }
+
+      .cv16 {
+        stroke-width: 5px;
+      }
+
+      .cv16, .cv12 {
+        fill: #fff;
+      }
+
+      .cv16, .cv12, .cv22, .cv23 {
+        stroke: #fff;
+      }
+
+      .cv16, .cv20 {
+        font-size: 20px;
+      }
+
+      .cv6, .cv24 {
+        letter-spacing: 0em;
+      }
+
+      .cv17 {
+        font-size: 30.1px;
+        letter-spacing: 0em;
+      }
+
+      .cv17, .cv25, .cv18, .cv26 {
+        opacity: .6;
+      }
+
+      .cv27, .cv25, .cv28, .cv7, .cv29, .cv30, .cv31 {
+        font-weight: 700;
+      }
+
+      .cv27, .cv25, .cv32, .cv29 {
+        stroke: #000;
+      }
+
+      .cv27, .cv28, .cv29, .cv31 {
+        font-family: "open-sans-condensed";
+        font-size: 67px;
+      }
+
+      .cv27, .cv29 {
+        fill: #e0d846;
+        stroke-width: 2px;
+      }
+
+      .cv27, .cv31 {
+        letter-spacing: 0em;
+      }
+
+      .cv33 {
+        filter: url(#drop-shadow-5);
+      }
+
+      .cv34 {
+        mask: url(#mask);
+      }
+
+      .cv35 {
+        stroke: #0477c3;
+        stroke-width: 5px;
+      }
+
+      .cv35, .cv25, .cv32, .cv23 {
+        stroke-miterlimit: 10;
+      }
+
+      .cv35, .cv36, .cv22, .cv23, .cv37 {
+        fill: none;
+      }
+
+      .cv35, .cv28, .cv31 {
+        stroke-linecap: round;
+      }
+
+      .cv38 {
+        opacity: .5;
+      }
+
+      .cv25 {
+        font-size: 20.5px;
+        letter-spacing: 0em;
+      }
+
+      .cv25, .cv30 {
+        font-family: "swiss-721-bt";
+        font-style: italic;
+      }
+
+      .cv18 {
+        font-size: 52.8px;
+        letter-spacing: 0em;
+      }
+
+      .cv28, .cv29 {
+        letter-spacing: 0em;
+      }
+
+      .cv28, .cv31 {
+        fill: #b80d0e;
+        stroke: #b80d0e;
+        stroke-linejoin: round;
+        stroke-width: 16px;
+      }
+
+      .cv19 {
+        letter-spacing: 0em;
+      }
+
+      .cv19, .cv39, .cv30 {
+        fill: #333;
+      }
+
+      .cv22, .cv37 {
+        stroke-width: 4px;
+      }
+
+      .cv40 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cv41 {
+        font-size: 60.9px;
+      }
+
+      .cv41, .cv42 {
+        font-family: CocogooseProTrial-Regular, CocogooseProTrial;
+      }
+
+      .cv41, .cv42, .cv20 {
+        fill: #f22b2a;
+        stroke: #f22b2a;
+      }
+
+      .cv43 {
+        fill: #f2f2f2;
+      }
+
+      .cv7 {
+        font-family: "swiss-721-bt";
+        font-size: 32px;
+      }
+
+      .cv7, .cv30 {
+        stroke: #241a1a;
+      }
+
+      .cv44 {
+        fill: #040303;
+      }
+
+      .cv45 {
+        fill: #f29501;
+      }
+
+      .cv46 {
+        letter-spacing: 0em;
+      }
+
+      .cv47 {
+        isolation: isolate;
+      }
+
+      .cv8 {
+        letter-spacing: 0em;
+      }
+
+      .cv48 {
+        fill: #c91f0e;
+      }
+
+      .cv49 {
+        letter-spacing: 0em;
+      }
+
+      .cv50 {
+        clip-path: url(#clippath-3);
+      }
+
+      .cv23 {
+        stroke-width: 3px;
+      }
+
+      .cv51 {
+        letter-spacing: 0em;
+      }
+
+      .cv9 {
+        letter-spacing: 0em;
+      }
+
+      .cv52 {
+        letter-spacing: 0em;
+      }
+
+      .cv30 {
+        font-size: 24.4px;
+        letter-spacing: 0em;
+        stroke-width: .5px;
+      }
+
+      .cv42 {
+        font-size: 55.7px;
+        letter-spacing: 0em;
+      }
+
+      .cv10 {
+        letter-spacing: 0em;
+      }
+
+      .cv53 {
+        clip-path: url(#clippath-2);
+      }
+
+      .cv54 {
+        letter-spacing: 0em;
+      }
+
+      .cv55 {
+        fill: #fefefe;
+      }
+
+      .cv56 {
+        filter: url(#luminosity-invert);
+      }
+
+      .cv57 {
+        letter-spacing: 0em;
+      }
+
+      .cv58 {
+        clip-path: url(#clippath);
+      }
+
+      .cv59 {
+        mix-blend-mode: hard-light;
+      }
+
+      .cv37 {
+        stroke: #f2f2f2;
+      }
+    
+      /* Resumen póster 1 = doble contorno: cv60 azul (afuera) → cv16 blanco → cv20 rojo (texto). paint-order stroke fill para que cada contorno quede detrás de su relleno. */
+      .cv16, .cv20 { paint-order: stroke fill; }
+      /* stroke-linejoin round = sin picos en los vértices del contorno */
+      .cv16, .cv20, .cv60 { stroke-linejoin: round; stroke-linecap: round; }
+      .cv60 { fill: #0477c3; stroke: #0477c3; stroke-width: 9px; paint-order: stroke fill; }
+      /* Párrafo real del póster 2 (Su nombre significa…) — oscuro sobre el póster crema */
+      .cv70 { font-family: "swiss-721-bt"; font-weight: 700; font-size: 17px; fill: #241a1a; letter-spacing: -0.2px; }
+      /* Segundo texto del póster 2 (Su nombre significa…), en el cuadrado der. del sax */
+      .cv71 { font-family: "swiss-721-bt"; font-weight: 700; font-size: 15px; fill: #241a1a; letter-spacing: -0.3px; }
+      /* Tercer texto del póster 2 (Un músico que…), centrado entre las 2 estrellitas, un poco más grande */
+      .cv72 { font-family: "swiss-721-bt"; font-weight: 700; font-size: 20px; fill: #241a1a; letter-spacing: -0.2px; text-anchor: middle; }
+
+      /* ===== Overlay v2 (calcado del SVG de Ani "Yameconoces-movil") ===== */
+      .nvblk{font-family:"swiss-721-bt";font-weight:900;}
+      .nvbold{font-family:"swiss-721-bt";font-weight:700;}
+      .nvital{font-family:"swiss-721-bt";font-weight:700;font-style:italic;}
+      .nvout{font-family:"swiss-721-bt";font-weight:900;fill:#fff;stroke:#fff;stroke-width:9px;paint-order:stroke fill;stroke-linejoin:round;stroke-linecap:round;}
+      .nvred{font-family:"swiss-721-bt";font-weight:900;fill:#f22b2a;}
+      .nvblue{font-family:"swiss-721-bt";font-weight:900;fill:#0477c3;stroke:#0477c3;stroke-width:15px;paint-order:stroke fill;stroke-linejoin:round;stroke-linecap:round;}
+
+</style>
+    <clipPath id="clippath">
+      </clipPath>
+    <clipPath id="clippath-1">
+      </clipPath>
+    <filter id="drop-shadow-1" x="650.9" y="71" width="117" height="101" filterUnits="userSpaceOnUse">
+      <feOffset dx="5.7" dy="2.8"/>
+      <feGaussianBlur result="blur" stdDeviation="2.8"/>
+      <feFlood flood-color="#070707" flood-opacity=".6"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-2" x="547.5" y="121.1" width="481.5" height="182.9" filterUnits="userSpaceOnUse">
+      <feOffset dx="5.7" dy="2.8"/>
+      <feGaussianBlur result="blur1" stdDeviation="2.8"/>
+      <feFlood flood-color="#070707" flood-opacity=".6"/>
+      <feComposite in2="blur1" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-5" x="354.3" y="-26.5" width="812.2" height="1098.9" filterUnits="userSpaceOnUse">
+      <feOffset dx="-5.7" dy="7"/>
+      <feGaussianBlur result="blur2" stdDeviation="5"/>
+      <feFlood flood-color="#000" flood-opacity=".8"/>
+      <feComposite in2="blur2" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clippath-2">
+      </clipPath>
+    <filter id="drop-shadow-6" x="925.4" y="41.5" width="199.6" height="266" filterUnits="userSpaceOnUse">
+      <feOffset dx="-8.5" dy="7"/>
+      <feGaussianBlur result="blur3" stdDeviation="5"/>
+      <feFlood flood-color="#000" flood-opacity=".5"/>
+      <feComposite in2="blur3" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clippath-3">
+      </clipPath>
+    <filter id="luminosity-invert" x="34.4" y="395.5" width="354" height="87" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feColorMatrix result="cm" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>
+    </filter>
+    <mask id="mask" x="34.4" y="395.5" width="354" height="87" maskUnits="userSpaceOnUse">
+      <g class="cv56">
+        </g>
+    </mask>
+    </defs>
+  <g class="cv47">
+    <g id="Fondo">
+      <!-- Fotos de pósters (image/image1) ELIMINADAS del overlay: ya vienen en el fondo webp + el póster 1 corregido (poster1-latam-logo.webp). Uno de estos <use #image1> a scale(1) se agrandaba y tapaba todo (cortina verde). EL VATO también movido a la imagen del póster. -->
+    </g>
+    <g id="Texto">
+      <text class="nvblk" font-size="52.8" fill="#1a1a1a" xml:space="preserve" transform="translate(6.8 904.9) rotate(-12.8) scale(.8 1)"><tspan x="0" y="0">UN  TÍTULO  COOL</tspan></text>
+      <text class="nvblk" font-size="30.1" fill="#1a1a1a" transform="translate(12.7 938.1) rotate(-12.4) scale(.8 1)"><tspan x="0" y="0">AQUÍ UN SUBTÍTULO</tspan></text>
+      <text class="nvital" font-size="22" fill="#1a1a1a" transform="translate(24.5 974) rotate(-12.2) scale(.8 1)"><tspan x="0" y="0">NACIÓ EN: GUADALAJARA</tspan><tspan x="0" y="25.1">HACE DE TODO: CANTA,</tspan><tspan x="0" y="50.1">TOCA 21 INSTRUMENTOS,</tspan><tspan x="0" y="75.2">COMPONE Y BAILA.</tspan></text>
+      <text class="nvital" font-size="22" fill="#1a1a1a" transform="translate(234.4623 1093.8784) rotate(-12.754) scale(.7593 1)"><tspan x="0" y="0">SU NOMBRE SIGNIFICA…</tspan><tspan x="0" y="25.1"><tspan fill="#c1272d">HUEY</tspan> = GRANDE,</tspan><tspan x="0" y="50.1">INGENIOSO, MAGNÍFICO.</tspan></text>
+      <text class="nvital" font-size="22" fill="#1a1a1a" transform="translate(255.0165 1179.5551) rotate(-12.754) scale(.7593 1)"><tspan x="0" y="0"><tspan fill="#244f37">COYOTE</tspan> = CURIOSO,</tspan><tspan x="0" y="25.1">JUGUETÓN Y DIVERTIDO.</tspan></text>
+      <text class="nvital" font-size="32" fill="#1a1a1a" transform="translate(199.8212 1323.9227) rotate(-12.754) scale(.7593 1)"><tspan x="0" y="0">UN MÚSICO QUE</tspan><tspan x="1.7" y="30">SIEMPRE BUSCA</tspan><tspan x="21" y="60">SACARTE UNA</tspan><tspan x="66.1" y="90">SONRISA</tspan></text>
+      <text class="nvblue" font-size="24" transform="translate(521.7 768) rotate(6.7) scale(.7 1) skewX(.3)"><tspan x="0" y="0">CANTAUTOR MEXICANO QUE CONVIERTE</tspan><tspan x="0" y="40">CUALQUIER IDEA EN UNA CANCIÓN,</tspan><tspan x="0" y="80">MEZCLA GÉNEROS, ROMPE REGLAS Y</tspan><tspan x="0" y="120">DEMUESTRA QUE LA MÚSICA TAMBIÉN</tspan><tspan x="0" y="160">PUEDE SER HUMOR PURO.</tspan></text>
+      <text class="nvout" font-size="24" transform="translate(521.7 768) rotate(6.7) scale(.7 1) skewX(.3)"><tspan x="0" y="0">CANTAUTOR MEXICANO QUE CONVIERTE</tspan><tspan x="0" y="40">CUALQUIER IDEA EN UNA CANCIÓN,</tspan><tspan x="0" y="80">MEZCLA GÉNEROS, ROMPE REGLAS Y</tspan><tspan x="0" y="120">DEMUESTRA QUE LA MÚSICA TAMBIÉN</tspan><tspan x="0" y="160">PUEDE SER HUMOR PURO.</tspan></text>
+      <text class="nvred" font-size="24" transform="translate(521.7 768) rotate(6.7) scale(.7 1) skewX(.3)"><tspan x="0" y="0">CANTAUTOR MEXICANO QUE CONVIERTE</tspan><tspan x="0" y="40">CUALQUIER IDEA EN UNA CANCIÓN,</tspan><tspan x="0" y="80">MEZCLA GÉNEROS, ROMPE REGLAS Y</tspan><tspan x="0" y="120">DEMUESTRA QUE LA MÚSICA TAMBIÉN</tspan><tspan x="0" y="160">PUEDE SER HUMOR PURO.</tspan></text>
+      <text class="nvblk" font-size="34" fill="#333" transform="translate(658.9375 1209.4295) rotate(10.6722) scale(.8939 1)"><tspan x="0" y="0">TEXTO MÁS TEXTO</tspan></text>
+      <text class="nvital" font-size="24.5" fill="#333" transform="translate(664.4337 1252.5329) rotate(10.4015) scale(.8939 1)"><tspan x="0" y="0">SUBTÍTULO LINDO Y NICE</tspan></text>
+      <text class="nvbold" font-size="17" fill="#333" transform="translate(614.2534 1296.5852) rotate(10.0172) scale(.8939 1)"><tspan x="0" y="0">DESDE CANCIONES PROPIAS HASTA “SEÑORAS</tspan><tspan x="18.7" y="19.7">CHAPARRITAS”, MEMO OCHOA, SE VENDEN</tspan><tspan x="42.7" y="39.3">COLCHONES Y HASTA HARRY POTTER.</tspan><tspan x="33.3" y="59">HA PARTICIPADO EN FESTIVALES COMO:</tspan></text>
+      <text class="nvbold" font-size="28.6" fill="#241a1a" transform="translate(555.7403 1619.0382) rotate(10.4015) scale(.9802 1)"><tspan x="0" y="0">Cervantino</tspan></text>
+      <text class="nvbold" font-size="28.6" fill="#241a1a" transform="translate(736.9196 1654.506) rotate(10.4015) scale(.9802 1)"><tspan x="0" y="0">Cumbre Tajín</tspan></text>
+      <text class="nvblk" font-size="25.5" fill="#ccc" text-anchor="middle" transform="translate(731.5 1707.8) rotate(11.009) scale(.8149 1)"><tspan x="0" y="0">¿POR QUÉ SE HIZO FAMOSO?</tspan></text>
+      <text class="nvbold" font-size="13.4" fill="#333" transform="translate(536.0601 1702.5078) rotate(11.006) scale(.8939 1)"><tspan x="0" y="0">CAMBIA LA LETRA DE CANCIONES FAMOSAS, MEZCLA RITMOS</tspan><tspan x="16.2" y="19.7">DE TODO EL MUNDO Y COLABORA CON OTROS ARTISTAS.</tspan></text>
+      <text class="nvbold" font-size="20.6" fill="#333" transform="translate(538.7385 1756.7884) rotate(11.1055) scale(.8939 1)"><tspan x="0" y="0">LO SUYO ES CONVERTIR CUALQUIER</tspan><tspan x="57.8" y="26.6">IDEA EN UNA ROLA CHIDA.</tspan></text>
+    </g>
+  </g>
+</svg>
+        </section>
+
+        <div class="divider-marquee" id="d-proximos-shows" role="img" aria-label="Próximos Shows">
+            <div class="divider-track">
+                <img src="assets/divider-proximos-shows-text.png?v=neg" alt="Próximos Shows">
+                <img src="assets/divider-proximos-shows-text.png?v=neg" alt="" aria-hidden="true">
+            </div>
+        </div>
+
+        <!-- PRÓXIMOS SHOWS (sección 3) -->
+        <section id="proximos-shows" class="reveal-init">
+            <img class="bg" src="assets/proximos-fondo-nuevo.webp?v=1" alt="Próximos Shows — Presentaciones" loading="lazy" decoding="async">
+
+            <h2 class="seo-only">Próximos Shows del Huey Coyote</h2>
+            <h3 class="seo-only">Recomendaciones de la casa</h3>
+
+            <!-- Lista de presentaciones (mes negro · día/ciudad teal; guiones rojos vienen del fondo) -->
+            <!-- Ciudades = botones: cada una llevará a la sub-sección con fotos/videos del show (destinos pendientes) -->
+            <div class="shows-list">
+                <span class="mes">JUL</span><span class="dia">14</span><a class="ciudad" href="#show-cdmx" aria-label="Ver presentación en CDMX">CDMX</a>
+                <span class="mes">AGO</span><span class="dia">22</span><a class="ciudad" href="#show-guadalajara" aria-label="Ver presentación en Guadalajara">GUADALAJARA</a>
+                <span class="mes">SEP</span><span class="dia">02</span><a class="ciudad" href="#show-monterrey" aria-label="Ver presentación en Monterrey">MONTERREY</a>
+                <span class="mes">NOV</span><span class="dia">04</span><a class="ciudad" href="#show-tijuana" aria-label="Ver presentación en Tijuana">TIJUANA</a>
+            </div>
+
+            <h3 class="seo-only">Especiales del mes: Niu Jork, Ostin, Mayami</h3>
+            <!-- NIU JORK / OSTIN / MAYAMI ahora van integrados en la imagen de fondo (Anette los hornea al fondo nuevo) -->
+
+            <a class="platform-link platform-logo pos-spotify"
+               href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw"
+               target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img class="logo-spotify" src="assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
+            <a class="platform-link platform-logo pos-youtube"
+               href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG"
+               target="_blank" rel="noopener noreferrer" aria-label="YouTube Music"><img class="logo-youtube" src="assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
+            <a class="platform-link platform-logo pos-amazon"
+               href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M"
+               target="_blank" rel="noopener noreferrer" aria-label="Amazon Music"><img class="logo-amazon" src="assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async"></a>
+            <a class="platform-link platform-logo pos-apple"
+               href="https://music.apple.com/mx/artist/hueycoyote/1088136173"
+               target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img class="logo-apple" src="assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
+        </section>
+
+        <!-- Divisor: anuncia La Merch -->
+        <div class="divider-marquee" id="d-merch" role="img" aria-label="La Merch">
+            <div class="divider-track">
+                <img src="assets/divider-la-merch-text.png?v=neg" alt="La Merch">
+                <img src="assets/divider-la-merch-text.png?v=neg" alt="" aria-hidden="true">
+            </div>
+        </div>
+
+        <!-- MERCH (sección 4) -->
+        <section id="merch">
+            <img class="bg" src="assets/merch-sintexto-v4.webp?v=609b" alt="Merch — Llévele, llévele · Piratería oficial y La Original" loading="lazy" decoding="async">
+            <h2 class="seo-only">Merch — Llévele, llévele</h2>
+
+            <!-- NOMBRES (clicables, deslizan a la izquierda al hover) -->
+            <a class="merch-item pos-pirat-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">PLAYERAS :</a>
+            <a class="merch-item pos-pirat-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CHAMARRA :</a>
+            <a class="merch-item pos-pirat-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CALCETAS :</a>
+            <a class="merch-item pos-orig-playeras"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">PLAYERAS :</a>
+            <a class="merch-item pos-orig-chamarra"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CHAMARRA :</a>
+            <a class="merch-item pos-orig-calcetas"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CALCETAS :</a>
+
+            <!-- PRECIOS (editables, no clicables) -->
+            <span class="merch-price pos-price-pirat-pl">$250</span>
+            <span class="merch-price pos-price-pirat-ch">$350</span>
+            <span class="merch-price pos-price-pirat-ca">3X50</span>
+            <span class="merch-price pos-price-orig-pl">$800</span>
+            <span class="merch-price pos-price-orig-ch">$1000</span>
+            <span class="merch-price pos-price-orig-ca">$150</span>
+        </section>
+
+        <!-- Divisor: anuncia ¿Ya me conoces? -->
+
+
+        <!-- Divisor: anuncia Fotitos (Galería) -->
+        <div class="divider-marquee" id="d-galeria" role="img" aria-label="Con la raza">
+            <div class="divider-track">
+                <img src="assets/divider-con-la-raza-text.png?v=6" alt="Con la raza">
+                <img src="assets/divider-con-la-raza-text.png?v=6" alt="" aria-hidden="true">
+            </div>
+        </div>
+
+        <!-- GALERÍA DE FOTOS (Fotitos) -->
+        <section id="galeria">
+            <div class="galeria-scroll" id="galeria-scroll">
+                <div class="galeria-sticky">
+                    <div class="galeria-strip" id="galeria-grid">
+                        <img class="gp b1" style="transform:rotate(-5deg) translateY(-60px)" src="assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
+                        <img class="gp b3" style="transform:rotate(4deg) translateY(52px)" src="assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
+                        <img class="gp b2" style="transform:rotate(-3deg) translateY(-50px)" src="assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
+                        <img class="gp b4" style="transform:rotate(6deg) translateY(58px)" src="assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
+                        <img class="gp b5" style="transform:rotate(-7deg) translateY(-56px)" src="assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
+                        <img class="gp b1" style="transform:rotate(3deg) translateY(50px)" src="assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
+                        <img class="gp b6" style="transform:rotate(-4deg) translateY(-62px)" src="assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
+                        <img class="gp b3" style="transform:rotate(7deg) translateY(54px)" src="assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
+                        <img class="gp b2" style="transform:rotate(-6deg) translateY(-52px)" src="assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
+                        <img class="gp b4" style="transform:rotate(5deg) translateY(60px)" src="assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
+                        <img class="gp b5" style="transform:rotate(-2deg) translateY(-58px)" src="assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
+                        <img class="gp b1" style="transform:rotate(8deg) translateY(50px)" src="assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
+                        <img class="gp b6" style="transform:rotate(-5deg) translateY(-54px)" src="assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
+                        <img class="gp b2" style="transform:rotate(4deg) translateY(62px)" src="assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
+                        <img class="gp b3" style="transform:rotate(-8deg) translateY(-56px)" src="assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
+                        <img class="gp b4" style="transform:rotate(5deg) translateY(52px)" src="assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="lightbox" id="lightbox" aria-hidden="true">
+            <button class="lightbox-close" id="lb-close" aria-label="Cerrar">&times;</button>
+            <button class="lightbox-nav lightbox-prev" id="lb-prev" aria-label="Anterior">&#8249;</button>
+            <img id="lb-img" src="" alt="">
+            <button class="lightbox-nav lightbox-next" id="lb-next" aria-label="Siguiente">&#8250;</button>
+        </div>
+
+        <!-- Divisor: anuncia Échame un grito -->
+        <div class="divider-marquee" id="d-contacto" role="img" aria-label="Échame un grito">
+            <div class="divider-track">
+                <img src="assets/divider-echame-un-grito-text.png?v=neg" alt="Échame un grito">
+                <img src="assets/divider-echame-un-grito-text.png?v=neg" alt="" aria-hidden="true">
+            </div>
+        </div>
+
+        <!-- ÉCHAME UN GRITO (sección 6 — Contacto) -->
+        <section id="contacto" class="reveal-init">
+            <img class="bg" src="assets/echame-v2.webp?v=610" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
+            <h2 class="seo-only">Échame un grito — Contacto del Huey Coyote</h2>
+
+            <!-- 4 botones-sticker posicionados en la columna derecha (diseño original) + destello, clicables (misma pestaña) -->
+            <a class="ech-btn ech-fb" href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" aria-label="Facebook"><img src="assets/ech-fb-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-fb-c.webp?v=1');mask-image:url('assets/ech-fb-c.webp?v=1')"></span></a>
+            <a class="ech-btn ech-ig" href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" aria-label="Instagram"><img src="assets/ech-ig-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-ig-c.webp?v=1');mask-image:url('assets/ech-ig-c.webp?v=1')"></span></a>
+            <a class="ech-btn ech-email" href="mailto:contacto@elhueycoyote.com" aria-label="Email contacto"><img src="assets/ech-email-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-email-c.webp?v=1');mask-image:url('assets/ech-email-c.webp?v=1')"></span></a>
+            <a class="ech-btn ech-tt" href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" aria-label="TikTok"><img src="assets/ech-tt-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-tt-c.webp?v=1');mask-image:url('assets/ech-tt-c.webp?v=1')"></span></a>
+            <span class="ech-phone" data-text="2224440001">2224440001</span>
+        </section>
+
+        <!-- FOOTER (final de la página) -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <img class="footer-logo" src="assets/footer-logo-v3.webp?v=1" alt="El Huey Coyote">
+                <p class="footer-tag">Puro corrido, pura fiesta 🌮🎸</p>
+                <nav class="footer-social" aria-label="Redes sociales">
+                    <a href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
+                    <span class="dot">•</span>
+                    <a href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <span class="dot">•</span>
+                    <a href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" target="_blank" rel="noopener noreferrer">TikTok</a>
+                </nav>
+                <a class="footer-mail" href="mailto:contacto@elhueycoyote.com">contacto@elhueycoyote.com</a>
+                <button class="btn-cierra" id="btn-cierra" type="button" aria-label="Cierra el changarro">CIERRA EL CHANGARRO</button>
+                <p class="footer-copy">© 2026 El Huey Coyote · Todos los derechos reservados</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- PORTADA (cortina overlay encima de todo) -->
+    <div class="portada-overlay" id="portada">
+        <img src="assets/portada.png?v=20260523-0031" alt="El Huey Coyote">
+        <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
+    </div>
+    <audio id="audio-changarro" preload="auto" src="assets/audio/changarro-open.mp3?v=20260523-0514"></audio>
+    <!-- Reproductor OCULTO de FANTASIAS (suena al terminar el changarro, sin abrir el panel). Renderizado fuera de pantalla. -->
+    <div id="fantasias-player" aria-hidden="true" style="position:fixed; left:-10000px; top:0; width:320px; height:80px; opacity:0; pointer-events:none;"></div>
+
+    <!-- Botón de música: aparece al abrir el changarro; reproduce al Huey Coyote -->
+    <button class="music-fab" id="music-fab" aria-label="Pon una rolita del Huey Coyote">
+        <span class="disc" aria-hidden="true"></span> Pon una rolita
+    </button>
+    <div class="music-panel" id="music-panel">
+        <button class="music-close" id="music-close" aria-label="Cerrar música">✕</button>
+        <p class="panel-title">Las rolitas del HueyCoyote</p>
+        <ul class="song-list" id="song-list"></ul>
+        <div id="music-embed"></div>
+    </div>
+
+
+    <script>
+        /* Llenar data-text para el rayo brillante de PRÓXIMOS SHOWS y LA MERCH */
+        document.querySelectorAll('.shows-list .mes,.shows-list .dia,.shows-list .ciudad,.merch-item,.merch-price').forEach(function(el){ if(!el.dataset.text) el.dataset.text = el.textContent.trim(); });
+
+        const PORTADA_KEY = 'huey_portada_vista';
+        const portada = document.getElementById('portada');
+        const btnChangarro = document.getElementById('btn-changarro');
+        const audioChangarro = document.getElementById('audio-changarro');
+
+        // ¿El usuario ya vio la cortina antes? (se guarda en el navegador)
+        // Excepción: con ?intro=1 (o ?inicio=1) en la URL SIEMPRE se muestra la portada desde el
+        // inicio, para mandarle al cliente la experiencia completa (Ani).
+        let portadaVista = false;
+        try { portadaVista = localStorage.getItem(PORTADA_KEY) === '1' && !/[?&](intro|inicio)=1/.test(location.search); } catch (e) {}
+
+        if (portadaVista) {
+            // Visitante que regresa / hace refresh → entra directo, sin cortina
+            if (portada) { portada.style.pointerEvents = 'none'; portada.style.display = 'none'; }
+            document.body.classList.add('changarro-abierto');
+            // changarro ya abierto → arranca el brinco del headliner
+            document.body.classList.add('headliner-anim');
+        } else {
+            // Primera vez → muestra la cortina y bloquea el scroll detrás de ella
+            document.body.classList.add('cortina-bajada');
+        }
+
+        // === Fix: los divisores SIEMPRE giran desde el inicio (sin necesidad de refresh) ===
+        // En móvil, la animación marquee a veces no arranca hasta que las imágenes terminan de
+        // decodificarse. Reiniciamos la animación cuando cada imagen carga, al window load y con refuerzos.
+        (function () {
+            function kick(track) {
+                if (!track) return;
+                track.style.animation = 'none';
+                void track.offsetWidth;   // fuerza reflow → la animación recalcula con el ancho ya listo
+                track.style.animation = '';
+            }
+            function kickAll() { document.querySelectorAll('.divider-track').forEach(kick); }
+            document.querySelectorAll('.divider-track img').forEach(function (img) {
+                if (img.complete) kick(img.closest('.divider-track'));
+                else img.addEventListener('load', function () { kick(img.closest('.divider-track')); });
+            });
+            window.addEventListener('load', kickAll);
+            setTimeout(kickAll, 600);
+            setTimeout(kickAll, 1800);
+        })();
+
+        if (btnChangarro) btnChangarro.addEventListener('click', function () {
+            // Marca la cortina como vista: ya no volverá a salir en futuros refresh
+            try { localStorage.setItem(PORTADA_KEY, '1'); } catch (e) {}
+            portada.classList.add('subida');
+            // Deja de capturar el dedo de inmediato: el usuario puede scrollear aunque la cortina siga subiendo
+            portada.style.pointerEvents = 'none';
+            document.body.classList.remove('cortina-bajada');
+            // Reproduce el sonido del changarro en sincronía con la cortina subiendo
+            if (audioChangarro) {
+                audioChangarro.currentTime = 0;
+                audioChangarro.play().catch(() => { /* navegador bloqueó autoplay, no rompe nada */ });
+                // Cuando el sonido del changarro TERMINA, arranca FANTASIAS desde Spotify
+                // en un reproductor OCULTO (no abre el panel de "PON UNA ROLITA").
+                audioChangarro.addEventListener('ended', function () {
+                    const fp = document.getElementById('fantasias-player');
+                    if (fp) {
+                        fp.innerHTML = '<iframe width="320" height="80" frameborder="0" '
+                            + 'allow="autoplay; encrypted-media" '
+                            + 'src="https://open.spotify.com/embed/track/5eHegIfGPku1Jo70rRzv6k?utm_source=generator&autoplay=1"></iframe>';
+                    }
+                }, { once: true });
+            }
+            // Muestra el botón de música del Huey Coyote ya que se abrió el changarro
+            document.body.classList.add('changarro-abierto');
+            // Ya que la cortina terminó de subir, la sacamos del render (libera GPU → scroll más fluido)
+            //  y HASTA ENTONCES arranca el brinco de los letreros del headliner.
+            setTimeout(() => {
+                portada.style.pointerEvents = 'none';
+                portada.style.display = 'none';
+                document.body.classList.add('headliner-anim');
+            }, 1700);
+        });
+
+        // "CIERRA EL CHANGARRO" (footer): vuelve a bajar la cortina y regresa al inicio
+        const btnCierra = document.getElementById('btn-cierra');
+        if (btnCierra && portada) btnCierra.addEventListener('click', function () {
+            document.documentElement.classList.remove('portada-vista');
+            window.scrollTo(0, 0);
+            // 1) Coloca la cortina arriba (fuera de pantalla por arriba) SIN transición,
+            //    para garantizar el punto de partida del deslizamiento de bajada.
+            portada.style.transition = 'none';
+            portada.classList.add('subida');      // translateY(-100%) = arriba, fuera de vista
+            portada.style.display = '';
+            portada.style.pointerEvents = 'auto';
+            document.body.classList.add('cortina-bajada');
+            document.body.classList.remove('changarro-abierto');
+            document.body.classList.remove('headliner-anim');
+            // 2) Doble requestAnimationFrame: aseguramos que el navegador pinte el estado
+            //    "arriba" antes de animar; así la transición de bajada se ve siempre
+            //    (incluso en el navegador in-app de Telegram / Safari).
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    portada.style.transition = '';     // restaura la transición de 1.6s
+                    portada.classList.remove('subida'); // baja la cortina: arriba → abajo
+                });
+            });
+            // mismo sonido del changarro que al abrir
+            if (audioChangarro) {
+                audioChangarro.currentTime = 0;
+                audioChangarro.play().catch(() => { /* el navegador puede bloquear autoplay; no rompe nada */ });
+            }
+        });
+
+        // Menú hamburguesa (header)
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const open = document.body.classList.toggle('menu-open');
+                menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+            navMenu.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', function () {
+                    document.body.classList.remove('menu-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+            document.addEventListener('click', function (e) {
+                if (document.body.classList.contains('menu-open') &&
+                    !navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                    document.body.classList.remove('menu-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        // Galería: lightbox (tocar foto → verla grande, navegar prev/next)
+        (function () {
+            const grid = document.getElementById('galeria-grid');
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lb-img');
+            if (!grid || !lb) return;
+            const fotos = Array.prototype.map.call(grid.querySelectorAll('img'), function (i) { return i.getAttribute('src'); });
+            let cur = 0;
+            function show(i) { cur = (i + fotos.length) % fotos.length; lbImg.src = fotos[cur]; }
+            function abrir(i) { show(i); lb.classList.add('open'); }
+            function cerrar() { lb.classList.remove('open'); lbImg.src = ''; }
+            grid.querySelectorAll('img').forEach(function (img) {
+                img.addEventListener('click', function () { abrir(parseInt(img.dataset.i, 10)); });
+            });
+            document.getElementById('lb-close').addEventListener('click', cerrar);
+            document.getElementById('lb-prev').addEventListener('click', function (e) { e.stopPropagation(); show(cur - 1); });
+            document.getElementById('lb-next').addEventListener('click', function (e) { e.stopPropagation(); show(cur + 1); });
+            lb.addEventListener('click', function (e) { if (e.target === lb) cerrar(); });
+        })();
+
+        // FOTITOS: galería de scroll HORIZONTAL con AUTO-PASE (Ani). Las fotos avanzan solas
+        // (ping-pong suave). Al primer toque/scroll del usuario, se detiene el auto y se ocultan
+        // las flechitas (ya entendió hacia dónde deslizar).
+        (function () {
+            const strip = document.getElementById('galeria-grid');
+            const hint = document.getElementById('galeria-hint');
+            if (!strip) return;
+            let dir = 1, paused = false, resumeTimer = null;
+            const SPEED = 1.3; // px por frame (~78px/s)
+            // OJO: el scroll-snap (proximity) jala de vuelta cada micro-incremento → se apaga
+            // mientras corre el auto y se restaura al pausar (para que el swipe manual centre).
+            strip.style.scrollSnapType = 'none';
+            function tick() {
+                if (!paused) {
+                    const max = strip.scrollWidth - strip.clientWidth;
+                    if (max > 4) {
+                        strip.scrollLeft += dir * SPEED;
+                        if (strip.scrollLeft >= max - 1) dir = -1;
+                        else if (strip.scrollLeft <= 0) dir = 1;
+                    }
+                }
+                requestAnimationFrame(tick); // SIEMPRE re-agenda: nunca se mata el bucle
+            }
+            requestAnimationFrame(tick);
+            // Al tocar/deslizar, se pausa el auto (snap on para swipe manual + se ocultan flechitas);
+            // tras 4s de inactividad, se reanuda solo. Robusto ante un evento "fantasma" al cargar.
+            function pause() {
+                paused = true;
+                strip.style.scrollSnapType = '';
+                if (hint) hint.style.opacity = '0';
+                clearTimeout(resumeTimer);
+                resumeTimer = setTimeout(function () {
+                    paused = false;
+                    strip.style.scrollSnapType = 'none';
+                    if (hint) hint.style.opacity = '';
+                }, 4000);
+            }
+            ['pointerdown', 'touchstart', 'wheel'].forEach(function (ev) {
+                strip.addEventListener(ev, pause, { passive: true });
+            });
+        })();
+
+        // Botón de música: al click abre la lista de rolitas del Huey Coyote
+        const musicFab = document.getElementById('music-fab');
+        const musicPanel = document.getElementById('music-panel');
+        const musicEmbed = document.getElementById('music-embed');
+        const musicClose = document.getElementById('music-close');
+        const songListEl = document.getElementById('song-list');
+
+        // Rolitas del Huey Coyote en Spotify (orden pedido por Anette)
+        const SONGS = [
+            { t: 'Tirando Flow · Sesh #10',      id: '6WmCmQuse2SjjSVab5EHxg' },
+            { t: 'Fantasías',                    id: '5eHegIfGPku1Jo70rRzv6k' },
+            { t: 'Domingo Sin Bajón',            id: '3CsC05AC1I7KGaE2CyyGVf' },
+            { t: 'El Corrido de Harry Potter',   id: '5ttVu9xFETiJjKx0OmBKMz' },
+            { t: 'Como un Ladrón',               id: '5HYLD6LFmwssarqIfYCrZe' },
+        ];
+        function spotifyEmbed(id) {
+            return '<iframe style="border-radius:10px" width="100%" height="152" frameborder="0" ' +
+                'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" ' +
+                'src="https://open.spotify.com/embed/track/' + id + '?utm_source=generator"></iframe>';
+        }
+        // Pinta la lista de canciones
+        if (songListEl) {
+            SONGS.forEach(function (s, i) {
+                const li = document.createElement('li');
+                const b = document.createElement('button');
+                b.type = 'button';
+                b.className = 'song-item';
+                b.innerHTML = '<span class="num">' + (i + 1) + '</span><span>' + s.t + '</span>';
+                b.addEventListener('click', function () {
+                    // marca la elegida y reproduce esa rolita
+                    document.querySelectorAll('.song-item').forEach(function (el) { el.classList.remove('active'); });
+                    b.classList.add('active');
+                    musicEmbed.innerHTML = spotifyEmbed(s.id);   // inyecta tras gesto → reproduce
+                    musicFab.classList.add('playing');
+                });
+                li.appendChild(b);
+                songListEl.appendChild(li);
+            });
+        }
+        if (musicFab) {
+            musicFab.addEventListener('click', function () {
+                document.body.classList.toggle('music-open');   // abre/cierra la lista de rolitas
+            });
+            musicClose.addEventListener('click', function () {
+                document.body.classList.remove('music-open');
+                musicEmbed.innerHTML = '';   // detiene la música
+                document.querySelectorAll('.song-item').forEach(function (el) { el.classList.remove('active'); });
+                musicFab.classList.remove('playing');
+            });
+        }
+
+        // MERCH: animación de desenrollar removida — la sección se muestra siempre, en todos los dispositivos
+
+        // ¿YA ME CONOCES? — 3 posters vuelan y aterrizan + "EL MERO MERO" se raya
+        const conocesSection = document.getElementById('sobre-mi');
+        if (conocesSection && 'IntersectionObserver' in window) {
+            const conocesObs = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        conocesSection.classList.add('posters-landed');
+                        // El rayón arranca pronto al entrar a la sección y luego corre en bucle (CSS infinite)
+                        setTimeout(() => conocesSection.classList.add('mero-scratched'), 600);
+                        conocesObs.unobserve(conocesSection);
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+            conocesObs.observe(conocesSection);
+        } else if (conocesSection) {
+            conocesSection.classList.add('posters-landed');
+            conocesSection.classList.add('mero-scratched');
+        }
+
+        // Opción 1: aparición al hacer scroll (fade + sube) en secciones marcadas
+        const revealEls = document.querySelectorAll('.reveal-init');
+        if (revealEls.length && 'IntersectionObserver' in window) {
+            const revealObs = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        revealObs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            revealEls.forEach((el) => revealObs.observe(el));
+        } else {
+            revealEls.forEach((el) => el.classList.add('revealed'));
+        }
+
+        /* === Botones de plataformas en los bancos === */
+        const PLACEHOLDER = ['APPLE_MUSIC_URL', 'YOUTUBE_MUSIC_URL', 'AMAZON_MUSIC_URL'];
+        function abrirURL(u) {
+            if (!u || PLACEHOLDER.indexOf(u) !== -1) {
+                alert('Esta cuenta todavía no tiene liga configurada.');
+                return false;
+            }
+            window.open(u, '_blank', 'noopener');
+            return true;
+        }
+        // YouTube y Amazon: abren directo en pestaña nueva
+        document.querySelectorAll('.stool-youtube, .stool-amazon').forEach(function (el) {
+            el.addEventListener('click', function (e) {
+                e.preventDefault();
+                abrirURL(el.getAttribute('data-url'));
+            });
+        });
+        // Apple: el logo abre la imagen "PARA LOS MÁS FRESAS" a pantalla completa.
+        // El botón (manzanita + "El HueyCoyote") lleva a Apple Music. Tocar la imagen cierra.
+        const appleBtn = document.getElementById('btn-apple');
+        const appleAd = document.getElementById('apple-ad');
+        const appleAdGo = document.getElementById('apple-ad-go');
+        const appleAdCerrar = document.getElementById('apple-ad-cerrar');
+        const appleAdImg = appleAd ? appleAd.querySelector('.ad-img') : null;
+        function cerrarAppleAd() { if (appleAd) appleAd.classList.remove('abierto'); }
+        if (appleBtn && appleAd) {
+            appleBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                appleAd.classList.add('abierto');   // solo muestra la pantalla completa
+            });
+            // El botón es un enlace real (href a Apple Music, misma pestaña). Además
+            // forzamos la navegación por JS (window.location) como respaldo: así funciona
+            // aunque algún navegador in-app (Telegram, etc.) ignore el clic del enlace.
+            appleAdGo.addEventListener('click', function () {
+                window.location.href = 'https://music.apple.com/mx/artist/hueycoyote/1088136173';
+            });
+            appleAdCerrar.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); cerrarAppleAd(); });
+            // tocar la imagen (fuera del botón) cierra la pantalla completa
+            if (appleAdImg) appleAdImg.addEventListener('click', function () { cerrarAppleAd(); });
+        }
+    </script>
+</body>
+</html>
