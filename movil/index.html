@@ -1238,11 +1238,13 @@
             /* OSCURO con contornos plateados en partes (Ani): relleno gris oscuro + filo plata
                fino + emboss (brillo plata arriba-izq / sombra abajo-der) = metal oscuro cuyos
                bordes brillan plateado en algunas partes. */
-            color: #2c2d2f;
-            -webkit-text-fill-color: #2c2d2f;
+            /* Mismo acabado que compu (Ani 2026-07-10): filo OSCURO fino. El filo plateado
+               claro que traía antes se lavaba contra la lámina y casi no se leía. */
+            color: #2a2b2e;
+            -webkit-text-fill-color: #2a2b2e;
             background: none; -webkit-background-clip: border-box; background-clip: border-box;
-            -webkit-text-stroke: 0.3px rgba(206,210,214,0.5);
-            text-shadow: -0.6px -0.6px 0.3px rgba(230,234,238,0.6), 0.7px 0.9px 1.2px rgba(0,0,0,0.55);
+            -webkit-text-stroke: 0.45px rgba(34,35,38,0.58);
+            text-shadow: -0.6px -0.6px 0.3px rgba(230,234,238,0.6), 0.75px 0.95px 1.3px rgba(0,0,0,0.58);
             transform: rotate(-6deg);
             white-space: nowrap;
             pointer-events: none;
@@ -1257,7 +1259,9 @@
            se queda un rato, se borra de izq→der y vuelve a empezar (sin costura porque
            ambos extremos del ciclo están "en nada"). */
         #sobre-mi.mero-scratched .mero-mero {
-            animation: scratch-loop 7s steps(46, end) infinite;
+            /* mismo retardo de 1.8s que la versión compu: entras, ves la lámina limpia,
+               y entonces se raya (Ani 2026-07-10) */
+            animation: scratch-loop 7s steps(46, end) 1.8s infinite;
         }
         @keyframes scratch-loop {
             0%   { clip-path: inset(0 100% 0 0); }  /* nada (recortado desde la derecha) */
@@ -2037,6 +2041,11 @@
     </g>
   </g>
 </svg>
+
+            <!-- "El mero mero" rayado en la lámina. Vive como HTML, NO en el SVG:
+                 el commit b65a56c lo borró de aquí dando por hecho que venía en la capa
+                 de texto vivo, y esa capa nunca lo trajo. Restaurado (Ani 2026-07-10). -->
+            <div class="mero-mero" aria-hidden="true"><span style="transform:translateY(2px) rotate(-5deg)">E</span><span style="transform:translateY(-2px) rotate(3deg)">l</span> <span style="transform:translateY(1px) rotate(-6deg)">m</span><span style="transform:translateY(-3px) rotate(2deg)">E</span><span style="transform:translateY(2px) rotate(-3deg)">R</span><span style="transform:translateY(-1px) rotate(4deg)">o</span> <span style="transform:translateY(-2px) rotate(-4deg)">m</span><span style="transform:translateY(2px) rotate(5deg)">E</span><span style="transform:translateY(-2px) rotate(-5deg)">R</span><span style="transform:translateY(1px) rotate(2deg)">o</span></div>
         </section>
 
         <div class="divider-marquee" id="d-proximos-shows" role="img" aria-label="Próximos Shows">
