@@ -2,6 +2,20 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 57) — MÓVIL: "El mero mero" no existía · restaurado con la animación de compu
+- **Ani (2287):** SOLO móvil. "No me sale lo de EL MERO MERO, checa eso y colócale la animación que también tiene la versión compu."
+- **🔴 CAUSA RAÍZ (regresión del 8-jul).** El commit **`b65a56c`** ("sección con TEXTO VIVO (no horneado)", instancia *cris2/Laso*) **borró el `<div class="mero-mero">`** de la móvil. Su mensaje decía: *"Mero mero ahora viene del SVG (se quitó el div duplicado)"*. **La capa SVG nunca lo trajo:** `conoce-live` tiene **43 `<tspan>` y ninguno dice "El mero mero"**.
+  - El `CSS` (`.mero-mero`, `@keyframes scratch-loop`) y el `JS` (`classList.add('mero-scratched')`) **siguieron ahí**, apuntando a un elemento inexistente → **cero errores en consola**, simplemente no se pintaba nada. Por eso pasó desapercibido un mes.
+  - Comprobado antes de tocar: `tiene_mero_mero:false`, `tiene_clase_scratched:true`. Y el fondo `conoces-fondo-v2.webp` **no lo trae horneado** (esa zona es lámina pelona) → tampoco era que estuviera tapado.
+- **Fix:** restaurado el `<div class="mero-mero">` con sus 10 `<span>` y sus rotaciones individuales, idéntico al de compu, justo después del SVG de texto vivo.
+- **Animación igualada a compu:** `scratch-loop 7s steps(46,end) infinite` → se le añade el **retardo de `1.8s`** que compu ya tenía (entras, ves la lámina limpia, y entonces se raya).
+- **Acabado igualado a compu.** La móvil tenía filo **plateado claro** `rgba(206,210,214,.5)` a `.3px`, que **se lavaba** contra el metal (ver captura `mero_solo.png` antes del cambio: apenas se adivinaba). Ahora `-webkit-text-stroke:.45px rgba(34,35,38,.58)` + `color:#2a2b2e`, como compu. Se conserva el `font-size:5cqw` propio de móvil (compu usa 2.55cqw sobre un contenedor mucho más ancho).
+- **Verificado en Chrome real (CDP, 390px)** muestreando `clip-path` a lo largo del ciclo: `t=0s` y `t=1.0s` → `inset(0 100% 0 0)` (oculto, en el retardo) · `t=2.3s` → `inset(0 67.4% 0 0)` (rayando) · `t=3.5s` → `inset(0px)` (completo) · `t=6.0s` → sigue puesto · `t=8.6s` → `inset(0 0 0 82.6%)` (borrándose). Bucle sin costura.
+- **CSS muerto que queda:** `.mero-cover` (tapaba el "El mero mero" horneado del fondo v1; el v2 ya no lo trae). No estorba; no se borró para no arriesgar.
+- **Compu sin tocar.** Diff = `movil/index.html`.
+- **Deploy:** commit `a8f94a3` → GH Actions → elhueycoyote.com
+- **⚠️ Lección:** al migrar texto horneado → texto vivo, **verificar que el SVG realmente traiga cada pieza** antes de borrar el HTML que la pintaba. CSS+JS huérfanos no fallan: callan.
+
 ## 2026-07-10 · anette (cont. 56) — MÓVIL: cartel "SHOWS AGOTADOS" en PRÓXIMOS SHOWS
 - **Ani (2283):** SOLO móvil. Añadir el cartel SHOWS AGOTADOS a PRÓXIMOS SHOWS: al tocar cualquier ciudad sale el cartel, **dura 4s y se quita solo**. Ajustar el tamaño a móvil.
 - **El asset ya existía.** La imagen que mandó Ani es **idéntica pixel a pixel** a `movil/assets/compu/agotados-cartel.png` (756×559 RGBA; dif media y máx = **0** en toda la zona opaca, 314,768 px). Se **reusa** en vez de subir un duplicado de 490KB. Desde móvil la ruta es `assets/compu/agotados-cartel.png` (la carpeta se llama `compu/` por herencia; moverla rompería compu).
