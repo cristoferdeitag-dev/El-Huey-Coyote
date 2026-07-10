@@ -160,6 +160,25 @@
   .ml-prox>.w+.w{margin-top:-.26em}
   .ml-prox:hover{transform:translateY(-7px) translate(-50%,-50%) scale(1.07) rotate(-3deg)}
   /* Logos-botón de streaming sobre los banquitos */
+  /* ===== "PARA LOS MÁS FRESAS" — letrero a pantalla completa al hacer clic en el logo de Apple Music del headliner ===== */
+  .apple-ad-overlay{position:fixed;inset:0;z-index:9999;display:none;background:#000}
+  .apple-ad-overlay.abierto{display:grid;place-items:center;animation:adFade .28s ease}
+  @keyframes adFade{from{opacity:0}to{opacity:1}}
+  /* Escenario con el aspecto EXACTO del letrero: así el glow y la zona clicable
+     siguen calzando con la imagen en cualquier tamaño de ventana. */
+  .apple-ad-overlay .ad-stage{position:relative;width:min(100vw, calc(100vh * 2032 / 1143));aspect-ratio:2032 / 1143}
+  .apple-ad-overlay .ad-img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;filter:brightness(.72);cursor:pointer}
+  /* Capa-recorte SOLO de la manzanita + "-El HueyCoyote", con contorno de iluminación. */
+  .apple-ad-overlay .ad-glow{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;
+    filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 3px #fff) drop-shadow(0 0 7px rgba(255,255,255,.95)) drop-shadow(0 0 14px rgba(255,255,255,.75));
+    animation:cta-glow-pulse 1.9s ease-in-out infinite}
+  @keyframes cta-glow-pulse{0%,100%{opacity:.8}50%{opacity:1}}
+  /* Zona clicable sobre la manzanita + nombre (medida sobre el letrero: x 1095..1494, y 997..1055 de 2032x1143). */
+  .apple-ad-overlay .ad-cta{position:absolute;left:52.6%;right:25.5%;top:85.8%;height:7.6%;cursor:pointer}
+  .apple-ad-overlay .ad-cerrar{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;
+    background:rgba(255,255,255,.92);color:#c4161c;border:2px solid #c4161c;font-size:24px;line-height:1;cursor:pointer;z-index:2}
+  @media (prefers-reduced-motion:reduce){.apple-ad-overlay .ad-glow{animation:none}}
+
   .stool-btn{position:absolute;transform:translateY(0) translate(-50%,-50%) scale(1);display:block;pointer-events:auto;cursor:pointer;line-height:0;transition:transform .2s ease,filter .2s ease}
   .stool-btn img{width:100%;height:auto;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
   .stool-btn:hover{transform:translateY(-6px) translate(-50%,-50%) scale(1.08);z-index:11}
@@ -417,7 +436,7 @@
   <a class="menu-link ml-conlaraza" href="#sec-collabs"  style="left:70.4%;top:15.8%;font-size:2.05cqw" data-text="CON LA RAZA">CON LA RAZA</a>
   <a class="menu-link ml-echame"    href="#sec-echame"   style="left:70.0%;top:23.2%;font-size:2.0cqw" data-text="ÉCHAME UN&#10;GRITO">ÉCHAME UN<br>GRITO</a>
   <!-- Logos-botón de streaming sobre los banquitos (mismos links/imágenes que la móvil) -->
-  <a class="stool-btn" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:11.5%;top:76.9%;width:3.9cqw"><img src="../sitio/assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
+  <a class="stool-btn" id="btn-apple" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" rel="noopener" aria-label="Apple Music del Huey Coyote" style="left:11.5%;top:76.9%;width:3.9cqw"><img src="../sitio/assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
   <a class="stool-btn" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:21.1%;top:80.5%;width:2.9cqw"><img src="../sitio/assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async"></a>
   <a class="stool-btn" href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music" style="left:37.9%;top:80.5%;width:4.3cqw"><img src="../sitio/assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
   <a class="stool-btn" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:56.3%;top:80.5%;width:4.7cqw"><img src="../sitio/assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
@@ -544,6 +563,15 @@
   <button class="music-fab" id="music-fab" aria-label="Pon una rolita"><span class="disc" aria-hidden="true"></span> Pon una rolita</button>
   <div class="music-panel" id="music-panel"><button class="mclose" id="mclose" aria-label="Cerrar">✕</button><p class="panel-title">Las rolitas del HueyCoyote</p><ul class="song-list" id="song-list"></ul><div id="membed"></div></div>
 
+<!-- Apple Music: letrero "PARA LOS MÁS FRESAS" a pantalla completa -->
+<div class="apple-ad-overlay" id="apple-ad" role="dialog" aria-modal="true" aria-label="Para los más fresas — El Huey Coyote">
+  <div class="ad-stage">
+    <img class="ad-img" src="../sitio/assets/compu/apple-fresas-ad-compu.webp?v=0710c49" alt="Para los más fresas — El Huey Coyote" loading="lazy" decoding="async">
+    <img class="ad-glow" src="../sitio/assets/compu/apple-cta-glow-compu.png?v=0710c49" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <a class="ad-cta" id="apple-ad-go" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Ir a Apple Music del Huey Coyote"></a>
+    <button class="ad-cerrar" id="apple-ad-cerrar" aria-label="Cerrar">&times;</button>
+  </div>
+</div>
   <script>
     document.body.classList.add('cortina-bajada');
     const portada=document.getElementById('portada');
@@ -733,6 +761,26 @@
       usbBtn.addEventListener('click',()=>{tiembla();document.body.classList.toggle('music-open');});
     }
     document.getElementById('mclose').addEventListener('click',()=>{document.body.classList.remove('music-open');me.innerHTML='';document.querySelectorAll('.song-item').forEach(el=>el.classList.remove('active'));fab.classList.remove('playing');});
+
+    /* ===== Letrero de Apple Music ===== */
+    (function () {
+      const btn = document.getElementById('btn-apple');
+      const ad = document.getElementById('apple-ad');
+      if (!btn || !ad) return;
+      const img = ad.querySelector('.ad-img');
+      const cerrar = document.getElementById('apple-ad-cerrar');
+      const go = document.getElementById('apple-ad-go');
+      const abrir = () => { ad.classList.add('abierto'); document.body.style.overflow = 'hidden'; };
+      const cerrarAd = () => { ad.classList.remove('abierto'); document.body.style.overflow = ''; };
+      btn.addEventListener('click', (e) => { e.preventDefault(); abrir(); });
+      cerrar.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); cerrarAd(); });
+      /* clic en la imagen (fuera del botón) o en el fondo negro: cierra */
+      img.addEventListener('click', cerrarAd);
+      ad.addEventListener('click', (e) => { if (e.target === ad) cerrarAd(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && ad.classList.contains('abierto')) cerrarAd(); });
+      /* el <a target="_blank"> ya navega solo; NO abrir con JS también (saldrían 2 pestañas) */
+      go.addEventListener('click', (e) => { e.stopPropagation(); });
+    })();
   </script>
 </body>
 </html>
