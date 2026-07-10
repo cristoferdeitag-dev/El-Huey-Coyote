@@ -2,6 +2,23 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 51) — 🚀 PRODUCCIÓN: el sitio nuevo ya vive en elhueycoyote.com
+- **Ani (2260):** subir la versión compu a internet y quitar la que estaba. **(2263)** aclaró: que la compu salga en computadora y la móvil en teléfono.
+- **⚠️ Freno antes de tocar prod:** `preview/compu` NO tiene ninguna media query `max-width` — abierta en 390px se apachurra (verificado con captura). Publicarla sola habría roto el sitio para todo el tráfico de celular. Le enseñé la captura y eligió el reparto por dispositivo.
+- **Estado previo:** en `elhueycoyote.com/` vivía el **sitio viejo de mayo** (1139 líneas, sin "¿Ya me conoces?"). Lo nuevo sólo existía bajo `/preview/`.
+- **Qué se hizo:**
+  - `git mv preview/sitio movil` y `git mv preview/compu compu` (URLs públicas limpias; `movil/` pesa 132MB de assets, por eso se MUEVE, no se copia).
+  - `compu/index.html`: **82 rutas** `../sitio/assets/` → `../movil/assets/`. Título `· versión compu` → el del sitio. Móvil: título unificado también.
+  - `preview/compu-copia` y `preview/sitio-sticky` (experimentos) también apuntaban a `../sitio/assets/` → reescritos a `../../movil/assets/` (21 y 11 rutas) para no dejarlos rotos.
+  - **`index.html` raíz = repartidor**: `matchMedia('(max-width: 900px)')` → `movil/`, si no → `compu/`. Usa `location.replace` (no ensucia el historial, el botón "atrás" no rebota). Override `?v=movil` / `?v=compu` para revisar. `<noscript>` con los 2 enlaces.
+  - **Stubs** en `preview/sitio/index.html` y `preview/compu/index.html` que redirigen a las rutas nuevas (JS + `meta refresh`), para no romper los enlaces que Ani ya tenía.
+  - **`.htaccess` raíz** con `Cache-Control: no-cache` para el HTML (los de `compu/` y `movil/` ya lo traían de su etapa de preview y se conservan).
+- **¿Por qué redirect de JS y no rewrite de .htaccess?** Un rewrite interno mantiene la URL en `/` pero entonces las rutas relativas (`assets/...`) se resolverían contra `/` y **se romperían todas las imágenes**. Habría que pasar todo a rutas absolutas. El redirect por JS es la opción sin riesgo y sin build step.
+- **Verificado (Chrome headless; el MCP de Playwright se atoró — usar chrome directo, ver cont.16):** 390→MÓVIL · 820 (tablet vertical)→MÓVIL · 1024→COMPU · 1440→COMPU · `?v=compu` en 390→COMPU · `?v=movil` en 1440→MÓVIL · `/preview/compu/`→COMPU · `/preview/sitio/`→MÓVIL. Y **0 rutas rotas**: validé en disco las 68 de compu, 47 de móvil y 2 de la raíz.
+- **Deploy:** commit `7fa2662`. El rsync mueve 132MB, así que puede tronar por el rate-limit SSH de Hostinger → reintentar el run (pasó en cont.50).
+- **Reversible:** el sitio viejo sigue en el historial (`git show 2ba2724:index.html`).
+- **PENDIENTE:** compu no es responsiva; si algún día se quiere una sola página adaptable habría que rehacerla. Hoy no hace falta: cada aparato recibe la suya.
+
 ## 2026-07-10 · anette (cont. 50) — COMPU letrero: fuera las franjas blancas laterales
 - **Ani (2255 + captura marcada en morado):** quitar los "lados blancos" del cartel; que sólo se vea el diseño del póster.
 - **Hallazgo:** NO eran grises ni parte del muro — la imagen que mandó trae **franjas de blanco PURO (255,255,255)** de 295px a la izq y 294px a la der. Se veían grises en pantalla porque el overlay les aplica `filter:brightness(.72)` (255 × .72 ≈ 184).
