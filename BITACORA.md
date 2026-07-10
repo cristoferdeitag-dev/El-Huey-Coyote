@@ -2,6 +2,15 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 44) — MÓVIL "Sobre mí": NUEVO fondo limpio + overlay RECONSTRUIDO desde SVG de Ani
+- **Ani (2218/2219):** mandó (1) nueva imagen de fondo LIMPIA (pósters sin texto horneado — el filler ya no está; poster 1 conserva logo+EL VATO+PARA LATAM que son arte) y (2) el SVG `Yameconoces-movil_¿Ya me conoces-.svg` con el texto CORRECTO + posiciones + tamaños. Objetivo: cambiar fondo + reconstruir todo el texto vivo para que calce EXACTO con el SVG.
+- **Fondo:** PNG 1086×1937 → `assets/conoces/conoces-fondo-v2.webp` (403KB). `<img class="bg">` ahora `conoces-fondo-v2.webp?v=0710v2`.
+- **Overlay reconstruido (`<g id="Texto">` reemplazado, 16 <text> nuevos, clases nv*):** el SVG usa el MISMO viewBox (1086.3×1936.5) → transforms calzan directo. Fuentes mapeadas: Swiss721BT-Black→swiss-721-bt 900 (nvblk), Bold→700 (nvbold), BoldItalic→700 italic (nvital). Resumen p1 = 2 capas (nvout blanco stroke 9 + nvred rojo) — el diseño NUEVO es contorno BLANCO+rojo (NO azul; el #0477c3 del SVG son polígonos decorativos st45, ya en el fondo). Extraje texto+tamaños+fills del SVG por script (`scratchpad/rebuild_overlay.py`).
+- **Texto correcto por elemento (del SVG):** p1 resumen "CANTAUTOR MEXICANO…PUEDE SER HUMOR PURO." (24px, translate 521.7 768 rot6.7 scale.7 skewX.3). p2: NACIÓ EN: GUADALAJARA/HACE DE TODO: CANTA,/TOCA 21 INSTRUMENTOS,/COMPONE Y BAILA. (st2 22px ital, 24.5 974). SU NOMBRE (234.46 1093.88 sc.7593) + COYOTE (255.02 1179.56). UN MÚSICO QUE/SIEMPRE BUSCA/SACARTE UNA/SONRISA (st5 32px, 199.82 1323.92). Título/subtítulo p2 siguen placeholder (UN TÍTULO COOL/AQUÍ UN SUBTÍTULO). p3: cuerpos st29/st26/st23, "Cervantino"(st15)/"Cumbre Tajín"(st19) (reemplazan Palabra súper cool), "¿POR QUÉ SE HIZO"(st37, reemplaza ALGO PARA RESALTAR), título "TEXTO MÁS TEXTO"+subtítulo "SUBTÍTULO LINDO Y NICE" placeholder.
+- **⚠️ Título p3 pendiente de decidir:** el SVG trae "TEXTO MÁS TEXTO" (placeholder) pero Ani (msg 2214) pidió "Hace canciones sobre absolutamente TODO." ahí. Dejé el del SVG y le pregunté cuál. (Al 34px del SVG "Hace canciones…" no cabe en 1 renglón.)
+- **Harness preview:** `preview7.cjs` ahora intercepta `conoces-fondo-v2.webp`→`bgv2_full.png`. Clases cv* viejas quedan sin uso (inocuas).
+- **PENDIENTE:** título/subtítulo reales p2 y p3; decisión título p3; "El mero mero" (st20 del SVG, Monotxt) NO incluido (no está en fondo nuevo ni overlay — ver si Ani lo quiere).
+
 ## 2026-07-09 · anette (cont. 43) — MÓVIL: texto2 cabe en póster, texto3 más grande, + TÍTULO póster 3
 - **Ani (2214):** (a) texto2 (SU NOMBRE): que no se salga del póster 2 SIN moverlo de lugar. (b) texto3 (UN MÚSICO): aún MÁS grande, centrado entre las 2 estrellitas. (c) Póster 3: donde dice "TEXTO MÁS TEXTO" poner "Hace canciones sobre absolutamente TODO." (resto del póster 3 NO tocar aún).
 - **cv71 (texto2):** 17→**15px** (letter-spacing -0.3), MISMA posición translate(215 1095). A 15px las 3 líneas caben dentro del póster con margen.
