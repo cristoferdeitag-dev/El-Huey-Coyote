@@ -2,6 +2,22 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 53) — COMPU: aire en el "¿" + animaciones que ya no se paran al scrollear
+- **Ani (2269):** los 3 cambios **SOLO en compu**, la móvil no se toca hasta nuevo aviso. (1) Separar un chirris el "¿" de la "Y" en el letrero YA ME CONOCES del headliner. (2) Las fotos de CON LA RAZA no deben pararse cuando el usuario scrollea. (3) Los divisores tampoco deben pararse.
+- **(1) El "¿" pegado a la Y.** El letrero clonaba su texto con `content:attr(data-text)` en un `::after` (así se pinta el rayo de luz). Un pseudo-elemento **no admite un `<span>` adentro**, y `attr()` **no funciona en elementos normales** (Chrome sólo lo soporta con `url()`), así que no se podía separar sólo el signo sin desalinear el destello.
+  - **Fix:** el destello de `.ml-conoces` deja de ser `::after` y pasa a ser un `<span class="ml-shine" aria-hidden="true">` con la **misma estructura interna** que el texto (`<span class="q">¿</span>YA ME CONOCES?`). Así el `.q{margin-right:.055em}` aplica a los dos y las letras coinciden.
+  - Se sacó `content:attr(data-text)` a su propia regla (sólo para los otros 5 letreros, que siguen con `::after`) y se cambió `.ml-conoces::after` → `.ml-conoces .ml-shine` en las 6 reglas donde aparecía (base, nowrap, `headliner-anim`, delay .5s, `is-scrolling`, `prefers-reduced-motion`). Se quitó el `data-text` del ancla.
+  - **Medido:** desfase destello↔texto = **0.00px** en X y en Y; `::after` ya no genera caja (`content:none`); la animación sigue siendo `letrero-shine` con delay .5s (el orden del rayo no cambió). Hueco `¿`→`Y` = 1.36px a font-size 24.77px.
+- **(2) y (3) — de dónde venía el freno.** Había un `body.is-scrolling` (clase que se pone durante 140ms tras cada evento de scroll) que pausaba a propósito los marquees y la galería: *"5 animaciones infinitas saturaban el compositor y trababan TODO el scroll"*. Ani lo quiere corriendo.
+  - **Divisores:** borrada la regla `body.is-scrolling .dtrack{animation-play-state:paused}`. Se **conserva** `.dtrack.mq-off{paused}` (pausa los que están fuera de pantalla — no se ven, y es lo que de verdad ahorra compositor). El `dscroll` es un `translateX` puro con `will-change:transform`: lo mueve la GPU, no la CPU.
+  - **Galería CON LA RAZA:** el `tick()` del auto-pase checaba `!document.body.classList.contains('is-scrolling')`. Quitado → `if(!paused&&inView)`.
+  - **Trampa que faltaba:** aunque se quitara ese check, el listener `wheel` sobre la tira llamaba a `userActivity()` (pausa 2.8s) **con el cursor encima aunque el usuario estuviera scrolleando la página en vertical**. Ahora `wheel` sólo pausa si el gesto es **horizontal** (`|deltaX| > |deltaY|`). `pointerdown`/`touchstart` siguen pausando (eso sí es interacción real).
+- **Verificado en Chrome REAL vía CDP** (`--headless=new` + `remote-debugging-port` + websockets; el `--virtual-time-budget` **no corre `requestAnimationFrame`**, por eso el auto-pase medía 0 y parecía roto): avance de la galería **42px en reposo = 42px durante scroll vertical continuo** (antes: 0), **0px tras rueda horizontal** (la pausa intencional sigue viva), `dtrack` en `running` con `is-scrolling` activo en el body.
+- **Verificado contra el sitio en vivo** (no sólo local): `elhueycoyote.com/compu/` sirve `ml-shine` ×2 y ya no contiene la regla `body.is-scrolling .dtrack`; `movil/` intacta.
+- **Móvil sin tocar** — el diff es un solo archivo, `compu/index.html`.
+- **Deploy:** commit `f6bf4a3` → GH Actions → elhueycoyote.com ✅
+- **PENDIENTE:** nada. Ojo: si algún día se vuelve a sentir tirón en el scroll de compu, el culpable ya no es el marquee — buscar en el headliner (degradado-en-texto + drop-shadows) antes de volver a pausar animaciones.
+
 ## 2026-07-10 · anette (cont. 52) — MÓVIL: la portada (cortina) sale SIEMPRE
 - **Ani (2265):** quitar que la portada salga sólo una vez; debe salir cada vez que entres.
 - **Dónde estaba el candado (3 puntos, `movil/index.html`):**
