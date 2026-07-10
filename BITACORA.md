@@ -2,6 +2,21 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 55) — COMPU: nuevo fondo de ÉCHAME UN GRITO · los pósters caen UNA vez por visita
+- **Ani (2280):** SOLO compu. (1) Cambiar la imagen de fondo de ÉCHAME UN GRITO por la que mandó. (2) Los pósters de ¿YA ME CONOCES? deben caer **una sola vez** al llegar a la sección, y repetir sólo cuando el usuario **regrese** a ella.
+- **(1) Fondo.** Su imagen llegó por Telegram como **JPEG 2032×1143** (mismas medidas que el asset actual). Diff estructural (blur 3px para ignorar ruido JPEG): **el único cambio real es la vitrina de la tienda de la derecha**, bbox `x[1700,2031] y[419,719]` — le quitó a la persona de la entrada. Fuera de ese bloque: **0 px** de diferencia a cualquier umbral.
+  - **Decisión:** no meter su JPEG completo (habría recomprimido toda la cabina sin necesidad). Se **compone** sólo ese bloque sobre el webp original, con máscara de degradado (`GaussianBlur` r=5, franja de 10px) para que no se vea la costura. Nuevo asset `bg-echame-cabina-0710.webp` (q=90, method=6, 327KB).
+  - **Control:** fuera del bloque, dif máx vs el original = **33** (pérdida del re-encode webp, invisible). Dentro, dif máx vs la imagen de Ani = 64 (ruido JPEG).
+  - Los hotspots (`.ech-phone`, `.ech-fb/.ech-ig/.ech-email/.ech-tt`) **no se tocan**: nada se movió de sitio. Verificado con captura real.
+- **(2) Pósters — la trampa.** Los keyframes `conoces-drop-1/2/3` no sólo repetían: **terminaban desvaneciendo el póster hacia arriba** (`91.667%` visible → `100%` `opacity:0; translateY(-90px)`) para poder reiniciar el bucle limpio. **Quitar sólo `infinite` habría hecho que los pósters desaparecieran** a los ~5.5s y ahí se quedaran, invisibles.
+  - **Fix:** keyframes rehechos para que aterricen y **se queden** (`40%,100%` / `65%,100%` / `90%,100%`), duración `6s infinite both` → **`1.8s both`**. Los tiempos absolutos de caída no cambian: p1 a **0.72s**, p2 a **1.17s**, p3 a **1.62s** (1.8s × los nuevos %, = 6s × los viejos %). Al terminar la animación el compositor deja de trabajar.
+  - El `IntersectionObserver` (threshold .28) ya quitaba y reponía `.posters-falling` al salir/entrar — **eso se conserva**, y es lo que hace que la cascada se repita al regresar.
+- **Verificado en Chrome real vía CDP:** `animationIterationCount:1`, `duration:1.8s`; opacidad `[0.6,0,0]` al llegar → `[1,1,1]` tras caer → **`[1,1,1]` 4.5s después** (antes ya se habría desvanecido) → `[0,0,0]` al salir de la sección → `[0.46,0,0]` justo al volver (arrancó de cero) → `[1,1,1]` tras volver a caer. Fondo carga `2032×1143`.
+- **Assets huérfanos:** `bg-echame-cabina-0701.webp` y `-0707.webp` ya no se referencian (se conservan por si Ani quiere volver).
+- **Móvil sin tocar.** Diff = `compu/index.html` + el asset nuevo.
+- **Deploy:** commit `d8afea8` → GH Actions → elhueycoyote.com
+- **PENDIENTE:** siguen abiertos los 2 de cont.54 (emojis del footer móvil, título de pestaña).
+
 ## 2026-07-10 · anette (cont. 54) — COMPU: aire en el "?" de cierre · FOOTER (compu + móvil): "Pura música y pura fiesta"
 - **Ani (2273):** (1) separar también el `?` de la `S` en YA ME CONOCES (compu). (2) En el footer de **ambas** versiones, cambiar "Música, Sudor y Cumbia" por **"Pura música y pura fiesta"**.
 - **(1)** Se reusa la estructura de cont.53: `<span class="qc">?</span>` en el texto **y** en el clon `.ml-shine`. CSS `.ml-conoces .qc{margin-left:.055em}` — mismo valor que `.q`, para que los dos signos respiren igual. Medido: hueco `S`→`?` = **1.36px** (idéntico al `¿`→`Y`), desfase destello↔texto **0px en los dos signos**, ancho del letrero = ancho del clon (216.19px). Verificado a 3× que el `?` **no toca la estrellita roja** del arte ni el borde del letrero.
