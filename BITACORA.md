@@ -2,6 +2,18 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 46) — MÓVIL "Sobre mí" P3: texto centrado EXACTO en la línea gris
+- **Ani (2231):** "baja un chirris el texto de la línea gris, debe quedar perfectamente centrado con la línea gris".
+- **Diagnóstico medido (no a ojo):** la "línea gris" es la banda oscura (#38 4e 44 aprox) inclinada del póster 3. Ajusté su eje por regresión sobre el fondo `conoces-fondo-v2.webp`: **ángulo real 11.009°** (el texto tenía 10.8493), eje va de **x=500 a x=963** → centro a lo largo **x=731.5** (NO 752.1 como asumió cont.45; ese valor venía del rect del SVG, no medido), **grosor perpendicular ~44px** (±22 del eje).
+- **Cap height real de la fuente:** extraje `sCapHeight=719/1000` del woff2 `swiss-721-bt-n9` → a 25.5px las mayúsculas miden 18.33px. El centro óptico de un texto en mayúsculas es `baseline − capHeight/2` = baseline − 9.17 (NO el bbox de tinta: el acento de "QUÉ" sube a 24.6 y "¿"/"Q" bajan 2px bajo la baseline; centrar por bbox lo habría dejado chueco).
+- **Fix:** `translate(752.1 1701) rotate(10.8493)` → **`translate(731.5 1707.8) rotate(11.009)`** (línea ~1989, `text.nvblk`). Baja 6.8px, recorre 20.6px a la izq, y empata el ángulo con la banda.
+- **Verificación en navegador (Playwright, 390px):** mapeé los píxeles del texto (#ccc) al marco de la banda (u = a lo largo, v = perpendicular).
+  - ANTES: v ∈ [−19.0, −1.1], centro **−10.0** → holgura 3.0 arriba vs 23.1 abajo (se salía por arriba). u centro +20.4 (cargado a la der.).
+  - DESPUÉS: v ∈ [−8.8, +8.9], centro **+0.1** → holgura **13.2 arriba / 13.1 abajo**. u centro +2.4, márgenes 70.0 izq / 65.2 der. Centrado en ambos ejes.
+- **Gotcha preview:** `#portada.portada-overlay` tapa la sección en el screenshot; hay que `display:none` antes de capturar. Y el server local cachea `index.html` → recargar con `?bust=`.
+- **Deploy:** push `461ad94` → GH Actions → elhueycoyote.com/preview/sitio/.
+- **PENDIENTE (sin cambios):** título/subtítulo reales p2 y p3, decisión título p3, "El mero mero".
+
 ## 2026-07-10 · anette (cont. 45) — MÓVIL "Sobre mí": contorno azul resumen P1 + HUEY rojo/COYOTE verde P2
 - **Ani (2224):** 3 correcciones: (1) resumen P1 le falta contorno AZUL; (2) P2 faltan colores de "Huey" y "Coyote"; (3) P3 texto gris "¿POR QUÉ SE HIZO" incompleto.
 - **(1) HECHO:** añadí clase `.nvblue` (fill+stroke #0477c3 15px, paint-order stroke fill, linejoin/linecap round) y una 3ª capa `<text class="nvblue">` con las mismas 5 tspans del resumen, ANTES de nvout. Orden de pintado: azul (abajo, stroke 15) → blanco (nvout, stroke 9) → rojo (nvred). Verificado en render: rojo→blanco→azul. ⚠️ CORRIGE cont.44 (que había puesto solo blanco+rojo — Ani SÍ quiere el azul, el #0477c3 del SVG eran polígonos pero el resumen SÍ va con contorno azul).
