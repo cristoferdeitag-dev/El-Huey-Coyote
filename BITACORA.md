@@ -2,6 +2,16 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 50) — COMPU letrero: fuera las franjas blancas laterales
+- **Ani (2255 + captura marcada en morado):** quitar los "lados blancos" del cartel; que sólo se vea el diseño del póster.
+- **Hallazgo:** NO eran grises ni parte del muro — la imagen que mandó trae **franjas de blanco PURO (255,255,255)** de 295px a la izq y 294px a la der. Se veían grises en pantalla porque el overlay les aplica `filter:brightness(.72)` (255 × .72 ≈ 184).
+- **Recorte:** contenido real del cartel = **x 295..1737, alto completo** → `crop(295, 0, 1738, 1143)` = **1443×1143**. Ojo: la columna 1738 es fleco de compresión JPEG (sólo 17px no-blancos), por eso el corte va en 1738 y no en 1740. El bbox lo saqué del **JPEG original**, no del webp ya reencodeado (el reencode movía el borde 1px).
+- **Assets regenerados** (los dos, desde el original): `apple-fresas-ad-compu.webp` (1443×1143, 187KB) y `apple-cta-glow-compu.png` (1443×1143, 13KB). ⚠️ El glow hubo que **rehacerlo desde cero** con todo el pipeline (umbral + apertura horizontal) y recortar al final — no basta recortar el PNG viejo si ya lo sobrescribiste.
+- **CSS actualizado:** `.ad-stage` de `2032/1143` → **`1443/1143`** (`width:min(100vw, calc(100vh * 1443 / 1143))`). Hotspot recalculado sobre el nuevo lienzo: el CTA vive en x 800..1199, y 997..1055 → `left:54.2%; right:15.8%` (antes 52.6%/25.5%). El vertical no cambió (el recorte fue sólo horizontal).
+- **Verificado en navegador (1440×900):** el escenario mide 1136×900 (llena el alto, centrado), aspecto 1.26249, primera y última columna de la imagen ya tienen contenido (0 franja blanca), y el CTA sigue cubriendo el texto con margen (14.1px izq / 12.6px der). Los lados ahora son el fondo negro del modal, como debe ser.
+- **Deploy:** commit `1d0fceb` → GH Actions → elhueycoyote.com/preview/compu/
+- **PENDIENTE:** nada.
+
 ## 2026-07-10 · anette (cont. 49) — COMPU headliner: letrero "PARA LOS MÁS FRESAS" al clic en Apple Music
 - **Ani (2251 + imagen):** al hacer clic en el logo de Apple Music del HEADLINER debe salir el letrero que mandó. Y la manzanita + "-El HueyCoyote" del pie de la imagen deben tener contorno de iluminación y ser un botón que lleve a Apple Music. "Al igual que en la versión móvil".
 - **Móvil ya lo tenía** (`sitio/index.html`: `.apple-ad-overlay`, `#btn-apple`, assets `apple-fresas-ad.webp` 853×1844 + `apple-cta-glow.png`). Compu sólo enlazaba directo a Apple Music con `target="_blank"`.
