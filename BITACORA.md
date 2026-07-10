@@ -2,6 +2,15 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 54) — COMPU: aire en el "?" de cierre · FOOTER (compu + móvil): "Pura música y pura fiesta"
+- **Ani (2273):** (1) separar también el `?` de la `S` en YA ME CONOCES (compu). (2) En el footer de **ambas** versiones, cambiar "Música, Sudor y Cumbia" por **"Pura música y pura fiesta"**.
+- **(1)** Se reusa la estructura de cont.53: `<span class="qc">?</span>` en el texto **y** en el clon `.ml-shine`. CSS `.ml-conoces .qc{margin-left:.055em}` — mismo valor que `.q`, para que los dos signos respiren igual. Medido: hueco `S`→`?` = **1.36px** (idéntico al `¿`→`Y`), desfase destello↔texto **0px en los dos signos**, ancho del letrero = ancho del clon (216.19px). Verificado a 3× que el `?` **no toca la estrellita roja** del arte ni el borde del letrero.
+- **(2) Ojo — la móvil NO decía lo que Ani creía.** Su footer decía **"Puro corrido, pura fiesta 🌮🎸"**; sólo compu tenía "Música, Sudor y Cumbia". Se unificaron los dos a "Pura música y pura fiesta" (sin emojis, que es como Ani escribió el texto) y **se le avisó** para que decida si repone los 🌮🎸.
+- **NO se tocó** el `<title>` ni la `<meta description>`, que siguen diciendo "Música, Sudor y Cumbia" en ambas versiones. Ani pidió el footer; se le avisó del pendiente.
+- **Ésta sí toca `movil/index.html`** (Ani lo autorizó explícitamente para este cambio; el bloqueo de cont.53 era sólo para los cambios de animación).
+- **Deploy:** commit `95f6fa8` → GH Actions → elhueycoyote.com
+- **PENDIENTE:** decisión de Ani sobre los emojis del footer y sobre el título de pestaña.
+
 ## 2026-07-10 · anette (cont. 53) — COMPU: aire en el "¿" + animaciones que ya no se paran al scrollear
 - **Ani (2269):** los 3 cambios **SOLO en compu**, la móvil no se toca hasta nuevo aviso. (1) Separar un chirris el "¿" de la "Y" en el letrero YA ME CONOCES del headliner. (2) Las fotos de CON LA RAZA no deben pararse cuando el usuario scrollea. (3) Los divisores tampoco deben pararse.
 - **(1) El "¿" pegado a la Y.** El letrero clonaba su texto con `content:attr(data-text)` en un `::after` (así se pinta el rayo de luz). Un pseudo-elemento **no admite un `<span>` adentro**, y `attr()` **no funciona en elementos normales** (Chrome sólo lo soporta con `url()`), así que no se podía separar sólo el signo sin desalinear el destello.
