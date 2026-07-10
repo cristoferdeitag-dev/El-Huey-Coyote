@@ -41,7 +41,38 @@
   .ct{position:absolute;white-space:nowrap;line-height:1}
   .dsec{scroll-margin-top:9vw}
   /* ¿Ya me conoces? — los pósters CAEN en cascada y el efecto se REPITE EN BUCLE mientras la sección está a la vista; NO se pausa al pasar el cursor (Ani 2026-07-07). Al salir y VOLVER a la sección, la cascada se reinicia desde arriba (clase .posters-falling que un observer prende/apaga). */
-  #sec-conoces .poster-ov{position:absolute;inset:0;width:100%;height:auto;pointer-events:none;z-index:2;opacity:0;transform:translateY(-90px);will-change:transform,opacity}
+  #sec-conoces .poster-ov{position:absolute;inset:0;pointer-events:none;z-index:2;opacity:0;transform:translateY(-90px);will-change:transform,opacity}
+  #sec-conoces .poster-ov>img{display:block;width:100%;height:auto}
+  /* Texto vivo por póster (del SVG de Ani, "Yameconoces-compu"). Cae junto con su póster. */
+  #sec-conoces .poster-tx{position:absolute;top:0;left:0;width:100%;height:auto;overflow:visible}
+  .hx-st13{letter-spacing:0em;}
+  .hx-st14{font-size:23px;font-weight:700;font-family:"swiss-721-bt", sans-serif;fill:#333;}
+  .hx-st15{font-weight:700;opacity:.6;stroke-miterlimit:10;font-family:"swiss-721-bt", sans-serif;font-style:italic;stroke-width:.8px;font-size:28px;letter-spacing:0em;}
+  .hx-st16{font-weight:700;opacity:.6;stroke-miterlimit:10;font-family:"swiss-721-bt", sans-serif;font-style:italic;stroke-width:.8px;font-size:28px;}
+  .hx-st17{font-weight:700;font-family:"swiss-721-bt", sans-serif;fill:#333;font-size:19px;letter-spacing:0em;}
+  .hx-st18{font-weight:700;font-family:"swiss-721-bt", sans-serif;fill:#333;font-size:15px;letter-spacing:0em;}
+  .hx-st20{font-weight:700;opacity:.6;stroke-miterlimit:10;font-family:"swiss-721-bt", sans-serif;font-style:italic;stroke-width:.8px;font-size:38px;letter-spacing:0em;stroke:#000;}
+  .hx-st24{font-weight:700;fill:#333;font-family:"swiss-721-bt", sans-serif;font-style:italic;stroke:#241a1a;font-size:27.4px;letter-spacing:0em;stroke-width:.5px;}
+  .hx-st25{font-weight:700;opacity:.6;stroke-miterlimit:10;font-family:"swiss-721-bt", sans-serif;font-style:italic;stroke-width:.8px;font-size:28px;stroke:#000;}
+  .hx-st26{fill:#333;font-family:"swiss-721-bt", sans-serif;font-weight:900;font-size:38px;letter-spacing:0em;}
+  .hx-st29{fill:#f22b2a;stroke:#f22b2a;font-family:"swiss-721-bt", sans-serif;font-weight:900;font-size:24px;}
+  .hx-st30{letter-spacing:0em;}
+  .hx-st31{fill:#c1272d;stroke:red;}
+  .hx-st35{stroke:#fff;fill:#fff;font-family:"swiss-721-bt", sans-serif;font-weight:900;stroke-width:9px;font-size:24px;}
+  .hx-st41{opacity:.6;font-size:38.1px;letter-spacing:0em;font-family:"swiss-721-bt", sans-serif;font-weight:900;}
+  .hx-st42{opacity:.6;font-family:"swiss-721-bt", sans-serif;font-weight:900;font-size:66.8px;letter-spacing:0em;}
+  .hx-st43{letter-spacing:0em;}
+  .hx-st46{fill:#fff;font-family:"swiss-721-bt", sans-serif;font-weight:900;font-size:24px;}
+  .hx-st52{stroke:#000;}
+  .hx-st53{stroke:#000;letter-spacing:0em;}
+  .hx-st58{letter-spacing:0em;}
+  .hx-st59{font-family:"swiss-721-bt", sans-serif;font-weight:900;fill:#ccc;font-size:34px;letter-spacing:0em;}
+  .hx-st6{fill:#241a1a;font-weight:700;font-family:"swiss-721-bt", sans-serif;letter-spacing:0em;font-size:32px;stroke:#241a1a;}
+  .hx-st60{letter-spacing:0em;}
+  .hx-st62{fill:#244f37;stroke:#243636;}
+  .hx-st63{letter-spacing:0em;}
+  .hx-st65{letter-spacing:0em;}
+  .hx-st9{fill:#241a1a;font-weight:700;font-family:"swiss-721-bt", sans-serif;font-size:32px;stroke:#241a1a;letter-spacing:0em;}
   /* Bucle: ciclo de 6s = cascada (~1.6s) + hold visible (~4s espera) + salida rápida (0.5s), luego repite */
   #sec-conoces.posters-falling .poster-ov-1{animation:conoces-drop-1 6s infinite both}
   #sec-conoces.posters-falling .poster-ov-2{animation:conoces-drop-2 6s infinite both}
@@ -390,7 +421,27 @@
   <a class="stool-btn" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:56.3%;top:80.5%;width:4.7cqw"><img src="../sitio/assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="¿Ya me conoces?"><div class="dtrack"><img src="../sitio/assets/compu/divtext-conoces.png?v=10" alt="¿Ya me conoces?"><img src="../sitio/assets/compu/divtext-conoces.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-conoces"><img class="bg" src="../sitio/assets/compu/bg-conoces-wall2.webp?v=1" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async"><img class="poster-ov poster-ov-1" src="../sitio/assets/compu/conoces-poster1.webp?v=3" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-2" src="../sitio/assets/compu/conoces-poster2-full-v2.webp" alt="" aria-hidden="true" loading="lazy"><img class="poster-ov poster-ov-3" src="../sitio/assets/compu/conoces-poster3.webp?v=3" alt="" aria-hidden="true" loading="lazy"><div class="mero-mero"><span style="transform:translateY(2px) rotate(-5deg)">E</span><span style="transform:translateY(-2px) rotate(3deg)">l</span> <span style="transform:translateY(1px) rotate(-6deg)">m</span><span style="transform:translateY(-3px) rotate(2deg)">E</span><span style="transform:translateY(2px) rotate(-3deg)">R</span><span style="transform:translateY(-1px) rotate(4deg)">o</span> <span style="transform:translateY(-2px) rotate(-4deg)">m</span><span style="transform:translateY(2px) rotate(5deg)">E</span><span style="transform:translateY(-2px) rotate(-5deg)">R</span><span style="transform:translateY(1px) rotate(2deg)">o</span></div></section>
+<section class="dsec reveal" id="sec-conoces"><img class="bg" src="../sitio/assets/compu/bg-conoces-wall2.webp?v=1" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async"><div class="poster-ov poster-ov-1" aria-hidden="true"><img src="../sitio/assets/compu/conoces-poster1-clean.webp?v=0710c" alt="" loading="lazy"><svg class="poster-tx" viewBox="0 0 2031.9 1142.9" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<g><text class="hx-st42" transform="translate(94.6 310.9) rotate(-6.8) scale(.8 1)"><tspan x="0" y="0" xml:space="preserve">UN  TÍTULO  COOL</tspan></text>
+<text class="hx-st25" transform="translate(104.3 396.4) rotate(-6.1) scale(.8 1)"><tspan class="hx-st13"><tspan x="0" y="0">NACIÓ EN: GUADALAJARA</tspan></tspan><tspan class="hx-st30"><tspan x="0" y="34.9">HACE DE TODO: CANTA,</tspan></tspan><tspan class="hx-st30"><tspan x="0" y="69.7">TOCA 21 INSTRUMENTOS, </tspan></tspan><tspan class="hx-st13"><tspan x="0" y="104.6">COMPONE Y BAILA.</tspan></tspan></text>
+<text class="hx-st15" transform="translate(349.5 576.6) rotate(-6.7) scale(.8 1)"><tspan class="hx-st52"><tspan x="0" y="0">SU NOMBRE SIGNIFICA…</tspan></tspan><tspan class="hx-st31" x="0" y="34.9">HUEY</tspan><tspan class="hx-st52" x="74.3" y="34.9" xml:space="preserve"> = GRANDE, </tspan><tspan class="hx-st52"><tspan x="0" y="69.7">INGENIOSO, MAGNÍFICO.</tspan></tspan></text>
+<text class="hx-st16" transform="translate(360.5 688.9) rotate(-6.7) scale(.8 1)"><tspan class="hx-st43"><tspan class="hx-st62" x="0" y="0">COYOTE</tspan><tspan class="hx-st52" x="114.2" y="0" xml:space="preserve"> = CURIOSO, </tspan></tspan><tspan class="hx-st53"><tspan x="0" y="34.9">JUGUETÓN Y DIVERTIDO.</tspan></tspan></text>
+<text class="hx-st20" transform="translate(279.7 861.6) rotate(-6.7) scale(.8 1)"><tspan x="0" y="0">UN MÚSICO QUE </tspan><tspan x="2.1" y="36.2">SIEMPRE BUSCA </tspan><tspan x="24.9" y="72.4">SACARTE UNA </tspan><tspan x="78.5" y="108.6">SONRISA</tspan></text>
+<text class="hx-st41" transform="translate(97.5 353.5) rotate(-6.3) scale(.8 1)"><tspan x="0" y="0">FERNANDO DE ITA</tspan></text></g>
+</svg></div><div class="poster-ov poster-ov-2" aria-hidden="true"><img src="../sitio/assets/compu/conoces-poster2-clean.webp?v=0710c" alt="" loading="lazy"><svg class="poster-tx" viewBox="0 0 2031.9 1142.9" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<g><text class="hx-st35" transform="translate(863.7 883.2) rotate(3.6) scale(.7 1) skewX(.3)"><tspan class="hx-st63"><tspan x="0" y="0">CANTAUTOR MEXICANO QUE CONVIERTE </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="40">CUALQUIER IDEA EN UNA CANCIÓN, </tspan></tspan><tspan class="hx-st65"><tspan x="0" y="80">MEZCLA GÉNEROS, ROMPE REGLAS Y </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="120">DEMUESTRA QUE LA MÚSICA TAMBIÉN</tspan></tspan><tspan class="hx-st65"><tspan x="0" y="160" xml:space="preserve"> PUEDE SER HUMOR PURO</tspan></tspan></text>
+<text class="hx-st46" transform="translate(863.7 883.2) rotate(3.6) scale(.7 1) skewX(.3)"><tspan class="hx-st63"><tspan x="0" y="0">CANTAUTOR MEXICANO QUE CONVIERTE </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="40">CUALQUIER IDEA EN UNA CANCIÓN, </tspan></tspan><tspan class="hx-st65"><tspan x="0" y="80">MEZCLA GÉNEROS, ROMPE REGLAS Y </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="120">DEMUESTRA QUE LA MÚSICA TAMBIÉN</tspan></tspan><tspan class="hx-st65"><tspan x="0" y="160" xml:space="preserve"> PUEDE SER HUMOR PURO</tspan></tspan></text>
+<text class="hx-st29" transform="translate(863.7 883.2) rotate(3.6) scale(.7 1) skewX(.3)"><tspan class="hx-st63"><tspan x="0" y="0">CANTAUTOR MEXICANO QUE CONVIERTE </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="40">CUALQUIER IDEA EN UNA CANCIÓN, </tspan></tspan><tspan class="hx-st65"><tspan x="0" y="80">MEZCLA GÉNEROS, ROMPE REGLAS Y </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="120">DEMUESTRA QUE LA MÚSICA TAMBIÉN</tspan></tspan><tspan class="hx-st65"><tspan x="0" y="160" xml:space="preserve"> PUEDE SER HUMOR PURO.</tspan></tspan></text></g>
+</svg></div><div class="poster-ov poster-ov-3" aria-hidden="true"><img src="../sitio/assets/compu/conoces-poster3-clean.webp?v=0710c" alt="" loading="lazy"><svg class="poster-tx" viewBox="0 0 2031.9 1142.9" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<g><text class="hx-st26" transform="translate(1542.4673 283.0884) rotate(4.6846) scale(.8939 1)"><tspan x="0" y="0">TEXTO MÁS TEXTO</tspan></text>
+<text class="hx-st6" transform="translate(1475.448 750.9057) rotate(4.4139) scale(.9802 1)"><tspan x="0" y="0">Cervantino</tspan></text>
+<text class="hx-st9" transform="translate(1681.1837 769.2269) rotate(4.4139) scale(.9802 1)"><tspan x="0" y="0">Cumbre Tajín</tspan></text>
+<text class="hx-st59" text-anchor="middle" transform="translate(1680.5 831.3) rotate(4.635) scale(.8149 1)"><tspan x="0" y="0">¿POR QUÉ SE HIZO FAMOSO?</tspan></text>
+<text class="hx-st17" transform="translate(1502.9206 385.2833) rotate(4.0295) scale(.8939 1)"><tspan x="0" y="0">DESDE CANCIONES PROPIAS HASTA “SEÑORAS </tspan><tspan x="21" y="22">CHAPARRITAS”, MEMO OCHOA, SE VENDEN </tspan><tspan x="47.8" y="44">COLCHONES Y HASTA HARRY POTTER.</tspan><tspan x="37.2" y="66">HA PARTICIPADO EN FESTIVALES COMO:</tspan></text>
+<text class="hx-st18" transform="translate(1463.2899 846.0792) rotate(5.0183) scale(.8939 1)"><tspan x="0" y="0">CAMBIA LA LETRA DE CANCIONES FAMOSAS,MEZCLA RITMOS </tspan><tspan x="18.1" y="22">DE TODO EL MUNDO Y COLABORA CON OTROS ARTISTAS.</tspan></text>
+<text class="hx-st24" transform="translate(1553.6176 330.4098) rotate(4.4139) scale(.8939 1)"><tspan x="0" y="0">SUBTÍTULO LINDO Y NICE</tspan></text>
+<text class="hx-st14" transform="translate(1472.6039 906.1658) rotate(5.1178) scale(.8939 1)"><tspan class="hx-st60"><tspan x="0" y="0">LO SUYO ES CONVERTIR CUALQUIER </tspan></tspan><tspan class="hx-st58"><tspan x="64.7" y="29.7">IDEA EN UNA ROLA CHIDA.</tspan></tspan></text></g>
+</svg></div><div class="mero-mero"><span style="transform:translateY(2px) rotate(-5deg)">E</span><span style="transform:translateY(-2px) rotate(3deg)">l</span> <span style="transform:translateY(1px) rotate(-6deg)">m</span><span style="transform:translateY(-3px) rotate(2deg)">E</span><span style="transform:translateY(2px) rotate(-3deg)">R</span><span style="transform:translateY(-1px) rotate(4deg)">o</span> <span style="transform:translateY(-2px) rotate(-4deg)">m</span><span style="transform:translateY(2px) rotate(5deg)">E</span><span style="transform:translateY(-2px) rotate(-5deg)">R</span><span style="transform:translateY(1px) rotate(2deg)">o</span></div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="Próximos Shows"><img src="../sitio/assets/compu/divtext-proximos.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-proximos"><img class="bg" src="../sitio/assets/compu/bg-proximos.webp?v=10" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl">
 <div class="ct dl-row" style="left:3.5%;top:28.96%"><span class="m">JUN</span><span class="d">07</span><a class="c" href="#sec-proximos" data-text="PUEBLA">PUEBLA</a></div>
