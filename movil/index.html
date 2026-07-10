@@ -588,6 +588,49 @@
         }
         .shows-list .ciudad:hover,
         .shows-list .ciudad:focus { color: #b80d0e; }
+        /* === Cartel SHOWS AGOTADOS (Ani 2026-07-10) ===
+           Igual que en compu: al tocar cualquier ciudad aparece el cartel encima de la lista,
+           dura 4s y se quita solo. Un toque en el cartel lo cierra antes.
+           Reusa el MISMO png que la versión compu (assets/compu/agotados-cartel.png). */
+        #proximos-shows .agotados-cartel {
+            position: absolute;
+            left: 9%;
+            /* arranca justo debajo de "RECOMENDACIONES DE LA CASA" — igual que en compu,
+               donde el subtítulo queda a la vista y el cartel sólo tapa la lista */
+            top: 14.5%;
+            width: 82%;
+            height: auto;
+            z-index: 7;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            cursor: pointer;
+            transform: rotate(-3deg) scale(0.6);
+            transform-origin: 50% 50%;
+            transition: opacity 0.25s ease;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.28));
+        }
+        #proximos-shows.agotados-on .agotados-cartel {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            animation: cartel-sello 0.42s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+        }
+        @keyframes cartel-sello {
+            0%   { opacity: 0; transform: rotate(-3deg) scale(1.75); }
+            60%  { opacity: 1; transform: rotate(-3deg) scale(0.97); }
+            100% { opacity: 1; transform: rotate(-3deg) scale(1); }
+        }
+        /* Mientras el cartel está puesto, la lista se apaga: el cartel tiene las esquinas
+           rotas y por ahí se asomaba el primer renglón ("JUL 14 CDMX"). Apagarla evita
+           andar calibrando el tamaño del cartel para cada ancho de pantalla. */
+        #proximos-shows .shows-list { transition: opacity 0.18s ease; }
+        #proximos-shows.agotados-on .shows-list { opacity: 0; pointer-events: none; }
+        @media (prefers-reduced-motion: reduce) {
+            #proximos-shows .agotados-cartel { transition: none; }
+            #proximos-shows.agotados-on .agotados-cartel { animation: none; transform: rotate(-3deg) scale(1); }
+        }
+
         /* ESPECIALES DEL MES — ciudades (rojo, itálica) */
         .especial-ciudad {
             position: absolute;
@@ -2019,6 +2062,9 @@
                 <span class="mes">NOV</span><span class="dia">04</span><a class="ciudad" href="#show-tijuana" aria-label="Ver presentación en Tijuana">TIJUANA</a>
             </div>
 
+            <!-- Cartel que tapa la lista al tocar una ciudad; se quita solo a los 4s -->
+            <img class="agotados-cartel" src="assets/compu/agotados-cartel.png?v=1" alt="Shows agotados — vuelve pronto mi güerit@" loading="lazy" decoding="async">
+
             <h3 class="seo-only">Especiales del mes: Niu Jork, Ostin, Mayami</h3>
             <!-- NIU JORK / OSTIN / MAYAMI ahora van integrados en la imagen de fondo (Anette los hornea al fondo nuevo) -->
 
@@ -2437,6 +2483,30 @@
         } else {
             revealEls.forEach((el) => el.classList.add('revealed'));
         }
+
+        /* === PRÓXIMOS SHOWS: cartel "SHOWS AGOTADOS" (Ani 2026-07-10) ===
+           Tocar cualquier ciudad tapa la lista con el cartel. Se quita solo a los 4s.
+           Tocar el cartel lo cierra antes. Mismo comportamiento que la versión compu,
+           que usa 5s; aquí Ani pidió 4s. */
+        (function () {
+            const sec = document.getElementById('proximos-shows');
+            if (!sec) return;
+            const cartel = sec.querySelector('.agotados-cartel');
+            let agotadosTimer = null;
+            function cerrar() {
+                clearTimeout(agotadosTimer);
+                sec.classList.remove('agotados-on');
+            }
+            sec.querySelectorAll('.shows-list .ciudad').forEach(function (c) {
+                c.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    sec.classList.add('agotados-on');
+                    clearTimeout(agotadosTimer);
+                    agotadosTimer = setTimeout(cerrar, 4000);
+                });
+            });
+            if (cartel) cartel.addEventListener('click', cerrar);
+        })();
 
         /* === Botones de plataformas en los bancos === */
         const PLACEHOLDER = ['APPLE_MUSIC_URL', 'YOUTUBE_MUSIC_URL', 'AMAZON_MUSIC_URL'];
