@@ -6,9 +6,9 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 - **Ani (2224):** 3 correcciones: (1) resumen P1 le falta contorno AZUL; (2) P2 faltan colores de "Huey" y "Coyote"; (3) P3 texto gris "¿POR QUÉ SE HIZO" incompleto.
 - **(1) HECHO:** añadí clase `.nvblue` (fill+stroke #0477c3 15px, paint-order stroke fill, linejoin/linecap round) y una 3ª capa `<text class="nvblue">` con las mismas 5 tspans del resumen, ANTES de nvout. Orden de pintado: azul (abajo, stroke 15) → blanco (nvout, stroke 9) → rojo (nvred). Verificado en render: rojo→blanco→azul. ⚠️ CORRIGE cont.44 (que había puesto solo blanco+rojo — Ani SÍ quiere el azul, el #0477c3 del SVG eran polígonos pero el resumen SÍ va con contorno azul).
 - **(2) HECHO:** en nvital SU NOMBRE (línea ~1978), "HUEY" envuelto en `<tspan fill="#c1272d">` (rojo). En nvital COYOTE (línea ~1979), "COYOTE" en `<tspan fill="#244f37">` (verde). Colores tomados del SVG de Ani (st7 rojo / st62 verde). Verificado en render.
-- **(3) BLOQUEADO:** el texto gris "¿POR QUÉ SE HIZO" viene CORTADO en el SVG de Ani (solo "¿POR QUÉ SE HIZO " con espacio final, sin continuación). Le pedí a Ani (msg 2225) el texto completo de esa línea. Pendiente su respuesta.
-- **Deploy:** push `0870ff6` → GH Actions FTP OK (run 29064874173, success). Vivo en elhueycoyote.com/preview/sitio/.
-- **PENDIENTE:** texto completo línea gris P3 (Ani); + los de cont.44 (título/subtítulo reales p2/p3, decisión título p3, "El mero mero").
+- **(3) HECHO:** Ani (msg 2227) dio el texto: "¿POR QUÉ SE HIZO FAMOSO?" en mayúsculas. Cambié la tspan; a 30.4px "FAMOSO?" se pegaba al borde der. del póster → bajé a **25.5px** (nvblk, translate 599.2328 1685.4498 rot10.85 scale.8149). Verificado: cabe cómodo en la barra gris.
+- **Deploy:** push `0870ff6` (fixes 1+2, run 29064874173 OK) y `772b952` (fix 3). Vivo en elhueycoyote.com/preview/sitio/.
+- **PENDIENTE:** los de cont.44 (título/subtítulo reales p2/p3, decisión título p3, "El mero mero"). Las 3 correcciones del msg 2224+2227 CERRADAS.
 
 ## 2026-07-10 · anette (cont. 44) — MÓVIL "Sobre mí": NUEVO fondo limpio + overlay RECONSTRUIDO desde SVG de Ani
 - **Ani (2218/2219):** mandó (1) nueva imagen de fondo LIMPIA (pósters sin texto horneado — el filler ya no está; poster 1 conserva logo+EL VATO+PARA LATAM que son arte) y (2) el SVG `Yameconoces-movil_¿Ya me conoces-.svg` con el texto CORRECTO + posiciones + tamaños. Objetivo: cambiar fondo + reconstruir todo el texto vivo para que calce EXACTO con el SVG.
