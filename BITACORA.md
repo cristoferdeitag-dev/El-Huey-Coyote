@@ -2,6 +2,20 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 52) — MÓVIL: la portada (cortina) sale SIEMPRE
+- **Ani (2265):** quitar que la portada salga sólo una vez; debe salir cada vez que entres.
+- **Dónde estaba el candado (3 puntos, `movil/index.html`):**
+  1. Script **pre-pintado** en `<body>` (línea ~1520): si `localStorage['huey_portada_vista']==='1'` metía `html.portada-vista` + `body.changarro-abierto` ANTES de pintar, para entrar sin parpadeo. (Existía un escape `?intro=1` / `?inicio=1` para forzarla.)
+  2. Rama `if (portadaVista) { ... } else { cortina-bajada }` en el script principal (~2185).
+  3. `localStorage.setItem(PORTADA_KEY,'1')` al pulsar "ABRE EL CHANGARRO" (~2220).
+- **Fix:** los 3 quitados. Ahora siempre `document.body.classList.add('cortina-bajada')`. Borrada la const `PORTADA_KEY` (quedaba huérfana) y el parámetro `?intro=1` (ya no tiene sentido).
+- **Detalle que faltaba:** a quien YA tenía la marca guardada no le bastaba con dejar de leerla — la llave seguía en su navegador. Dejé un `localStorage.removeItem('huey_portada_vista')` al inicio para limpiarla.
+- **Se conserva:** `html.portada-vista { display:none }` en el CSS y el `classList.remove('portada-vista')` del botón "CIERRA EL CHANGARRO" (inocuos: la clase ya nunca se agrega, y el botón sigue sirviendo para volver a bajar la cortina).
+- **Verificado (Chrome headless con perfil persistente, 390px):** 1ª visita → cortina abajo · 2ª visita en el MISMO perfil (refresh) → cortina abajo · visitante con la marca vieja sembrada → cortina abajo. 0 errores de consola. Captura: la cortina verde con "ABRE EL CHANGARRO".
+- **compu no se tocó:** nunca usó `localStorage`, su portada siempre salió en cada visita.
+- **Deploy:** commit `fc6e58f` → GH Actions → elhueycoyote.com
+- **PENDIENTE:** nada.
+
 ## 2026-07-10 · anette (cont. 51) — 🚀 PRODUCCIÓN: el sitio nuevo ya vive en elhueycoyote.com
 - **Ani (2260):** subir la versión compu a internet y quitar la que estaba. **(2263)** aclaró: que la compu salga en computadora y la móvil en teléfono.
 - **⚠️ Freno antes de tocar prod:** `preview/compu` NO tiene ninguna media query `max-width` — abierta en 390px se apachurra (verificado con captura). Publicarla sola habría roto el sitio para todo el tráfico de celular. Le enseñé la captura y eligió el reparto por dispositivo.
