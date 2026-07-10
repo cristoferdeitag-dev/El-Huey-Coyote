@@ -2,6 +2,17 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 56) — MÓVIL: cartel "SHOWS AGOTADOS" en PRÓXIMOS SHOWS
+- **Ani (2283):** SOLO móvil. Añadir el cartel SHOWS AGOTADOS a PRÓXIMOS SHOWS: al tocar cualquier ciudad sale el cartel, **dura 4s y se quita solo**. Ajustar el tamaño a móvil.
+- **El asset ya existía.** La imagen que mandó Ani es **idéntica pixel a pixel** a `movil/assets/compu/agotados-cartel.png` (756×559 RGBA; dif media y máx = **0** en toda la zona opaca, 314,768 px). Se **reusa** en vez de subir un duplicado de 490KB. Desde móvil la ruta es `assets/compu/agotados-cartel.png` (la carpeta se llama `compu/` por herencia; moverla rompería compu).
+- **Portado de compu:** mismo `@keyframes cartel-sello` (.42s, scale 1.75→.97→1, `rotate(-3deg)`), mismo `drop-shadow`, mismo patrón `.agotados-on` en la sección. **Diferencia pedida: 4s en vez de los 5s de compu.** Toque en el cartel lo cierra antes.
+- **Posición:** `left:9%; width:82%; top:14.5%`. El `top` se subió de 10% → 14.5% porque a 10% el cartel tapaba **"RECOMENDACIONES DE LA CASA"**; en compu ese subtítulo queda a la vista (compu real: `left 8.3% / top 18.8% / ancho 39.4% / alto 53.4%`).
+- **Detalle que costó:** el cartel tiene las **esquinas rotas** (transparentes ~7.9% de su alto en la zona del texto), y por ese hueco se asomaba el primer renglón `JUL 14 CDMX`. Perseguir el tamaño exacto habría exigido calibrar por ancho de pantalla. **Solución:** apagar la lista mientras el cartel está puesto — `#proximos-shows.agotados-on .shows-list{opacity:0;pointer-events:none}` con `transition:opacity .18s`. Robusto en cualquier ancho.
+- **Verificado en Chrome real (CDP, 390px):** opacidad del cartel `0` → `1` al tocar la ciudad → **`1` a los 3.2s** → **`0` a los 4.4s**. `cartel_cubre_la_lista:true`, `cartel_dentro_de_seccion:true`, márgenes izq/der 37px, imagen carga 756×559.
+- **Compu sin tocar.** Diff = `movil/index.html` únicamente.
+- **Deploy:** commit `5e8ec2a` → GH Actions → elhueycoyote.com
+- **PENDIENTE:** siguen abiertos los 2 de cont.54 (emojis 🌮🎸 del footer móvil, título de pestaña). Las ciudades siguen sin destino real (`href="#show-cdmx"` etc., ahora con `preventDefault`).
+
 ## 2026-07-10 · anette (cont. 55) — COMPU: nuevo fondo de ÉCHAME UN GRITO · los pósters caen UNA vez por visita
 - **Ani (2280):** SOLO compu. (1) Cambiar la imagen de fondo de ÉCHAME UN GRITO por la que mandó. (2) Los pósters de ¿YA ME CONOCES? deben caer **una sola vez** al llegar a la sección, y repetir sólo cuando el usuario **regrese** a ella.
 - **(1) Fondo.** Su imagen llegó por Telegram como **JPEG 2032×1143** (mismas medidas que el asset actual). Diff estructural (blur 3px para ignorar ruido JPEG): **el único cambio real es la vitrina de la tienda de la derecha**, bbox `x[1700,2031] y[419,719]` — le quitó a la persona de la entrada. Fuera de ese bloque: **0 px** de diferencia a cualquier umbral.
