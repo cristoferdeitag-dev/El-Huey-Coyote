@@ -166,15 +166,15 @@
   @keyframes adFade{from{opacity:0}to{opacity:1}}
   /* Escenario con el aspecto EXACTO del letrero: así el glow y la zona clicable
      siguen calzando con la imagen en cualquier tamaño de ventana. */
-  .apple-ad-overlay .ad-stage{position:relative;width:min(100vw, calc(100vh * 2032 / 1143));aspect-ratio:2032 / 1143}
+  .apple-ad-overlay .ad-stage{position:relative;width:min(100vw, calc(100vh * 1443 / 1143));aspect-ratio:1443 / 1143}
   .apple-ad-overlay .ad-img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;filter:brightness(.72);cursor:pointer}
   /* Capa-recorte SOLO de la manzanita + "-El HueyCoyote", con contorno de iluminación. */
   .apple-ad-overlay .ad-glow{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;
     filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 3px #fff) drop-shadow(0 0 7px rgba(255,255,255,.95)) drop-shadow(0 0 14px rgba(255,255,255,.75));
     animation:cta-glow-pulse 1.9s ease-in-out infinite}
   @keyframes cta-glow-pulse{0%,100%{opacity:.8}50%{opacity:1}}
-  /* Zona clicable sobre la manzanita + nombre (medida sobre el letrero: x 1095..1494, y 997..1055 de 2032x1143). */
-  .apple-ad-overlay .ad-cta{position:absolute;left:52.6%;right:25.5%;top:85.8%;height:7.6%;cursor:pointer}
+  /* Zona clicable sobre la manzanita + nombre (medida sobre el letrero recortado: x 800..1199, y 997..1055 de 1443x1143). */
+  .apple-ad-overlay .ad-cta{position:absolute;left:54.2%;right:15.8%;top:85.8%;height:7.6%;cursor:pointer}
   .apple-ad-overlay .ad-cerrar{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;
     background:rgba(255,255,255,.92);color:#c4161c;border:2px solid #c4161c;font-size:24px;line-height:1;cursor:pointer;z-index:2}
   @media (prefers-reduced-motion:reduce){.apple-ad-overlay .ad-glow{animation:none}}
@@ -566,8 +566,8 @@
 <!-- Apple Music: letrero "PARA LOS MÁS FRESAS" a pantalla completa -->
 <div class="apple-ad-overlay" id="apple-ad" role="dialog" aria-modal="true" aria-label="Para los más fresas — El Huey Coyote">
   <div class="ad-stage">
-    <img class="ad-img" src="../sitio/assets/compu/apple-fresas-ad-compu.webp?v=0710c49" alt="Para los más fresas — El Huey Coyote" loading="lazy" decoding="async">
-    <img class="ad-glow" src="../sitio/assets/compu/apple-cta-glow-compu.png?v=0710c49" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="ad-img" src="../sitio/assets/compu/apple-fresas-ad-compu.webp?v=0710c50" alt="Para los más fresas — El Huey Coyote" loading="lazy" decoding="async">
+    <img class="ad-glow" src="../sitio/assets/compu/apple-cta-glow-compu.png?v=0710c50" alt="" aria-hidden="true" loading="lazy" decoding="async">
     <a class="ad-cta" id="apple-ad-go" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Ir a Apple Music del Huey Coyote"></a>
     <button class="ad-cerrar" id="apple-ad-cerrar" aria-label="Cerrar">&times;</button>
   </div>
