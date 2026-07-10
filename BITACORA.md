@@ -2,6 +2,21 @@
 
 Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historial, solo agregar.
 
+## 2026-07-10 · anette (cont. 49) — COMPU headliner: letrero "PARA LOS MÁS FRESAS" al clic en Apple Music
+- **Ani (2251 + imagen):** al hacer clic en el logo de Apple Music del HEADLINER debe salir el letrero que mandó. Y la manzanita + "-El HueyCoyote" del pie de la imagen deben tener contorno de iluminación y ser un botón que lleve a Apple Music. "Al igual que en la versión móvil".
+- **Móvil ya lo tenía** (`sitio/index.html`: `.apple-ad-overlay`, `#btn-apple`, assets `apple-fresas-ad.webp` 853×1844 + `apple-cta-glow.png`). Compu sólo enlazaba directo a Apple Music con `target="_blank"`.
+- **Assets nuevos (compu es HORIZONTAL, el del móvil es vertical):**
+  - `assets/compu/apple-fresas-ad-compu.webp` — la imagen de Ani (2032×1143, q88).
+  - `assets/compu/apple-cta-glow-compu.png` — recorte RGBA sólo de la manzanita + "-El HueyCoyote" (mismo patrón que el glow del móvil: canvas completo, transparente salvo el CTA, tinta #111).
+- **Cómo se generó el glow:** umbral duro (L<110) dentro de la caja del CTA, **apertura morfológica horizontal** (erosión+dilatación de radio 2 en X) y dilatación 1px para recuperar antialias. La apertura es lo que mata una **veta vertical de la madera** que tocaba el guion y se colaba como parte del mismo componente conectado (filtrar por tamaño de componente NO bastaba, quedaban unidos). Verificado sobre fondo verde: sólo manzana + texto.
+- **Medición del CTA:** bbox del texto = x 1095..1494, y 997..1055 (de 2032×1143). Hotspot con margen: `left:52.6%; right:25.5%; top:85.8%; height:7.6%`.
+- **⚠️ Diferencia con el móvil — `.ad-stage`:** el móvil usa `object-fit:cover` a pantalla completa. En compu eso **rompería la alineación** del glow y del hotspot (el recorte de `cover` varía con la relación de aspecto de la ventana). Metí un contenedor `.ad-stage` con `width:min(100vw, calc(100vh*2032/1143))` + `aspect-ratio:2032/1143`, y dentro imagen/glow/CTA a `inset:0` con `object-fit:fill`. Así el aspecto es exacto siempre y los % del hotspot calzan a cualquier tamaño. Probado a 1440×900 y 1280×1024: aspect 1.7778 y el CTA cubre el texto con margen en ambos.
+- **🐞 BUG 1 (mío):** puse el overlay ANTES de `</body>` pero el `<script>` está antes de eso → al correr, `#apple-ad` no existía, el `if (!btn || !ad) return` abortaba y el clic navegaba directo a Apple Music. **Movido el markup arriba del `<script>`.** (En compu el script inline vive dentro del body, no al final del documento.)
+- **🐞 BUG 2 (mío):** el CTA tenía `target="_blank"` **y** un `window.open()` de respaldo copiado del móvil → abría **2 pestañas**. En móvil el respaldo existe porque el navegador in-app de Telegram ignora el clic del `<a>`; en compu sobra. Dejado sólo el ancla + `stopPropagation()` para que no cierre el letrero.
+- **Comportamiento verificado en navegador:** abre con el logo del headliner ✓ · cierra con la X ✓ · cierra al clicar la imagen ✓ · cierra con Escape ✓ · bloquea el scroll del body mientras está abierto y lo restaura al cerrar ✓ · `elementFromPoint` sobre la manzanita y sobre el centro devuelve `A#apple-ad-go` (el glow tiene `pointer-events:none`) ✓ · el botón del headliner conserva `href` real como respaldo sin JS ✓
+- **Deploy:** commit `fc7c4f3` → GH Actions → elhueycoyote.com/preview/compu/
+- **PENDIENTE:** nada.
+
 ## 2026-07-10 · anette (cont. 48) — COMPU: título p1 encaja entre estrellas + contorno AZUL del resumen p2
 - **Ani (2245 + captura):** (a) p1: mover "TÍTULO" un chirris a la izq y "COOL" un poco a la izq (la "O" de TÍTULO chocaba con la estrella roja). (b) p2: falta el **contorno azul** del resumen (lleva blanco + azul) y que **no se vea con picos**.
 - **(a) Diagnóstico — NO era un simple nudge.** Medí con `getExtentOfChar()` en el navegador (métricas reales, no mi copia de la fuente): con `scale(.8 1)` el título ocupa global x 94.6→629.0 y "TÍTULO" mide **212.7px**. Las 2 estrellas del arte (detectadas por color en `conoces-poster1-clean.webp`: **verde 183..200, roja 413..432**) dejan un hueco de **213.0px**. Cero holgura → NINGÚN desplazamiento lateral podía dar aire en ambos lados; moverlo a la izq sólo cambiaba de estrella el choque.
