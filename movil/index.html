@@ -2071,7 +2071,7 @@
                 <span class="mes">NOV</span><span class="dia">04</span><a class="ciudad" href="#show-tijuana" aria-label="Ver presentación en Tijuana">TIJUANA</a>
             </div>
 
-            <!-- Cartel que tapa la lista al tocar una ciudad; se quita solo a los 4s -->
+            <!-- Cartel que tapa la lista al tocar una ciudad; se quita solo a los 3.5s.-->
             <img class="agotados-cartel" src="assets/compu/agotados-cartel.png?v=1" alt="Shows agotados — vuelve pronto mi güerit@" loading="lazy" decoding="async">
 
             <h3 class="seo-only">Especiales del mes: Niu Jork, Ostin, Mayami</h3>
@@ -2494,9 +2494,9 @@
         }
 
         /* === PRÓXIMOS SHOWS: cartel "SHOWS AGOTADOS" (Ani 2026-07-10) ===
-           Tocar cualquier ciudad tapa la lista con el cartel. Se quita solo a los 4s.
-           Tocar el cartel lo cierra antes. Mismo comportamiento que la versión compu,
-           que usa 5s; aquí Ani pidió 4s. */
+           Tocar cualquier ciudad tapa la lista con el cartel. Se quita solo a los 3.5s.
+           Tocar el cartel lo cierra antes. Mismo comportamiento y duración que la
+           versión compu (Ani unificó ambas a 3.5s el 2026-07-12). */
         (function () {
             const sec = document.getElementById('proximos-shows');
             if (!sec) return;
@@ -2511,7 +2511,7 @@
                     e.preventDefault();
                     sec.classList.add('agotados-on');
                     clearTimeout(agotadosTimer);
-                    agotadosTimer = setTimeout(cerrar, 4000);
+                    agotadosTimer = setTimeout(cerrar, 3500);
                 });
             });
             if (cartel) cartel.addEventListener('click', cerrar);

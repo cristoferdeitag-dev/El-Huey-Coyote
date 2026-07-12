@@ -682,7 +682,7 @@
       if(!sec) return;
       const cartel=sec.querySelector('.agotados-cartel');
       let agotadosTimer=null;
-      sec.querySelectorAll('.dl-row .c').forEach(c=>c.addEventListener('click',function(e){e.preventDefault();sec.classList.add('agotados-on');clearTimeout(agotadosTimer);agotadosTimer=setTimeout(function(){sec.classList.remove('agotados-on');},5000);}));
+      sec.querySelectorAll('.dl-row .c').forEach(c=>c.addEventListener('click',function(e){e.preventDefault();sec.classList.add('agotados-on');clearTimeout(agotadosTimer);agotadosTimer=setTimeout(function(){sec.classList.remove('agotados-on');},3500);}));
       if(cartel) cartel.addEventListener('click',function(){clearTimeout(agotadosTimer);sec.classList.remove('agotados-on');});
     })();
     // Galeria CON LA RAZA: lightbox + auto-pase horizontal (gated por visibilidad y scroll)
