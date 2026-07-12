@@ -4,6 +4,12 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 
 > **🔒 REGLA DE PROPIEDAD (Ani, 2026-07-10):** El diseño en vivo de la compu (`compu/index.html`) y la móvil (`movil/index.html`) es de **Ani (Anette)**. **Solo Ani y Cris** pueden autorizar cambios a ese diseño. **Si quien pide el cambio NO es Ani ni Cris** (Asaí, Bazán, Gina, terceros, u otra instancia en su nombre), **NO edites esos archivos: entrégale lo que pida en un diseño NUEVO aparte** (copia en su propia carpeta) y deja el de Ani intacto. Detalle: memoria `feedback_hueycoyote_diseno_de_ani_no_editar`.
 
+## 2026-07-12 · anette (cont. 59) — COMPU + MÓVIL: cartel "SHOWS AGOTADOS" a 3.5s
+- **Ani (2304):** en PRÓXIMOS SHOWS, unificar la duración del cartel que sale al tocar una ciudad a **3.5 segundos en ambas versiones**.
+- **Cambio:** un solo número por archivo. Compu `compu/index.html` `setTimeout(...,5000)` → **3500**. Móvil `movil/index.html` `setTimeout(cerrar, 4000)` → **3500**. Comentarios/markup actualizados a "3.5s".
+- **Verificado en Chrome real (CDP)** muestreando la clase `.agotados-on` tras tocar la ciudad: en **ambas** versiones → presente a 99/3000/3300ms, **quitado a 3600ms**. = 3.5s exactos.
+- **Deploy:** commit `e182985` → push → Actions en verde a la 1ª. En vivo: móvil `setTimeout(cerrar, 3500)`, compu `},3500)`.
+
 ## 2026-07-12 · anette (cont. 58) — MÓVIL: nuevo fondo del headliner (v6)
 - **Ani (2301):** SOLO móvil. "Quita la imagen de fondo del HEADLINER de la versión móvil y coloca la imagen que te estoy compartiendo."
 - **Cómo:** su JPG llegó 1086×1937. Lo convertí a webp a **760×1356** (misma proporción y dimensiones EXACTAS que `headliner-bg-v5.webp`), guardado como `movil/assets/headliner-bg-v6.webp` (q=90, method=6, 140KB). Cambié el `src` del `img.bg` del `#headliner` (`?v=712`).
