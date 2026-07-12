@@ -4,6 +4,14 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 
 > **🔒 REGLA DE PROPIEDAD (Ani, 2026-07-10):** El diseño en vivo de la compu (`compu/index.html`) y la móvil (`movil/index.html`) es de **Ani (Anette)**. **Solo Ani y Cris** pueden autorizar cambios a ese diseño. **Si quien pide el cambio NO es Ani ni Cris** (Asaí, Bazán, Gina, terceros, u otra instancia en su nombre), **NO edites esos archivos: entrégale lo que pida en un diseño NUEVO aparte** (copia en su propia carpeta) y deja el de Ani intacto. Detalle: memoria `feedback_hueycoyote_diseno_de_ani_no_editar`.
 
+## 2026-07-12 · anette (cont. 58) — MÓVIL: nuevo fondo del headliner (v6)
+- **Ani (2301):** SOLO móvil. "Quita la imagen de fondo del HEADLINER de la versión móvil y coloca la imagen que te estoy compartiendo."
+- **Cómo:** su JPG llegó 1086×1937. Lo convertí a webp a **760×1356** (misma proporción y dimensiones EXACTAS que `headliner-bg-v5.webp`), guardado como `movil/assets/headliner-bg-v6.webp` (q=90, method=6, 140KB). Cambié el `src` del `img.bg` del `#headliner` (`?v=712`).
+- **Alineación intacta:** los 6 letreros HTML (¿YA ME CONOCES?, PRÓXIMOS/SHOWS, LA RAZA, ÉCHAME UN GRITO, PA' LLEVAR) y los 3 botones-banco (Apple/YouTube/Amazon) **quedan en su sitio** — la imagen nueva respeta el mismo layout. Verificado en **Chrome real vía CDP** (390px, headliner completo con bancos incluidos).
+- **Nota:** la imagen nueva es casi idéntica a la v5 (diff **<0.3%** de píxeles, concentrado en la tabla verde ~y540); retoque fino de Ani, no rediseño. Dejé `headliner-bg-v5.webp` en el repo (ya sin referencias, borrable a futuro).
+- **Compu sin tocar.** Diff = `movil/index.html` + asset nuevo.
+- **Deploy:** commit `1f2c79c` → push → Actions falló 1ª vez (rate-limit SSH), rerun en verde. Verificado en vivo (`elhueycoyote.com/movil/`, 200, 140KB).
+
 ## 2026-07-10 · anette (cont. 57) — MÓVIL: "El mero mero" no existía · restaurado con la animación de compu
 - **Ani (2287):** SOLO móvil. "No me sale lo de EL MERO MERO, checa eso y colócale la animación que también tiene la versión compu."
 - **🔴 CAUSA RAÍZ (regresión del 8-jul).** El commit **`b65a56c`** ("sección con TEXTO VIVO (no horneado)", instancia *cris2/Laso*) **borró el `<div class="mero-mero">`** de la móvil. Su mensaje decía: *"Mero mero ahora viene del SVG (se quitó el div duplicado)"*. **La capa SVG nunca lo trajo:** `conoce-live` tiene **43 `<tspan>` y ninguno dice "El mero mero"**.
