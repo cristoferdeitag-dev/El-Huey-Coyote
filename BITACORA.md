@@ -4,6 +4,20 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 
 > **🔒 REGLA DE PROPIEDAD (Ani, 2026-07-10):** El diseño en vivo de la compu (`compu/index.html`) y la móvil (`movil/index.html`) es de **Ani (Anette)**. **Solo Ani y Cris** pueden autorizar cambios a ese diseño. **Si quien pide el cambio NO es Ani ni Cris** (Asaí, Bazán, Gina, terceros, u otra instancia en su nombre), **NO edites esos archivos: entrégale lo que pida en un diseño NUEVO aparte** (copia en su propia carpeta) y deja el de Ani intacto. Detalle: memoria `feedback_hueycoyote_diseno_de_ani_no_editar`.
 
+## 2026-07-17 · anette (cont. 63) — COMPU: PRÓXIMOS SHOWS fondo v3 + show list reestructurado (guiado por SVG de Ani)
+- **Ani (2350-2360):** SOLO compu. Otro fondo nuevo de PRÓXIMOS SHOWS (mandó PNG `PRoximosHows-fondocopu.png`, 2032×859) + SVG con las posiciones exactas del texto porque cambió TODA la distribución. Iteración con 3 SVGs; el 3º (`...copia_copia.svg`) traía el texto real colocado.
+- **Nuevo fondo** `movil/assets/compu/bg-proximos-v3.webp` (2032×859, ref `?v=12`). Reemplaza a v2 (753 de alto). Layout nuevo: líneas punteadas escalonadas por columna izq + **columna de 6 óvalos naranjas** (fechas) + torta/coke/quesadilla. viewBox SVG = 2031.9×858.8.
+- **Show list REESTRUCTURADO** (antes era 1 grid mes|día|ciudad en `.dl-row`). Ahora 3 piezas por fila, coords del SVG (÷ viewBox):
+  - **MES** negro (`.dl-mo`, swiss-721-bt, #1a1a1a) a la izquierda, `left:3.80%`. (No venía en el SVG; Ani pidió "el texto negro antes de cada ciudad" → se lo agregué.)
+  - **CIUDAD** verde-menta (`.dl-row .c`, swiss-721-bt 2.36cqw, **#63ceb2**) en `left:10.20%` (x=207.3 del SVG). Y por fila: 39.17/48.18/57.19/67.36/77.54/86.26%.
+  - **DÍA** rojo (`.dl-day`, **eds-market-bold-slant** 2.66cqw, **#b80d0e**) DENTRO del óvalo naranja, `left:~43.3%` (x=880 del SVG). Y por fila: 39.69/49.16/58.63/68.08/77.55/87.02%.
+  - Colores/fuentes/tamaños tomados del `<style>` del SVG (st2 cities 48px #63ceb2, st15 days 54px #b80d0e EdsMarketBoldSlant). El click de "agotados" sigue en `.dl-row .c`.
+- **Botones EXTRAS:** `top` 96.0%→**96.5%** (dots del SVG en cy=828.8→96.5%). Orden final **Spotify · Apple Music · YouTube Music · Amazon Music** (el SVG mostraba otro orden — Spotify/YouTube/Amazon/Apple — lo probé pero Ani corrigió al orden original; se revirtió).
+- **Proceso:** primero interpreté mal (puse el texto sobre las líneas, chocaba con la comida) → **pregunté a Ani con opciones** en vez de adivinar → mandó SVG con texto colocado → implementé exacto → 2 ajustes de Ani (mes negro + orden botones) → OK.
+- **Verificado en Chrome real (CDP, file://, abrir changarro).** Ciudades sobre líneas, días en óvalos, meses en negro, cartel agotados sigue OK. **Móvil NO se tocó** (tiene su propio layout de proximos).
+- **Deploy:** commit `c7b3dc3` → push → GH Actions **success** (26s). En vivo: bg v3 HTTP 200 (151KB), HTML con `?v=12`+`dl-mo`+`dl-day`, orden botones correcto.
+- **Nota:** el asset v2 (`bg-proximos-v2.webp`) queda huérfano en repo (ya sin refs, borrable a futuro).
+
 ## 2026-07-17 · anette (cont. 62) — COMPU + MÓVIL: CON LA RAZA carrusel en LOOP unidireccional (sin ping-pong)
 - **Ani (2345):** en CON LA RAZA, las imágenes deben ir SIEMPRE de derecha a izquierda; al llegar a la última NO cambiar de sentido, solo repetirse en la misma dirección — "como los divisores". 
 - **Causa:** el auto-pase (`#galeria-grid` .galeria-strip, JS con `strip.scrollLeft+=dir*SPEED`) hacía **ping-pong**: `if(scrollLeft>=max-1)dir=-1; else if(scrollLeft<=0)dir=1;` → llegaba al final y se regresaba. MISMA lógica en compu (SPEED 1.0, gated por inView) y móvil (SPEED 1.3, siempre corre).
