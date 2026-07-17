@@ -4,6 +4,15 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 
 > **🔒 REGLA DE PROPIEDAD (Ani, 2026-07-10):** El diseño en vivo de la compu (`compu/index.html`) y la móvil (`movil/index.html`) es de **Ani (Anette)**. **Solo Ani y Cris** pueden autorizar cambios a ese diseño. **Si quien pide el cambio NO es Ani ni Cris** (Asaí, Bazán, Gina, terceros, u otra instancia en su nombre), **NO edites esos archivos: entrégale lo que pida en un diseño NUEVO aparte** (copia en su propia carpeta) y deja el de Ani intacto. Detalle: memoria `feedback_hueycoyote_diseno_de_ani_no_editar`.
 
+## 2026-07-17 · anette (cont. 62) — COMPU + MÓVIL: CON LA RAZA carrusel en LOOP unidireccional (sin ping-pong)
+- **Ani (2345):** en CON LA RAZA, las imágenes deben ir SIEMPRE de derecha a izquierda; al llegar a la última NO cambiar de sentido, solo repetirse en la misma dirección — "como los divisores". 
+- **Causa:** el auto-pase (`#galeria-grid` .galeria-strip, JS con `strip.scrollLeft+=dir*SPEED`) hacía **ping-pong**: `if(scrollLeft>=max-1)dir=-1; else if(scrollLeft<=0)dir=1;` → llegaba al final y se regresaba. MISMA lógica en compu (SPEED 1.0, gated por inView) y móvil (SPEED 1.3, siempre corre).
+- **Fix (idéntico en ambos):** loop infinito estilo divisor. (1) Se **clona la tira completa** de 16 fotos (`img.cloneNode(true)` → clases `.gp-clone`, `aria-hidden`, `tabIndex=-1`), quedando 32 imgs. (2) `tick()` ahora solo suma `scrollLeft+=SPEED` (un solo sentido) y `if(scrollLeft>=loopW)scrollLeft-=loopW` → reinicia sin invertir. (3) `loopW` = `primerClon.offsetLeft - primerOriginal.offsetLeft` (ancho de un juego + gaps), recalculado en load/resize/timeouts. Se quitó la variable `dir`.
+- **Lightbox intacto:** el array `fotos` se arma ANTES de clonar (16 originales), y cada clon lleva un listener que hace `img.click()` de su original → tocar un clon abre la misma foto. El `data-i` se copia con cloneNode. Drag manual, hover y reveal por tandas sin cambios.
+- **Verificado en Chrome real (CDP):** compu (1440px) y móvil (390px). En ambos: 32 imgs (16 clones), `scrollLeft` SIEMPRE creciente en el muestreo (sin deltas negativos = sin rebote), y al forzar `scrollLeft=loopW-4` salta a ~9 (reset de loop limpio). compu loopW≈5850, móvil loopW≈2496. Sin huecos, fotos siempre visibles.
+- **Diff:** `compu/index.html` + `movil/index.html` (solo el bloque JS del auto-pase). Sin assets nuevos.
+- **Deploy:** commit `7dbd2c4` → push → GH Actions **success** (23s). En vivo: `gp-clone` presente en ambas, `dir=-1` = 0.
+
 ## 2026-07-17 · anette (cont. 61) — COMPU + MÓVIL: LA MERCH "CHAMARRA" → "BÓXERS"
 - **Ani (2339, 2342):** en LA MERCH, cambiar la palabra "CHAMARRA" por "BÓXERS" en las 2 columnas (PIRATERÍA OFICIAL + LA ORIGINAL). Primero compu, luego pidió lo mismo en móvil.
 - **Los nombres de prendas son TEXTO VIVO** (`.merch-item`, botones que simulan Shopify → `elhueycoyote.myshopify.com`), NO están horneados en el fondo. El bg `bg-merch-llevele-0701b.webp` solo trae "LLÉVELE, LLÉVELE / PIRATERÍA OFICIAL / LA ORIGINAL" + líneas punteadas en blanco. Así que cambiar el texto es limpio, nada se asoma detrás.
