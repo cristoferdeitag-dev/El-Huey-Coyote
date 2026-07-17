@@ -4,6 +4,27 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 
 > **🔒 REGLA DE PROPIEDAD (Ani, 2026-07-10):** El diseño en vivo de la compu (`compu/index.html`) y la móvil (`movil/index.html`) es de **Ani (Anette)**. **Solo Ani y Cris** pueden autorizar cambios a ese diseño. **Si quien pide el cambio NO es Ani ni Cris** (Asaí, Bazán, Gina, terceros, u otra instancia en su nombre), **NO edites esos archivos: entrégale lo que pida en un diseño NUEVO aparte** (copia en su propia carpeta) y deja el de Ani intacto. Detalle: memoria `feedback_hueycoyote_diseno_de_ani_no_editar`.
 
+## 2026-07-17 · anette (cont. 61) — COMPU + MÓVIL: LA MERCH "CHAMARRA" → "BÓXERS"
+- **Ani (2339, 2342):** en LA MERCH, cambiar la palabra "CHAMARRA" por "BÓXERS" en las 2 columnas (PIRATERÍA OFICIAL + LA ORIGINAL). Primero compu, luego pidió lo mismo en móvil.
+- **Los nombres de prendas son TEXTO VIVO** (`.merch-item`, botones que simulan Shopify → `elhueycoyote.myshopify.com`), NO están horneados en el fondo. El bg `bg-merch-llevele-0701b.webp` solo trae "LLÉVELE, LLÉVELE / PIRATERÍA OFICIAL / LA ORIGINAL" + líneas punteadas en blanco. Así que cambiar el texto es limpio, nada se asoma detrás.
+- **En el código estaba en SINGULAR "CHAMARRA :"** (con " :"), no "CHAMARRAS". Lo dejé como **"BÓXERS :"** para que combine con "PLAYERAS :" y "CALCETAS :". Ani ok.
+- **Compu** (`compu/index.html`): 4 reemplazos = 2 columnas × (texto visible + `data-text` del efecto shine hover). Clases `pos-pirat-chamarra`/`pos-orig-chamarra` NO se renombraron (son hooks de posición; renombrar arriesgaba el CSS). 
+- **Móvil** (`movil/index.html`): 2 reemplazos (solo texto visible; móvil no usa `data-text`, usa pulso por `animation-delay`). Clases igual sin tocar.
+- **Verificado en Chrome real (CDP):** compu 1440px y móvil 390px (con clic en `#btn-changarro` para abrir el changarro). Ambas columnas muestran "BÓXERS :" alineado con líneas y precios ($350 pirata / $1000 original). En vivo: compu 4×, móvil 2×, `CHAMARRA` (mayúsculas) = 0 en ambas.
+- **Deploy:** commit `8a11b74` → push → GH Actions **success** (23s). 
+- **NOTA precios:** $250/$350/3X50 (pirata) y $800/$1000/$150 (original) siguen igual (no los tocó).
+
+## 2026-07-17 · anette (cont. 60) — COMPU: fondo nuevo de PRÓXIMOS SHOWS (versión reducida) + realineado completo
+- **Ani (2331):** SOLO compu. Cambiar la imagen de fondo de PRÓXIMOS SHOWS por una versión más **reducida en tamaño** (misma imagen) y reacomodar los botones de EXTRAS (Spotify/Apple/YouTube/Amazon) al nuevo tamaño de la sección.
+- **La imagen nueva es la MITAD SUPERIOR de la vieja.** Vieja `bg-proximos.webp` = 2032×1143. Nueva = **2032×753** (mismo ancho, más baja). Ani le quitó el bloque inferior (GUARNICIONES/QUESADILLAS con precios + el pan y la quesadilla). El top (títulos + líneas punteadas + ciudades joke NIU JORK/OSTIN/MAYAMI + barra EXTRAS) queda idéntico en píxeles absolutos. Nuevo asset `movil/assets/compu/bg-proximos-v2.webp` (webp q90 m6, 136KB) referenciado con `?v=11`.
+- **Como `.dsec>img.bg` usa `height:auto`, cambiar el aspecto (1143→753) reacomoda TODO lo posicionado en %.** Tres bloques recalculados:
+  1. **Botones EXTRAS** (`.extra-logo`): los 4 puntos naranjas siguen en el mismo X (medidos: 22.0/40.0/58.8/83.9%), solo cambió el centro vertical de la barra → `top` 96.8% → **96.0%**. Left intacto (23.4/41.4/60.2/85.0%).
+  2. **Lista de shows en vivo** (`.ct.dl-row`): las líneas punteadas de la col. izq. están en los MISMOS píxeles (y=331,382,452,512,572,632) — en la vieja eran 28.96/33.46/39.50/44.79/50.09/55.34% (=exacto a los top que ya tenían). Nuevos `top` = px/753 → **43.96 / 50.73 / 60.03 / 67.99 / 75.96 / 83.93%**. Left 3.5% intacto.
+  3. **Cartel "SHOWS AGOTADOS"** (`.agotados-cartel`): el PNG (756×559, aspecto 1.35) a 38% de ancho ocupaba ~76% del alto de la sección corta = enorme. Reproporcionado: `width` 38%→**35%**, `top` 20.5%→**22%** (Ani pidió subirlo un poco), `left` 9%→**6%**. Limitación geométrica: la lista quedó ancha-y-baja (6 renglones en 44% del alto) y el cartel es cuadrado → cubrir los 6 renglones completos lo haría chocar con EXTRAS; el compromiso cubre las ciudades y deja asomar 2-3 letras de los meses a la izq (look de "letrero pegado", como el original).
+- **Verificado en Chrome real (CDP, file://, 1440px).** Truco de captura: la compu tiene `body.cortina-bajada{overflow:hidden;height:100vh}` (splash "ABRE EL CHANGARRO") que bloquea el scroll al cargar → hay que **clic en `#btn-changarro`** para abrir el changarro antes de poder scrollear/capturar la sección. Además `.reveal` arranca en opacity:0/translateY(40) hasta que el IntersectionObserver dispara. Screenshots validaron: lista sobre sus líneas, 4 logos sobre sus puntos, cartel cubriendo ciudades sin tapar EXTRAS.
+- **Móvil sin tocar.** Diff = `compu/index.html` + asset nuevo. Asset viejo `bg-proximos.webp` (1143) queda en repo (ya sin referencias, borrable a futuro).
+- **Deploy:** commit `00da757` → push → GH Actions **success a la 1ª** (31s). En vivo verificado: `bg-proximos-v2.webp` HTTP 200 (139KB), HTML con `?v=11` + tops nuevos.
+
 ## 2026-07-12 · anette (cont. 59) — COMPU + MÓVIL: cartel "SHOWS AGOTADOS" a 3.5s
 - **Ani (2304):** en PRÓXIMOS SHOWS, unificar la duración del cartel que sale al tocar una ciudad a **3.5 segundos en ambas versiones**.
 - **Cambio:** un solo número por archivo. Compu `compu/index.html` `setTimeout(...,5000)` → **3500**. Móvil `movil/index.html` `setTimeout(cerrar, 4000)` → **3500**. Comentarios/markup actualizados a "3.5s".
