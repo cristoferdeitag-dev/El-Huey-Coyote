@@ -325,12 +325,11 @@
   .lightbox-prev{left:18px}.lightbox-next{right:18px}
   @media (prefers-reduced-motion:reduce){.ml-conoces .ml-shine,.ml-conlaraza::after,.ml-echame::after,.ml-pallevar::after,.ml-prox .f::after{animation:none}}
 
-  /* Lista de shows: ÚNICO texto vivo de la sección Próximos Shows (lo demás es la imagen de fondo). MES negro + DÍA + CIUDAD en teal, alineados a la izquierda de los puntitos del fondo. */
-  /* tipografía EXACTA de la móvil (.shows-list): swiss-721-bt 700 + grid mes/día/ciudad + colores/stroke iguales */
-  .dl-row{display:grid;grid-template-columns:2.5em 1.7em auto;column-gap:.7em;align-items:baseline;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:normal;font-size:2.3cqw;line-height:1;transform:translateY(-78%)}
-  .dl-row .m{color:#1a1a1a;-webkit-text-stroke:.45px #1a1a1a}
-  .dl-row .d{color:#00a99d;-webkit-text-stroke:.45px #00a99d}
-  .dl-row .c{color:#00bfb0;-webkit-text-stroke:.45px #00a99d}
+  /* Lista de shows (SVG de Ani 2026-07-17): CIUDAD verde-menta a la izquierda (sobre su línea) + DÍA rojo dentro del óvalo naranja. Sin mes. */
+  .dl-row{font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:normal;font-size:2.36cqw;line-height:1;white-space:nowrap;transform:translateY(-78%)}
+  .dl-row .c{color:#63ceb2;-webkit-text-stroke:.4px #63ceb2;text-decoration:none}
+  .dl-mo{font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:normal;font-size:2.36cqw;line-height:1;color:#1a1a1a;-webkit-text-stroke:.4px #1a1a1a;white-space:nowrap;transform:translateY(-78%)}
+  .dl-day{font-family:'eds-market-bold-slant','Oswald',sans-serif;font-weight:400;font-style:normal;font-size:2.66cqw;line-height:1;color:#b80d0e;white-space:nowrap;transform:translateY(-78%)}
   /* Cartel SHOWS AGOTADOS: cubre la lista de shows al hacer click (Ani 2026-07-01) */
   #sec-proximos .agotados-cartel{position:absolute;left:6%;top:22%;width:35%;height:auto;z-index:7;pointer-events:none;cursor:pointer;
     opacity:0;visibility:hidden;transform:rotate(-3deg) scale(.6);transform-origin:50% 50%;
@@ -473,20 +472,33 @@
 <text class="hx-st14" transform="translate(1472.6039 906.1658) rotate(5.1178) scale(.8939 1)"><tspan class="hx-st60"><tspan x="0" y="0">LO SUYO ES CONVERTIR CUALQUIER </tspan></tspan><tspan class="hx-st58"><tspan x="64.7" y="29.7">IDEA EN UNA ROLA CHIDA.</tspan></tspan></text></g>
 </svg></div><div class="mero-mero"><span style="transform:translateY(2px) rotate(-5deg)">E</span><span style="transform:translateY(-2px) rotate(3deg)">l</span> <span style="transform:translateY(1px) rotate(-6deg)">m</span><span style="transform:translateY(-3px) rotate(2deg)">E</span><span style="transform:translateY(2px) rotate(-3deg)">R</span><span style="transform:translateY(-1px) rotate(4deg)">o</span> <span style="transform:translateY(-2px) rotate(-4deg)">m</span><span style="transform:translateY(2px) rotate(5deg)">E</span><span style="transform:translateY(-2px) rotate(-5deg)">R</span><span style="transform:translateY(1px) rotate(2deg)">o</span></div></section>
 <div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../movil/assets/compu/divtext-proximos.png?v=10" alt="Próximos Shows"><img src="../movil/assets/compu/divtext-proximos.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-proximos"><img class="bg" src="../movil/assets/compu/bg-proximos-v2.webp?v=11" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl">
-<div class="ct dl-row" style="left:3.5%;top:43.96%"><span class="m">JUN</span><span class="d">07</span><a class="c" href="#sec-proximos" data-text="PUEBLA">PUEBLA</a></div>
-<div class="ct dl-row" style="left:3.5%;top:50.73%"><span class="m">JUL</span><span class="d">14</span><a class="c" href="#sec-proximos" data-text="CDMX">CDMX</a></div>
-<div class="ct dl-row" style="left:3.5%;top:60.03%"><span class="m">AGO</span><span class="d">22</span><a class="c" href="#sec-proximos" data-text="GUADALAJARA">GUADALAJARA</a></div>
-<div class="ct dl-row" style="left:3.5%;top:67.99%"><span class="m">SEP</span><span class="d">02</span><a class="c" href="#sec-proximos" data-text="MONTERREY">MONTERREY</a></div>
-<div class="ct dl-row" style="left:3.5%;top:75.96%"><span class="m">OCT</span><span class="d">25</span><a class="c" href="#sec-proximos" data-text="LEÓN">LEÓN</a></div>
-<div class="ct dl-row" style="left:3.5%;top:83.93%"><span class="m">NOV</span><span class="d">04</span><a class="c" href="#sec-proximos" data-text="TIJUANA">TIJUANA</a></div>
+<section class="dsec reveal" id="sec-proximos"><img class="bg" src="../movil/assets/compu/bg-proximos-v3.webp?v=12" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl">
+<!-- Show list (SVG Ani 2026-07-17): MES negro + CIUDAD verde (10.2%) + DÍA en el óvalo naranja (43.3%). -->
+<div class="ct dl-mo" style="left:3.80%;top:39.17%">JUN</div>
+<div class="ct dl-row" style="left:10.20%;top:39.17%"><a class="c" href="#sec-proximos" data-text="PUEBLA">PUEBLA</a></div>
+<div class="ct dl-day" style="left:43.48%;top:39.69%">07</div>
+<div class="ct dl-mo" style="left:3.80%;top:48.18%">JUL</div>
+<div class="ct dl-row" style="left:10.20%;top:48.18%"><a class="c" href="#sec-proximos" data-text="CDMX">CDMX</a></div>
+<div class="ct dl-day" style="left:43.32%;top:49.16%">14</div>
+<div class="ct dl-mo" style="left:3.80%;top:57.19%">AGO</div>
+<div class="ct dl-row" style="left:10.20%;top:57.19%"><a class="c" href="#sec-proximos" data-text="GUADALAJARA">GUADALAJARA</a></div>
+<div class="ct dl-day" style="left:43.32%;top:58.63%">22</div>
+<div class="ct dl-mo" style="left:3.80%;top:67.36%">SEP</div>
+<div class="ct dl-row" style="left:10.20%;top:67.36%"><a class="c" href="#sec-proximos" data-text="MONTERREY">MONTERREY</a></div>
+<div class="ct dl-day" style="left:43.32%;top:68.08%">02</div>
+<div class="ct dl-mo" style="left:3.80%;top:77.54%">OCT</div>
+<div class="ct dl-row" style="left:10.20%;top:77.54%"><a class="c" href="#sec-proximos" data-text="LEÓN">LEÓN</a></div>
+<div class="ct dl-day" style="left:43.32%;top:77.55%">25</div>
+<div class="ct dl-mo" style="left:3.80%;top:86.26%">NOV</div>
+<div class="ct dl-row" style="left:10.20%;top:86.26%"><a class="c" href="#sec-proximos" data-text="TIJUANA">TIJUANA</a></div>
+<div class="ct dl-day" style="left:43.21%;top:87.02%">04</div>
 <!-- Cartel "SHOWS AGOTADOS": aparece al hacer click en un show y cubre la lista (Ani 2026-07-01); click en el cartel lo cierra -->
 <img class="agotados-cartel" src="../movil/assets/compu/agotados-cartel.png?v=1" alt="Shows agotados — vuelve pronto mi güerit@" loading="lazy" decoding="async">
 <!-- Logos de plataformas (blancos) tras cada punto naranja de la barra EXTRAS -->
-<a class="extra-logo" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:23.4%;top:96.0%"><img src="../movil/assets/compu/logo-spotify-white.webp?v=2" alt="Spotify" decoding="async"></a>
-<a class="extra-logo" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:41.4%;top:96.0%;height:1.6cqw"><img src="../movil/assets/compu/logo-apple-music-white.webp?v=2" alt="Apple Music" decoding="async"></a>
-<a class="extra-logo" href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music" style="left:60.2%;top:96.0%"><img src="../movil/assets/compu/logo-youtube-music-white.webp?v=2" alt="YouTube Music" decoding="async"></a>
-<a class="extra-logo" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:85.0%;top:96.0%"><img src="../movil/assets/compu/logo-amazon-music-white.webp?v=2" alt="Amazon Music" decoding="async"></a>
+<a class="extra-logo" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:23.4%;top:96.5%"><img src="../movil/assets/compu/logo-spotify-white.webp?v=2" alt="Spotify" decoding="async"></a>
+<a class="extra-logo" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:41.4%;top:96.5%;height:1.6cqw"><img src="../movil/assets/compu/logo-apple-music-white.webp?v=2" alt="Apple Music" decoding="async"></a>
+<a class="extra-logo" href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music" style="left:60.2%;top:96.5%"><img src="../movil/assets/compu/logo-youtube-music-white.webp?v=2" alt="YouTube Music" decoding="async"></a>
+<a class="extra-logo" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:85.0%;top:96.5%"><img src="../movil/assets/compu/logo-amazon-music-white.webp?v=2" alt="Amazon Music" decoding="async"></a>
 </div></section>
 <div class="dmarquee" role="img" aria-label="La Merch"><div class="dtrack"><img src="../movil/assets/compu/divtext-merch.png?v=10" alt="La Merch"><img src="../movil/assets/compu/divtext-merch.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-merch"><img class="bg" src="../movil/assets/compu/bg-merch-llevele-0701b.webp" alt="merch — Llévele, llévele" loading="lazy" decoding="async"><div class="ovl">
