@@ -706,15 +706,23 @@
       const strip=document.getElementById('galeria-grid');
       const hint=document.getElementById('galeria-hint');
       if(strip){
-        let dir=1,paused=false,rt=null,inView=false;const SPEED=1.0;
+        let paused=false,rt=null,inView=false;const SPEED=1.0;
+        /* Loop infinito SIEMPRE der→izq, sin rebote — como los divisores (Ani 2026-07-17):
+           se clona la tira completa y, al recorrer un juego, se reinicia el scroll sin cambiar de sentido. */
+        var origs=Array.prototype.slice.call(strip.querySelectorAll('img'));
+        origs.forEach(function(img){var c=img.cloneNode(true);c.classList.add('gp-clone');c.setAttribute('aria-hidden','true');c.tabIndex=-1;c.addEventListener('click',function(){img.click();});strip.appendChild(c);});
+        var loopW=0;
+        function calcLoop(){var o=strip.querySelector('img:not(.gp-clone)');var c=strip.querySelector('img.gp-clone');if(o&&c){var d=c.offsetLeft-o.offsetLeft;if(d>4)loopW=d;}}
+        strip.querySelectorAll('img').forEach(function(im){if(im.complete)calcLoop();else im.addEventListener('load',calcLoop);});
+        window.addEventListener('load',calcLoop);window.addEventListener('resize',calcLoop);setTimeout(calcLoop,500);setTimeout(calcLoop,1600);
         strip.style.scrollSnapType='none';
         if('IntersectionObserver' in window){new IntersectionObserver(es=>{es.forEach(e=>inView=e.isIntersecting);},{rootMargin:'120px 0px'}).observe(strip);} else {inView=true;}
         function tick(){
           /* El auto-pase NO se detiene por el scroll vertical de la página (Ani 2026-07-10):
              sólo se pausa si el usuario agarra la tira o la desliza de lado. */
-          if(!paused&&inView){
-            const max=strip.scrollWidth-strip.clientWidth;
-            if(max>4){strip.scrollLeft+=dir*SPEED;if(strip.scrollLeft>=max-1)dir=-1;else if(strip.scrollLeft<=0)dir=1;}
+          if(!paused&&inView&&loopW>4){
+            strip.scrollLeft+=SPEED;
+            if(strip.scrollLeft>=loopW)strip.scrollLeft-=loopW;
           }
           requestAnimationFrame(tick);
         }
