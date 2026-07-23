@@ -709,7 +709,7 @@
       if(!sec) return;
       const cartel=sec.querySelector('.agotados-cartel');
       let agotadosTimer=null;
-      sec.querySelectorAll('.dl-row .c').forEach(c=>c.addEventListener('click',function(e){e.preventDefault();sec.classList.add('agotados-on');clearTimeout(agotadosTimer);agotadosTimer=setTimeout(function(){sec.classList.remove('agotados-on');},3500);}));
+      sec.querySelectorAll('.dl-row .c').forEach(c=>c.addEventListener('click',function(e){e.preventDefault();sec.classList.add('agotados-on');clearTimeout(agotadosTimer);agotadosTimer=setTimeout(function(){sec.classList.remove('agotados-on');},2200);}));
       if(cartel) cartel.addEventListener('click',function(){clearTimeout(agotadosTimer);sec.classList.remove('agotados-on');});
     })();
     // LA MERCH: click en un item -> aparece el cartel "YA MERITO NOS LLEGA" (la tienda Shopify aun no existe); click en el cartel lo cierra; se quita solo a los 3.5s (Ani 2026-07-23)
@@ -718,7 +718,7 @@
       if(!sec) return;
       const cartel=sec.querySelector('.merch-cartel');
       let merchTimer=null;
-      sec.querySelectorAll('.merch-item').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();sec.classList.add('merch-cartel-on');clearTimeout(merchTimer);merchTimer=setTimeout(function(){sec.classList.remove('merch-cartel-on');},3500);}));
+      sec.querySelectorAll('.merch-item').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();sec.classList.add('merch-cartel-on');clearTimeout(merchTimer);merchTimer=setTimeout(function(){sec.classList.remove('merch-cartel-on');},2000);}));
       if(cartel) cartel.addEventListener('click',function(){clearTimeout(merchTimer);sec.classList.remove('merch-cartel-on');});
     })();
     // Galeria CON LA RAZA: lightbox + auto-pase horizontal (gated por visibilidad y scroll)

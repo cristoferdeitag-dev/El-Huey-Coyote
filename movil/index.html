@@ -630,6 +630,40 @@
             #proximos-shows .agotados-cartel { transition: none; }
             #proximos-shows.agotados-on .agotados-cartel { animation: none; transform: rotate(-3deg) scale(1); }
         }
+        /* LA MERCH: al tocar un item aparece el cartel "YA MERITO NOS LLEGA" (la tienda Shopify aun no existe). Mismo mecanismo que el cartel de agotados. (Ani 2026-07-23) */
+        #merch .merch-cartel {
+            position: absolute;
+            left: 8%;
+            top: 20%;
+            width: 84%;
+            height: auto;
+            z-index: 8;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            cursor: pointer;
+            transform: rotate(-4deg) scale(0.6);
+            transform-origin: 50% 50%;
+            transition: opacity 0.25s ease;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+        }
+        #merch.merch-cartel-on .merch-cartel {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            animation: merch-sello-m 0.42s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+        }
+        @keyframes merch-sello-m {
+            0%   { opacity: 0; transform: rotate(-4deg) scale(1.75); }
+            60%  { opacity: 1; transform: rotate(-4deg) scale(0.97); }
+            100% { opacity: 1; transform: rotate(-4deg) scale(1); }
+        }
+        /* Mientras el cartel esta puesto, se congela el zoom de los items y se bloquea su click */
+        #merch.merch-cartel-on .merch-item { pointer-events: none; animation: none; }
+        @media (prefers-reduced-motion: reduce) {
+            #merch .merch-cartel { transition: none; }
+            #merch.merch-cartel-on .merch-cartel { animation: none; transform: rotate(-4deg) scale(1); }
+        }
 
         /* ESPECIALES DEL MES — ciudades (rojo, itálica) */
         .especial-ciudad {
@@ -2105,12 +2139,12 @@
             <h2 class="seo-only">Merch — Llévele, llévele</h2>
 
             <!-- NOMBRES (clicables, deslizan a la izquierda al hover) -->
-            <a class="merch-item pos-pirat-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">PLAYERAS :</a>
-            <a class="merch-item pos-pirat-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">BÓXERS :</a>
-            <a class="merch-item pos-pirat-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CALCETAS :</a>
-            <a class="merch-item pos-orig-playeras"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">PLAYERAS :</a>
-            <a class="merch-item pos-orig-chamarra"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">BÓXERS :</a>
-            <a class="merch-item pos-orig-calcetas"  href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer">CALCETAS :</a>
+            <a class="merch-item pos-pirat-playeras" href="#merch" role="button">PLAYERAS :</a>
+            <a class="merch-item pos-pirat-chamarra" href="#merch" role="button">BÓXERS :</a>
+            <a class="merch-item pos-pirat-calcetas" href="#merch" role="button">CALCETAS :</a>
+            <a class="merch-item pos-orig-playeras"  href="#merch" role="button">PLAYERAS :</a>
+            <a class="merch-item pos-orig-chamarra"  href="#merch" role="button">BÓXERS :</a>
+            <a class="merch-item pos-orig-calcetas"  href="#merch" role="button">CALCETAS :</a>
 
             <!-- PRECIOS (editables, no clicables) -->
             <span class="merch-price pos-price-pirat-pl">$250</span>
@@ -2119,6 +2153,9 @@
             <span class="merch-price pos-price-orig-pl">$800</span>
             <span class="merch-price pos-price-orig-ch">$1000</span>
             <span class="merch-price pos-price-orig-ca">$150</span>
+
+            <!-- Cartel "YA MERITO NOS LLEGA" (aparece al tocar un item; la tienda Shopify aun no existe) -->
+            <img class="merch-cartel" src="assets/compu/merch-cartel.png?v=1" alt="Ya merito nos llega — la tienda abre pronto" decoding="async">
         </section>
 
         <!-- Divisor: anuncia ¿Ya me conoces? -->
@@ -2515,7 +2552,30 @@
                     e.preventDefault();
                     sec.classList.add('agotados-on');
                     clearTimeout(agotadosTimer);
-                    agotadosTimer = setTimeout(cerrar, 3500);
+                    agotadosTimer = setTimeout(cerrar, 2200);
+                });
+            });
+            if (cartel) cartel.addEventListener('click', cerrar);
+        })();
+
+        /* === LA MERCH: cartel "YA MERITO NOS LLEGA" (Ani 2026-07-23) ===
+           Tocar cualquier item muestra el cartel (la tienda Shopify aun no existe).
+           Se quita solo a los 2s; tocar el cartel lo cierra antes. */
+        (function () {
+            const sec = document.getElementById('merch');
+            if (!sec) return;
+            const cartel = sec.querySelector('.merch-cartel');
+            let merchTimer = null;
+            function cerrar() {
+                clearTimeout(merchTimer);
+                sec.classList.remove('merch-cartel-on');
+            }
+            sec.querySelectorAll('.merch-item').forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    sec.classList.add('merch-cartel-on');
+                    clearTimeout(merchTimer);
+                    merchTimer = setTimeout(cerrar, 2000);
                 });
             });
             if (cartel) cartel.addEventListener('click', cerrar);

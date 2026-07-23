@@ -4,6 +4,17 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 
 > **🔒 REGLA DE PROPIEDAD (Ani, 2026-07-10):** El diseño en vivo de la compu (`compu/index.html`) y la móvil (`movil/index.html`) es de **Ani (Anette)**. **Solo Ani y Cris** pueden autorizar cambios a ese diseño. **Si quien pide el cambio NO es Ani ni Cris** (Asaí, Bazán, Gina, terceros, u otra instancia en su nombre), **NO edites esos archivos: entrégale lo que pida en un diseño NUEVO aparte** (copia en su propia carpeta) y deja el de Ani intacto. Detalle: memoria `feedback_hueycoyote_diseno_de_ani_no_editar`.
 
+## 2026-07-23 · anette (cont. 65) — MÓVIL: mismo cartel de LA MERCH · duraciones a 2s (merch) y 2.2s (agotados) en ambas
+- **Ani (2770):** le encantó el cartel de merch. Pide: (1) compu LA MERCH → duración **2s**; (2) **portar el MISMO cartel a la MÓVIL** (misma sección LA MERCH, aparece al tocar un item, misma duración 2s); (3) cartel de **PRÓXIMOS SHOWS "agotados"** → **2.2s** en compu **y** móvil.
+- **COMPU (`compu/index.html`):** merch timer 3500→**2000**; agotados timer 3500→**2200**. (2 números.)
+- **MÓVIL (`movil/index.html`):** portado completo del cartel de merch, mismo patrón que agotados:
+  - Los **6** `.merch-item` cambiaron `href` shopify (target=_blank) → `href="#merch" role="button"`.
+  - CSS `#merch .merch-cartel` (centrado `left:8%;top:20%;width:84%`, z-index 8, drop-shadow) + `@keyframes merch-sello-m` (rotate(-4deg), escala 1.75→.97→1). Mientras el cartel está puesto se **congela el zoom** de los items (`.merch-item{animation:none;pointer-events:none}`).
+  - `<img class="merch-cartel" src="assets/compu/merch-cartel.png?v=1">` dentro de `#merch` (reusa el asset ya subido).
+  - JS init nuevo (toca item → `preventDefault` + add clase + timer **2000**; toca cartel → cierra). Agotados timer 3500→**2200**.
+- **Verificado en Chrome real (Playwright):** COMPU por código (merch `},2000)`, agotados `},2200)`, 0 shopify). MÓVIL funcional a 390px (abrir changarro → tocar item → `merch-cartel-on` presente, cartel a **opacity 1** tras el sello, **centrado 50%**, dentro de la sección, imagen 1200px carga). 0 refs a Shopify en ambas. Sin errores de consola nuevos (solo favicon.ico 404).
+- Diff = `compu/index.html` + `movil/index.html` (sin assets nuevos; el cartel ya existía de cont.64).
+
 ## 2026-07-23 · anette (cont. 64) — COMPU: LA MERCH · click en item → cartel "YA MERITO NOS LLEGA" (en vez de Shopify)
 - **Ani (2765):** en LA MERCH, como aún no hay cuenta oficial de Shopify, al dar click a un botón de item debe aparecer un cartel (mandó `Yamerito.png`, starburst amarillo/rojo "YA MERITO NOS LLEGA", 1323×869 RGBA transparente).
 - **Se replicó el mecanismo probado del cartel "SHOWS AGOTADOS"** (PRÓXIMOS SHOWS): overlay que aparece con animación de sello (`@keyframes merch-sello` .42s, rotate(-4deg), scale 1.75→.97→1), se cierra solo a los **3.5s** o al tocarlo. Clase `#sec-merch.merch-cartel-on`.
