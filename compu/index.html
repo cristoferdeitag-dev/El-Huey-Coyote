@@ -344,6 +344,20 @@
   #sec-proximos.agotados-on .dl-row{pointer-events:none}
   @media (prefers-reduced-motion:reduce){#sec-proximos .agotados-cartel{transition:none}
     #sec-proximos.agotados-on .agotados-cartel{animation:none;transform:rotate(-3deg) scale(1)}}
+  /* Cartel "YA MERITO NOS LLEGA" en LA MERCH: al dar click a un item aparece el cartel (la tienda Shopify aun no existe) (Ani 2026-07-23) */
+  #sec-merch .merch-cartel{position:absolute;left:29%;top:19%;width:42%;height:auto;z-index:8;pointer-events:none;cursor:pointer;
+    opacity:0;visibility:hidden;transform:rotate(-4deg) scale(.6);transform-origin:50% 50%;
+    transition:opacity .25s ease;filter:drop-shadow(0 6px 12px rgba(0,0,0,.3))}
+  #sec-merch.merch-cartel-on .merch-cartel{opacity:1;visibility:visible;pointer-events:auto;
+    animation:merch-sello .42s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes merch-sello{
+    0%{opacity:0;transform:rotate(-4deg) scale(1.75)}
+    60%{opacity:1;transform:rotate(-4deg) scale(.97)}
+    100%{opacity:1;transform:rotate(-4deg) scale(1)}
+  }
+  #sec-merch.merch-cartel-on .merch-item{pointer-events:none}
+  @media (prefers-reduced-motion:reduce){#sec-merch .merch-cartel{transition:none}
+    #sec-merch.merch-cartel-on .merch-cartel{animation:none;transform:rotate(-4deg) scale(1)}}
 
   /* Brinco del headliner ELIMINADO a pedido de Anette (2026-06-07) — botones estáticos. */
 
@@ -503,18 +517,19 @@
 <div class="dmarquee" role="img" aria-label="La Merch"><div class="dtrack"><img src="../movil/assets/compu/divtext-merch.png?v=10" alt="La Merch"><img src="../movil/assets/compu/divtext-merch.png?v=10" alt="" aria-hidden="true"></div></div>
 <section class="dsec reveal" id="sec-merch"><img class="bg" src="../movil/assets/compu/bg-merch-llevele-0701b.webp" alt="merch — Llévele, llévele" loading="lazy" decoding="async"><div class="ovl">
 <!-- Coordenadas del texto vivo actualizadas al SVG de Ani (NuevoLaMerch-compu, viewBox 2031.9x1095.3) 2026-07-01 -->
-<a class="ct merch-item pos-pirat-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="PLAYERAS :" style="left:9.37%;top:28.54%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">PLAYERAS :</a>
-<a class="ct merch-item pos-pirat-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="BÓXERS :" style="left:9.37%;top:33.47%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">BÓXERS :</a>
-<a class="ct merch-item pos-pirat-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CALCETAS :" style="left:9.37%;top:38.40%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">CALCETAS :</a>
-<a class="ct merch-item pos-orig-playeras" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="PLAYERAS :" style="left:52.52%;top:28.80%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">PLAYERAS :</a>
-<a class="ct merch-item pos-orig-chamarra" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="BÓXERS :" style="left:52.52%;top:33.73%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">BÓXERS :</a>
-<a class="ct merch-item pos-orig-calcetas" href="https://elhueycoyote.myshopify.com/" target="_blank" rel="noopener noreferrer" data-text="CALCETAS :" style="left:52.52%;top:38.66%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">CALCETAS :</a>
+<a class="ct merch-item pos-pirat-playeras" href="#sec-merch" role="button" data-text="PLAYERAS :" style="left:9.37%;top:28.54%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">PLAYERAS :</a>
+<a class="ct merch-item pos-pirat-chamarra" href="#sec-merch" role="button" data-text="BÓXERS :" style="left:9.37%;top:33.47%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">BÓXERS :</a>
+<a class="ct merch-item pos-pirat-calcetas" href="#sec-merch" role="button" data-text="CALCETAS :" style="left:9.37%;top:38.40%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">CALCETAS :</a>
+<a class="ct merch-item pos-orig-playeras" href="#sec-merch" role="button" data-text="PLAYERAS :" style="left:52.52%;top:28.80%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">PLAYERAS :</a>
+<a class="ct merch-item pos-orig-chamarra" href="#sec-merch" role="button" data-text="BÓXERS :" style="left:52.52%;top:33.73%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">BÓXERS :</a>
+<a class="ct merch-item pos-orig-calcetas" href="#sec-merch" role="button" data-text="CALCETAS :" style="left:52.52%;top:38.66%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">CALCETAS :</a>
 <div class="ct" style="left:39.53%;top:27.98%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$250</div>
 <div class="ct" style="left:39.53%;top:33.29%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$350</div>
 <div class="ct" style="left:82.67%;top:27.99%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$800</div>
 <div class="ct" style="left:82.67%;top:32.91%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$1000</div>
 <div class="ct" style="left:82.67%;top:38.20%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$150</div>
 <div class="ct" style="left:39.59%;top:38.61%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">3X50</div>
+<img class="merch-cartel" src="../movil/assets/compu/merch-cartel.png?v=1" alt="Ya merito nos llega — la tienda abre pronto" decoding="async">
 </div></section>
 <div class="dmarquee" role="img" aria-label="Con la raza"><div class="dtrack"><img src="../movil/assets/compu/divtext-conlaraza.png?v=1" alt="Con la raza"><img src="../movil/assets/compu/divtext-conlaraza.png?v=1" alt="" aria-hidden="true"></div></div>
 <section class="reveal" id="sec-collabs">
@@ -696,6 +711,15 @@
       let agotadosTimer=null;
       sec.querySelectorAll('.dl-row .c').forEach(c=>c.addEventListener('click',function(e){e.preventDefault();sec.classList.add('agotados-on');clearTimeout(agotadosTimer);agotadosTimer=setTimeout(function(){sec.classList.remove('agotados-on');},3500);}));
       if(cartel) cartel.addEventListener('click',function(){clearTimeout(agotadosTimer);sec.classList.remove('agotados-on');});
+    })();
+    // LA MERCH: click en un item -> aparece el cartel "YA MERITO NOS LLEGA" (la tienda Shopify aun no existe); click en el cartel lo cierra; se quita solo a los 3.5s (Ani 2026-07-23)
+    (function(){
+      const sec=document.getElementById('sec-merch');
+      if(!sec) return;
+      const cartel=sec.querySelector('.merch-cartel');
+      let merchTimer=null;
+      sec.querySelectorAll('.merch-item').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();sec.classList.add('merch-cartel-on');clearTimeout(merchTimer);merchTimer=setTimeout(function(){sec.classList.remove('merch-cartel-on');},3500);}));
+      if(cartel) cartel.addEventListener('click',function(){clearTimeout(merchTimer);sec.classList.remove('merch-cartel-on');});
     })();
     // Galeria CON LA RAZA: lightbox + auto-pase horizontal (gated por visibilidad y scroll)
     (function(){
