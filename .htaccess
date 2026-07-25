@@ -1,10 +1,20 @@
-# La raíz es el repartidor (teléfono -> /movil/, compu -> /compu/).
-# No se cachea para que un cambio de reglas se vea al instante y nadie
-# quede pegado a una versión vieja del redirect.
+# Reparto por aparato EN EL SERVIDOR: la URL se queda limpia (elhueycoyote.com, sin /compu/ ni /movil/ visibles).
+# Celular -> movil/index.html · escritorio/tablet horizontal -> compu/index.html (reescritura INTERNA, no redirect).
+# El index.html raíz (repartidor JS) queda como respaldo por si mod_rewrite no está disponible.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_USER_AGENT} "android|iphone|ipod|blackberry|iemobile|opera mini|mobile" [NC]
+  RewriteRule ^(index\.html)?$ movil/index.html [L]
+  RewriteRule ^(index\.html)?$ compu/index.html [L]
+</IfModule>
+
+# No cachear HTML: los cambios de reglas/diseño se ven al instante y el reparto
+# por User-Agent no se contamina (Vary evita que un caché sirva la versión equivocada).
 <IfModule mod_headers.c>
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache, no-store, must-revalidate"
     Header set Pragma "no-cache"
     Header set Expires "0"
+    Header append Vary "User-Agent"
   </FilesMatch>
 </IfModule>

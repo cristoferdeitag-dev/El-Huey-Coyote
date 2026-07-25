@@ -15,20 +15,20 @@
      Adobe Typekit no carga en el navegador in-app de Telegram (request a use.typekit.net bloqueado),
      por eso Ani veía la tipografía de respaldo. Servirlas desde el propio dominio garantiza que SIEMPRE
      se vea Eds Market Bold Slant / Ciabatta sin importar el navegador. */
-  @font-face{font-family:'eds-market-bold-slant';src:url('../movil/assets/fonts/eds-market-bold-slant-n4.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-  @font-face{font-family:'ciabatta';src:url('../movil/assets/fonts/ciabatta-i7.woff2') format('woff2');font-weight:700;font-style:italic;font-display:swap}
-  @font-face{font-family:'stratum-2-web';src:url('../movil/assets/fonts/stratum-2-web-n1.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-  @font-face{font-family:'brush-up';src:url('../movil/assets/fonts/brush-up-n5.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-  @font-face{font-family:'open-sans-condensed';src:url('../movil/assets/fonts/open-sans-condensed-n4.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-  @font-face{font-family:'open-sans-condensed';src:url('../movil/assets/fonts/open-sans-condensed-n8.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
-  @font-face{font-family:'open-sans-condensed';src:url('../movil/assets/fonts/open-sans-condensed-i8.woff2') format('woff2');font-weight:800;font-style:italic;font-display:swap}
-  @font-face{font-family:'swiss-721-bt';src:url('../movil/assets/fonts/swiss-721-bt-n4.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-  @font-face{font-family:'swiss-721-bt';src:url('../movil/assets/fonts/swiss-721-bt-i4.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
-  @font-face{font-family:'swiss-721-bt';src:url('../movil/assets/fonts/swiss-721-bt-n7.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
-  @font-face{font-family:'swiss-721-bt';src:url('../movil/assets/fonts/swiss-721-bt-i7.woff2') format('woff2');font-weight:700;font-style:italic;font-display:swap}
-  @font-face{font-family:'swiss-721-bt';src:url('../movil/assets/fonts/swiss-721-bt-n9.woff2') format('woff2');font-weight:900;font-style:normal;font-display:swap}
+  @font-face{font-family:'eds-market-bold-slant';src:url('/movil/assets/fonts/eds-market-bold-slant-n4.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'ciabatta';src:url('/movil/assets/fonts/ciabatta-i7.woff2') format('woff2');font-weight:700;font-style:italic;font-display:swap}
+  @font-face{font-family:'stratum-2-web';src:url('/movil/assets/fonts/stratum-2-web-n1.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'brush-up';src:url('/movil/assets/fonts/brush-up-n5.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'open-sans-condensed';src:url('/movil/assets/fonts/open-sans-condensed-n4.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'open-sans-condensed';src:url('/movil/assets/fonts/open-sans-condensed-n8.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
+  @font-face{font-family:'open-sans-condensed';src:url('/movil/assets/fonts/open-sans-condensed-i8.woff2') format('woff2');font-weight:800;font-style:italic;font-display:swap}
+  @font-face{font-family:'swiss-721-bt';src:url('/movil/assets/fonts/swiss-721-bt-n4.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'swiss-721-bt';src:url('/movil/assets/fonts/swiss-721-bt-i4.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+  @font-face{font-family:'swiss-721-bt';src:url('/movil/assets/fonts/swiss-721-bt-n7.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+  @font-face{font-family:'swiss-721-bt';src:url('/movil/assets/fonts/swiss-721-bt-i7.woff2') format('woff2');font-weight:700;font-style:italic;font-display:swap}
+  @font-face{font-family:'swiss-721-bt';src:url('/movil/assets/fonts/swiss-721-bt-n9.woff2') format('woff2');font-weight:900;font-style:normal;font-display:swap}
   *{margin:0;padding:0;box-sizing:border-box}
-  @font-face{font-family:'DK Drop Dead Gorgeous';src:url('../movil/assets/fonts/DKDropDeadGorgeous.otf') format('opentype');font-display:swap}
+  @font-face{font-family:'DK Drop Dead Gorgeous';src:url('/movil/assets/fonts/DKDropDeadGorgeous.otf') format('opentype');font-display:swap}
   html{scroll-behavior:auto}
   html,body{background:#101010;overflow-x:hidden;font-family:'Poppins',system-ui,sans-serif}
   body.cortina-bajada{overflow:hidden;height:100vh}
@@ -271,7 +271,7 @@
   @keyframes phone-text-shine{0%{background-position:190% 0;opacity:0}1%{opacity:1}20%{background-position:-70% 0;opacity:1}22%{opacity:0}100%{background-position:-70% 0;opacity:0}}
   @media (prefers-reduced-motion:reduce){#sec-echame .ech-shine{animation:none}#sec-echame .ech-phone::after{animation:none}}
   /* === FOOTER (compu) — portado de la móvil, adaptado a escritorio === */
-  .site-footer{width:100%;background-color:#1a1f1c;background-image:linear-gradient(rgba(18,24,21,.66),rgba(18,24,21,.66)),url('../movil/assets/footer-fondo.webp?v=1');background-size:auto,cover;background-position:center,center bottom;background-repeat:no-repeat,no-repeat;border-top:4px solid #ffd84a;color:#fff;padding:clamp(34px,3.5vw,60px) 24px clamp(38px,4vw,64px);text-align:center;font-family:'Quicksand',sans-serif}
+  .site-footer{width:100%;background-color:#1a1f1c;background-image:linear-gradient(rgba(18,24,21,.66),rgba(18,24,21,.66)),url('/movil/assets/footer-fondo.webp?v=1');background-size:auto,cover;background-position:center,center bottom;background-repeat:no-repeat,no-repeat;border-top:4px solid #ffd84a;color:#fff;padding:clamp(34px,3.5vw,60px) 24px clamp(38px,4vw,64px);text-align:center;font-family:'Quicksand',sans-serif}
   .footer-inner{max-width:900px;margin:0 auto}
   /* Footer: orden original centrado (Ani pidió regresarlo 2026-07-01); logo un poco más grande */
   .footer-logo{display:block;margin:-14px auto 10px;height:clamp(120px,12.8vw,200px);width:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.45))}
@@ -287,7 +287,7 @@
   .btn-cierra:hover,.btn-cierra:focus{transform:scale(1.06);text-shadow:2px 5px 6px rgba(0,0,0,.6),0 2px 2px rgba(0,0,0,.5);outline:none}
   @keyframes neon-flicker{0%,18%,22%,25%,53%,57%,83%,100%{opacity:1;text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45),0 0 7px rgba(190,255,240,.95),0 0 15px rgba(60,224,200,.85),0 0 28px rgba(0,171,171,.6)}20%,24%,55%,84%{opacity:.55;text-shadow:2px 4px 4px rgba(0,0,0,.55),0 2px 2px rgba(0,0,0,.45)}}
   @media (prefers-reduced-motion:reduce){.btn-cierra{animation:none}}
-  #sec-collabs{background:#9e9899 url('../movil/assets/compu/bg-conlaraza.webp?v=3') center center/cover no-repeat;min-height:56.25vw;display:flex;align-items:center}
+  #sec-collabs{background:#9e9899 url('/movil/assets/compu/bg-conlaraza.webp?v=3') center center/cover no-repeat;min-height:56.25vw;display:flex;align-items:center}
   #sec-collabs .galeria-compu{width:100%}
   .galeria-compu{position:relative;width:100%}
   .galeria-strip{display:flex;align-items:center;gap:1.6vw;padding:3vw 4vw;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none}
@@ -366,7 +366,7 @@
   .reveal.shown{opacity:1;transform:none;will-change:auto}
 
   /* === Divisores: MARQUEE (metal fijo + texto deslizando) === */
-  .dmarquee{width:100%;overflow:hidden;line-height:0;background:url('../movil/assets/compu/divider-metal-compu.png?v=1') center/100% 100% no-repeat}
+  .dmarquee{width:100%;overflow:hidden;line-height:0;background:url('/movil/assets/compu/divider-metal-compu.png?v=1') center/100% 100% no-repeat}
   .dtrack{display:flex;width:max-content;animation:dscroll 26s linear infinite;will-change:transform;transform:translateZ(0);backface-visibility:hidden}
   .dtrack img{height:5.4vw;max-height:108px;width:auto;display:block;flex:0 0 auto}
   @keyframes dscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -376,7 +376,7 @@
   .dtrack.mq-off{animation-play-state:paused}
 
   /* === Portada (cortina) === */
-  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('../movil/assets/compu/portada-curtain-clean.webp?v=10') center center/cover no-repeat;
+  .portada{position:fixed;inset:0;z-index:100;overflow:hidden;background:#2dbf86 url('/movil/assets/compu/portada-curtain-clean.webp?v=10') center center/cover no-repeat;
     transition:transform 1.6s cubic-bezier(.65,0,.35,1);will-change:transform}
   .portada.subida{transform:translateY(-100%)}
   .portada-logo{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(84%,1720px);max-height:64vh;object-fit:contain;height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
@@ -395,7 +395,7 @@
   body.changarro-abierto .music-fab{display:inline-flex}
   /* === Header/nav portado de la MÓVIL (barra metálica + logo + menú hamburguesa), adaptado a compu. Aparece al abrir el changarro. === */
   .site-header{position:fixed;top:0;left:0;width:100%;z-index:95;display:none;align-items:center;justify-content:center;height:clamp(60px,5vw,100px);overflow:hidden}
-  .site-header::before{content:'';position:absolute;inset:0;background:url('../movil/assets/compu/divider-metal-compu.png') center center/100% 100% no-repeat;filter:brightness(.85);opacity:.5;pointer-events:none}
+  .site-header::before{content:'';position:absolute;inset:0;background:url('/movil/assets/compu/divider-metal-compu.png') center center/100% 100% no-repeat;filter:brightness(.85);opacity:.5;pointer-events:none}
   .site-header .header-logo-link{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;height:100%}
   .site-header .header-logo-link img{height:72%;width:auto;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
   body.changarro-abierto .site-header{display:flex}
@@ -409,7 +409,7 @@
   .nav-menu a{color:#fff;text-decoration:none;font-family:'eds-market-bold-slant','Oswald',sans-serif;font-size:clamp(16px,1.35vw,22px);letter-spacing:.04em;text-transform:uppercase;padding:16px 34px;border-bottom:1px solid rgba(255,255,255,.08);transition:background .15s ease,color .15s ease}
   .nav-menu a:last-child{border-bottom:0}
   .nav-menu a:hover{background:rgba(255,216,74,.16);color:#ffd84a}
-  .music-fab .disc{width:44px;height:44px;flex:0 0 auto;background:url('../movil/assets/spotify-white.png?v=1') center/contain no-repeat}
+  .music-fab .disc{width:44px;height:44px;flex:0 0 auto;background:url('/movil/assets/spotify-white.png?v=1') center/contain no-repeat}
   @keyframes spin{to{transform:rotate(360deg)}}
   @keyframes mpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
   .music-fab.playing{background:#1a7a32}
@@ -435,7 +435,7 @@
 <body>
   <!-- Header/nav (igual que la móvil) — aparece al abrir el changarro -->
   <header class="site-header" id="site-header">
-    <a class="header-logo-link" href="#headliner" aria-label="Ir al inicio (Headliner)"><img src="../movil/assets/header-logo.webp?v=2" alt="El Huey Coyote"></a>
+    <a class="header-logo-link" href="#headliner" aria-label="Ir al inicio (Headliner)"><img src="/movil/assets/header-logo.webp?v=2" alt="El Huey Coyote"></a>
     <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
   </header>
   <nav class="nav-menu" id="nav-menu" aria-label="Menú principal">
@@ -446,36 +446,36 @@
     <a href="#sec-echame">Contacto</a>
   </nav>
   <div class="site">
-<section class="dsec" id="headliner"><img class="bg" src="../movil/assets/compu/bg-headliner-changarro-0707.webp?v=1" alt="El Huey Coyote" decoding="async"><div class="ovl">
+<section class="dsec" id="headliner"><img class="bg" src="/movil/assets/compu/bg-headliner-changarro-0707.webp?v=1" alt="El Huey Coyote" decoding="async"><div class="ovl">
   <!-- Textos vivos sobre la bandera naranja de USB's (Ani 2026-06-27): mismo estilo del SVG (Ciabatta Bold Italic, relleno crema #fcee94, contorno café #603813) -->
   <span class="hl-flag hl-usb" style="left:85.2%;top:25.6%;font-size:3.56cqw">USB'S</span>
   <span class="hl-flag hl-slogan" style="left:83.45%;top:47.4%;font-size:1.92cqw">CON CUMBIAS<br>PA' ENAMORAR</span>
   <!-- USB clickeable: al hover tiembla; al click abre el panel de rolitas (2º botón de "Pon una rolita"). Ani 2026-07-07 -->
-  <button type="button" class="hl-usb-btn" id="usb-jukebox" aria-label="Pon una rolita" style="left:89.3%;top:39.2%;width:10.5cqw"><img src="../movil/assets/compu/usb-boton.webp?v=3" alt="USB — Pon una rolita" decoding="async"></button>
+  <button type="button" class="hl-usb-btn" id="usb-jukebox" aria-label="Pon una rolita" style="left:89.3%;top:39.2%;width:10.5cqw"><img src="/movil/assets/compu/usb-boton.webp?v=3" alt="USB — Pon una rolita" decoding="async"></button>
   <a class="menu-link ml-conoces"   href="#sec-conoces"  style="left:30.7%;top:20.5%;font-size:1.72cqw"><span class="q">¿</span>YA ME CONOCES<span class="qc">?</span><span class="ml-shine" aria-hidden="true"><span class="q">¿</span>YA ME CONOCES<span class="qc">?</span></span></a>
   <a class="menu-link ml-prox"      href="#sec-proximos" style="left:11.93%;top:35.4%;font-size:3.4cqw"><span class="w">PRÓXIMOS<span class="f" data-text="PRÓXIMOS">PRÓXIMOS</span></span><span class="w">SHOWS<span class="f" data-text="SHOWS">SHOWS</span></span></a>
   <a class="menu-link ml-pallevar" href="#sec-merch"     style="left:33.5%;top:39.0%;font-size:2.3cqw" data-text="PA’ LLEVAR">PA’ LLEVAR</a>
   <a class="menu-link ml-conlaraza" href="#sec-collabs"  style="left:70.4%;top:15.8%;font-size:2.05cqw" data-text="CON LA RAZA">CON LA RAZA</a>
   <a class="menu-link ml-echame"    href="#sec-echame"   style="left:70.0%;top:23.2%;font-size:2.0cqw" data-text="ÉCHAME UN&#10;GRITO">ÉCHAME UN<br>GRITO</a>
   <!-- Logos-botón de streaming sobre los banquitos (mismos links/imágenes que la móvil) -->
-  <a class="stool-btn" id="btn-apple" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" rel="noopener" aria-label="Apple Music del Huey Coyote" style="left:11.5%;top:76.9%;width:3.9cqw"><img src="../movil/assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
-  <a class="stool-btn" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:21.1%;top:80.5%;width:2.9cqw"><img src="../movil/assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async"></a>
-  <a class="stool-btn" href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music" style="left:37.9%;top:80.5%;width:4.3cqw"><img src="../movil/assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
-  <a class="stool-btn" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:56.3%;top:80.5%;width:4.7cqw"><img src="../movil/assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
+  <a class="stool-btn" id="btn-apple" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" rel="noopener" aria-label="Apple Music del Huey Coyote" style="left:11.5%;top:76.9%;width:3.9cqw"><img src="/movil/assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
+  <a class="stool-btn" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:21.1%;top:80.5%;width:2.9cqw"><img src="/movil/assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async"></a>
+  <a class="stool-btn" href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music" style="left:37.9%;top:80.5%;width:4.3cqw"><img src="/movil/assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
+  <a class="stool-btn" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:56.3%;top:80.5%;width:4.7cqw"><img src="/movil/assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
 </div></section>
-<div class="dmarquee" role="img" aria-label="¿Ya me conoces?"><div class="dtrack"><img src="../movil/assets/compu/divtext-conoces.png?v=10" alt="¿Ya me conoces?"><img src="../movil/assets/compu/divtext-conoces.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-conoces"><img class="bg" src="../movil/assets/compu/bg-conoces-wall2.webp?v=1" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async"><div class="poster-ov poster-ov-1" aria-hidden="true"><img src="../movil/assets/compu/conoces-poster1-clean.webp?v=0710c" alt="" loading="lazy"><svg class="poster-tx" viewBox="0 0 2031.9 1142.9" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<div class="dmarquee" role="img" aria-label="¿Ya me conoces?"><div class="dtrack"><img src="/movil/assets/compu/divtext-conoces.png?v=10" alt="¿Ya me conoces?"><img src="/movil/assets/compu/divtext-conoces.png?v=10" alt="" aria-hidden="true"></div></div>
+<section class="dsec reveal" id="sec-conoces"><img class="bg" src="/movil/assets/compu/bg-conoces-wall2.webp?v=1" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async"><div class="poster-ov poster-ov-1" aria-hidden="true"><img src="/movil/assets/compu/conoces-poster1-clean.webp?v=0710c" alt="" loading="lazy"><svg class="poster-tx" viewBox="0 0 2031.9 1142.9" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
 <g><text class="hx-st42" transform="translate(94.6 310.9) rotate(-6.8) scale(.745 1)"><tspan x="0" y="0" xml:space="preserve">UN  TÍTULO  COOL</tspan></text>
 <text class="hx-st25" transform="translate(104.3 396.4) rotate(-6.1) scale(.8 1)"><tspan class="hx-st13"><tspan x="0" y="0">NACIÓ EN: GUADALAJARA</tspan></tspan><tspan class="hx-st30"><tspan x="0" y="34.9">HACE DE TODO: CANTA,</tspan></tspan><tspan class="hx-st30"><tspan x="0" y="69.7">TOCA 21 INSTRUMENTOS, </tspan></tspan><tspan class="hx-st13"><tspan x="0" y="104.6">COMPONE Y BAILA.</tspan></tspan></text>
 <text class="hx-st15" transform="translate(349.5 576.6) rotate(-6.7) scale(.8 1)"><tspan class="hx-st52"><tspan x="0" y="0">SU NOMBRE SIGNIFICA…</tspan></tspan><tspan class="hx-st31" x="0" y="34.9">HUEY</tspan><tspan class="hx-st52" x="74.3" y="34.9" xml:space="preserve"> = GRANDE, </tspan><tspan class="hx-st52"><tspan x="0" y="69.7">INGENIOSO, MAGNÍFICO.</tspan></tspan></text>
 <text class="hx-st16" transform="translate(360.5 688.9) rotate(-6.7) scale(.8 1)"><tspan class="hx-st43"><tspan class="hx-st62" x="0" y="0">COYOTE</tspan><tspan class="hx-st52" x="114.2" y="0" xml:space="preserve"> = CURIOSO, </tspan></tspan><tspan class="hx-st53"><tspan x="0" y="34.9">JUGUETÓN Y DIVERTIDO.</tspan></tspan></text>
 <text class="hx-st20" transform="translate(279.7 861.6) rotate(-6.7) scale(.8 1)"><tspan x="0" y="0">UN MÚSICO QUE </tspan><tspan x="2.1" y="36.2">SIEMPRE BUSCA </tspan><tspan x="24.9" y="72.4">SACARTE UNA </tspan><tspan x="78.5" y="108.6">SONRISA</tspan></text>
 <text class="hx-st41" transform="translate(97.5 353.5) rotate(-6.3) scale(.8 1)"><tspan x="0" y="0">FERNANDO DE ITA</tspan></text></g>
-</svg></div><div class="poster-ov poster-ov-2" aria-hidden="true"><img src="../movil/assets/compu/conoces-poster2-clean.webp?v=0710c" alt="" loading="lazy"><svg class="poster-tx" viewBox="0 0 2031.9 1142.9" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+</svg></div><div class="poster-ov poster-ov-2" aria-hidden="true"><img src="/movil/assets/compu/conoces-poster2-clean.webp?v=0710c" alt="" loading="lazy"><svg class="poster-tx" viewBox="0 0 2031.9 1142.9" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
 <g><text class="hx-blue" transform="translate(863.7 883.2) rotate(3.6) scale(.7 1) skewX(.3)"><tspan class="hx-st63"><tspan x="0" y="0">CANTAUTOR MEXICANO QUE CONVIERTE </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="40">CUALQUIER IDEA EN UNA CANCIÓN, </tspan></tspan><tspan class="hx-st65"><tspan x="0" y="80">MEZCLA GÉNEROS, ROMPE REGLAS Y </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="120">DEMUESTRA QUE LA MÚSICA TAMBIÉN</tspan></tspan><tspan class="hx-st65"><tspan x="0" y="160" xml:space="preserve"> PUEDE SER HUMOR PURO</tspan></tspan></text><text class="hx-st35" transform="translate(863.7 883.2) rotate(3.6) scale(.7 1) skewX(.3)"><tspan class="hx-st63"><tspan x="0" y="0">CANTAUTOR MEXICANO QUE CONVIERTE </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="40">CUALQUIER IDEA EN UNA CANCIÓN, </tspan></tspan><tspan class="hx-st65"><tspan x="0" y="80">MEZCLA GÉNEROS, ROMPE REGLAS Y </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="120">DEMUESTRA QUE LA MÚSICA TAMBIÉN</tspan></tspan><tspan class="hx-st65"><tspan x="0" y="160" xml:space="preserve"> PUEDE SER HUMOR PURO</tspan></tspan></text>
 <text class="hx-st46" transform="translate(863.7 883.2) rotate(3.6) scale(.7 1) skewX(.3)"><tspan class="hx-st63"><tspan x="0" y="0">CANTAUTOR MEXICANO QUE CONVIERTE </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="40">CUALQUIER IDEA EN UNA CANCIÓN, </tspan></tspan><tspan class="hx-st65"><tspan x="0" y="80">MEZCLA GÉNEROS, ROMPE REGLAS Y </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="120">DEMUESTRA QUE LA MÚSICA TAMBIÉN</tspan></tspan><tspan class="hx-st65"><tspan x="0" y="160" xml:space="preserve"> PUEDE SER HUMOR PURO</tspan></tspan></text>
 <text class="hx-st29" transform="translate(863.7 883.2) rotate(3.6) scale(.7 1) skewX(.3)"><tspan class="hx-st63"><tspan x="0" y="0">CANTAUTOR MEXICANO QUE CONVIERTE </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="40">CUALQUIER IDEA EN UNA CANCIÓN, </tspan></tspan><tspan class="hx-st65"><tspan x="0" y="80">MEZCLA GÉNEROS, ROMPE REGLAS Y </tspan></tspan><tspan class="hx-st63"><tspan x="0" y="120">DEMUESTRA QUE LA MÚSICA TAMBIÉN</tspan></tspan><tspan class="hx-st65"><tspan x="0" y="160" xml:space="preserve"> PUEDE SER HUMOR PURO.</tspan></tspan></text></g>
-</svg></div><div class="poster-ov poster-ov-3" aria-hidden="true"><img src="../movil/assets/compu/conoces-poster3-clean.webp?v=0710c" alt="" loading="lazy"><svg class="poster-tx" viewBox="0 0 2031.9 1142.9" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+</svg></div><div class="poster-ov poster-ov-3" aria-hidden="true"><img src="/movil/assets/compu/conoces-poster3-clean.webp?v=0710c" alt="" loading="lazy"><svg class="poster-tx" viewBox="0 0 2031.9 1142.9" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
 <g><text class="hx-st26" transform="translate(1542.4673 283.0884) rotate(4.6846) scale(.8939 1)"><tspan x="0" y="0">TEXTO MÁS TEXTO</tspan></text>
 <text class="hx-st6" transform="translate(1475.448 750.9057) rotate(4.4139) scale(.9802 1)"><tspan x="0" y="0">Cervantino</tspan></text>
 <text class="hx-st9" transform="translate(1681.1837 769.2269) rotate(4.4139) scale(.9802 1)"><tspan x="0" y="0">Cumbre Tajín</tspan></text>
@@ -485,8 +485,8 @@
 <text class="hx-st24" transform="translate(1553.6176 330.4098) rotate(4.4139) scale(.8939 1)"><tspan x="0" y="0">SUBTÍTULO LINDO Y NICE</tspan></text>
 <text class="hx-st14" transform="translate(1472.6039 906.1658) rotate(5.1178) scale(.8939 1)"><tspan class="hx-st60"><tspan x="0" y="0">LO SUYO ES CONVERTIR CUALQUIER </tspan></tspan><tspan class="hx-st58"><tspan x="64.7" y="29.7">IDEA EN UNA ROLA CHIDA.</tspan></tspan></text></g>
 </svg></div><div class="mero-mero"><span style="transform:translateY(2px) rotate(-5deg)">E</span><span style="transform:translateY(-2px) rotate(3deg)">l</span> <span style="transform:translateY(1px) rotate(-6deg)">m</span><span style="transform:translateY(-3px) rotate(2deg)">E</span><span style="transform:translateY(2px) rotate(-3deg)">R</span><span style="transform:translateY(-1px) rotate(4deg)">o</span> <span style="transform:translateY(-2px) rotate(-4deg)">m</span><span style="transform:translateY(2px) rotate(5deg)">E</span><span style="transform:translateY(-2px) rotate(-5deg)">R</span><span style="transform:translateY(1px) rotate(2deg)">o</span></div></section>
-<div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="../movil/assets/compu/divtext-proximos.png?v=10" alt="Próximos Shows"><img src="../movil/assets/compu/divtext-proximos.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-proximos"><img class="bg" src="../movil/assets/compu/bg-proximos-v3.webp?v=12" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl">
+<div class="dmarquee" role="img" aria-label="Próximos Shows"><div class="dtrack"><img src="/movil/assets/compu/divtext-proximos.png?v=10" alt="Próximos Shows"><img src="/movil/assets/compu/divtext-proximos.png?v=10" alt="" aria-hidden="true"></div></div>
+<section class="dsec reveal" id="sec-proximos"><img class="bg" src="/movil/assets/compu/bg-proximos-v3.webp?v=12" alt="Proximos Shows - menu del changarro" loading="lazy" decoding="async"><div class="ovl">
 <!-- Show list (SVG Ani 2026-07-17): MES negro + CIUDAD verde (10.2%) + DÍA en el óvalo naranja (43.3%). -->
 <div class="ct dl-mo" style="left:3.80%;top:39.17%">JUN</div>
 <div class="ct dl-row" style="left:10.20%;top:39.17%"><a class="c" href="#sec-proximos" data-text="PUEBLA">PUEBLA</a></div>
@@ -507,15 +507,15 @@
 <div class="ct dl-row" style="left:10.20%;top:86.26%"><a class="c" href="#sec-proximos" data-text="TIJUANA">TIJUANA</a></div>
 <div class="ct dl-day" style="left:43.21%;top:87.02%">04</div>
 <!-- Cartel "SHOWS AGOTADOS": aparece al hacer click en un show y cubre la lista (Ani 2026-07-01); click en el cartel lo cierra -->
-<img class="agotados-cartel" src="../movil/assets/compu/agotados-cartel.png?v=1" alt="Shows agotados — vuelve pronto mi güerit@" loading="lazy" decoding="async">
+<img class="agotados-cartel" src="/movil/assets/compu/agotados-cartel.png?v=1" alt="Shows agotados — vuelve pronto mi güerit@" loading="lazy" decoding="async">
 <!-- Logos de plataformas (blancos) tras cada punto naranja de la barra EXTRAS -->
-<a class="extra-logo" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:23.4%;top:96.5%"><img src="../movil/assets/compu/logo-spotify-white.webp?v=2" alt="Spotify" decoding="async"></a>
-<a class="extra-logo" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:41.4%;top:96.5%;height:1.6cqw"><img src="../movil/assets/compu/logo-apple-music-white.webp?v=2" alt="Apple Music" decoding="async"></a>
-<a class="extra-logo" href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music" style="left:60.2%;top:96.5%"><img src="../movil/assets/compu/logo-youtube-music-white.webp?v=2" alt="YouTube Music" decoding="async"></a>
-<a class="extra-logo" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:85.0%;top:96.5%"><img src="../movil/assets/compu/logo-amazon-music-white.webp?v=2" alt="Amazon Music" decoding="async"></a>
+<a class="extra-logo" href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw" target="_blank" rel="noopener" aria-label="Spotify" style="left:23.4%;top:96.5%"><img src="/movil/assets/compu/logo-spotify-white.webp?v=2" alt="Spotify" decoding="async"></a>
+<a class="extra-logo" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Apple Music" style="left:41.4%;top:96.5%;height:1.6cqw"><img src="/movil/assets/compu/logo-apple-music-white.webp?v=2" alt="Apple Music" decoding="async"></a>
+<a class="extra-logo" href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music" style="left:60.2%;top:96.5%"><img src="/movil/assets/compu/logo-youtube-music-white.webp?v=2" alt="YouTube Music" decoding="async"></a>
+<a class="extra-logo" href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music" style="left:85.0%;top:96.5%"><img src="/movil/assets/compu/logo-amazon-music-white.webp?v=2" alt="Amazon Music" decoding="async"></a>
 </div></section>
-<div class="dmarquee" role="img" aria-label="La Merch"><div class="dtrack"><img src="../movil/assets/compu/divtext-merch.png?v=10" alt="La Merch"><img src="../movil/assets/compu/divtext-merch.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-merch"><img class="bg" src="../movil/assets/compu/bg-merch-llevele-0701b.webp" alt="merch — Llévele, llévele" loading="lazy" decoding="async"><div class="ovl">
+<div class="dmarquee" role="img" aria-label="La Merch"><div class="dtrack"><img src="/movil/assets/compu/divtext-merch.png?v=10" alt="La Merch"><img src="/movil/assets/compu/divtext-merch.png?v=10" alt="" aria-hidden="true"></div></div>
+<section class="dsec reveal" id="sec-merch"><img class="bg" src="/movil/assets/compu/bg-merch-llevele-0701b.webp" alt="merch — Llévele, llévele" loading="lazy" decoding="async"><div class="ovl">
 <!-- Coordenadas del texto vivo actualizadas al SVG de Ani (NuevoLaMerch-compu, viewBox 2031.9x1095.3) 2026-07-01 -->
 <a class="ct merch-item pos-pirat-playeras" href="#sec-merch" role="button" data-text="PLAYERAS :" style="left:9.37%;top:28.54%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">PLAYERAS :</a>
 <a class="ct merch-item pos-pirat-chamarra" href="#sec-merch" role="button" data-text="BÓXERS :" style="left:9.37%;top:33.47%;font-size:2.21cqw;color:#1a1a1a;font-family:'swiss-721-bt','Oswald',sans-serif;font-weight:700;font-style:italic;">BÓXERS :</a>
@@ -529,28 +529,28 @@
 <div class="ct" style="left:82.67%;top:32.91%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$1000</div>
 <div class="ct" style="left:82.67%;top:38.20%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">$150</div>
 <div class="ct" style="left:39.59%;top:38.61%;font-size:2.17cqw;color:#1a1a1a;font-family:'eds-market-bold-slant',sans-serif;font-weight:400;">3X50</div>
-<img class="merch-cartel" src="../movil/assets/compu/merch-cartel.png?v=1" alt="Ya merito nos llega — la tienda abre pronto" decoding="async">
+<img class="merch-cartel" src="/movil/assets/compu/merch-cartel.png?v=1" alt="Ya merito nos llega — la tienda abre pronto" decoding="async">
 </div></section>
-<div class="dmarquee" role="img" aria-label="Con la raza"><div class="dtrack"><img src="../movil/assets/compu/divtext-conlaraza.png?v=1" alt="Con la raza"><img src="../movil/assets/compu/divtext-conlaraza.png?v=1" alt="" aria-hidden="true"></div></div>
+<div class="dmarquee" role="img" aria-label="Con la raza"><div class="dtrack"><img src="/movil/assets/compu/divtext-conlaraza.png?v=1" alt="Con la raza"><img src="/movil/assets/compu/divtext-conlaraza.png?v=1" alt="" aria-hidden="true"></div></div>
 <section class="reveal" id="sec-collabs">
   <div class="galeria-compu">
     <div class="galeria-strip" id="galeria-grid">
-      <img class="gp b1 sz-md fr-tall" style="--rot:-5deg;--ty:-28px;animation-delay:0s"    src="../movil/assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
-      <img class="gp b3 sz-lg fr-sq"   style="--rot:4deg;--ty:24px;animation-delay:.09s"   src="../movil/assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
-      <img class="gp b2 sz-sm fr-wide" style="--rot:-3deg;--ty:-24px;animation-delay:.18s"  src="../movil/assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
-      <img class="gp b4 sz-md fr-sq"   style="--rot:6deg;--ty:27px;animation-delay:.6s"    src="../movil/assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
-      <img class="gp b5 sz-lg fr-tall" style="--rot:-7deg;--ty:-26px;animation-delay:.69s"  src="../movil/assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
-      <img class="gp b1 sz-sm fr-sq"   style="--rot:3deg;--ty:23px;animation-delay:.78s"   src="../movil/assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
-      <img class="gp b6 sz-md fr-wide" style="--rot:-4deg;--ty:-29px;animation-delay:.87s"  src="../movil/assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
-      <img class="gp b3 sz-lg fr-sq"   style="--rot:7deg;--ty:25px;animation-delay:1.15s"  src="../movil/assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
-      <img class="gp b2 sz-sm fr-tall" style="--rot:-6deg;--ty:-24px;animation-delay:1.24s" src="../movil/assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
-      <img class="gp b4 sz-md fr-wide" style="--rot:5deg;--ty:28px;animation-delay:1.33s"  src="../movil/assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
-      <img class="gp b5 sz-lg fr-sq"   style="--rot:-2deg;--ty:-27px;animation-delay:1.65s" src="../movil/assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
-      <img class="gp b1 sz-sm fr-wide" style="--rot:8deg;--ty:23px;animation-delay:1.74s"  src="../movil/assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
-      <img class="gp b6 sz-md fr-tall" style="--rot:-5deg;--ty:-25px;animation-delay:1.83s" src="../movil/assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
-      <img class="gp b2 sz-lg fr-wide" style="--rot:4deg;--ty:29px;animation-delay:2.15s"  src="../movil/assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
-      <img class="gp b3 sz-sm fr-sq"   style="--rot:-8deg;--ty:-26px;animation-delay:2.24s" src="../movil/assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
-      <img class="gp b4 sz-md fr-tall" style="--rot:5deg;--ty:24px;animation-delay:2.33s"  src="../movil/assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
+      <img class="gp b1 sz-md fr-tall" style="--rot:-5deg;--ty:-28px;animation-delay:0s"    src="/movil/assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
+      <img class="gp b3 sz-lg fr-sq"   style="--rot:4deg;--ty:24px;animation-delay:.09s"   src="/movil/assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
+      <img class="gp b2 sz-sm fr-wide" style="--rot:-3deg;--ty:-24px;animation-delay:.18s"  src="/movil/assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
+      <img class="gp b4 sz-md fr-sq"   style="--rot:6deg;--ty:27px;animation-delay:.6s"    src="/movil/assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
+      <img class="gp b5 sz-lg fr-tall" style="--rot:-7deg;--ty:-26px;animation-delay:.69s"  src="/movil/assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
+      <img class="gp b1 sz-sm fr-sq"   style="--rot:3deg;--ty:23px;animation-delay:.78s"   src="/movil/assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
+      <img class="gp b6 sz-md fr-wide" style="--rot:-4deg;--ty:-29px;animation-delay:.87s"  src="/movil/assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
+      <img class="gp b3 sz-lg fr-sq"   style="--rot:7deg;--ty:25px;animation-delay:1.15s"  src="/movil/assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
+      <img class="gp b2 sz-sm fr-tall" style="--rot:-6deg;--ty:-24px;animation-delay:1.24s" src="/movil/assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
+      <img class="gp b4 sz-md fr-wide" style="--rot:5deg;--ty:28px;animation-delay:1.33s"  src="/movil/assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
+      <img class="gp b5 sz-lg fr-sq"   style="--rot:-2deg;--ty:-27px;animation-delay:1.65s" src="/movil/assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
+      <img class="gp b1 sz-sm fr-wide" style="--rot:8deg;--ty:23px;animation-delay:1.74s"  src="/movil/assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
+      <img class="gp b6 sz-md fr-tall" style="--rot:-5deg;--ty:-25px;animation-delay:1.83s" src="/movil/assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
+      <img class="gp b2 sz-lg fr-wide" style="--rot:4deg;--ty:29px;animation-delay:2.15s"  src="/movil/assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
+      <img class="gp b3 sz-sm fr-sq"   style="--rot:-8deg;--ty:-26px;animation-delay:2.24s" src="/movil/assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
+      <img class="gp b4 sz-md fr-tall" style="--rot:5deg;--ty:24px;animation-delay:2.33s"  src="/movil/assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
     </div>
     <div class="galeria-hint" id="galeria-hint"><span class="ghint-arrow">&#8250;</span><span class="ghint-arrow">&#8250;</span><span class="ghint-arrow">&#8250;</span></div>
   </div>
@@ -561,17 +561,17 @@
   <img id="lb-img" src="" alt="Foto El Huey Coyote">
   <button class="lightbox-nav lightbox-next" id="lb-next" aria-label="Siguiente">&#8250;</button>
 </div>
-<div class="dmarquee" role="img" aria-label="Échame un grito"><div class="dtrack"><img src="../movil/assets/compu/divtext-echame.png?v=10" alt="Échame un grito"><img src="../movil/assets/compu/divtext-echame.png?v=10" alt="" aria-hidden="true"></div></div>
-<section class="dsec reveal" id="sec-echame"><img class="bg" src="../movil/assets/compu/bg-echame-cabina-0710.webp?v=1" alt="echame" loading="lazy" decoding="async"><div class="ovl">
+<div class="dmarquee" role="img" aria-label="Échame un grito"><div class="dtrack"><img src="/movil/assets/compu/divtext-echame.png?v=10" alt="Échame un grito"><img src="/movil/assets/compu/divtext-echame.png?v=10" alt="" aria-hidden="true"></div></div>
+<section class="dsec reveal" id="sec-echame"><img class="bg" src="/movil/assets/compu/bg-echame-cabina-0710.webp?v=1" alt="echame" loading="lazy" decoding="async"><div class="ovl">
   <span class="ech-phone" data-text="2224440001">2224440001</span>
-  <a class="ech-btn ech-fb" href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" target="_blank" rel="noopener" aria-label="Facebook"><img src="../movil/assets/compu/ech-fb-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('../movil/assets/compu/ech-fb-svg.webp?v=1');mask-image:url('../movil/assets/compu/ech-fb-svg.webp?v=1')"></span></a>
-  <a class="ech-btn ech-ig" href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" target="_blank" rel="noopener" aria-label="Instagram"><img src="../movil/assets/compu/ech-ig-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('../movil/assets/compu/ech-ig-svg.webp?v=1');mask-image:url('../movil/assets/compu/ech-ig-svg.webp?v=1')"></span></a>
-  <a class="ech-btn ech-email" href="mailto:contacto@elhueycoyote.com" aria-label="Email contacto"><img src="../movil/assets/compu/ech-email-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('../movil/assets/compu/ech-email-svg.webp?v=1');mask-image:url('../movil/assets/compu/ech-email-svg.webp?v=1')"></span></a>
-  <a class="ech-btn ech-tt" href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" target="_blank" rel="noopener" aria-label="TikTok"><img src="../movil/assets/compu/ech-tt-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('../movil/assets/compu/ech-tt-svg.webp?v=1');mask-image:url('../movil/assets/compu/ech-tt-svg.webp?v=1')"></span></a>
+  <a class="ech-btn ech-fb" href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" target="_blank" rel="noopener" aria-label="Facebook"><img src="/movil/assets/compu/ech-fb-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('/movil/assets/compu/ech-fb-svg.webp?v=1');mask-image:url('/movil/assets/compu/ech-fb-svg.webp?v=1')"></span></a>
+  <a class="ech-btn ech-ig" href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" target="_blank" rel="noopener" aria-label="Instagram"><img src="/movil/assets/compu/ech-ig-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('/movil/assets/compu/ech-ig-svg.webp?v=1');mask-image:url('/movil/assets/compu/ech-ig-svg.webp?v=1')"></span></a>
+  <a class="ech-btn ech-email" href="mailto:contacto@elhueycoyote.com" aria-label="Email contacto"><img src="/movil/assets/compu/ech-email-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('/movil/assets/compu/ech-email-svg.webp?v=1');mask-image:url('/movil/assets/compu/ech-email-svg.webp?v=1')"></span></a>
+  <a class="ech-btn ech-tt" href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" target="_blank" rel="noopener" aria-label="TikTok"><img src="/movil/assets/compu/ech-tt-svg.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('/movil/assets/compu/ech-tt-svg.webp?v=1');mask-image:url('/movil/assets/compu/ech-tt-svg.webp?v=1')"></span></a>
 </div></section>
 <footer class="site-footer">
   <div class="footer-inner">
-    <img class="footer-logo" src="../movil/assets/footer-logo-v3.webp?v=1" alt="El Huey Coyote">
+    <img class="footer-logo" src="/movil/assets/footer-logo-v3.webp?v=1" alt="El Huey Coyote">
     <p class="footer-tag">Pura música y pura fiesta</p>
     <button class="btn-cierra" id="btn-cierra" type="button" aria-label="Cierra el changarro">CIERRA EL CHANGARRO</button>
     <nav class="footer-social" aria-label="Redes sociales">
@@ -590,10 +590,10 @@
   <!-- Portada (cortina) -->
   <div class="portada" id="portada">
     <!-- Logo-overlay OCULTO: el nuevo fondo de portada (portada-curtain-clean v=4) ya trae el logo horneado. Conservado por si se quiere volver a layering. -->
-    <!-- <img class="portada-logo" src="../movil/assets/compu/portada-logo-clean.webp?v=5" alt="El Huey Coyote"> -->
+    <!-- <img class="portada-logo" src="/movil/assets/compu/portada-logo-clean.webp?v=5" alt="El Huey Coyote"> -->
     <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
   </div>
-  <audio id="audio-changarro" preload="auto" src="../movil/assets/audio/changarro-open.mp3"></audio>
+  <audio id="audio-changarro" preload="auto" src="/movil/assets/audio/changarro-open.mp3"></audio>
 
   <!-- Botón de música -->
   <button class="music-fab" id="music-fab" aria-label="Pon una rolita"><span class="disc" aria-hidden="true"></span> Pon una rolita</button>
@@ -602,8 +602,8 @@
 <!-- Apple Music: letrero "PARA LOS MÁS FRESAS" a pantalla completa -->
 <div class="apple-ad-overlay" id="apple-ad" role="dialog" aria-modal="true" aria-label="Para los más fresas — El Huey Coyote">
   <div class="ad-stage">
-    <img class="ad-img" src="../movil/assets/compu/apple-fresas-ad-compu.webp?v=0710c50" alt="Para los más fresas — El Huey Coyote" loading="lazy" decoding="async">
-    <img class="ad-glow" src="../movil/assets/compu/apple-cta-glow-compu.png?v=0710c50" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="ad-img" src="/movil/assets/compu/apple-fresas-ad-compu.webp?v=0710c50" alt="Para los más fresas — El Huey Coyote" loading="lazy" decoding="async">
+    <img class="ad-glow" src="/movil/assets/compu/apple-cta-glow-compu.png?v=0710c50" alt="" aria-hidden="true" loading="lazy" decoding="async">
     <a class="ad-cta" id="apple-ad-go" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" target="_blank" rel="noopener" aria-label="Ir a Apple Music del Huey Coyote"></a>
     <button class="ad-cerrar" id="apple-ad-cerrar" aria-label="Cerrar">&times;</button>
   </div>
@@ -618,7 +618,7 @@
       if(_actx) return;
       try{
         _actx=new (window.AudioContext||window.webkitAudioContext)();
-        fetch('../movil/assets/audio/changarro-open.mp3').then(r=>r.arrayBuffer())
+        fetch('/movil/assets/audio/changarro-open.mp3').then(r=>r.arrayBuffer())
           .then(b=>_actx.decodeAudioData(b)).then(buf=>{_abuf=buf;}).catch(()=>{});
       }catch(e){}
     }

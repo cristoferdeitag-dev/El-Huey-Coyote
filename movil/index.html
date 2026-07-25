@@ -18,12 +18,12 @@
 
         @font-face {
             font-family: 'Inlanders Demo';
-            src: url('assets/fonts/InlandersDemo.otf') format('opentype');
+            src: url('/movil/assets/fonts/InlandersDemo.otf') format('opentype');
             font-display: swap;
         }
         @font-face {
             font-family: 'DK Drop Dead Gorgeous';
-            src: url('assets/fonts/DKDropDeadGorgeous.otf') format('opentype');
+            src: url('/movil/assets/fonts/DKDropDeadGorgeous.otf') format('opentype');
             font-display: swap;
         }
 
@@ -1054,7 +1054,7 @@
             width: 100%;
             overflow: hidden;
             line-height: 0;
-            background: url('assets/divider-metal-bg.png?v=3') center center / 100% 100% no-repeat;
+            background: url('/movil/assets/divider-metal-bg.png?v=3') center center / 100% 100% no-repeat;
             filter: brightness(0.85);    /* mismo oscurecido suave que las secciones, para que toda la página sea uniforme */
             /* Al navegar desde el headliner/menú, el divisor aterriza justo DEBAJO del header fijo
                (offset = alto del header). Así la sección queda en su lugar y no tapada.
@@ -1254,7 +1254,7 @@
             height: 5%;
             z-index: 4;
             pointer-events: none;
-            background: url('assets/conoces/mero-cover.png') center center / 100% 100% no-repeat;
+            background: url('/movil/assets/conoces/mero-cover.png') center center / 100% 100% no-repeat;
         }
         /* "El mero mero" — texto blanco (como el original) con filo fino oscuro
            para que se lea; se RAYA de izq→der al entrar (grabado en el momento). */
@@ -1332,7 +1332,7 @@
         body.changarro-abierto .music-fab { display: inline-flex; }
         .music-fab .disc {
             width: 30px; height: 30px; flex: 0 0 auto;
-            background: url('assets/spotify-white.png?v=1') center/contain no-repeat;
+            background: url('/movil/assets/spotify-white.png?v=1') center/contain no-repeat;
         }
         .music-fab.playing { background: #1a7a32; }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -1358,7 +1358,7 @@
         .site-header::before {
             content: '';
             position: absolute; inset: 0;
-            background: url('assets/divider-metal-bg.png?v=3') center center / 100% 100% no-repeat;
+            background: url('/movil/assets/divider-metal-bg.png?v=3') center center / 100% 100% no-repeat;
             filter: brightness(0.85);
             opacity: 0.42;
             pointer-events: none;
@@ -1518,7 +1518,7 @@
         .galeria-sticky {
             /* aspect-ratio = tamaño real de la imagen (1086×1937) → se ve COMPLETA, sin cortar (Ani) */
             position: relative; aspect-ratio: 1086 / 1937; overflow: hidden;
-            background: url('assets/galeria/galeria-fondo-v2.webp?v=609') center center / 100% 100% no-repeat;
+            background: url('/movil/assets/galeria/galeria-fondo-v2.webp?v=609') center center / 100% 100% no-repeat;
         }
         .galeria-strip {
             position: absolute; inset: 0;
@@ -1603,7 +1603,7 @@
     <script>try{localStorage.removeItem('huey_portada_vista');}catch(e){}</script>
     <!-- HEADER fijo: siempre arriba al scrollear -->
     <header class="site-header" id="site-header">
-        <a class="header-logo-link" href="#headliner" aria-label="Ir al inicio (Headliner)"><img src="assets/header-logo.webp?v=2" alt="El Huey Coyote"></a>
+        <a class="header-logo-link" href="#headliner" aria-label="Ir al inicio (Headliner)"><img src="/movil/assets/header-logo.webp?v=2" alt="El Huey Coyote"></a>
         <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
     </header>
     <nav class="nav-menu" id="nav-menu" aria-label="Menú principal">
@@ -1618,7 +1618,7 @@
         <!-- HEADLINER (sección 2) -->
         <section id="headliner">
             <!-- Fondo v2: estrellas, trompeta y hamburguesa ya integradas; recuadros vacíos. Todos los textos van en HTML. -->
-            <img class="bg" src="assets/headliner-bg-v6.webp?v=712" alt="El Huey Coyote — bienvenida al puesto" decoding="async" fetchpriority="high">
+            <img class="bg" src="/movil/assets/headliner-bg-v6.webp?v=712" alt="El Huey Coyote — bienvenida al puesto" decoding="async" fetchpriority="high">
             <h1 class="seo-only">El Huey Coyote</h1>
 
             <!-- 4 letreros como texto HTML (control total de color/tamaño/posición) -->
@@ -1643,36 +1643,36 @@
 
             <!-- 3 logos-botón sobre los bancos rojos -->
             <a class="stool-btn stool-apple" id="btn-apple" href="#" data-url="https://music.apple.com/mx/artist/hueycoyote/1088136173" aria-label="Apple Music del Huey Coyote">
-                <img src="assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async">
+                <img src="/movil/assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async">
             </a>
             <a class="stool-btn stool-youtube" href="#" data-url="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG" target="_blank" rel="noopener" aria-label="YouTube Music del Huey Coyote">
-                <img src="assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async">
+                <img src="/movil/assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async">
             </a>
             <a class="stool-btn stool-amazon" href="#" data-url="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M" target="_blank" rel="noopener" aria-label="Amazon Music del Huey Coyote">
-                <img src="assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async">
+                <img src="/movil/assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async">
             </a>
         </section>
 
         <!-- Apple Music: "PARA LOS MÁS FRESAS" a pantalla completa -->
         <div class="apple-ad-overlay" id="apple-ad">
             <button class="ad-cerrar" id="apple-ad-cerrar" aria-label="Cerrar">&times;</button>
-            <img class="ad-img" src="assets/apple-fresas-ad.webp?v=606" alt="Para los más fresas — El Huey Coyote" loading="lazy" decoding="async">
-            <img class="ad-glow" src="assets/apple-cta-glow.png?v=2" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <img class="ad-img" src="/movil/assets/apple-fresas-ad.webp?v=606" alt="Para los más fresas — El Huey Coyote" loading="lazy" decoding="async">
+            <img class="ad-glow" src="/movil/assets/apple-cta-glow.png?v=2" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <a class="ad-cta" id="apple-ad-go" href="https://music.apple.com/mx/artist/hueycoyote/1088136173" aria-label="Ir a Apple Music del Huey Coyote"></a>
         </div>
 
         <!-- Divisor: anuncia Próximos Shows -->
         <div class="divider-marquee" id="d-sobre-mi" role="img" aria-label="¿Ya me conoces?">
             <div class="divider-track">
-                <img src="assets/divider-ya-me-conoces-text.png?v=neg" alt="¿Ya me conoces?">
-                <img src="assets/divider-ya-me-conoces-text.png?v=neg" alt="" aria-hidden="true">
+                <img src="/movil/assets/divider-ya-me-conoces-text.png?v=neg" alt="¿Ya me conoces?">
+                <img src="/movil/assets/divider-ya-me-conoces-text.png?v=neg" alt="" aria-hidden="true">
             </div>
         </div>
 
         <!-- ¿YA ME CONOCES? (sección 2 — Sobre mí) -->
         <section id="sobre-mi">
             <!-- Fondo horneado con la imagen CORRECTA del póster 1 de Ani metida en su capa (detrás del póster 2). Pósters 2 y 3 quedan idénticos a antes; póster 1 correcto y sin doble. -->
-            <img class="bg" src="assets/conoces/conoces-fondo-v2.webp?v=0710v2" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
+            <img class="bg" src="/movil/assets/conoces/conoces-fondo-v2.webp?v=0710v2" alt="¿Ya me conoces? — Sobre El Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">¿Ya me conoces? — Sobre el Huey Coyote</h2>
 
             <!-- Capa de TEXTO VIVO (SVG). PARA LATAM y logo son parte de la imagen del póster (no aquí). -->
@@ -2084,14 +2084,14 @@
 
         <div class="divider-marquee" id="d-proximos-shows" role="img" aria-label="Próximos Shows">
             <div class="divider-track">
-                <img src="assets/divider-proximos-shows-text.png?v=neg" alt="Próximos Shows">
-                <img src="assets/divider-proximos-shows-text.png?v=neg" alt="" aria-hidden="true">
+                <img src="/movil/assets/divider-proximos-shows-text.png?v=neg" alt="Próximos Shows">
+                <img src="/movil/assets/divider-proximos-shows-text.png?v=neg" alt="" aria-hidden="true">
             </div>
         </div>
 
         <!-- PRÓXIMOS SHOWS (sección 3) -->
         <section id="proximos-shows" class="reveal-init">
-            <img class="bg" src="assets/proximos-fondo-nuevo.webp?v=1" alt="Próximos Shows — Presentaciones" loading="lazy" decoding="async">
+            <img class="bg" src="/movil/assets/proximos-fondo-nuevo.webp?v=1" alt="Próximos Shows — Presentaciones" loading="lazy" decoding="async">
 
             <h2 class="seo-only">Próximos Shows del Huey Coyote</h2>
             <h3 class="seo-only">Recomendaciones de la casa</h3>
@@ -2106,36 +2106,36 @@
             </div>
 
             <!-- Cartel que tapa la lista al tocar una ciudad; se quita solo a los 3.5s.-->
-            <img class="agotados-cartel" src="assets/compu/agotados-cartel.png?v=1" alt="Shows agotados — vuelve pronto mi güerit@" loading="lazy" decoding="async">
+            <img class="agotados-cartel" src="/movil/assets/compu/agotados-cartel.png?v=1" alt="Shows agotados — vuelve pronto mi güerit@" loading="lazy" decoding="async">
 
             <h3 class="seo-only">Especiales del mes: Niu Jork, Ostin, Mayami</h3>
             <!-- NIU JORK / OSTIN / MAYAMI ahora van integrados en la imagen de fondo (Anette los hornea al fondo nuevo) -->
 
             <a class="platform-link platform-logo pos-spotify"
                href="https://open.spotify.com/intl-es/artist/3FP0UgKEa2aprodn6KboaK?si=-AWuDIanTuG5j1IO5Itlcw"
-               target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img class="logo-spotify" src="assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
+               target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img class="logo-spotify" src="/movil/assets/logo-spotify.webp?v=604" alt="Spotify" decoding="async"></a>
             <a class="platform-link platform-logo pos-youtube"
                href="https://music.youtube.com/channel/UCKPhjhtq8zkZytKMbBO69sg?si=EeJu-SKDvNbpYLFG"
-               target="_blank" rel="noopener noreferrer" aria-label="YouTube Music"><img class="logo-youtube" src="assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
+               target="_blank" rel="noopener noreferrer" aria-label="YouTube Music"><img class="logo-youtube" src="/movil/assets/logo-youtube-music.webp?v=604" alt="YouTube Music" decoding="async"></a>
             <a class="platform-link platform-logo pos-amazon"
                href="https://music.amazon.com.mx/artists/B07KSG7LGS/el-hueycoyote?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=MX&ref=dm_sh_nvIOj96Q5Lv5ld4T6p6DruW9M"
-               target="_blank" rel="noopener noreferrer" aria-label="Amazon Music"><img class="logo-amazon" src="assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async"></a>
+               target="_blank" rel="noopener noreferrer" aria-label="Amazon Music"><img class="logo-amazon" src="/movil/assets/logo-amazon-music.webp?v=604" alt="Amazon Music" decoding="async"></a>
             <a class="platform-link platform-logo pos-apple"
                href="https://music.apple.com/mx/artist/hueycoyote/1088136173"
-               target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img class="logo-apple" src="assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
+               target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img class="logo-apple" src="/movil/assets/logo-apple-music.webp?v=604" alt="Apple Music" decoding="async"></a>
         </section>
 
         <!-- Divisor: anuncia La Merch -->
         <div class="divider-marquee" id="d-merch" role="img" aria-label="La Merch">
             <div class="divider-track">
-                <img src="assets/divider-la-merch-text.png?v=neg" alt="La Merch">
-                <img src="assets/divider-la-merch-text.png?v=neg" alt="" aria-hidden="true">
+                <img src="/movil/assets/divider-la-merch-text.png?v=neg" alt="La Merch">
+                <img src="/movil/assets/divider-la-merch-text.png?v=neg" alt="" aria-hidden="true">
             </div>
         </div>
 
         <!-- MERCH (sección 4) -->
         <section id="merch">
-            <img class="bg" src="assets/merch-sintexto-v4.webp?v=609b" alt="Merch — Llévele, llévele · Piratería oficial y La Original" loading="lazy" decoding="async">
+            <img class="bg" src="/movil/assets/merch-sintexto-v4.webp?v=609b" alt="Merch — Llévele, llévele · Piratería oficial y La Original" loading="lazy" decoding="async">
             <h2 class="seo-only">Merch — Llévele, llévele</h2>
 
             <!-- NOMBRES (clicables, deslizan a la izquierda al hover) -->
@@ -2155,7 +2155,7 @@
             <span class="merch-price pos-price-orig-ca">$150</span>
 
             <!-- Cartel "YA MERITO NOS LLEGA" (aparece al tocar un item; la tienda Shopify aun no existe) -->
-            <img class="merch-cartel" src="assets/compu/merch-cartel.png?v=1" alt="Ya merito nos llega — la tienda abre pronto" decoding="async">
+            <img class="merch-cartel" src="/movil/assets/compu/merch-cartel.png?v=1" alt="Ya merito nos llega — la tienda abre pronto" decoding="async">
         </section>
 
         <!-- Divisor: anuncia ¿Ya me conoces? -->
@@ -2164,8 +2164,8 @@
         <!-- Divisor: anuncia Fotitos (Galería) -->
         <div class="divider-marquee" id="d-galeria" role="img" aria-label="Con la raza">
             <div class="divider-track">
-                <img src="assets/divider-con-la-raza-text.png?v=6" alt="Con la raza">
-                <img src="assets/divider-con-la-raza-text.png?v=6" alt="" aria-hidden="true">
+                <img src="/movil/assets/divider-con-la-raza-text.png?v=6" alt="Con la raza">
+                <img src="/movil/assets/divider-con-la-raza-text.png?v=6" alt="" aria-hidden="true">
             </div>
         </div>
 
@@ -2174,22 +2174,22 @@
             <div class="galeria-scroll" id="galeria-scroll">
                 <div class="galeria-sticky">
                     <div class="galeria-strip" id="galeria-grid">
-                        <img class="gp b1" style="transform:rotate(-5deg) translateY(-60px)" src="assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
-                        <img class="gp b3" style="transform:rotate(4deg) translateY(52px)" src="assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
-                        <img class="gp b2" style="transform:rotate(-3deg) translateY(-50px)" src="assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
-                        <img class="gp b4" style="transform:rotate(6deg) translateY(58px)" src="assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
-                        <img class="gp b5" style="transform:rotate(-7deg) translateY(-56px)" src="assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
-                        <img class="gp b1" style="transform:rotate(3deg) translateY(50px)" src="assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
-                        <img class="gp b6" style="transform:rotate(-4deg) translateY(-62px)" src="assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
-                        <img class="gp b3" style="transform:rotate(7deg) translateY(54px)" src="assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
-                        <img class="gp b2" style="transform:rotate(-6deg) translateY(-52px)" src="assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
-                        <img class="gp b4" style="transform:rotate(5deg) translateY(60px)" src="assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
-                        <img class="gp b5" style="transform:rotate(-2deg) translateY(-58px)" src="assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
-                        <img class="gp b1" style="transform:rotate(8deg) translateY(50px)" src="assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
-                        <img class="gp b6" style="transform:rotate(-5deg) translateY(-54px)" src="assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
-                        <img class="gp b2" style="transform:rotate(4deg) translateY(62px)" src="assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
-                        <img class="gp b3" style="transform:rotate(-8deg) translateY(-56px)" src="assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
-                        <img class="gp b4" style="transform:rotate(5deg) translateY(52px)" src="assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
+                        <img class="gp b1" style="transform:rotate(-5deg) translateY(-60px)" src="/movil/assets/galeria/foto01.webp" alt="El Huey Coyote — foto 1" loading="lazy" data-i="0">
+                        <img class="gp b3" style="transform:rotate(4deg) translateY(52px)" src="/movil/assets/galeria/foto02.webp" alt="El Huey Coyote — foto 2" loading="lazy" data-i="1">
+                        <img class="gp b2" style="transform:rotate(-3deg) translateY(-50px)" src="/movil/assets/galeria/foto03.webp" alt="El Huey Coyote — foto 3" loading="lazy" data-i="2">
+                        <img class="gp b4" style="transform:rotate(6deg) translateY(58px)" src="/movil/assets/galeria/foto04.webp" alt="El Huey Coyote — foto 4" loading="lazy" data-i="3">
+                        <img class="gp b5" style="transform:rotate(-7deg) translateY(-56px)" src="/movil/assets/galeria/foto05.webp" alt="El Huey Coyote — foto 5" loading="lazy" data-i="4">
+                        <img class="gp b1" style="transform:rotate(3deg) translateY(50px)" src="/movil/assets/galeria/foto06.webp" alt="El Huey Coyote — foto 6" loading="lazy" data-i="5">
+                        <img class="gp b6" style="transform:rotate(-4deg) translateY(-62px)" src="/movil/assets/galeria/foto07.webp" alt="El Huey Coyote — foto 7" loading="lazy" data-i="6">
+                        <img class="gp b3" style="transform:rotate(7deg) translateY(54px)" src="/movil/assets/galeria/foto08.webp" alt="El Huey Coyote — foto 8" loading="lazy" data-i="7">
+                        <img class="gp b2" style="transform:rotate(-6deg) translateY(-52px)" src="/movil/assets/galeria/foto09.webp" alt="El Huey Coyote — foto 9" loading="lazy" data-i="8">
+                        <img class="gp b4" style="transform:rotate(5deg) translateY(60px)" src="/movil/assets/galeria/foto10.webp" alt="El Huey Coyote — foto 10" loading="lazy" data-i="9">
+                        <img class="gp b5" style="transform:rotate(-2deg) translateY(-58px)" src="/movil/assets/galeria/foto11.webp" alt="El Huey Coyote — foto 11" loading="lazy" data-i="10">
+                        <img class="gp b1" style="transform:rotate(8deg) translateY(50px)" src="/movil/assets/galeria/foto12.webp" alt="El Huey Coyote — foto 12" loading="lazy" data-i="11">
+                        <img class="gp b6" style="transform:rotate(-5deg) translateY(-54px)" src="/movil/assets/galeria/foto13.webp" alt="El Huey Coyote — foto 13" loading="lazy" data-i="12">
+                        <img class="gp b2" style="transform:rotate(4deg) translateY(62px)" src="/movil/assets/galeria/foto14.webp" alt="El Huey Coyote — foto 14" loading="lazy" data-i="13">
+                        <img class="gp b3" style="transform:rotate(-8deg) translateY(-56px)" src="/movil/assets/galeria/foto15.webp" alt="El Huey Coyote — foto 15" loading="lazy" data-i="14">
+                        <img class="gp b4" style="transform:rotate(5deg) translateY(52px)" src="/movil/assets/galeria/foto16.webp" alt="El Huey Coyote — foto 16" loading="lazy" data-i="15">
                     </div>
                 </div>
             </div>
@@ -2204,28 +2204,28 @@
         <!-- Divisor: anuncia Échame un grito -->
         <div class="divider-marquee" id="d-contacto" role="img" aria-label="Échame un grito">
             <div class="divider-track">
-                <img src="assets/divider-echame-un-grito-text.png?v=neg" alt="Échame un grito">
-                <img src="assets/divider-echame-un-grito-text.png?v=neg" alt="" aria-hidden="true">
+                <img src="/movil/assets/divider-echame-un-grito-text.png?v=neg" alt="Échame un grito">
+                <img src="/movil/assets/divider-echame-un-grito-text.png?v=neg" alt="" aria-hidden="true">
             </div>
         </div>
 
         <!-- ÉCHAME UN GRITO (sección 6 — Contacto) -->
         <section id="contacto" class="reveal-init">
-            <img class="bg" src="assets/echame-v2.webp?v=610" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
+            <img class="bg" src="/movil/assets/echame-v2.webp?v=610" alt="Échame un grito — Contacto del Huey Coyote" loading="lazy" decoding="async">
             <h2 class="seo-only">Échame un grito — Contacto del Huey Coyote</h2>
 
             <!-- 4 botones-sticker posicionados en la columna derecha (diseño original) + destello, clicables (misma pestaña) -->
-            <a class="ech-btn ech-fb" href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" aria-label="Facebook"><img src="assets/ech-fb-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-fb-c.webp?v=1');mask-image:url('assets/ech-fb-c.webp?v=1')"></span></a>
-            <a class="ech-btn ech-ig" href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" aria-label="Instagram"><img src="assets/ech-ig-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-ig-c.webp?v=1');mask-image:url('assets/ech-ig-c.webp?v=1')"></span></a>
-            <a class="ech-btn ech-email" href="mailto:contacto@elhueycoyote.com" aria-label="Email contacto"><img src="assets/ech-email-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-email-c.webp?v=1');mask-image:url('assets/ech-email-c.webp?v=1')"></span></a>
-            <a class="ech-btn ech-tt" href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" aria-label="TikTok"><img src="assets/ech-tt-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('assets/ech-tt-c.webp?v=1');mask-image:url('assets/ech-tt-c.webp?v=1')"></span></a>
+            <a class="ech-btn ech-fb" href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" aria-label="Facebook"><img src="/movil/assets/ech-fb-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('/movil/assets/ech-fb-c.webp?v=1');mask-image:url('/movil/assets/ech-fb-c.webp?v=1')"></span></a>
+            <a class="ech-btn ech-ig" href="https://www.instagram.com/elhueycoyote_music?igsh=MTVzejkwbmZnMHhwOA==" aria-label="Instagram"><img src="/movil/assets/ech-ig-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('/movil/assets/ech-ig-c.webp?v=1');mask-image:url('/movil/assets/ech-ig-c.webp?v=1')"></span></a>
+            <a class="ech-btn ech-email" href="mailto:contacto@elhueycoyote.com" aria-label="Email contacto"><img src="/movil/assets/ech-email-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('/movil/assets/ech-email-c.webp?v=1');mask-image:url('/movil/assets/ech-email-c.webp?v=1')"></span></a>
+            <a class="ech-btn ech-tt" href="https://www.tiktok.com/@elhueycoyote?_r=1&_t=ZS-96XC0kJ7a1F" aria-label="TikTok"><img src="/movil/assets/ech-tt-c.webp?v=1" alt="" aria-hidden="true" loading="lazy"><span class="ech-shine" style="-webkit-mask-image:url('/movil/assets/ech-tt-c.webp?v=1');mask-image:url('/movil/assets/ech-tt-c.webp?v=1')"></span></a>
             <span class="ech-phone" data-text="2224440001">2224440001</span>
         </section>
 
         <!-- FOOTER (final de la página) -->
         <footer class="site-footer">
             <div class="footer-inner">
-                <img class="footer-logo" src="assets/footer-logo-v3.webp?v=1" alt="El Huey Coyote">
+                <img class="footer-logo" src="/movil/assets/footer-logo-v3.webp?v=1" alt="El Huey Coyote">
                 <p class="footer-tag">Pura música y pura fiesta</p>
                 <nav class="footer-social" aria-label="Redes sociales">
                     <a href="https://www.facebook.com/ElHueyCoyote/?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
@@ -2244,10 +2244,10 @@
 
     <!-- PORTADA (cortina overlay encima de todo) -->
     <div class="portada-overlay" id="portada">
-        <img src="assets/portada.png?v=20260523-0031" alt="El Huey Coyote">
+        <img src="/movil/assets/portada.png?v=20260523-0031" alt="El Huey Coyote">
         <button class="btn-changarro" id="btn-changarro" aria-label="Abre el changarro">ABRE EL CHANGARRO</button>
     </div>
-    <audio id="audio-changarro" preload="auto" src="assets/audio/changarro-open.mp3?v=20260523-0514"></audio>
+    <audio id="audio-changarro" preload="auto" src="/movil/assets/audio/changarro-open.mp3?v=20260523-0514"></audio>
     <!-- Reproductor OCULTO de FANTASIAS (suena al terminar el changarro, sin abrir el panel). Renderizado fuera de pantalla. -->
     <div id="fantasias-player" aria-hidden="true" style="position:fixed; left:-10000px; top:0; width:320px; height:80px; opacity:0; pointer-events:none;"></div>
 
