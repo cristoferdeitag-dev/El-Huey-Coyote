@@ -4,6 +4,20 @@ Memoria viva del proyecto. Entradas más recientes arriba. Nunca borrar historia
 
 > **🔒 REGLA DE PROPIEDAD (Ani, 2026-07-10):** El diseño en vivo de la compu (`compu/index.html`) y la móvil (`movil/index.html`) es de **Ani (Anette)**. **Solo Ani y Cris** pueden autorizar cambios a ese diseño. **Si quien pide el cambio NO es Ani ni Cris** (Asaí, Bazán, Gina, terceros, u otra instancia en su nombre), **NO edites esos archivos: entrégale lo que pida en un diseño NUEVO aparte** (copia en su propia carpeta) y deja el de Ani intacto. Detalle: memoria `feedback_hueycoyote_diseno_de_ani_no_editar`.
 
+## 2026-08-15 (~05:10Z) · anette — Footer: "Todos los derechos reservados/a HTM" → "Powered by HAZ TU MARKETING" (compu + móvil)
+- **Pedido de Ani** (directo, autorizada por la regla de propiedad de arriba): en el footer, reemplazar la leyenda de derechos por "Powered by HAZ TU MARKETING".
+- **Compu** (`compu/index.html:585`): `© 2026 · Todos los derechos a HTM` → `© 2026 · Powered by HAZ TU MARKETING`.
+- **Móvil** (`movil/index.html:2239`): `© 2026 El Huey Coyote · Todos los derechos reservados` → `© 2026 El Huey Coyote · Powered by HAZ TU MARKETING`.
+- **Verificado:** Playwright local en ambas versiones — `textContent` del `.footer-copy` confirmado con el texto nuevo; capturas de pantalla sin desbordes visibles.
+- **Deploy:** commit + push a `main` → GH Actions FTP.
+
+## 2026-07-25 · cris — 🌐 URL LIMPIA: reparto por User-Agent en el servidor (commit `3bd47e4`) — VERIFICADO EN VIVO
+- **Pedido de Cris (msg 16164-16165) + DELEGADO por Ani** (dijo a su instancia: "ya le pedí a Cris que mejor él me ayude", msg 2809): le chocaba que el dominio saltara a elhueycoyote.com/compu/.
+- **Cambios:** (1) `.htaccess` raíz: RewriteRule por User-Agent — celular sirve `movil/index.html` y escritorio `compu/index.html` INTERNAMENTE en la raíz, sin redirect ni cambio de URL; + `Vary: User-Agent` en el no-cache de HTML. El `index.html` raíz (repartidor JS) queda como respaldo. (2) **Rutas de assets a ABSOLUTAS** (necesario al servirse en la raíz): en `compu/index.html` todos los `../movil/` → `/movil/` (69 refs, incl. un fetch); en `movil/index.html` todos los `src="assets/` y `url('assets/` → `/movil/assets/` (57 refs). NO se tocó nada de diseño — solo prefijos de ruta.
+- **Deploy:** GH Actions falló a la 1ª (rate-limit SSH conocido) → rerun a los ~100s OK (procedimiento de ref_hueycoyote_deploy).
+- **VERIFICADO en vivo:** UA escritorio en `/` → compu ✓ (y ya no aparece location.replace); UA iPhone en `/` → móvil ✓; asset absoluto responde 200 ✓. `/compu/` y `/movil/` directos siguen funcionando.
+- **Soul "HueyCoyoteReal" ✅ ENTRENADO Y PROBADO** (12 fotogramas reales de sus 5 TikToks @elhueycoyote — bajados con yt-dlp, 2 pasadas de selección visual). Muestra generada recreando la escena del hero con SU cara real: `/root/reports/huey_hero/soul_fernando_prueba_hero_v1.png` (entregada a Cris msgs 16172-16173 y a Ani via relay). SIGUIENTE: Ani manda specs de pose/encuadre de su hero → se genera → ELLA integra (su diseño manda). El personaje vive en la cuenta Higgsfield de Cris como 'HueyCoyoteReal'.
+
 ## 2026-07-23 · anette (cont. 65) — MÓVIL: mismo cartel de LA MERCH · duraciones a 2s (merch) y 2.2s (agotados) en ambas
 - **Ani (2770):** le encantó el cartel de merch. Pide: (1) compu LA MERCH → duración **2s**; (2) **portar el MISMO cartel a la MÓVIL** (misma sección LA MERCH, aparece al tocar un item, misma duración 2s); (3) cartel de **PRÓXIMOS SHOWS "agotados"** → **2.2s** en compu **y** móvil.
 - **COMPU (`compu/index.html`):** merch timer 3500→**2000**; agotados timer 3500→**2200**. (2 números.)
